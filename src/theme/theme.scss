@@ -1,0 +1,58 @@
+@use '~@angular/material' as mat;
+
+//Color map
+$turtle-palette: (
+  100: #B9E4C9,
+  500: #37966F,
+  800: #356859,
+  contrast: (
+    100: rgba(black, 0.87),
+    500: white,
+    800: white,
+    300: white, // ... continues to 900
+  ));
+
+$portland-palette:(
+  200: #FEAA91,
+  500: #FD5523,
+  800: #D64216,
+  contrast: (
+    200: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    800: rgba(black, 0.87),
+    300: white, // ... continues to 900
+  ));
+
+$my-primary: mat.define-palette($turtle-palette, 500);
+$my-accent: mat.define-palette($portland-palette, 500);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
+));
+
+//Typography
+$body-1: mat.define-typography-level(
+  $font-family: Lekton,
+  $font-weight: 400,
+  $font-size: 18px,
+  $line-height: 22px,
+  $letter-spacing: 0.5px,
+);
+
+$my-custom-typography-config: mat.define-typography-config(
+  $display-4: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1: mat.define-typography-level(34px, 40px, 400),
+  $headline:  mat.define-typography-level(24px, 32px, 400),
+);
+
+@include mat.core();
+@include mat.core-theme($my-theme);
+@include mat.all-component-themes($my-theme);
+
