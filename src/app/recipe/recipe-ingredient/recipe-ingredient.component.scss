@@ -1,0 +1,29 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+
+.ingredient-container {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 5px;
+
+  button {
+    height: 25px;
+    width: 25px;
+    border: none;
+    background: none;
+    color: mat.get-color-from-palette(color.$my-primary, 800);
+    padding: 0;
+  }
+
+  .text {
+    margin-left: 8px;
+    font-family: Lekton;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    color: mat.get-color-from-palette(color.$my-primary, 800);
+  }
+}

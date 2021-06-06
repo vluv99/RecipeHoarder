@@ -1,0 +1,27 @@
+@use '~@angular/material' as mat;
+$custom-background-color: #FFFBE6;
+
+$turtle-palette: (
+  100: #B9E4C9,
+  500: #37966F,
+  800: #356859,
+  contrast: (
+    100: rgba(black, 0.87),
+    500: white,
+    800: white,
+    300: white, // ... continues to 900
+  ));
+
+$portland-palette:(
+  200: #FEAA91,
+  500: #FD5523,
+  800: #D64216,
+  contrast: (
+    200: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    800: rgba(black, 0.87),
+    300: white, // ... continues to 900
+  ));
+
+$my-primary: mat.define-palette($turtle-palette, 500);
+$my-accent: mat.define-palette($portland-palette, 500);
