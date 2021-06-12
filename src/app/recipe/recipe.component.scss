@@ -1,5 +1,12 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+//@use '~@angular/core/style/_elevation.scss';
+
+
 .container{
-  /*height: 500px;*/
+  /*box-shadow: 0 0 5px 1px #000000bd;*/
+  @include mat.elevation(6); //shadow
+  border-radius: 0 0 4px 4px;
 }
 
 .img-container{
@@ -17,13 +24,14 @@
 .data-container{
   margin-right: 15px;
   margin-left: 15px;
+  max-width: 700px;
 
   .description{
 
   }
 
   h1 {
-    font-size: 18px;
+    /*font-size: 18px;*/
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;

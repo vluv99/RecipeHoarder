@@ -1,13 +1,19 @@
 @use '~@angular/material' as mat;
-@import "src/theme/color";
+@use  "src/theme/color";
 
 .app-container{
   height: 100vh;
+  background-color: mat.get-color-from-palette(color.$my-primary, 100);
 }
 
 .app-sidenav-content{
-  background-color: $custom-background-color;
+  /*background-color: $custom-background-color;*/
   /*min-height: 100%-64px;*/
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: color.$custom-background-color;
 }
 
 .app-sidenav{

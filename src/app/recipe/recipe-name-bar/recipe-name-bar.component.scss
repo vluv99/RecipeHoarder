@@ -7,6 +7,7 @@ mat-card {
   flex-flow: row;
   justify-content: space-between;
   margin-top: -40px;
+  @include mat.elevation(4); //shadow
 
   h1 {
     font-size: 20px;
