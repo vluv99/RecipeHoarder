@@ -18,10 +18,10 @@ jobs:
       run: npm install
 
     - name: Download angluar
-      run: npm install -g @angular/cli
+      run: npm install @angular/cli
 
     - name: Build the angular
-      run: ng build 
+      run: npm run-script ng build 
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
