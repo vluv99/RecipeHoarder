@@ -1,11 +1,63 @@
-
 <mat-drawer-container class="app-container" [hasBackdrop]="true">
-  <mat-drawer #drawer [mode]="'over'" class="app-sidenav">I'm a drawer
-    <br>
-  aaaaaaaaaaaaaaaaaasssssssssssssssssss</mat-drawer>
-  <mat-drawer-content >
+  <mat-drawer #drawer [mode]="'over'" class="app-sidenav">
+    <div class="drawer-content">
+      <div class="icon-holder">
+        <img src="assets/img/4e935017c4560f24db18d548d37c5769%20-%20Copy.ico" alt="logo">
+        <div>Recipe hoarder</div>
+      </div>
+
+      <a class="menu-item" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>dashboard</mat-icon>
+      </span>
+        <div>Main page</div>
+      </a>
+
+      <a class="menu-item" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>add_circle</mat-icon>
+      </span>
+        <div>Add recipe</div>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a class="menu-item" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>book</mat-icon>
+      </span>
+        <div>My recipes</div>
+      </a>
+
+      <a class="menu-item" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>favorite</mat-icon>
+      </span>
+        <div>My favorites</div>
+      </a>
+
+      <a class="menu-item" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>format_list_bulleted</mat-icon>
+      </span>
+        <div>My shoppinglist</div>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a class="menu-item bottom" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>logout</mat-icon>
+      </span>
+        <div>Log out</div>
+      </a>
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content>
     <mat-toolbar color='primary'>
-      <button mat-icon-button class="menu-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+      <button mat-icon-button class="menu-icon" aria-label="Example icon-button with menu icon"
+              (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       My App

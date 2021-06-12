@@ -14,6 +14,7 @@ import { RecipeNameBarComponent } from './recipe/recipe-name-bar/recipe-name-bar
 import {MatCardModule} from "@angular/material/card";
 import { RecipeIngredientComponent } from './recipe/recipe-ingredient/recipe-ingredient.component';
 import { RecipeStepComponent } from './recipe/recipe-step/recipe-step.component';
+import {MatDividerModule} from "@angular/material/divider";
 
 
 
@@ -25,16 +26,17 @@ import { RecipeStepComponent } from './recipe/recipe-step/recipe-step.component'
     RecipeIngredientComponent,
     RecipeStepComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    MatCardModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatDividerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

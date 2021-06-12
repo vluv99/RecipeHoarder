@@ -1,12 +1,12 @@
 @use '~@angular/material' as mat;
-@use  "src/theme/color";
+@use "src/theme/color";
 
-.app-container{
+.app-container {
   height: 100vh;
   background-color: mat.get-color-from-palette(color.$my-primary, 100);
 }
 
-.app-sidenav-content{
+.app-sidenav-content {
   /*background-color: $custom-background-color;*/
   /*min-height: 100%-64px;*/
   max-width: 700px;
@@ -16,8 +16,75 @@
   background-color: color.$custom-background-color;
 }
 
-.app-sidenav{
+.app-sidenav {
   width: 300px;
-  padding-left: 15px;
-  padding-top: 15px;
+  /*padding-left: 15px;
+  padding-top: 15px;*/
+
+  .drawer-content {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+
+    .icon-holder {
+      background-color: mat.get-color-from-palette(color.$my-primary, 500);
+      height: 300px;
+      /*margin-top: auto;
+      margin-bottom: auto;*/
+      text-align: center;
+
+      img {
+        height: 150px;
+        width: 150px;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      }
+
+      div {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+
+        color: white;
+      }
+    }
+
+    .menu-item {
+      padding-left: 25px;
+      padding-top: 15px;
+      display: flex;
+      flex-flow: row;
+      text-decoration: none;
+      align-content: center;
+      color: black;
+
+      font-family: Montserrat;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.15px;
+
+      span {
+        color: mat.get-color-from-palette(color.$my-primary, 800);
+      }
+
+      div {
+        /*align-self: center;*/
+        margin-left: 10px;
+      }
+
+      &.bottom {
+        margin-top: auto;
+        margin-bottom: 15px;
+      }
+    }
+
+    mat-divider {
+      color: mat.get-color-from-palette(color.$my-primary, 500);
+      margin-top: 15px;
+    }
+  }
 }
