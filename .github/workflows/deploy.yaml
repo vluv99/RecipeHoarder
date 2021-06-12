@@ -17,6 +17,9 @@ jobs:
     - name: Download npm
       run: npm install
 
+    - name: Download angluar
+      run: npm install -g @angular/cli
+
     - name: Build the angular
       run: ng build 
 
