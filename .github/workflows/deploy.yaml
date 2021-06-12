@@ -1,0 +1,28 @@
+
+name: Deploy website
+
+on: 
+  push:
+    branches: 
+      - release
+      - cli-dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Download npm
+      run: npm install
+
+    - name: Build the angular
+      run: ng build 
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist/recipe-hoarder
+     
