@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Input } from "@angular/core";
+import {Ingredient} from "../../../model/Ingredient";
 
 @Component({
   selector: 'app-recipe-ingredient',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-ingredient.component.scss']
 })
 export class RecipeIngredientComponent implements OnInit {
+  @Input() ingredient!: Ingredient;
 
   constructor() { }
 

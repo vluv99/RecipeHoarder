@@ -5,7 +5,7 @@
   display: flex;
   flex-flow: row;
   align-items: center;
-  padding-bottom: 5px; //TODO: padding or mrgin?
+  padding-bottom: 15px; //TODO: padding or mrgin?
 
   .num{
     border-color: mat.get-color-from-palette(color.$my-primary, 800);
@@ -14,26 +14,28 @@
     border-radius: 25px;
     width: 46px;
     height: 46px;
+    min-width: 46px;
+    min-height: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-family: Lekton;
+/*    font-family: Lekton;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px;*/
   }
 
   .text{
     margin-left: 15px;
-    font-family: Lekton;
+    /* font-family: Lekton;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px;*/
   }
 }

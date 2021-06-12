@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Input } from "@angular/core";
 
 @Component({
   selector: 'app-recipe-step',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-step.component.scss']
 })
 export class RecipeStepComponent implements OnInit {
+  @Input() step!: String;
+  @Input() num!: Number;
 
   constructor() { }
 
