@@ -21,7 +21,7 @@ jobs:
       run: npm install @angular/cli
 
     - name: Build the angular
-      run: npm run-script ng build --base-href /RecipeHoarder/
+      run: npm run deploy
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
