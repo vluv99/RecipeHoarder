@@ -15,6 +15,7 @@ const scrape = ($: cheerio.CheerioAPI) => {
   ldData.forEach((element:any) => {
     if(element["@type"] =="Recipe"){
       const name = element["name"];
+      const url = "";
       const description = element["description"];
 
       const ingredients:Ingredient[] = [];
@@ -25,7 +26,9 @@ const scrape = ($: cheerio.CheerioAPI) => {
         ingredients.push(new Ingredient(n));
       });
 
-      r = new Recipe(name, description, ingredients);
+
+
+      r = new Recipe(name, url, description, ingredients, []);
     }
   });
 

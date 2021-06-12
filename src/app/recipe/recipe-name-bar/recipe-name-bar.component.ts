@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Recipe} from "../../../model/Recipe";
 
 @Component({
   selector: 'app-recipe-name-bar',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipe-name-bar.component.scss']
 })
 export class RecipeNameBarComponent implements OnInit {
+  @Input() recipe!: Recipe
 
-  constructor() { }
+  constructor() {  }
 
   ngOnInit(): void {
   }
