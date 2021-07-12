@@ -15,6 +15,8 @@ import {MatCardModule} from "@angular/material/card";
 import { RecipeIngredientComponent } from './recipe/recipe-ingredient/recipe-ingredient.component';
 import { RecipeStepComponent } from './recipe/recipe-step/recipe-step.component';
 import {MatDividerModule} from "@angular/material/divider";
+import { HomeComponent } from './home/home/home.component';
+import { CategoryComponent } from './home/home/category-selector/category/category.component';
 
 
 
@@ -24,7 +26,9 @@ import {MatDividerModule} from "@angular/material/divider";
     RecipeComponent,
     RecipeNameBarComponent,
     RecipeIngredientComponent,
-    RecipeStepComponent
+    RecipeStepComponent,
+    HomeComponent,
+    CategoryComponent
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,22 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+
+mat-card{
+  background-color: mat.get-color-from-palette(color.$my-accent, 'default');
+  display: flex;
+  flex-flow: column;
+  height: 70px;
+  width: 55px;
+  align-items: center;
+
+  mat-icon{
+    font-size: 38px;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 3px;
+  }
+
+  div{
+    text-align: center;
+  }
+}
