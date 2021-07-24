@@ -1,0 +1,24 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+
+mat-card{
+  max-width: 250px;
+  padding: 0;
+  background-color: mat.get-color-from-palette(color.$my-primary, 100);
+
+  img{
+    max-width: 250px;
+    max-height: 250px;
+    object-fit: contain;
+    margin: 0;
+  }
+
+  mat-card-content{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 5px;
+
+  }
+
+}

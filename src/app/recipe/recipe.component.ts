@@ -48,9 +48,9 @@ export class RecipeComponent implements OnInit {
 
 
   constructor() {
-    getData("https://www.allrecipes.com/recipe/12682/apple-pie-by-grandma-ople/").then(r=>{
+    /*getData("https://www.allrecipes.com/recipe/12682/apple-pie-by-grandma-ople/").then(r=>{
       this.recipe = r;
-    });
+    });*/
   }
 
   ngOnInit(): void {

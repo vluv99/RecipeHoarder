@@ -1,3 +1,26 @@
 <div class="container">
-<app-category></app-category>
+  <h1  class="mat-subheading-5">Popular Categories</h1>
+  <div class="category-container">
+    <recipe-category categoryIcon="breakfast_dining" categoryName="Breakfast"></recipe-category>
+    <recipe-category categoryIcon="dinner_dining" categoryName="Main course"></recipe-category>
+    <recipe-category categoryIcon="cake" categoryName="Dessert"></recipe-category>
+    <recipe-category categoryIcon="bakery_dining" categoryName="Snack"></recipe-category>
+
+    <recipe-category categoryIcon="lunch_dining" categoryName="Quick"></recipe-category>
+    <recipe-category categoryIcon="set_meal" categoryName="Healthy"></recipe-category>
+    <recipe-category categoryIcon="brunch_dining" categoryName="Complex"></recipe-category>
+    <recipe-category categoryIcon="local_fire_department" categoryName="Spicy"></recipe-category>
+  </div>
+
+  <h1  class="mat-subheading-5">Recipes For You</h1>
+
+  <horizontal-list>
+    <app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>
+  </horizontal-list>
+
+
+
+
+  <h1  class="mat-subheading-5">Try These Too!</h1>
+  <div class="other-recipes-container"></div>
 </div>

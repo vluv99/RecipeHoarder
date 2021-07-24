@@ -17,6 +17,10 @@ import { RecipeStepComponent } from './recipe/recipe-step/recipe-step.component'
 import {MatDividerModule} from "@angular/material/divider";
 import { HomeComponent } from './home/home/home.component';
 import { CategoryComponent } from './home/home/category-selector/category/category.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatGridListModule} from "@angular/material/grid-list";
+import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
+import { HorizontalListComponent } from './components/horizontal-list/horizontal-list.component';
 
 
 
@@ -28,19 +32,23 @@ import { CategoryComponent } from './home/home/category-selector/category/catego
     RecipeIngredientComponent,
     RecipeStepComponent,
     HomeComponent,
-    CategoryComponent
+    CategoryComponent,
+    RecipeCardComponent,
+    HorizontalListComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSidenavModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatDividerModule
-    ],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatDividerModule,
+    MatGridListModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

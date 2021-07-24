@@ -2,21 +2,30 @@
 @use "src/theme/color";
 
 mat-card{
-  background-color: mat.get-color-from-palette(color.$my-accent, 'default');
+  //background-color: mat.get-color-from-palette(color.$my-accent, 'default');
+  //background-color: color.$custom-background-color;
+  background: radial-gradient(circle, rgba(253,85,35,0.4416141456582633) 0%, rgba(253,85,35,1) 95%);
+  border: 2px solid mat.get-color-from-palette(color.$my-accent, 'default');
   display: flex;
   flex-flow: column;
   height: 70px;
   width: 55px;
   align-items: center;
 
+  //@include mat.elevation(4); //shadow
+
+
   mat-icon{
     font-size: 38px;
     width: 38px;
     height: 38px;
     margin-bottom: 3px;
+    //text-shadow: 0 0 5px #fffbe6;
   }
 
   div{
     text-align: center;
+    font-weight: 600;
+    //text-shadow: 0 0 5px #fffbe6;
   }
 }
