@@ -1,4 +1,4 @@
-<div class="list">
+<div id="wrapper" class="list" [class.list--show-left]="showLeft" [class.list--show-right]="showRight">
   <div class="list__container" (scroll)="scrollEvent($event)">
     <ng-content></ng-content>
   </div>

@@ -16,11 +16,14 @@
 
   <horizontal-list>
     <app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>
+    <!--<app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>-->
   </horizontal-list>
 
 
 
 
   <h1  class="mat-subheading-5">Try These Too!</h1>
-  <div class="other-recipes-container"></div>
+  <horizontal-list>
+    <app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>
+  </horizontal-list>
 </div>

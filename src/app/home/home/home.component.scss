@@ -34,19 +34,14 @@
     //overflow-x: scroll;
     padding: 4px;
 
-    recipe-category{
 
+    recipe-category{
     }
   }
 
-  .my-recipes-container{
-
-
-
-    app-recipe-card{
-      margin: 5px;
-      position: relative;
-    }
+  padding: 15px;
+  @include breakpoints.media-breakpoint-down(sm) {
+      padding: 0;
   }
 
 }

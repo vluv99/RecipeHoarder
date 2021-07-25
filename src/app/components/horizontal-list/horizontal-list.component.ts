@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'horizontal-list',
@@ -7,37 +7,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HorizontalListComponent implements OnInit {
 
+  showLeft: boolean = false;
+  showRight: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   scrollEvent(container: any): void{
-    var $this = container.currentTarget;
+    var $this : HTMLDivElement = container.currentTarget;
 
-    let scrollLeft:number = $this.scrollLeft;
-    let maxScrollWidth = $this.innerWidth;
-    let maxScrollAmt = $this.maxSscrollWidth - maxScrollWidth
+    //       self width
+    // |---------------------------|
+    //
+    // |   parent width     |
+    // |--------------------|------|
+    // |                    |
 
-    console.log($this.scrollLeft);
+    //Current scroll amount
+    let scrollAmount:number = $this.scrollLeft;
+
+    let selfWidth = $this.scrollWidth;
+    let maxScrollAmt = selfWidth - $this.parentElement!.offsetWidth;
+
+    //console.log("Scrollamount: "+scrollAmount + " of " + maxScrollAmt);
 
     /*
       scrollLeft = $this.scrollLeft(),
       maxScrollWidth = $this.innerWidth(),
       maxScrollAmt = $this.find("ul").prop('scrollWidth') - maxScrollWidth
 */
-    if (scrollLeft >= maxScrollAmt) {
-      $this.closest(".hor-scroll-wrap").addClass("scrolled-right");
+    if (scrollAmount >= maxScrollAmt) {
+      //$this.closest(".hor-scroll-wrap").addClass("scrolled-right");
+      this.showRight = false;
     } else {
-      $this.closest(".hor-scroll-wrap").removeClass("scrolled-right");
+      //$this.closest(".hor-scroll-wrap").removeClass("scrolled-right");
+      this.showRight = true;
     }
 
-    if (scrollLeft > 0) {
-      $this.closest(".hor-scroll-wrap").addClass("scrolled-left");
+    if (scrollAmount > 0) {
+      //$this.closest(".hor-scroll-wrap").addClass("scrolled-left");
+      this.showLeft = true;
     } else {
-      $this.closest(".hor-scroll-wrap").removeClass("scrolled-left");
+      //$this.closest(".hor-scroll-wrap").removeClass("scrolled-left");
+
+      this.showLeft = false;
     }
-     
+
   }
 
 }
