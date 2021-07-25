@@ -4,18 +4,7 @@
 //Color map
 $my-warn: mat.define-palette(mat.$red-palette);
 
-$my-theme: mat.define-light-theme((
-  color: (
-    primary: $my-primary,
-    accent: $my-accent,
-    warn: $my-warn,
-  )
-));
 
-// Set custom background color
-$background: map-get($my-theme, background);
-$background: map_merge($background, (background: $custom-background-color));
-$my-theme: map_merge($my-theme, (background: $background));
 
 //Typography
 $body-1: mat.define-typography-level(
@@ -54,7 +43,20 @@ $my-custom-typography-config: mat.define-typography-config(
   $headline:  mat.define-typography-level(24px, 32px, 400),*/
 );
 
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  )
+));
+
+// Set custom background color
+$background: map-get($my-theme, background);
+$background: map_merge($background, (background: $custom-background-color));
+$my-theme: map_merge($my-theme, (background: $background));
+
 @include mat.core($my-custom-typography-config);
-@include mat.core-theme($my-theme);
+//@include mat.core-theme($my-theme);
 @include mat.all-component-themes($my-theme);
 

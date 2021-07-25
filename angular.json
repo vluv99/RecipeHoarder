@@ -76,7 +76,11 @@
                             "browserTarget": "recipe-hoarder:build:development"
                         }
                     },
-                    "defaultConfiguration": "development"
+                    "defaultConfiguration": "development",
+                  "options": {
+                    "port": 8080,
+                    "host": "192.168.1.101"
+                  }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",

@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-category',
+  selector: 'recipe-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  @Input() categoryName: string;
-  @Input() categoryIcon: string;
+  @Input() categoryName: string = '';
+  @Input() categoryIcon: string = '';
   constructor() { }
 
   ngOnInit(): void {

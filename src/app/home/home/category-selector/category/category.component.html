@@ -1,4 +1,6 @@
-<mat-card>
-  <mat-icon>{{ recipe.description }}lunch_dining</mat-icon>
-  <div>Simple card</div>
-</mat-card>
+<a [title]="'recipe-test'" [routerLink]="['/category', categoryName]">
+  <mat-card class="mat-elevation-z4">
+    <mat-icon>{{ categoryIcon }}</mat-icon>
+    <div>{{ categoryName }}</div>
+  </mat-card>
+</a>

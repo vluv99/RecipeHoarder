@@ -2,11 +2,13 @@
   <mat-drawer #drawer [mode]="'over'" class="app-sidenav">
     <div class="drawer-content">
       <div class="icon-holder">
-        <img src="assets/img/ReceptAPP_ikon-01.svg" alt="logo">
-        <div>Recipe hoarder</div>
+        <a [routerLink]="['/']">
+          <img src="assets/img/ReceptAPP_ikon-01.svg" alt="logo">
+          <div>Recipe hoarder</div>
+        </a>
       </div>
 
-      <a class="menu-item" href="#">
+      <a class="menu-item" [routerLink]="['/']">
       <span class="menu-icon" aria-label="menu icon">
         <mat-icon>dashboard</mat-icon>
       </span>
@@ -60,12 +62,15 @@
               (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      My App
+      <a [routerLink]="['/']">
+        My App
+      </a>
     </mat-toolbar>
 
     <div class="app-sidenav-content">
-      <!--<app-recipe></app-recipe>-->
-      <app-home></app-home>
+      <!--<app-recipe></app-recipe>
+      <app-home></app-home>-->
+      <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
