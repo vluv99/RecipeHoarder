@@ -1,0 +1,47 @@
+@use "../../../theme/mixins/breakpoints";
+@use "src/theme/color";
+@use "src/theme/fading_list";
+@use '~@angular/material' as mat;
+
+.container{
+
+  h1{
+    padding-top: 20px;
+    margin-left: 6%;
+    //font-weight: bolder;
+
+    @include breakpoints.media-breakpoint-down(sm) {
+      margin-left: 2%;
+    }
+  }
+
+
+  .category-container {
+    display: grid;
+
+    grid-template-columns: repeat(4,minmax(87px,1fr));
+
+    @include breakpoints.media-breakpoint-down(sm) {
+      grid-template-columns: repeat(auto-fit, minmax(87px, 1fr));
+    }
+
+    /*grid-template-rows: 1fr 1fr;*/
+    /*grid-template-rows: repeat(auto-fit,1fr);*/
+
+    gap: 8px;
+
+    justify-items: center;
+    //overflow-x: scroll;
+    padding: 4px;
+
+
+    recipe-category{
+    }
+  }
+
+  padding: 15px;
+  @include breakpoints.media-breakpoint-down(sm) {
+      padding: 0;
+  }
+
+}
