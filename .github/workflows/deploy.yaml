@@ -1,19 +1,19 @@
 
 name: Deploy website
 
-on: 
+on:
   push:
-    branches: 
-      - release
+    branches:
+      - main
       - cli-dev
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
-      
+
     - name: Download npm
       run: npm install
 
@@ -28,4 +28,3 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist/recipe-hoarder
-     
