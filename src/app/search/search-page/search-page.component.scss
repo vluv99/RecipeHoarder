@@ -1,0 +1,33 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+@use "../../../theme/mixins/breakpoints";
+
+.container{
+  padding: 15px;
+  @include breakpoints.media-breakpoint-down(sm) {
+    padding: 0;
+  }
+
+  h1{
+    padding-top: 20px;
+    margin-left: 6%;
+    //font-weight: bolder;
+
+    @include breakpoints.media-breakpoint-down(sm) {
+      margin-left: 2%;
+    }
+  }
+
+  .result-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 2;
+
+
+    app-recipe-card{
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px
+    }
+  }
+}

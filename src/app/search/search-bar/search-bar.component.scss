@@ -1,0 +1,39 @@
+
+:host{
+  flex-grow: 1;
+}
+
+.container {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+
+  input {
+    border-radius: 25px;
+    border: none;
+    max-height: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: medium;
+
+    width: 0;
+    flex-grow: 0;
+    padding-left: 0;
+    padding-right:0;
+    opacity: 0;
+
+    transition: all 500ms;
+
+    &:focus-visible{
+      outline: none;
+    }
+
+    &.active{
+      flex-grow: 1;
+      padding-left: 17px;
+      opacity: 1;
+    }
+  }
+}
+
+

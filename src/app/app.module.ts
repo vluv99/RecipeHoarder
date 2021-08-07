@@ -21,6 +21,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 import { HorizontalListComponent } from './components/horizontal-list/horizontal-list.component';
+import { SearchBarComponent } from './search/search-bar/search-bar.component';
+import { SearchPageComponent } from './search/search-page/search-page.component';
 
 
 
@@ -34,7 +36,9 @@ import { HorizontalListComponent } from './components/horizontal-list/horizontal
     HomeComponent,
     CategoryComponent,
     RecipeCardComponent,
-    HorizontalListComponent
+    HorizontalListComponent,
+    SearchBarComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,

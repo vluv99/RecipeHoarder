@@ -1,5 +1,5 @@
-<mat-drawer-container class="app-container" [hasBackdrop]="true">
-  <mat-drawer #drawer [mode]="'over'" class="app-sidenav">
+<mat-sidenav-container class="app-container" [hasBackdrop]="true">
+  <mat-sidenav #sidenav [mode]="'over'" class="app-sidenav">
     <div class="drawer-content">
       <div class="icon-holder">
         <a [routerLink]="['/']">
@@ -55,16 +55,21 @@
       </a>
     </div>
 
-  </mat-drawer>
-  <mat-drawer-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <mat-toolbar color='primary'>
-      <button mat-icon-button class="menu-icon" aria-label="Example icon-button with menu icon"
-              (click)="drawer.toggle()">
+      <button mat-icon-button class="menu-icon" aria-label="menu icon"
+              (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
+      </button>
+      <app-search-bar></app-search-bar>
+      <!--<button mat-icon-button class="menu-icon" aria-label="search icon"
+              >
+        <mat-icon>search</mat-icon>
       </button>
       <a [routerLink]="['/']">
         My App
-      </a>
+      </a>-->
     </mat-toolbar>
 
     <div class="app-sidenav-content">
@@ -72,5 +77,5 @@
       <app-home></app-home>-->
       <router-outlet></router-outlet>
     </div>
-  </mat-drawer-content>
-</mat-drawer-container>
+  </mat-sidenav-content>
+</mat-sidenav-container>
