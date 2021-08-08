@@ -17,13 +17,17 @@ import { RecipeStepComponent } from './recipe/recipe-step/recipe-step.component'
 import {MatDividerModule} from "@angular/material/divider";
 import { HomeComponent } from './home/home/home.component';
 import { CategoryComponent } from './home/home/category-selector/category/category.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatGridListModule} from "@angular/material/grid-list";
 import { RecipeCardComponent } from './components/recipe-card/recipe-card.component';
 import { HorizontalListComponent } from './components/horizontal-list/horizontal-list.component';
 import { SearchBarComponent } from './search/search-bar/search-bar.component';
 import { SearchPageComponent } from './search/search-page/search-page.component';
-
+import { ImportComponent } from './import/import.component';
+import {MatInputModule} from "@angular/material/input";
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -38,7 +42,8 @@ import { SearchPageComponent } from './search/search-page/search-page.component'
     RecipeCardComponent,
     HorizontalListComponent,
     SearchBarComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    ImportComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,11 @@ import { SearchPageComponent } from './search/search-page/search-page.component'
     BrowserAnimationsModule,
     MatCardModule,
     MatDividerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

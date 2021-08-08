@@ -1,6 +1,7 @@
 @use '~@angular/material' as mat;
 @import "color";
 
+
 //Color map
 $my-warn: mat.define-palette(mat.$red-palette);
 
@@ -31,10 +32,33 @@ $subheading-2: mat.define-typography-level(
   $letter-spacing: 0.15px,
 );
 
+$display-3: mat.define-typography-level(
+  $font-family: Montserrat,
+  $font-weight: 600,
+  $font-size: 48px,
+  $line-height: 56px,
+  $letter-spacing: 0.15px,
+);
+
+$subheading-1: mat.define-typography-level(
+  $font-family: Montserrat,
+  $font-weight: 600,
+  $font-size: 24px,
+  $line-height: 24px,
+  $letter-spacing: 0.18 px,
+);
+
+.mat-subheading-1,
+.mat-display-3{
+  color: mat.get-color-from-palette($my-accent , 500);
+}
+
 $my-custom-typography-config: mat.define-typography-config(
   $body-1: $body-1,
   $body-2: $body-2,
   $subheading-2: $subheading-2,
+  $display-3: $display-3,
+  $subheading-1: $subheading-1
 
   /*$display-4: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
   $display-3: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),

@@ -1,0 +1,29 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+@use "src/theme/mixins/breakpoints";
+
+.container {
+  padding: 35px;
+  @include breakpoints.media-breakpoint-down(sm) {
+    padding: 0;
+  }
+
+  h1,h3 {
+    margin-bottom:20px;
+  }
+
+  .input{
+    width: 100%;
+  }
+
+  .button-container{
+    margin-top: 20px;
+    display:flex;
+    justify-content: flex-end;
+
+    &>button{
+      border-color: mat.get-color-from-palette(color.$my-primary, 500);
+      border-width: 1.5px;
+    }
+  }
+}

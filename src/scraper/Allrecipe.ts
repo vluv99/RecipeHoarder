@@ -27,8 +27,8 @@ const scrape = ($: cheerio.CheerioAPI) => {
       });
 
 
-
-      r = new Recipe(name, url, description, ingredients, []);
+      //TODO: mising alrecipe ID
+      //r = new Recipe("Allrecipe.ts-is-missing-ID" ,name, url, description, ingredients, []);
     }
   });
 

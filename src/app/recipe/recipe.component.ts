@@ -4,7 +4,7 @@ import {Recipe} from "../../model/Recipe";
 import {Ingredient} from "../../model/Ingredient";
 import {Steps} from "../../model/Steps";
 import {ActivatedRoute} from "@angular/router";
-import {DatabaseServiceService} from "../services/database-service.service";
+import {DatabaseService} from "../services/database-service";
 
 @Component({
   selector: 'app-recipe',
@@ -18,7 +18,7 @@ export class RecipeComponent implements OnInit, OnDestroy {
   recipeId!: string;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private database:DatabaseServiceService) {
+  constructor(private route: ActivatedRoute, private database:DatabaseService) {
 
   }
 
@@ -27,7 +27,10 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this.recipeId = params['recipeId'];
 
     //TODO: load search results at
-      this.recipe = this.database.getById(this.recipeId);
+    this.database.getRecipeById(this.recipeId).then((r)=>{
+
+      this.recipe = r;
+    });
   });
   }
 

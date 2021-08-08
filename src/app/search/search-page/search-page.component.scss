@@ -1,6 +1,6 @@
 @use '~@angular/material' as mat;
 @use "src/theme/color";
-@use "../../../theme/mixins/breakpoints";
+@use "src/theme/mixins/breakpoints";
 
 .container{
   padding: 15px;

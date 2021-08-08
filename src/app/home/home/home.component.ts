@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Recipe} from "../../../model/Recipe";
-import {recipes} from "../../../scraper/mock_data"
+import {DatabaseService} from "../../services/database-service";
 
 @Component({
   selector: 'app-home',
@@ -8,13 +8,14 @@ import {recipes} from "../../../scraper/mock_data"
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  recipes: Recipe[];
+  recommendedRecpes?:Recipe[];
 
-  constructor() {
-    this.recipes = recipes;
-  }
+  constructor(private db:DatabaseService) {}
 
   ngOnInit(): void {
+    this.db.getRecommendedRecipes().then((r) => {
+      this.recommendedRecpes = r;
+    });
   }
 
 }

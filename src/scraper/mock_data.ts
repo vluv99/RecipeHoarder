@@ -4,6 +4,7 @@ import {Steps} from "../model/Steps";
 
 let recipes: Recipe[] = [
   new Recipe(
+    "2",
     "Prosciutto Pizza",
     "https://www.thespruceeats.com/prosciutto-pizza-4844358",
     "Ah, prosciutto pizza! The epic collision of two titanic Italian inventions explodes with spectacular umami flavor, balanced here by the dreamy, delicate flavor of burrata, and the peppery zip of bright green arugula. " +
@@ -29,6 +30,7 @@ let recipes: Recipe[] = [
       new Steps(8, "Layer the prosciutto and arugula onto the pizza. Drizzle with extra-virgin olive oil to taste. Top with the shaved Parmesan cheese. Slice and serve immediately."),
     ]),
   new Recipe(
+    "3",
     "Homemade Pizza & Pizza Dough",
     "https://www.simplyrecipes.com/recipes/homemade_pizza/",
 "This is a classic homemade pizza recipe, including a pizza dough recipe, topping suggestions, and step-by-step instructions with photos. Make perfect pizza at home!"
@@ -68,6 +70,7 @@ let recipes: Recipe[] = [
         "Thaw the pizza dough in the refrigerator overnight or for 5 to 6 hours. Then let the dough sit at room temperature for 30 minutes before stretching it out in the next steps."),
       ]),
   new Recipe(
+    "1",
     "How To Make The Best Homemade Pizza\n",
     "https://tasty.co/recipe/pizza-dough",
 "Making homemade pizza dough can sound like a lot of work, but it’s so worth the bragging rights. The dough itself requires few ingredients and just a little bit of rising and rest time. While you wait for the dough to be ready, you can get to work prepping your tomato sauce, chopping fresh vegetables, or grating the cheese you’ll put on top. Bake for 15 minutes, garnish with basil (or, let’s be real, more cheese), and enjoy showing off your way-better-than-takeout creation."

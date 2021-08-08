@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Recipe} from "../../../model/Recipe";
-import {DatabaseServiceService} from "../../services/database-service.service";
+import {DatabaseService} from "../../services/database-service";
 
 @Component({
   selector: 'app-search-page',
@@ -14,7 +14,7 @@ export class SearchPageComponent implements OnInit, OnDestroy  {
   searchTerm!: string;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private db:DatabaseServiceService) {
+  constructor(private route: ActivatedRoute, private db:DatabaseService) {
   }
 
   ngOnInit(): void {
