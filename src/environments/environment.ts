@@ -12,7 +12,8 @@ export const environment = {
     messagingSenderId: "450418157187",
     appId: "1:450418157187:web:354132a5b5d45bb5b95db6",
     measurementId: "G-RXPV60H1R1"
-  }
+  },
+  useEmulators:true
 };
 
 /*
