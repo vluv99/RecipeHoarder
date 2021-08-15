@@ -33,6 +33,14 @@ import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/auth';
 import { USE_EMULATOR as USE_DATABASE_EMULATOR } from '@angular/fire/database';
 import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/firestore';
 import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions';
+import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { ShoppingListInputComponent } from './shopping-list/shopping-list-input/shopping-list-input.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from "@angular/material/core";
+import { ListItemComponent } from './shopping-list/list-item/list-item.component';
+import { IngredientSuggestionComponent } from './shopping-list/ingredient-suggestion/ingredient-suggestion.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 @NgModule({
@@ -48,7 +56,11 @@ import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions'
     HorizontalListComponent,
     SearchBarComponent,
     SearchPageComponent,
-    ImportComponent
+    ImportComponent,
+    ShoppingListComponent,
+    ShoppingListInputComponent,
+    ListItemComponent,
+    IngredientSuggestionComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +77,10 @@ import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions'
     MatInputModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9099] : undefined },

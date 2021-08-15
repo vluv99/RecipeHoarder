@@ -1,0 +1,71 @@
+@use "../../../theme/mixins/breakpoints";
+@use "src/theme/color";
+@use '~@angular/material' as mat;
+
+
+.container{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  mat-form-field{
+    margin: auto;
+  }
+
+  #amount{
+    max-width: 100px;
+  }
+
+  #measurement{
+    max-width: 130px;
+  }
+
+  button{
+    margin-right: auto;
+    margin-left: 4px;
+    height: 66px;
+    margin-top: 5px;
+    vertical-align: top;
+    border-color: mat.get-color-from-palette(color.$my-accent, 500) ;
+  }
+
+  @include breakpoints.media-breakpoint-down(sm) {
+    #amount,#measurement{
+      max-width: 130px;
+    }
+
+    div{
+      margin-top: -20px;
+
+      display: flex;
+      flex-grow: 1;
+
+      #name{
+        max-width: 260px;
+        width: 234px;
+      }
+
+      button{
+        margin-left: 0;
+      }
+    }
+  }
+/*
+  @include breakpoints.media-breakpoint-down(rs) {
+    .container{
+
+    }
+
+    #name{
+      width: 214px!important;
+    }
+  }*/
+}
+
+
+
+
+
+
+

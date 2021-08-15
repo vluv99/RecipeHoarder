@@ -1,0 +1,16 @@
+<div class="container">
+
+  <h1 class="mat-display-3">Shopping List</h1>
+
+  <app-shopping-list-input></app-shopping-list-input>
+  <mat-divider></mat-divider>
+<!--
+  <div>
+    <app-ingredient-suggestion></app-ingredient-suggestion>
+  </div>
+-->
+
+  <div>
+  <app-list-item *ngFor="let i of ingredients" [ingredient]="i"></app-list-item>
+  </div>
+</div>
