@@ -1,0 +1,85 @@
+<mat-sidenav-container class="app-container" [hasBackdrop]="true">
+  <mat-sidenav #sidenav [mode]="'over'" class="app-sidenav">
+    <div class="drawer-content">
+      <div class="icon-holder">
+        <a [routerLink]="['/']">
+          <img src="assets/img/ReceptAPP_ikon-01.svg" alt="logo">
+          <div>Recipe hoarder</div>
+        </a>
+      </div>
+
+      <a class="menu-item" [routerLink]="['/']">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>dashboard</mat-icon>
+      </span>
+        <div>Main page</div>
+      </a>
+
+      <a class="menu-item" [routerLink]="['/import']">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>add_circle</mat-icon>
+      </span>
+        <div>Add recipe</div>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a class="menu-item" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>book</mat-icon>
+      </span>
+        <div>My recipes</div>
+      </a>
+
+      <a class="menu-item" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>favorite</mat-icon>
+      </span>
+        <div>My favorites</div>
+      </a>
+
+      <a class="menu-item" [routerLink]="['/shopping-list']">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>format_list_bulleted</mat-icon>
+      </span>
+        <div>My shoppinglist</div>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a class="menu-item bottom" href="#">
+      <span class="menu-icon" aria-label="menu icon">
+        <mat-icon>logout</mat-icon>
+      </span>
+        <div>Log out</div>
+      </a>
+    </div>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div *ngIf="url !== '/register' && url !== '/login'; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+    <mat-toolbar  color='primary' >
+      <button mat-icon-button class="menu-icon" aria-label="menu icon"
+              (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <app-search-bar></app-search-bar>
+      <!--<button mat-icon-button class="menu-icon" aria-label="search icon"
+              >
+        <mat-icon>search</mat-icon>
+      </button>
+      <a [routerLink]="['/']">
+        My App
+      </a>-->
+    </mat-toolbar></ng-template>
+    <ng-template #elseBlock>
+    <div  style="background-color: #37966F; height: 140px"></div></ng-template>
+
+    <div class="app-sidenav-content">
+      <!--<app-recipe></app-recipe>
+      <app-home></app-home>-->
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
