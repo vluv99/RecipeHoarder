@@ -1,0 +1,43 @@
+<div class="container">
+  <h2 class="mat-subheading-1 title">Login to your recipes!</h2>
+
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <mat-form-field class="" appearance="outline" color="primary">
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username" placeholder="pat_username53">
+      <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+        Username is missing
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="" appearance="outline" color="primary">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+        Password is missing
+      </mat-error>
+    </mat-form-field>
+
+
+    <div class="button-container">
+      <button mat-stroked-button color="primary" type="submit">SIGN ME IN</button> <!--[disabled]="!registerForm.valid"-->
+      <cool-google-button color="light" (click)="onGoogleLoginClicked()">
+        Sign In
+      </cool-google-button>
+    </div>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <h2 class="mat-subheading-1 text">Don’t have an account yet? Register here!</h2>
+
+  <button mat-raised-button color="primary" type="submit" >Register</button>
+
+  <span class="mat-subheading-1">OR</span>
+
+  <cool-google-button color="light" (click)="onGoogleRegisterClicked()">
+    Register with Google
+  </cool-google-button>
+</div>

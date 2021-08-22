@@ -59,22 +59,29 @@
   <mat-sidenav-content>
     <div *ngIf="url !== '/register' && url !== '/login'; then thenBlock else elseBlock"></div>
     <ng-template #thenBlock>
-    <mat-toolbar  color='primary' >
-      <button mat-icon-button class="menu-icon" aria-label="menu icon"
-              (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <app-search-bar></app-search-bar>
-      <!--<button mat-icon-button class="menu-icon" aria-label="search icon"
-              >
-        <mat-icon>search</mat-icon>
-      </button>
-      <a [routerLink]="['/']">
-        My App
-      </a>-->
-    </mat-toolbar></ng-template>
+      <mat-toolbar color='primary'>
+        <button mat-icon-button class="menu-icon" aria-label="menu icon"
+                (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <app-search-bar></app-search-bar>
+        <!--<button mat-icon-button class="menu-icon" aria-label="search icon"
+                >
+          <mat-icon>search</mat-icon>
+        </button>
+        <a [routerLink]="['/']">
+          My App
+        </a>-->
+      </mat-toolbar>
+    </ng-template>
     <ng-template #elseBlock>
-    <div  style="background-color: #37966F; height: 140px"></div></ng-template>
+      <div class="">
+        <a [routerLink]="['/login']" class="outsideHeader">
+          <img src="../assets/img/ReceptAPP_ikon-01.svg">
+          <h1 class="mat-display-3">RecipeHoarder</h1>
+        </a>
+      </div>
+    </ng-template>
 
     <div class="app-sidenav-content">
       <!--<app-recipe></app-recipe>

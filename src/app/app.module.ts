@@ -36,11 +36,14 @@ import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions'
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListInputComponent } from './shopping-list/shopping-list-input/shopping-list-input.component';
 import {MatSelectModule} from "@angular/material/select";
-import {MatOptionModule} from "@angular/material/core";
+import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import { ListItemComponent } from './shopping-list/list-item/list-item.component';
 import { IngredientSuggestionComponent } from './shopping-list/ingredient-suggestion/ingredient-suggestion.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { RegisterComponent } from './auth/register/register.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { LoginComponent } from './auth/login/login.component';
+import {CoolSocialLoginButtonsModule} from "@angular-cool/social-login-buttons";
 
 
 
@@ -62,7 +65,8 @@ import { RegisterComponent } from './auth/register/register.component';
     ShoppingListInputComponent,
     ListItemComponent,
     IngredientSuggestionComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -82,13 +86,18 @@ import { RegisterComponent } from './auth/register/register.component';
     AngularFirestoreModule,
     MatSelectModule,
     MatOptionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    CoolSocialLoginButtonsModule
+
   ],
   providers: [
     { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9099] : undefined },
     { provide: USE_DATABASE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9000] : undefined },
     { provide: USE_FIRESTORE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 8081] : undefined },
     { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },
+    MatDatepickerModule,
   ],
   bootstrap: [AppComponent]
 })
