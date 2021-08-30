@@ -1,0 +1,29 @@
+<div class="container">
+
+  <h1 class="mat-display-3">Recipe Import</h1>
+
+  <mat-form-field class="input" appearance="fill">
+    <mat-label>Recipe URL</mat-label>
+    <input matInput type="url" [(ngModel)]="value">
+    <mat-hint align="start"><strong>Paste here the recipe URL you copied!</strong></mat-hint>
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <div class="button-container">
+    <button mat-stroked-button color="primary" aria-label="send">
+      <mat-icon>add</mat-icon>
+      IMPORT
+    </button>
+  </div>
+
+  <h3 class="mat-subheading-1">You can import recipes from these sites:</h3>
+
+  <!--
+  <div class="result-container">
+    <app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>
+    <div *ngIf="recipes.length <= 0"> No results, sorry  :( </div>
+  </div>
+-->
+</div>

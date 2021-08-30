@@ -1,5 +1,7 @@
 @use '~@angular/material' as mat;
 @use "src/theme/color";
+@use "src/theme/mixins/breakpoints";
+
 
 .app-container {
   height: 100vh;
@@ -14,6 +16,37 @@
   margin-right: auto;
 
   background-color: color.$custom-background-color;
+}
+
+.outsideHeader{
+  background-color: mat.get-color-from-palette(color.$my-primary, 500);
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    border-radius: 50%;
+  }
+
+  h1{
+    margin-left: 20px;
+    margin-bottom: 0;
+    color: white;
+  }
+
+  @include breakpoints.media-breakpoint-down(sm) {
+    height: 100px;
+
+    img{
+      height: 80%;
+    }
+
+    h1{
+      margin-left: 10px;
+      font-size: x-large;
+    }
+  }
 }
 
 .app-sidenav {

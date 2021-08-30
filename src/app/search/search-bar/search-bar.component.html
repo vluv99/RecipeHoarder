@@ -1,0 +1,6 @@
+<div class="container">
+  <input #input type="text" [class.active] = "open === true" (keydown.enter)="searchButton()">
+  <button mat-icon-button class="menu-icon" aria-label="search icon" (click)="searchButton()">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>

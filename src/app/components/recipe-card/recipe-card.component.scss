@@ -1,6 +1,10 @@
 @use '~@angular/material' as mat;
 @use "src/theme/color";
 
+:host{
+  min-width: fit-content;
+}
+
 mat-card{
   max-width: 250px;
   padding: 0;

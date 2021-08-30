@@ -1,0 +1,70 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+@use "src/theme/mixins/breakpoints";
+
+.container {
+  padding: 35px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  @include breakpoints.media-breakpoint-down(sm) {
+    padding: 20px 0 20px 0;
+  }
+
+  h2 {
+    margin-top: -15px;
+    margin-bottom: 15px;
+    color: black;
+
+    @include breakpoints.media-breakpoint-down(rs) {
+      padding-right: 5%;
+      padding-left: 5%;
+    }
+  }
+
+  form {
+    //text-align: center;
+    display: flex;
+    flex-flow: column;
+    //align-content: center;
+
+    mat-form-field {
+      min-width: 350px;
+    }
+
+    button {
+      //width: 100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @include breakpoints.media-breakpoint-down(sm) {
+      mat-form-field {
+        min-width: 300px;
+      }
+    }
+
+    .button-container {
+      display: flex;
+      flex-flow: row;
+      margin-right: auto;
+      margin-left: auto;
+
+      button {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  mat-divider {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  span {
+    color: black;
+    margin-top: 15px;
+    font-size: medium;
+  }
+}

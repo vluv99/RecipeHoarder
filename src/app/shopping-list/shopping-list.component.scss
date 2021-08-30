@@ -1,0 +1,21 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+@use "src/theme/mixins/breakpoints";
+
+.container {
+  padding: 35px 80px;
+  @include breakpoints.media-breakpoint-down(sm) {
+    padding: 0;
+  }
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  @include breakpoints.media-breakpoint-down(sm) {
+    h1 {
+      padding: 5px 15px;
+    }
+  }
+
+}

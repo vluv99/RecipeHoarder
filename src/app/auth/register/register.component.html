@@ -1,0 +1,84 @@
+<div class="container">
+  <h1 class="mat-subheading-1">Register</h1>
+
+  <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="" appearance="outline" color="primary">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput formControlName="name" placeholder="Example Pat">
+      <mat-error *ngIf="registerForm.get('name')?.hasError('name') && !registerForm.get('name')?.hasError('required')">
+        Please enter a valid name
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('name')?.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="" appearance="outline" color="primary">
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username" placeholder="pat_username53">
+      <mat-error *ngIf="registerForm.get('username')?.hasError('username') && !registerForm.get('username')?.hasError('required')">
+        Please enter at least 4 characters or choose a different username, since that's already taken
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
+        Username is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="" appearance="outline" color="primary">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="pat@example.com">
+      <mat-error *ngIf="registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender" [(ngModel)]="selectedValue">
+        <mat-option *ngFor="let g of genders" [value]="genders">{{g}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="registerForm.get('gender')?.hasError('required')">
+        Gender is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Birth date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="mm/dd/yyyy">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="registerForm.get('birthDate')?.hasError('required')">
+        Birth date is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="" appearance="outline" color="primary">
+      <mat-label>Password</mat-label>
+      <input  matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('password') && !registerForm.get('password')?.hasError('required')">
+        Please enter a password that's at least 4 characters with numbers and special characters in it
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+        Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="" appearance="outline" color="primary">
+      <mat-label>Password Again</mat-label>
+      <input type="password" matInput formControlName="password2" [type]="hide ? 'password2' : 'text'">
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error *ngIf="registerForm.get('password2')?.hasError('password2') && !registerForm.get('password2')?.hasError('required')">
+        Passwords aren't matching
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('password2')?.hasError('required')">
+        Confirmation password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" >Register</button> <!--[disabled]="!registerForm.valid"-->
+  </form>
+</div>

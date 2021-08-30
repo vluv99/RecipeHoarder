@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "recipe-hoarder": {
+      "hosting": {
+        "recipe-hoarder": [
+          "recipe-hoarder"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "recipe-hoarder"
+  }
+}
