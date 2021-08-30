@@ -82,7 +82,7 @@
           "defaultConfiguration": "development",
           "options": {
             "port": 8080,
-            "host": "192.168.1.101"
+            "host": "192.168.0.46"
           }
         },
         "extract-i18n": {
