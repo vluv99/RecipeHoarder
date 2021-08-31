@@ -58,6 +58,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div *ngIf="url !== '/register' && url !== '/login'; then thenBlock else elseBlock"></div>
+
     <ng-template #thenBlock>
       <mat-toolbar color='primary'>
         <button mat-icon-button class="menu-icon" aria-label="menu icon"
@@ -74,6 +75,7 @@
         </a>-->
       </mat-toolbar>
     </ng-template>
+
     <ng-template #elseBlock>
       <div class="">
         <a [routerLink]="['/login']" class="outsideHeader">
