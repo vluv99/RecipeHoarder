@@ -1,0 +1,40 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+@use "src/theme/mixins/breakpoints";
+
+.container {
+  padding: 35px;
+  @include breakpoints.media-breakpoint-down(sm) {
+    padding: 5px;
+  }
+
+  h1, h3 {
+    margin-bottom: 20px;
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  img {
+    max-width: 50%;
+    align-self: center;
+    object-fit: cover;
+    padding-bottom: 25px;
+
+    @include breakpoints.media-breakpoint-down(sm) {
+      max-width: 90%;
+    }
+  }
+
+  .category-container{
+
+  }
+
+}

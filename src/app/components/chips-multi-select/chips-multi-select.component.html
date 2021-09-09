@@ -1,0 +1,5 @@
+<mat-chip-list selectable multiple>
+  <mat-chip #c="matChip" *ngFor="let option of options"  (click)="toggleSelection(c)">
+    {{option}}
+  </mat-chip>
+</mat-chip-list>

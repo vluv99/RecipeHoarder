@@ -8,7 +8,7 @@ export class Recipe {
   url: String = "";
   calories: number = 0;
   totalCookTime: any = null;
-  description: String = "";
+  description: string = "";
   ingredients: Ingredient[] = [];
   steps: Steps[] = [];
 

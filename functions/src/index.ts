@@ -2,7 +2,6 @@ import * as functions from "firebase-functions";
 //import {Recipe} from "../../shared/model/Recipe";
 import {getData} from "./core";
 
-
 //import {Recipe} from "/shared/model/Recipe";
 
 // // Start writing Firebase Functions
