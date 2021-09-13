@@ -7,7 +7,7 @@ import {MatChip} from "@angular/material/chips";
   styleUrls: ['./chips-multi-select.component.scss']
 })
 export class ChipsMultiSelectComponent implements OnInit {
-  @Input() options: string[] = [];
+  @Input() options: string[] = ["Lunch", "Dinner", "Dessert", "Breakfast", "Snack", "Quick", "Healthy", "Complex"];
   //"Lunch", "Dinner", "Dessert", "Breakfast", "Snack", "Quick", "Healthy", "Complex"
 
   constructor() { }

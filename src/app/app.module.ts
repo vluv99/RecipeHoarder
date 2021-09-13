@@ -45,6 +45,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import { LoginComponent } from './auth/login/login.component';
 import {CoolSocialLoginButtonsModule} from "@angular-cool/social-login-buttons";
 import { ImportRecipeDataComponent } from './import-recipe-data/import-recipe-data.component';
+import {MatChipsModule} from '@angular/material/chips';
 import { ChipsMultiSelectComponent } from './components/chips-multi-select/chips-multi-select.component';
 
 
@@ -93,7 +94,7 @@ import { ChipsMultiSelectComponent } from './components/chips-multi-select/chips
     MatDatepickerModule,
     MatNativeDateModule,
     CoolSocialLoginButtonsModule,
-
+    MatChipsModule
   ],
   providers: [
     { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9099] : undefined },
