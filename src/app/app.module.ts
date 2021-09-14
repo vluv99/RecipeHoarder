@@ -47,6 +47,8 @@ import {CoolSocialLoginButtonsModule} from "@angular-cool/social-login-buttons";
 import { ImportRecipeDataComponent } from './import-recipe-data/import-recipe-data.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { ChipsMultiSelectComponent } from './components/chips-multi-select/chips-multi-select.component';
+import { IngredientFieldsComponent } from './import-recipe-data/ingredient-fields/ingredient-fields.component';
+import { StepFieldsComponent } from './import-recipe-data/step-fields/step-fields.component';
 
 
 @NgModule({
@@ -70,7 +72,9 @@ import { ChipsMultiSelectComponent } from './components/chips-multi-select/chips
     RegisterComponent,
     LoginComponent,
     ImportRecipeDataComponent,
-    ChipsMultiSelectComponent
+    ChipsMultiSelectComponent,
+    IngredientFieldsComponent,
+    StepFieldsComponent
   ],
   imports: [
     BrowserModule,

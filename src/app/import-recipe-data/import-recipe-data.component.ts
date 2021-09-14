@@ -20,7 +20,8 @@ export class ImportRecipeDataComponent implements OnInit {
 
   getRecipeById(id:String){
     let r = new Recipe("id","demo recipe");
-    let i = [new Ingredient("egg", 3, Measurement.DKG),
+    let i = [
+      new Ingredient("egg", 3, Measurement.DKG),
       new Ingredient("egg2", 55, Measurement.DKG),
       new Ingredient("egg3", 2, Measurement.KG),
       new Ingredient("egg4", 611, Measurement.G)];
