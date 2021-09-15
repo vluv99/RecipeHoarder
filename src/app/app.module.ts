@@ -44,7 +44,11 @@ import { RegisterComponent } from './auth/register/register.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import { LoginComponent } from './auth/login/login.component';
 import {CoolSocialLoginButtonsModule} from "@angular-cool/social-login-buttons";
-
+import { ImportRecipeDataComponent } from './import-recipe-data/import-recipe-data.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { ChipsMultiSelectComponent } from './components/chips-multi-select/chips-multi-select.component';
+import { IngredientFieldsComponent } from './import-recipe-data/ingredient-fields/ingredient-fields.component';
+import { StepFieldsComponent } from './import-recipe-data/step-fields/step-fields.component';
 
 
 @NgModule({
@@ -66,7 +70,11 @@ import {CoolSocialLoginButtonsModule} from "@angular-cool/social-login-buttons";
     ListItemComponent,
     IngredientSuggestionComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ImportRecipeDataComponent,
+    ChipsMultiSelectComponent,
+    IngredientFieldsComponent,
+    StepFieldsComponent
   ],
   imports: [
     BrowserModule,
@@ -89,8 +97,8 @@ import {CoolSocialLoginButtonsModule} from "@angular-cool/social-login-buttons";
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CoolSocialLoginButtonsModule
-
+    CoolSocialLoginButtonsModule,
+    MatChipsModule
   ],
   providers: [
     { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9099] : undefined },

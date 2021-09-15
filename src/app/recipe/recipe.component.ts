@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { getData } from 'src/scraper/core';
+import { getData } from 'functions/src/core';
 import {Recipe} from "../../model/Recipe";
 import {Ingredient} from "../../model/Ingredient";
 import {Steps} from "../../model/Steps";

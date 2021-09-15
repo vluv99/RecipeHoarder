@@ -47,7 +47,7 @@
 
       <mat-divider></mat-divider>
 
-      <a class="menu-item bottom" href="#">
+      <a class="menu-item bottom" [routerLink]="['/login']">
       <span class="menu-icon" aria-label="menu icon">
         <mat-icon>logout</mat-icon>
       </span>
@@ -58,6 +58,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div *ngIf="url !== '/register' && url !== '/login'; then thenBlock else elseBlock"></div>
+
     <ng-template #thenBlock>
       <mat-toolbar color='primary'>
         <button mat-icon-button class="menu-icon" aria-label="menu icon"
@@ -74,6 +75,7 @@
         </a>-->
       </mat-toolbar>
     </ng-template>
+
     <ng-template #elseBlock>
       <div class="">
         <a [routerLink]="['/login']" class="outsideHeader">

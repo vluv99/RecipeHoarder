@@ -1,0 +1,29 @@
+@use '~@angular/material' as mat;
+@use "src/theme/color";
+
+.container{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  padding-bottom: 15px; //TODO: padding or margin?
+
+  .num{
+    border-color: mat.get-color-from-palette(color.$my-primary, 800);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 25px;
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  mat-form-field{
+    width: 100%;
+    margin-left: 20px;
+  }
+}

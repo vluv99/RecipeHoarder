@@ -1,0 +1,38 @@
+<div class="container">
+
+  <h1 class="mat-display-3">Recipe Import</h1>
+
+  <form class="recipe-data-form">
+    <mat-form-field class="" appearance="outline" color="accent">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name of the recipe" [value]="r.name"/>
+    </mat-form-field>
+
+    <img [src]="image">
+
+    <h1 class="mat-subheading-1">Categories <i style="font-size: large">(Chose min. 1)</i></h1>
+
+    <app-chips-multi-select></app-chips-multi-select>
+
+    <mat-form-field class="example-full-width" appearance="outline" color="accent">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Recipe description..." [value]="r.description"></textarea>
+    </mat-form-field>
+
+    <h1 class="mat-subheading-1">Ingredients</h1>
+
+    <div *ngFor="let i of r.ingredients">
+      <app-ingredient-fields [id]="i"></app-ingredient-fields>
+    </div>
+
+    <h1 class="mat-subheading-1">Directions</h1>
+
+    <div *ngFor="let i of r.steps">
+      <app-step-fields></app-step-fields>
+    </div>
+
+    <button mat-raised-button color="primary">Import Recipe</button>
+
+  </form>
+
+</div>

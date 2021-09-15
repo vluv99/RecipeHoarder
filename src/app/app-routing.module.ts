@@ -7,6 +7,7 @@ import {ImportComponent} from "./import/import.component";
 import {ShoppingListComponent} from "./shopping-list/shopping-list.component";
 import {RegisterComponent} from "./auth/register/register.component";
 import {LoginComponent} from "./auth/login/login.component";
+import {ImportRecipeDataComponent} from "./import-recipe-data/import-recipe-data.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'shopping-list', component: ShoppingListComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'recipe-data', component: ImportRecipeDataComponent},
 
 
 ];

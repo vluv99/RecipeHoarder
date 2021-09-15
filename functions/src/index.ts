@@ -1,5 +1,7 @@
 import * as functions from "firebase-functions";
-import {Recipe} from "../../shared/model/Recipe";
+//import {Recipe} from "../../shared/model/Recipe";
+import {getData} from "./core";
+
 //import {Recipe} from "/shared/model/Recipe";
 
 // // Start writing Firebase Functions
@@ -20,8 +22,12 @@ export const importRecipe = functions.https.onRequest((request, response) => {
 
   functions.logger.info("Got url from import: " + url, {structuredData: true});
 
-  let recipe :Recipe = new Recipe("a","tst",url, "...amm idk",[], [] );
+  getData(url).then((recipe) => {
+    response.send(recipe);
+  });
 
-  response.send(recipe);
+  //let recipe :Recipe = new Recipe("a","tst",url, "...amm idk",[], [] );
+
+
 
 });
