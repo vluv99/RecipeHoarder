@@ -53,7 +53,6 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: String) {
         r?.ingredients.push(new Ingredient(n, 1, Measurement.KG));
       });
 
-      //TODO: YUMMLY doesnt always have steps, so going to leave it for now.
       let num = 1;
       recipeData["recipeInstructions"].forEach((st: any) => {
         const s = st.text;

@@ -1,4 +1,8 @@
-## 1. step: Check the head (body)
+##1. emulator setup
+1. ``firebase emulators:start`` if emulator isn't operational yet run code
+2. ``npm run build`` to save changes, run code in the **functions** folder
+
+## 2. step: Check the head (body)
 ### - Does it have *application/ld+json* type of script?
 1. What type of data are there in the JSON
    1. @type: recipe
