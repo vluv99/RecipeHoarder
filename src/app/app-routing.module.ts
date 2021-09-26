@@ -12,13 +12,15 @@ import {ImportRecipeDataComponent} from "./import-recipe-data/import-recipe-data
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'recipe/:recipeId', component: RecipeComponent },
-  { path: 'category/:categoryName', component: RecipeComponent },
+  { path: 'category/:categoryName', component: SearchPageComponent },
   { path: 'search/:searchTerm', component: SearchPageComponent },
   { path: 'import', component: ImportComponent },
   { path: 'shopping-list', component: ShoppingListComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'recipe-data', component: ImportRecipeDataComponent},
+  { path: 'collections/:my-favourites', component: SearchPageComponent},
+  { path: 'collections/:my-recipes', component: SearchPageComponent},
 
 
 ];

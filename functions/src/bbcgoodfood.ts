@@ -55,7 +55,7 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: String) {
 
   let num = 1;
   recipeLD["recipeInstructions"].forEach((st: any) => {
-    const s =  st.text.replace(/<[^>]+>/g, '');
+    const s =  st.text.replace(/<[^>]+>/g, ''); //removes unnecessary HTML elements from the text
     r?.steps.push(new Steps(num, s))
     num++;
   })
