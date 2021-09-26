@@ -54,7 +54,7 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: String) {
 
   let num = 1;
   recipeLD["recipeInstructions"].forEach((st: any) => {
-    const s = st;
+    const s = st; //!!! here, its only an array element
     r?.steps.push(new Steps(num, s))
     num++;
   })

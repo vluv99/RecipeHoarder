@@ -7,12 +7,14 @@ import {Recipe} from "../../shared/model/Recipe";
 import * as allrecipe from "./Allrecipe";
 import * as taste from "./Taste-com-au";
 import * as tasty from "./Tasty";
+import * as bbcgoodfood from "./bbcgoodfood";
 
 var scrapers: { [id: string]: any; } = {}
 
 scrapers['allrecipes.com'] = allrecipe.getRecipeData;
 scrapers['taste.com.au'] =  taste.getRecipeData;
 scrapers['tasty.co'] = tasty.getRecipeData;
+scrapers['bbcgoodfood.com'] = bbcgoodfood.getRecipeData;
 
 export async function getData(url: string) :Promise<Recipe> {
   try {
