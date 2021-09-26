@@ -33,7 +33,10 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: String) {
       r.totalCookTime = time;
 
       let cal =  element["nutrition"].calories;
-      cal = cal.replace("calories", "");
+      if (cal != null) {
+        //only keep the numbers
+        cal = cal.replace("calories", "");
+      }
       let cal2 = parseInt(cal);
       r.calories = cal2;
 
