@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Ingredient} from "../../../../shared/model/Ingredient";
 
 @Component({
   selector: 'app-ingredient-fields',
-  templateUrl: './ingredient-fields.component.html',
-  styleUrls: ['./ingredient-fields.component.scss']
+  templateUrl: './ingredient-field.component.html',
+  styleUrls: ['./ingredient-field.component.scss']
 })
-export class IngredientFieldsComponent implements OnInit {
+export class IngredientFieldComponent implements OnInit {
 
-  id?: any;
+  @Input() ing!: Ingredient; //TODO: fix two way binding, since now it's only uploading the original
   measures:String[] = ["kg", "dkg", "gr"];
 
   ingredientNamesList = [

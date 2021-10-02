@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StepFieldsComponent } from './step-fields.component';
+import { IngredientFieldComponent } from './ingredient-field.component';
 
-describe('StepFieldsComponent', () => {
-  let component: StepFieldsComponent;
-  let fixture: ComponentFixture<StepFieldsComponent>;
+describe('IngredientFieldsComponent', () => {
+  let component: IngredientFieldComponent;
+  let fixture: ComponentFixture<IngredientFieldComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StepFieldsComponent ]
+      declarations: [ IngredientFieldComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StepFieldsComponent);
+    fixture = TestBed.createComponent(IngredientFieldComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
