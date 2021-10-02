@@ -3,7 +3,7 @@ import {ActivatedRoute, Event, Router, RouterEvent} from "@angular/router";
 import {Recipe} from "../../../model/Recipe";
 import {DatabaseService} from "../../services/database-service";
 import {filter} from "rxjs/operators";
-import * as url from "url";
+//import * as url from "url";
 
 @Component({
   selector: 'app-search-page',
