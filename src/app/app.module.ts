@@ -32,7 +32,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/auth';
 import { USE_EMULATOR as USE_DATABASE_EMULATOR } from '@angular/fire/database';
 import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/firestore';
-import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/functions';
+import {AngularFireFunctionsModule, USE_EMULATOR as USE_FUNCTIONS_EMULATOR} from '@angular/fire/functions';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListInputComponent } from './shopping-list/shopping-list-input/shopping-list-input.component';
 import {MatSelectModule} from "@angular/material/select";
@@ -91,6 +91,7 @@ import { StepFieldsComponent } from './import-recipe-data/step-fields/step-field
     MatInputModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireFunctionsModule,
     AngularFirestoreModule,
     MatSelectModule,
     MatOptionModule,

@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Recipe} from "../../../model/Recipe";
 import {Ingredient} from "../../../../shared/model/Ingredient";
 
 @Component({

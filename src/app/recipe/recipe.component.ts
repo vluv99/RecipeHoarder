@@ -1,9 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Recipe} from "../../model/Recipe";
-import {Ingredient} from "../../model/Ingredient";
-import {Steps} from "../../model/Steps";
 import {ActivatedRoute} from "@angular/router";
 import {DatabaseService} from "../services/database-service";
+import {Recipe} from "../../../shared/model/Recipe";
 
 @Component({
   selector: 'app-recipe',

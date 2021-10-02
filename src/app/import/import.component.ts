@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Event, RouterEvent, Router} from '@angular/router';
+import {AngularFirestore} from "@angular/fire/firestore";
+import {RecipeImporterService} from "../services/recipe-importer.service";
+import {DatabaseService} from "../services/database-service";
 
 @Component({
   selector: 'app-import',
@@ -10,9 +13,15 @@ export class ImportComponent implements OnInit {
 
   value = '';
 
-  constructor() { }
+  constructor(private importer: RecipeImporterService, private _router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  importRecipe(){
+    this.importer.getRecipe(this.value).then((r => {
+      this._router.navigate(['/recipe-data'])
+    }))
   }
 
 }

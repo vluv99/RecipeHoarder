@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Recipe} from "../../../model/Recipe";
 import {DatabaseService} from "../../services/database-service";
+import {Recipe} from "../../../../shared/model/Recipe";
 
 @Component({
   selector: 'app-home',
