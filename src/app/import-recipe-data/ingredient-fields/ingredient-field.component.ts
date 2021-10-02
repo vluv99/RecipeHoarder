@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Ingredient} from "../../../../shared/model/Ingredient";
+import {Change} from "firebase-functions";
 
 @Component({
   selector: 'app-ingredient-fields',
@@ -9,6 +10,9 @@ import {Ingredient} from "../../../../shared/model/Ingredient";
 export class IngredientFieldComponent implements OnInit {
 
   @Input() ing!: Ingredient; //TODO: fix two way binding, since now it's only uploading the original
+  @Output() ingChange = new EventEmitter<Ingredient>();
+
+
   measures:String[] = ["kg", "dkg", "gr"];
 
   ingredientNamesList = [
@@ -27,7 +31,11 @@ export class IngredientFieldComponent implements OnInit {
     }
   }
 
-  onFocusEvent($event: any, id:string, num:string) {
+  onFocusa(event: any){
+    console.log(event);
+  }
+
+  onFocusEvent(event: any, id:string, num:string) {
   /* let element = document.getElementById("hint"+num);
 
     // @ts-ignore
@@ -56,4 +64,7 @@ export class IngredientFieldComponent implements OnInit {
     //addToIngredient(new Ingredient(name, amount, measure))
   }
 
+  dataChanged(event: any) {
+    console.log(event);
+  }
 }

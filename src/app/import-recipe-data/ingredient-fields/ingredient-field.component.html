@@ -1,7 +1,7 @@
 <div class="shopping-list-input-form container">
   <mat-form-field id="amount{{ing}}" class="input" appearance="outline" color="accent">
     <mat-label>Amount</mat-label>
-    <input matInput id="amount-input" maxlength="10" type="number" placeholder="0.5" [value]="ing.amount">
+    <input matInput id="amount-input" maxlength="10" type="number" placeholder="0.5" [value]="ing.amount" (focus)="onFocusa($event)">
   </mat-form-field>
 
   <mat-form-field id="measurement{{ing}}" appearance="outline" class="input" color="accent">
