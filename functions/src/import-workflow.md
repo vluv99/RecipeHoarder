@@ -9,7 +9,7 @@
    1. @type: recipe
       1. Hopefully it's from "schema.org"
       2. Otherwise write code to process the data
-   2. 
-2. 
+   2. ...
+2. ...
 
-### - If not, does it ...
+### - If not, ... probabbly going to use some puppetier method

@@ -10,9 +10,13 @@ export class RecipeCardComponent implements OnInit {
 
   @Input() recipe! : Recipe;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+    console.log(this.recipe);
   }
+
+
 
 }
