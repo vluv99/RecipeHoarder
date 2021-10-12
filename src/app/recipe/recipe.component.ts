@@ -12,6 +12,8 @@ export class RecipeComponent implements OnInit, OnDestroy {
 
   recipe!: Recipe ;
 
+  //https://www.npmjs.com/package/ngx-lightbox - use this for pop up images
+
   recipeId!: string;
   private sub: any;
 

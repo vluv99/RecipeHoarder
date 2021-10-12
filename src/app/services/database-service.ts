@@ -103,6 +103,7 @@ const recipeConverter = {
 
   fromFirestore: function(snapshot:any, options:any) {
     const data = snapshot.data(options);
+    data.id = snapshot.id
     return Object.assign(Recipe.empty(), data);
   }
 };

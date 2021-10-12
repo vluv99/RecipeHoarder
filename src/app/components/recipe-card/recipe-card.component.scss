@@ -11,9 +11,9 @@ mat-card{
   background-color: mat.get-color-from-palette(color.$my-primary, 100);
 
   img{
-    max-width: 250px;
-    max-height: 250px;
-    object-fit: contain;
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
     margin: 0;
   }
 
