@@ -10,12 +10,16 @@ export class ChipsMultiSelectComponent implements OnInit {
   @Input() options: string[] = ["Lunch", "Dinner", "Dessert", "Breakfast", "Snack", "Quick", "Healthy", "Complex"];
   //"Lunch", "Dinner", "Dessert", "Breakfast", "Snack", "Quick", "Healthy", "Complex"
 
+  chosen: string[] = []
   constructor() { }
 
   ngOnInit(): void {
   }
 
   toggleSelection(chip: MatChip) {
+    if(chip.selected){
+      this.chosen.push("asd")
+    }
     chip.toggleSelected();
   }
 }

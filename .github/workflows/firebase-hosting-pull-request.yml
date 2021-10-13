@@ -22,16 +22,16 @@ jobs:
       - name: Build the angular
         run: npm run build:prod
 
-      - uses: FirebaseExtended/action-hosting-deploy@main
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'
-          projectId: recipe-hoarder
-          expires: 30d
-
-#      - uses: w9jds/firebase-action@master
+#      - uses: FirebaseExtended/action-hosting-deploy@main
 #        with:
-#          args: hosting:channel:deploy ${{ github.event.pull_request.title }}
-#        env:
-#          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}
+#          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'
+#          projectId: recipe-hoarder
+#          expires: 30d
+
+      - uses: w9jds/firebase-action@master
+        with:
+          args: hosting:channel:deploy pr-${{ github.event.number }}
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}
 
