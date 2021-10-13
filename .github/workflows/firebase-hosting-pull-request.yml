@@ -2,10 +2,15 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-on: pull_request
+on:
+  push:
+    branches:
+      - main
+      - cli-dev
+  pull_request
 jobs:
   build_and_preview:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+#    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -22,22 +27,26 @@ jobs:
       - name: Build the angular
         run: npm run build:prod
 
-      - run: |
-          cd dist
-          tree -a
-          ls
-          ls ./recipe-hoarder
-
-#      - uses: FirebaseExtended/action-hosting-deploy@main
-#        with:
-#          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-#          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'
-#          projectId: recipe-hoarder
-#          expires: 30d
-
-      - uses: w9jds/firebase-action@master
+      - uses: FirebaseExtended/action-hosting-deploy@main
+        if: ${{ github.event_name == 'pull_request' }}
         with:
-          args: hosting:channel:deploy pr-${{ github.event.number }}
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'
+          projectId: recipe-hoarder
+          expires: 30d
+
+      - uses: FirebaseExtended/action-hosting-deploy@main
+        if: ${{ github.event_name == 'push' }}
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'
+          projectId: recipe-hoarder
+          channelId: live
+
+
+#      - uses: w9jds/firebase-action@master
+#        with:
+#          args: hosting:channel:deploy pr-${{ github.event.number }}
+#        env:
+#          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
