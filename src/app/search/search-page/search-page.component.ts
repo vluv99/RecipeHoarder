@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Event, Router, RouterEvent} from "@angular/router";
-import {Recipe} from "../../../model/Recipe";
 import {DatabaseService} from "../../services/database-service";
 import {filter} from "rxjs/operators";
-//import * as url from "url";
+import {Recipe} from "../../../../shared/model/Recipe";
 
 @Component({
   selector: 'app-search-page',
@@ -31,7 +30,9 @@ export class SearchPageComponent implements OnInit, OnDestroy  {
      if (params.searchTerm) { //if its a search term, search
         this.searchTerm = params['searchTerm'];
 
-        this.recipes = this.db.search(this.searchTerm) //TODO: fix search
+        this.db.search(this.searchTerm).then(recipes =>{
+          this.recipes = recipes;
+        }) //TODO: fix search
 
       } else if(params.categoryName){ //if it isn't, search through categories
        this.searchTerm = params['categoryName'];

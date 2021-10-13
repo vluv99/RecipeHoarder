@@ -12,7 +12,7 @@
 
     <h1 class="mat-subheading-1">Categories <i style="font-size: large">(Chose min. 1)</i></h1>
 
-    <app-chips-multi-select></app-chips-multi-select>
+    <app-chips-multi-select required></app-chips-multi-select>
 
     <mat-form-field class="example-full-width" appearance="outline" color="accent">
       <mat-label>Description</mat-label>
@@ -22,16 +22,16 @@
     <h1 class="mat-subheading-1">Ingredients</h1>
 
     <div *ngFor="let i of r.ingredients">
-      <app-ingredient-fields [id]="i"></app-ingredient-fields>
+      <app-ingredient-fields [ing]="i"></app-ingredient-fields>
     </div>
 
     <h1 class="mat-subheading-1">Directions</h1>
 
     <div *ngFor="let i of r.steps">
-      <app-step-fields></app-step-fields>
+      <app-step-fields [step]="i"></app-step-fields>
     </div>
 
-    <button mat-raised-button color="primary">Import Recipe</button>
+    <button mat-raised-button color="primary" (click)="saveRecipe()">Import Recipe</button>
 
   </form>
 

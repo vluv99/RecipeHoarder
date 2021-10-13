@@ -28,4 +28,9 @@ export class Recipe {
     this.name = name;
   }
 
+  static empty(){
+    return new Recipe("","");
+  }
+
+
 }

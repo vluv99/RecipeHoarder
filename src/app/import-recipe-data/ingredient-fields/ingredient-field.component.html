@@ -1,0 +1,28 @@
+<div class="shopping-list-input-form container">
+  <mat-form-field id="amount{{ing}}" class="input" appearance="outline" color="accent">
+    <mat-label>Amount</mat-label>
+    <input matInput id="amount-input" maxlength="10" type="number" placeholder="0.5" [value]="ing.amount">
+  </mat-form-field>
+
+  <mat-form-field id="measurement{{ing}}" appearance="outline" class="input" color="accent">
+    <mat-label>Measure</mat-label>
+    <mat-select id="measurement-input">
+      <mat-option *ngFor="let m of measures" [value]="m">
+        {{m}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <mat-form-field id="name{{ing}}" class="input" color="accent" appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput id="name-inut" maxlength="256" type="text" list="names" placeholder="Flour" [value]="ing.name">
+      <datalist id="names">
+        <option *ngFor="let n of ingredientNamesList | slice:0:5;" [value]="n"> {{n}}</option>
+      </datalist>
+    </mat-form-field>
+
+  </div>
+
+  <mat-hint><strong id="hint{{ing}}" class="hint">hint</strong></mat-hint>
+</div>
