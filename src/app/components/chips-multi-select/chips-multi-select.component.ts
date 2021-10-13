@@ -17,9 +17,18 @@ export class ChipsMultiSelectComponent implements OnInit {
   }
 
   toggleSelection(chip: MatChip) {
-    if(chip.selected){
-      this.chosen.push("asd")
-    }
     chip.toggleSelected();
+
+    if(chip.selected){
+      this.chosen.push(chip.value)
+    }
+
+    if(!chip.selected){
+      const index = this.chosen.indexOf(chip.value, 0);
+      if (index > -1) {
+        this.chosen.splice(index, 1);
+      }
+    }
+
   }
 }
