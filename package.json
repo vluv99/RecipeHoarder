@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "start_noHost": "ng serve --disable-host-check",
-    "deploy": "ng build --base-href /RecipeHoarder/"
+    "build:prod": "ng build --prod --base-href /RecipeHoarder/"
   },
   "private": true,
   "dependencies": {

@@ -12,16 +12,31 @@
   </mat-form-field>
 
   <div class="button-container">
-    <!--<a [routerLink]="['/recipe-data']">-->
+
 
     <button mat-stroked-button color="primary" aria-label="send" (click)="importRecipe()">
       <mat-icon>add</mat-icon>
       IMPORT
     </button>
-    <!--</a>-->
+
   </div>
 
   <h3 class="mat-subheading-1">You can import recipes from these sites:</h3>
+
+  <mat-chip-list aria-label="Fish selection">
+    <a href="https://www.allrecipes.com/" target="_blank"><mat-chip >Allrecipes</mat-chip></a>
+    <a href="https://www.bbcgoodfood.com/" target="_blank"><mat-chip >BBC Good Food</mat-chip></a>
+    <a href="https://tasty.co/" target="_blank"><mat-chip >Tasty</mat-chip></a>
+    <a href="https://www.taste.com.au/" target="_blank"><mat-chip >Taste</mat-chip></a>
+  </mat-chip-list>
+
+  <h3 class="mat-subheading-1" style="margin-top: 20px">Or import manually:</h3>
+  <a [routerLink]="['/recipe-data']">
+  <button mat-stroked-button color="primary" aria-label="send">
+    <mat-icon>add</mat-icon>
+    IMPORT
+  </button>
+  </a>
 
   <!--
   <div class="result-container">
