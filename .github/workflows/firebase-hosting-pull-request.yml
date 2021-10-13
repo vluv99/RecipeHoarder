@@ -22,7 +22,7 @@ jobs:
       - name: Build the angular
         run: npm run build:prod
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: FirebaseExtended/action-hosting-deploy@main
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'

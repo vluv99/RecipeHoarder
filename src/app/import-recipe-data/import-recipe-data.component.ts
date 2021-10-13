@@ -20,7 +20,11 @@ export class ImportRecipeDataComponent implements OnInit {
               private database:DatabaseService) { }
 
   ngOnInit(): void {
-    this.r = this.recipeImporter.recipe!; //TODO: check this
+    if(this.recipeImporter.recipe) {
+      this.r = this.recipeImporter.recipe!; //TODO: check this
+    }else {
+      this.r = Recipe.empty()
+    }
 
     /* TODO: check if previous page was the importer, navigate back if import unsuccessfull
     if (!this.recipeImporter.recipe &&){
