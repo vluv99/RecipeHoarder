@@ -22,6 +22,10 @@ jobs:
       - name: Download npm
         run: npm install
 
+      - run: npm install
+        working-directory: ./functions
+
+
       - name: Download angluar
         run: npm install @angular/cli
 
