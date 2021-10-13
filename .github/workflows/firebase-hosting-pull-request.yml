@@ -36,18 +36,19 @@ jobs:
           projectId: recipe-hoarder
           expires: 30d
 
-      - uses: FirebaseExtended/action-hosting-deploy@main
+#      - uses: FirebaseExtended/action-hosting-deploy@main
+#        if: ${{ github.event_name == 'push' }}
+#        with:
+#          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'
+#          projectId: recipe-hoarder
+#          channelId: live
+
+
+      - uses: w9jds/firebase-action@master
         if: ${{ github.event_name == 'push' }}
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_RECIPE_HOARDER }}'
-          projectId: recipe-hoarder
-          channelId: live
-
-
-#      - uses: w9jds/firebase-action@master
-#        with:
-#          args: hosting:channel:deploy pr-${{ github.event.number }}
-#        env:
-#          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          args: deploy
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
