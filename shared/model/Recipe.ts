@@ -2,10 +2,10 @@ import {Ingredient} from "./Ingredient";
 import {Steps} from "./Steps";
 
 export class Recipe {
-  id?: String;
-  name: String;
+  id?: string;
+  name: string;
   image: URL | null = null;
-  url: String = "";
+  url: string = "";
   calories: number = 0;
   totalCookTime: any = null;
   description: string = "";
@@ -23,7 +23,7 @@ export class Recipe {
     this.ingredients = ingredients;
     this.steps = steps;
   }*/
-  constructor(id:String, name:String) {
+  constructor(id:string, name:string) {
     this.id = id;
     this.name = name;
   }

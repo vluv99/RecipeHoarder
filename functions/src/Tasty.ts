@@ -4,7 +4,7 @@ import * as cheerio from 'cheerio';
 import {Steps} from "../../shared/model/Steps";
 import * as moment from "moment";
 
-export function getRecipeData($: cheerio.CheerioAPI, _url: String) {
+export function getRecipeData($: cheerio.CheerioAPI, _url: string) {
 
   let ldJsonText = $('script[type="application/ld+json"]');   // select the script tag
   let select = ldJsonText.first().html();     // select the first that matches
@@ -42,7 +42,7 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: String) {
   let time = moment.duration(recipeLD["totalTime"]);
   r.totalCookTime = time;
 
-  let cal = recipeLD["nutrition"].calories;
+  let cal = recipeLD["nutrition"]?.calories;
   if (cal != null) {
     //only keep the numbers
     cal = cal.replace("calories", "");
