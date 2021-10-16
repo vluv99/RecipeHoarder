@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Ingredient} from "../../../../shared/model/Ingredient";
-import {Change} from "firebase-functions";
 
 @Component({
   selector: 'app-ingredient-fields',
