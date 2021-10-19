@@ -29,6 +29,7 @@ export class SearchPageComponent implements OnInit, OnDestroy  {
 
      if (params.searchTerm) { //if its a search term, search
         this.searchTerm = params['searchTerm'];
+       this.searchTerm = this.searchTerm.charAt(0).toUpperCase() // TODO: delete this part once we have keywords
 
         this.db.search(this.searchTerm).then(recipes =>{
           this.recipes = recipes;
@@ -37,9 +38,9 @@ export class SearchPageComponent implements OnInit, OnDestroy  {
       } else if(params.categoryName){ //if it isn't, search through categories
        this.searchTerm = params['categoryName'];
 
-       //this.recipes = this.db.search(this.searchTerm)
-       //TODO: category search once the firebase model is done
-       this.recipes = []
+       this.db.getRecipesByCategory(this.searchTerm).then(recipes => {
+         this.recipes = recipes
+       })
 
       } else if(params['my-favourites']){
 

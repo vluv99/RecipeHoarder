@@ -59,6 +59,19 @@ export class DatabaseService {
     return res;
   }
 
+  async getRecipesByCategory(cat: string): Promise<Recipe[]> {
+    var datas = await this.store.collection("recipes").ref.withConverter(recipeConverter).get();
+
+    var res:Recipe[] = [];
+    datas.forEach((d) =>{
+      if (d.get("categories").includes(cat)) {
+        res.push(d.data());
+      }
+    })
+
+    return res;
+  }
+
   async upload(r: Recipe) {
     const doc = await this.store.collection("recipes").add(recipeConverter.toFirestore(r));
     return doc.id

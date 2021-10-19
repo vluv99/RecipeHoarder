@@ -8,7 +8,18 @@
       <input matInput placeholder="Name of the recipe" [(ngModel)]="r.name"/> <!--[value]="r.name"-->
     </mat-form-field>
 
-    <img [src]="image">
+    <!--<input accept="image/*" type='file' id="imgInp" (change)="loadFile()"/>-->
+    <img id="recipe-image" [src]="r.image" alt="image" />
+
+    <div>
+      <mat-form-field class="" appearance="outline" color="accent" style="max-width: 150px;">
+        <mat-label>Cooking time</mat-label>
+        <input matInput placeholder="120" type="number" [(ngModel)]="r.totalCookTime" value="120"/>
+
+        <!--[value]="r.name"-->
+      </mat-form-field>
+      <span>&nbsp; mins</span>
+    </div>
 
     <h1 class="mat-subheading-1">Categories <i style="font-size: large">(Choose min. 1)</i></h1>
 
@@ -24,13 +35,18 @@
     <div *ngFor="let i of r.ingredients">
       <app-ingredient-fields [ing]="i" (remove)="removeIngredient(i)"></app-ingredient-fields>
     </div>
-    <button (click)="addNewIngredient()">Add new</button>
+    <button mat-icon-button color="primary" (click)="addNewIngredient()">
+      <mat-icon>add</mat-icon>
+    </button>
 
     <h1 class="mat-subheading-1">Directions</h1>
 
     <div *ngFor="let i of r.steps">
-      <app-step-fields [step]="i"></app-step-fields>
+      <app-step-fields [step]="i" (remove)="removeStep(i)"></app-step-fields>
     </div>
+    <button mat-icon-button color="primary" (click)="addNewStep()">
+      <mat-icon>add</mat-icon>
+    </button>
 
     <button mat-raised-button color="primary" (click)="saveRecipe()">Import Recipe</button>
 

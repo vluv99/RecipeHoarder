@@ -49,6 +49,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { ChipsMultiSelectComponent } from './components/chips-multi-select/chips-multi-select.component';
 import { IngredientFieldComponent } from './import-recipe-data/ingredient-fields/ingredient-field.component';
 import { StepFieldComponent } from './import-recipe-data/step-fields/step-field.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -76,31 +77,32 @@ import { StepFieldComponent } from './import-recipe-data/step-fields/step-field.
     IngredientFieldComponent,
     StepFieldComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatDividerModule,
-    MatGridListModule,
-    MatInputModule,
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireFunctionsModule,
-    AngularFirestoreModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatSnackBarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    CoolSocialLoginButtonsModule,
-    MatChipsModule
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatDividerModule,
+        MatGridListModule,
+        MatInputModule,
+        FormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireFunctionsModule,
+        AngularFirestoreModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatSnackBarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        CoolSocialLoginButtonsModule,
+        MatChipsModule,
+        MatAutocompleteModule
+    ],
   providers: [
     { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['http://localhost', 9099] : undefined },
     { provide: USE_DATABASE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9000] : undefined },
