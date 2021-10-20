@@ -1,8 +1,8 @@
 export class Ingredient {
-  name: String;
+  name: string;
   amount: Number;
   measurement: string;
-  constructor(name: String, amount: Number, measurement:string){
+  constructor(name: string, amount: Number, measurement:string){
     this.name = name;
     this.amount = amount;
     this.measurement = measurement;

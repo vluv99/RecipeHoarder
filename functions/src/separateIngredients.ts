@@ -4,22 +4,29 @@ const convert = require('convert-units')
 
 export function separate(r: Recipe) {
   const units = getUnits()
-  //const regex = /\d+/g;
 
   //console.log(units)
 
   r.ingredients.forEach((i:Ingredient) => {
     //console.log(i.name)
 
-    let res:any[] = []
+    //let res:any[] = []
 
     units.forEach( (unit: string) => {
-       if(i.name.includes(unit)){
-         res = i.name.split(unit)
+      //https://regex101.com/r/88Ynb0/1
+      let regex = new RegExp(String.raw`(?<number>[\d,./]+)\s?(${unit})\s(?<name>.+)`);
 
-         i.amount = parseInt(res[0])
+       if(regex.test(i.name)){
+         let found = i.name.match(regex)
+         i.amount = parseInt(found!.groups!.number)
+         i.name = found!.groups!.name
          i.measurement = unit
-         i.name = res[1]
+
+         //res = i.name.split(unit)
+
+         //i.amount = parseInt(res[0])
+         //i.measurement = unit
+         //i.name = res[1]
        }
     })
   })
