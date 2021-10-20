@@ -3,8 +3,10 @@ import {Recipe} from "../../shared/model/Recipe";
 import * as cheerio from 'cheerio';
 import {Steps} from "../../shared/model/Steps";
 import * as moment from "moment";
+import { parse } from 'tldts';
 
 export function getRecipeData($: cheerio.CheerioAPI, _url: string) {
+  const host = parse(_url).domainWithoutSuffix
 
   const ldJsonText = $('script[type="application/ld+json"]');   // select the script tag
   const select = ldJsonText.first().html();     // select the first that matches
@@ -13,13 +15,13 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: string) {
     var ldData = JSON.parse(select);
   }
 
-  //let r: Recipe = new Recipe("" ,"", new URL(""),"", "", [], []); // new recipe to import into
   let r: Recipe | null = null;
 
   let recipeLD: any;
+
   if (Array.isArray(ldData)) {
     ldData.forEach((element: any) => {
-      if (ldData["@type"] == "Recipe") {
+      if (element["@type"] == "Recipe") {
         recipeLD = element;
       }
     });
@@ -34,12 +36,15 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: string) {
   //Firebase is going to add the ID, so we're leaving it empty
   r = new Recipe("", name);
 
-
   r.image = recipeLD["image"].url;
+  if (r.image == null){
+    r.image = recipeLD["video"].thumbnailUrl;
+  }
+
   r.url = _url;
   r.description = recipeLD["description"];
 
-  const time = moment.duration(recipeLD["totalTime"]);
+  const time = moment.duration(recipeLD["totalTime"]).asMinutes();
   r.totalCookTime = time;
 
   let cal = recipeLD["nutrition"]?.calories;
@@ -57,7 +62,15 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: string) {
 
   let num = 1;
   recipeLD["recipeInstructions"].forEach((st: any) => {
-    const s = st.text;
+    if (host == "bbcgoodfood") {
+      var s =  st.text.replace(/<[^>]+>/g, ''); //removes unnecessary HTML elements from the text
+
+    } else if(host == "taste"){
+      var s = st;   //here, its only an array element
+
+    } else {    /** allrecipes & tasty **/
+      var s = st.text;  // basic json structure
+    }
     r?.steps.push(new Steps(num, s))
     num++;
   })

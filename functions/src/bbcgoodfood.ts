@@ -4,11 +4,10 @@ import * as cheerio from 'cheerio';
 import {Steps} from "../../shared/model/Steps";
 import * as moment from "moment";
 
+export function getRecipeData($: cheerio.CheerioAPI, _url: string) {
 
-export function getRecipeData($: cheerio.CheerioAPI, _url: String) {
-
-  let ldJsonText = $('script[type="application/ld+json"]');   // select the script tag
-  let select = ldJsonText.first().html();     // select the first that matches
+  const ldJsonText = $('script[type="application/ld+json"]');   // select the script tag
+  const select = ldJsonText.first().html();     // select the first that matches
 
   if (typeof select === "string") {   //
     var ldData = JSON.parse(select);

@@ -1,28 +1,40 @@
 <div class="shopping-list-input-form container">
-  <mat-form-field id="amount{{ing}}" class="input" appearance="outline" color="accent">
+  <mat-form-field id="amount" class="input" appearance="outline" color="accent">
     <mat-label>Amount</mat-label>
-    <input matInput id="amount-input" maxlength="10" type="number" placeholder="0.5" [value]="ing.amount">
+    <input matInput id="amount-input" maxlength="10" type="number" placeholder="0.5" [(ngModel)]="ing.amount" (ngModelChange)="onChange(ing)">
   </mat-form-field>
 
-  <mat-form-field id="measurement{{ing}}" appearance="outline" class="input" color="accent">
-    <mat-label>Measure</mat-label>
-    <mat-select id="measurement-input">
+  <!--<mat-form-field id="measurement" appearance="outline" class="input" color="accent">
+    <mat-label>Unit</mat-label>
+    <mat-select id="measurement-input"  [(ngModel)]="ing.measurement">
       <mat-option *ngFor="let m of measures" [value]="m">
         {{m}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <div>
-    <mat-form-field id="name{{ing}}" class="input" color="accent" appearance="outline">
-      <mat-label>Name</mat-label>
-      <input matInput id="name-inut" maxlength="256" type="text" list="names" placeholder="Flour" [value]="ing.name">
-      <datalist id="names">
-        <option *ngFor="let n of ingredientNamesList | slice:0:5;" [value]="n"> {{n}}</option>
-      </datalist>
-    </mat-form-field>
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let option of measures  | slice : 0 : 3;" [value]="option">
+      {{option}}
+    </mat-option>
+  </mat-autocomplete>-->
 
-  </div>
+  <datalist id="units">
+    <option *ngFor="let n of measures | slice:0:5;" [value]="n"> {{n}}</option>
+  </datalist>
 
-  <mat-hint><strong id="hint{{ing}}" class="hint">hint</strong></mat-hint>
+  <mat-form-field id="measurement" class="input" color="accent" appearance="outline">
+    <mat-label>Unit</mat-label>
+    <input matInput id="measurement-inut" maxlength="10" type="text" placeholder="kg" list="units" [(ngModel)]="ing.measurement" (ngModelChange)="onChange(ing)">
+  </mat-form-field>
+
+  <mat-form-field id="name" class="input" color="accent" appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput id="name-inut" maxlength="256" type="text" placeholder="Flour" [(ngModel)]="ing.name" (ngModelChange)="onChange(ing)">
+  </mat-form-field>
+
+  <button mat-icon-button color="primary" (click)="remove.emit(ing)">
+    <mat-icon>close</mat-icon>
+  </button>
+
 </div>

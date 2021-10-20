@@ -4,7 +4,7 @@
 
   <mat-form-field class="input" appearance="fill">
     <mat-label>Recipe URL</mat-label>
-    <input matInput type="url" [(ngModel)]="value">
+    <input matInput type="url" [(ngModel)]="value" (keydown.enter)="importRecipe()">
     <mat-hint align="start"><strong>Paste here the recipe URL you copied!</strong></mat-hint>
     <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
       <mat-icon>close</mat-icon>
