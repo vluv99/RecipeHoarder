@@ -35,7 +35,7 @@ export class IngredientFieldComponent implements OnInit, ControlValueAccessor {
 
   'pnt',   'qt',  'gal', 'ft3',   'yd3db',
 
-  'tbsp', 'db'
+  'tbsp', 'piece' , 'pieces' , 'tbsp'
 
 ]
 
