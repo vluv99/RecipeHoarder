@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.db.getRecommendedRecipes().then((r) => {
       this.recommendedRecpes = r;
-      this.recommendedRecpes2 = this.recommendedRecpes.reverse()
+      this.recommendedRecpes2 = [...r].reverse()
     })
 
   }
