@@ -11,6 +11,8 @@ export class Recipe {
   description: string = "";
   ingredients: Ingredient[] = [];
   steps: Steps[] = [];
+  categories: string[] = [];
+  importDate?: Date;
 
   /*constructor(id:String, name:String, image:URL, url:String, description:String, ingredients:Ingredient[], steps:Steps[]) {
     this.id = id;

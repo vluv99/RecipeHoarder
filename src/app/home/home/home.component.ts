@@ -9,13 +9,16 @@ import {Recipe} from "../../../../shared/model/Recipe";
 })
 export class HomeComponent implements OnInit {
   recommendedRecpes?:Recipe[];
+  recommendedRecpes2?:Recipe[];
 
   constructor(private db:DatabaseService) {}
 
   ngOnInit(): void {
     this.db.getRecommendedRecipes().then((r) => {
       this.recommendedRecpes = r;
-    });
+      this.recommendedRecpes2 = this.recommendedRecpes.reverse()
+    })
+
   }
 
 }

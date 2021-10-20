@@ -26,13 +26,13 @@ import { SearchPageComponent } from './search/search-page/search-page.component'
 import { ImportComponent } from './import/import.component';
 import {MatInputModule} from "@angular/material/input";
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
-import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/auth';
-import { USE_EMULATOR as USE_DATABASE_EMULATOR } from '@angular/fire/database';
-import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/firestore';
-import {AngularFireFunctionsModule, USE_EMULATOR as USE_FUNCTIONS_EMULATOR} from '@angular/fire/functions';
+import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
+import { USE_EMULATOR as USE_DATABASE_EMULATOR } from '@angular/fire/compat/database';
+import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
+import {AngularFireFunctionsModule, USE_EMULATOR as USE_FUNCTIONS_EMULATOR} from '@angular/fire/compat/functions';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListInputComponent } from './shopping-list/shopping-list-input/shopping-list-input.component';
 import {MatSelectModule} from "@angular/material/select";
@@ -49,6 +49,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { ChipsMultiSelectComponent } from './components/chips-multi-select/chips-multi-select.component';
 import { IngredientFieldComponent } from './import-recipe-data/ingredient-fields/ingredient-field.component';
 import { StepFieldComponent } from './import-recipe-data/step-fields/step-field.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -76,33 +77,34 @@ import { StepFieldComponent } from './import-recipe-data/step-fields/step-field.
     IngredientFieldComponent,
     StepFieldComponent
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSidenavModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatDividerModule,
-    MatGridListModule,
-    MatInputModule,
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireFunctionsModule,
-    AngularFirestoreModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatSnackBarModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    CoolSocialLoginButtonsModule,
-    MatChipsModule
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSidenavModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatDividerModule,
+        MatGridListModule,
+        MatInputModule,
+        FormsModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireFunctionsModule,
+        AngularFirestoreModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatSnackBarModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        CoolSocialLoginButtonsModule,
+        MatChipsModule,
+        MatAutocompleteModule
+    ],
   providers: [
-    { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9099] : undefined },
+    { provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['http://localhost', 9099] : undefined },
     { provide: USE_DATABASE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 9000] : undefined },
     { provide: USE_FIRESTORE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 8081] : undefined },
     { provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined },

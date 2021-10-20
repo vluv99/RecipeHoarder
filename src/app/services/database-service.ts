@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
-//import {recipes} from "../../scraper/mock_data";
-import {AngularFirestore} from "@angular/fire/firestore";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {Recipe} from "../../../shared/model/Recipe";
+import {deepCopy} from "../../../shared/util/DeepCopy";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  //recipe?: Recipe[];
+
 
   constructor(private store: AngularFirestore) {
-    //this.local_db = []//recipes;
+
   }
 
   async search(input:string):Promise<Recipe[]> {
-    //input = input.toLowerCase();
 
     const data = await this.store.collection("recipes").ref
       .where('name', '>=', input)
@@ -60,6 +59,19 @@ export class DatabaseService {
     return res;
   }
 
+  async getRecipesByCategory(cat: string): Promise<Recipe[]> {
+    var datas = await this.store.collection("recipes").ref.withConverter(recipeConverter).get();
+
+    var res:Recipe[] = [];
+    datas.forEach((d) =>{
+      if (d.get("categories").includes(cat)) {
+        res.push(d.data());
+      }
+    })
+
+    return res;
+  }
+
   async upload(r: Recipe) {
     const doc = await this.store.collection("recipes").add(recipeConverter.toFirestore(r));
     return doc.id
@@ -98,7 +110,10 @@ export class DatabaseService {
 const recipeConverter = {
 
   toFirestore: function(recipe:Recipe) {
-    return Object.assign({},recipe);
+    //return Object.assign({},recipe);
+    let a = deepCopy(recipe);
+
+    return a;
   },
 
   fromFirestore: function(snapshot:any, options:any) {
