@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 //import {Recipe} from "../../shared/model/Recipe";
-import {getData} from "./core";
+import {/*getData, */getData2} from "./core";
 
 //import {Recipe} from "/shared/model/Recipe";
 
@@ -53,7 +53,9 @@ export const importRecipe = functions.https.onCall(async (data, context) => {
 
   functions.logger.info("Got url from import: " + url, {structuredData: true});
 
-  let r = await getData(url)
+  //let r = await getData(url)
+
+  const r = await getData2(url)
 
   functions.logger.info(r)
 

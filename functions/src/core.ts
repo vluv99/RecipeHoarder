@@ -10,6 +10,10 @@ import * as tasty from "./Tasty";
 import * as bbcgoodfood from "./bbcgoodfood";
 import * as merged from "./merged";
 import * as separateIngredients from "./separateIngredients";
+import {Pipeline} from "./Pipeline";
+import {FetchUrlData} from "./modules/FetchUrlData";
+import {JsonLdExtractor} from "./modules/JsonLdExtractor";
+import {SeparateIngredients} from "./modules/SeparateIngredients";
 
 var scrapers: { [id: string]: any; } = {}
 
@@ -46,4 +50,22 @@ export async function getData(url: string) :Promise<Recipe> {
   } catch (error) {
     throw error;
   }
+}
+
+
+
+const recipesPipeline = new Pipeline([
+    new FetchUrlData(),
+    new JsonLdExtractor(),
+    new SeparateIngredients()
+]);
+
+export async function getData2(url: string) {
+    let r = Recipe.empty();
+
+    r.url = url;
+
+    await recipesPipeline.run(r)
+
+    return r;
 }
