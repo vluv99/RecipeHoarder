@@ -14,7 +14,7 @@ import {Pipeline} from "./Pipeline";
 import {FetchUrlData} from "./modules/FetchUrlData";
 import {JsonLdExtractor} from "./modules/JsonLdExtractor";
 import {SeparateIngredients} from "./modules/SeparateIngredients";
-import {ImageDownloader} from "./modules/ImageDownloader";
+//import {ImageDownloader} from "./modules/ImageDownloader";
 
 var scrapers: { [id: string]: any; } = {}
 
@@ -58,8 +58,8 @@ export async function getData(url: string) :Promise<Recipe> {
 const recipesPipeline = new Pipeline([
     new FetchUrlData(),
     new JsonLdExtractor(),
-    new SeparateIngredients(),
-    new ImageDownloader()
+    new SeparateIngredients()/*,
+    new ImageDownloader()*/
 ]);
 
 export async function getData2(url: string) {

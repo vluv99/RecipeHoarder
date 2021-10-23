@@ -31,7 +31,7 @@ export class SeparateIngredients implements PipelineModule {
             if (!processed) {
                 i.amount = 1
                 i.measurement = "";
-                console.log("no regex " + i)
+                //console.log("no regex " + i)
             }
 
         })
@@ -45,7 +45,7 @@ export class SeparateIngredients implements PipelineModule {
             if (unit.regex.test(i.name)) {
                 const found = i.name.match(unit.regex)
 
-                console.log("asdasd"+i.name + " " + JSON.stringify(found));
+                //console.log("asdasd"+i.name + " " + JSON.stringify(found));
                 if(found && found) {
                     i.amount = this.parseNumber(found!.groups!.number)
                     i.name = found!.groups!.name
@@ -61,11 +61,13 @@ export class SeparateIngredients implements PipelineModule {
 
     extractPieceCount(i:Ingredient):boolean{
         //https://regex101.com/r/zkZdv7/1/
-        const regex2 = new RegExp(String.raw`/(?<amount>^[\d\/\\]+)(\s?-\s?\d*\s?)?\s?(?<name>.+)/gm`);
+        // separate str if it contains number
+        const regex2 = new RegExp(String.raw`(?<amount>^[\d\/\\]+)(\s?-\s?\d*\s?)?\s?(?<name>.+)`);
 
         if (regex2.test(i.name)) {
             const found = i.name.match(regex2)
 
+            console.log("regex piece " + found!.groups!.amount)
             //console.log(this.parseNumber(found!.groups!.amount))
 
             i.amount = this.parseNumber(found!.groups!.amount);
