@@ -3,6 +3,7 @@ import {ImportData, PipelineModule} from "../Pipeline";
 import {Ingredient} from "../../../shared/model/Ingredient";
 
 const convert = require('convert-units')
+var numQty = require("numeric-quantity");
 
 export class SeparateIngredients implements PipelineModule {
     units = this.getUnits()
@@ -46,7 +47,7 @@ export class SeparateIngredients implements PipelineModule {
 
                 console.log("asdasd"+i.name + " " + JSON.stringify(found));
                 if(found && found) {
-                    i.amount = parseInt(found!.groups!.number)
+                    i.amount = this.parseNumber(found!.groups!.number)
                     i.name = found!.groups!.name
                     i.measurement = unit.unit
 
@@ -65,9 +66,9 @@ export class SeparateIngredients implements PipelineModule {
         if (regex2.test(i.name)) {
             const found = i.name.match(regex2)
 
-            console.log(parseInt(found!.groups!.amount))
+            //console.log(this.parseNumber(found!.groups!.amount))
 
-            i.amount = parseInt(found!.groups!.amount);
+            i.amount = this.parseNumber(found!.groups!.amount);
 
             i.name = found!.groups!.name;
             i.measurement = i.amount == 1 ? "piece" : "pieces";
@@ -76,6 +77,28 @@ export class SeparateIngredients implements PipelineModule {
         }
 
         return false;
+    }
+
+    parseNumber(num:string):number{
+        let res:number;
+
+        if (num.includes('/')){
+
+            res = numQty(num)
+            console.log("eval res: " + res)
+        }else if(num.includes('\\')){
+
+            const i = num.replace('\\', '/')
+            res =  numQty(i)
+        } else if (num.includes(',')){
+
+            res = numQty(num.replace(',', '.'))
+        }else {
+
+            res = numQty(num)
+        }
+
+        return res
     }
 
     getUnits() {
