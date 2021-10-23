@@ -1,47 +1,58 @@
 <div class="container">
 
-  <h1 class="mat-display-3">Recipe Import</h1>
+    <h1 class="mat-display-3">Recipe Import</h1>
 
-  <mat-form-field class="input" appearance="fill">
-    <mat-label>Recipe URL</mat-label>
-    <input matInput type="url" [(ngModel)]="value" (keydown.enter)="importRecipe()">
-    <mat-hint align="start"><strong>Paste here the recipe URL you copied!</strong></mat-hint>
-    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-form-field>
+    <mat-form-field class="input" appearance="fill">
+        <mat-label>Recipe URL</mat-label>
+        <input matInput type="url" [(ngModel)]="value" (keydown.enter)="importRecipe()">
+        <mat-hint align="start"><strong>Paste here the recipe URL you copied!</strong></mat-hint>
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
 
-  <div class="button-container">
+    <div class="button-container">
 
 
-    <button mat-stroked-button color="primary" aria-label="send" (click)="importRecipe()">
-      <mat-icon>add</mat-icon>
-      IMPORT
-    </button>
+        <button mat-stroked-button color="primary" aria-label="send" (click)="importRecipe()">
+            <mat-icon>add</mat-icon>
+            IMPORT
+        </button>
 
-  </div>
+    </div>
 
-  <h3 class="mat-subheading-1">You can import recipes from these sites:</h3>
+    <h3 class="mat-subheading-1">You can import recipes from these sites:</h3>
 
-  <mat-chip-list aria-label="Fish selection">
-    <a href="https://www.allrecipes.com/" target="_blank"><mat-chip >Allrecipes</mat-chip></a>
-    <a href="https://www.bbcgoodfood.com/" target="_blank"><mat-chip >BBC Good Food</mat-chip></a>
-    <a href="https://tasty.co/" target="_blank"><mat-chip >Tasty</mat-chip></a>
-    <a href="https://www.taste.com.au/" target="_blank"><mat-chip >Taste</mat-chip></a>
-  </mat-chip-list>
+    <mat-chip-list aria-label="Fish selection">
+        <a href="https://www.allrecipes.com/" target="_blank">
+            <mat-chip>Allrecipes</mat-chip>
+        </a>
+        <a href="https://www.bbcgoodfood.com/" target="_blank">
+            <mat-chip>BBC Good Food</mat-chip>
+        </a>
+        <a href="https://tasty.co/" target="_blank">
+            <mat-chip>Tasty</mat-chip>
+        </a>
+        <a href="https://www.taste.com.au/" target="_blank">
+            <mat-chip>Taste</mat-chip>
+        </a>
+        <a href="https://www.delish.com/" target="_blank">
+            <mat-chip>Delish</mat-chip>
+        </a>
+    </mat-chip-list>
 
-  <h3 class="mat-subheading-1" style="margin-top: 20px">Or import manually:</h3>
-  <a [routerLink]="['/recipe-data']">
-  <button mat-stroked-button color="primary" aria-label="send">
-    <mat-icon>add</mat-icon>
-    IMPORT
-  </button>
-  </a>
+    <h3 class="mat-subheading-1" style="margin-top: 20px">Or import manually:</h3>
+    <a [routerLink]="['/recipe-data']">
+        <button mat-stroked-button color="primary" aria-label="send">
+            <mat-icon>add</mat-icon>
+            IMPORT
+        </button>
+    </a>
 
-  <!--
-  <div class="result-container">
-    <app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>
-    <div *ngIf="recipes.length <= 0"> No results, sorry  :( </div>
-  </div>
--->
+    <!--
+    <div class="result-container">
+      <app-recipe-card *ngFor="let i of recipes" [recipe]="i"></app-recipe-card>
+      <div *ngIf="recipes.length <= 0"> No results, sorry  :( </div>
+    </div>
+  -->
 </div>
