@@ -45,9 +45,22 @@ export class JsonLdExtractor implements PipelineModule {
         //Firebase is going to add the ID, so we're leaving it empty
         r.name = ldData["name"];
 
-        r.image = ldData["image"]?.url ?? null;
-        if (r.image == null){
 
+        if (ldData["image"]){
+            const img = ldData["image"]
+
+            if (Array.isArray(img)){
+
+                /*if (typeof img[0] === "string"){
+                    r.image = img[0]
+                }else*/
+                if ('url' in img[0]){
+                    r.image = img[0].url
+                }
+            } else {
+                r.image = ldData["image"].url;
+            }
+        } else {
             r.image = ldData["video"]?.thumbnailUrl ?? null;
         }
 

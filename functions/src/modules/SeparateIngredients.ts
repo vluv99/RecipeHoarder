@@ -11,9 +11,9 @@ export class SeparateIngredients implements PipelineModule {
 
     constructor() {
         for (const unit of this.units) {
-            //https://regex101.com/r/1vD6FR/1
+            //https://regex101.com/r/HndwVL/1
             // separate str by unit
-            const regex = new RegExp(String.raw`(?<number>[\d,./]+)\s?(${unit}[s]?)[\.]?\s(?<name>.+)`);
+            const regex = new RegExp(String.raw`(?<number>[\d,./]+|[\d]*[\s]?[\u2150-\u215E\u00BC-\u00BE])\s?(${unit}[s]?)[\.]?\s(?<name>.+)`);
 
             //regex.compile()
             this.unitRegexes.push({unit, regex})
@@ -73,7 +73,7 @@ export class SeparateIngredients implements PipelineModule {
             i.amount = this.parseNumber(found!.groups!.amount);
 
             i.name = found!.groups!.name;
-            i.measurement = i.amount == 1 ? "piece" : "pieces";
+            i.measurement = i.amount == 1 || i.amount == 0.5 ? "piece" : "pieces";
 
             return true;
         }
@@ -117,6 +117,7 @@ export class SeparateIngredients implements PipelineModule {
         units = units.flat();
         units.push("piece");
         units.push("c");
+        units.push("cup"); /* !!! why do i have to put this in here? */
         units.push("tbsp");
         units.push("tablespoon");
         units.push("teaspoon");
