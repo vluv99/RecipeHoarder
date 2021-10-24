@@ -11,9 +11,9 @@ export class SeparateIngredients implements PipelineModule {
 
     constructor() {
         for (const unit of this.units) {
-            //https://regex101.com/r/HndwVL/1
+            //https://regex101.com/r/xukvvW/1
             // separate str by unit
-            const regex = new RegExp(String.raw`(?<number>[\d,./]+|[\d]*[\s]?[\u2150-\u215E\u00BC-\u00BE])\s?(${unit}[s]?)[\.]?\s(?<name>.+)`);
+            const regex = new RegExp(String.raw`(?<number>[\d,./]+|[\d]*[\s]?[\u2150-\u215E\u00BC-\u00BE])\s?(.+)?(${unit}[s]?)[\.]?\s(?<name>.+)`);
 
             //regex.compile()
             this.unitRegexes.push({unit, regex})
@@ -116,6 +116,7 @@ export class SeparateIngredients implements PipelineModule {
         })
         units = units.flat();
         units.push("piece");
+        units.push("pack");
         units.push("c");
         units.push("cup"); /* !!! why do i have to put this in here? */
         units.push("tbsp");
