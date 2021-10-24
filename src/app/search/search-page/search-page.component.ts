@@ -29,7 +29,8 @@ export class SearchPageComponent implements OnInit, OnDestroy  {
 
      if (params.searchTerm) { //if its a search term, search
         this.searchTerm = params['searchTerm'];
-       this.searchTerm = this.searchTerm.charAt(0).toUpperCase() // TODO: delete this part once we have keywords
+        this.searchTerm = this.searchTerm.replace(this.searchTerm.charAt(0), this.searchTerm.charAt(0).toUpperCase())
+       //this.searchTerm = this.searchTerm.charAt(0).toUpperCase() // TODO: delete this part once we have keywords
 
         this.db.search(this.searchTerm).then(recipes =>{
           this.recipes = recipes;

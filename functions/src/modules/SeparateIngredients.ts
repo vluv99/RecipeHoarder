@@ -12,6 +12,7 @@ export class SeparateIngredients implements PipelineModule {
     constructor() {
         for (const unit of this.units) {
             //https://regex101.com/r/HndwVL/1
+            /// new https://regex101.com/r/j8hueq/1
             // separate str by unit
             const regex = new RegExp(String.raw`(?<number>[\d,./]+|[\d]*[\s]?[\u2150-\u215E\u00BC-\u00BE])\s?(${unit}[s]?)[\.]?\s(?<name>.+)`);
 
