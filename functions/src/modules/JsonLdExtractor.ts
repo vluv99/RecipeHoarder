@@ -57,7 +57,9 @@ export class JsonLdExtractor implements PipelineModule {
                 if ('url' in img[0]){
                     r.image = img[0].url
                 }
-            } else {
+            } else if (typeof img === "string"){
+                r.image = ldData["image"]
+            } else{
                 r.image = ldData["image"].url;
             }
         } else {
