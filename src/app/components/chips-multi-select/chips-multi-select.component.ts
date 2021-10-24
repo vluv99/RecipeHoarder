@@ -19,7 +19,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class ChipsMultiSelectComponent implements OnInit, ControlValueAccessor, AfterViewInit {
   @Input()
-  options: string[] = ["Lunch", "Dinner", "Dessert", "Breakfast", "Snack", "Quick", "Healthy", "Complex"];
+  options: string[] = ["Breakfast", "Main course", "Dessert", "Snack", "Quick", "Healthy", "Complex", "Spicy"];
 
   @ViewChild(MatChipList)
   chipList!: MatChipList;
