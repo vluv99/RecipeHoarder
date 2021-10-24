@@ -119,6 +119,8 @@ export class SeparateIngredients implements PipelineModule {
         units.push("c");
         units.push("cup"); /* !!! why do i have to put this in here? */
         units.push("tbsp");
+        units.push("tsp"); /* !!! why do i have to put this in here? */
+        units.push("ml"); /* !!! why do i have to put this in here? */
         units.push("tablespoon");
         units.push("teaspoon");
         units.push("pound");
