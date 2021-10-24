@@ -5,6 +5,7 @@ import {RecipeImporterService} from "../services/recipe-importer.service";
 import {Router} from "@angular/router";
 import {DatabaseService} from "../services/database-service";
 import {Steps} from "../../../shared/model/Steps";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-import-recipe-data',
@@ -18,7 +19,8 @@ export class ImportRecipeDataComponent implements OnInit {
   stepCount:number = 0;
 
   constructor(private recipeImporter:RecipeImporterService, private _router: Router,
-              private database:DatabaseService) { }
+              private database:DatabaseService,
+              private _snackbar:MatSnackBar) { }
 
   ngOnInit(): void {
     if(this.recipeImporter.recipe) {
@@ -36,9 +38,15 @@ export class ImportRecipeDataComponent implements OnInit {
   saveRecipe(){
     this.r.importDate = new Date();
 
-    this.database.upload(this.r).then(id => {
-      this._router.navigate(['/recipe/' , id])
-    })
+    if (this.r.categories.length != 0){
+        this.database.upload(this.r).then(id => {
+            this._router.navigate(['/recipe/' , id])
+        })
+    } else {
+        this._snackbar.open('Choose min. 1 category!', 'Got it!', {
+            duration: 3000
+        });
+    }
   }
 
   addNewIngredient() {
