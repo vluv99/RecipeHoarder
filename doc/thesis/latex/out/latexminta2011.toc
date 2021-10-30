@@ -1,0 +1,21 @@
+\select@language {magyar} \contentsline {section}{Feladatkiírás}{3}{}%
+\select@language {magyar} \contentsline {section}{Tartalmi összefoglaló}{4}{}%
+\select@language {magyar} \contentsline {section}{Motiváció}{5}{}%
+\select@language {magyar} \contentsline {chapter}{\numberline {1}Piacfelmérés}{6}{}%
+\select@language {magyar} \contentsline {section}{\numberline {1.1}Grocy}{6}{}%
+\select@language {magyar} \contentsline {section}{\numberline {1.2}Delish}{6}{}%
+\select@language {magyar} \contentsline {section}{\numberline {1.3}Yummly}{6}{}%
+\select@language {magyar} \contentsline {section}{\numberline {1.4}BigOven}{7}{}%
+\select@language {magyar} \contentsline {section}{\numberline {1.5}ChefTap}{7}{}%
+\select@language {magyar} \contentsline {chapter}{\numberline {2}Hosszú}{8}{}%
+\select@language {magyar} \contentsline {section}{\numberline {2.1}Részletek}{8}{}%
+\select@language {magyar} \contentsline {chapter}{\numberline {3}Egyebek}{10}{}%
+\select@language {magyar} \contentsline {section}{\numberline {3.1}Környezetek}{10}{}%
+\select@language {magyar} \contentsline {section}{\numberline {3.2}Listák}{11}{}%
+\select@language {magyar} \contentsline {section}{\numberline {3.3}Egy táblázat és egy ábra}{12}{}%
+\select@language {magyar} \contentsline {chapter}{\numberline {4}Függelék}{14}{}%
+\select@language {magyar} \contentsline {section}{\numberline {4.1}A program forráskódja}{14}{}%
+\select@language {magyar} \ 
+\select@language {magyar} \contentsline {section}{Nyilatkozat}{15}{}%
+\select@language {magyar} \contentsline {section}{Köszönetnyilvánítás}{16}{}%
+\select@language {magyar} \contentsline {section}{Irodalomjegyzék}{17}{}%
