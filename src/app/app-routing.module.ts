@@ -9,18 +9,22 @@ import {RegisterComponent} from "./auth/register/register.component";
 import {LoginComponent} from "./auth/login/login.component";
 import {ImportRecipeDataComponent} from "./import-recipe-data/import-recipe-data.component";
 
+import {canActivate, redirectUnauthorizedTo} from '@angular/fire/compat/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'recipe/:recipeId', component: RecipeComponent },
-  { path: 'category/:categoryName', component: SearchPageComponent },
-  { path: 'search/:searchTerm', component: SearchPageComponent },
-  { path: 'import', component: ImportComponent },
-  { path: 'shopping-list', component: ShoppingListComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'recipe-data', component: ImportRecipeDataComponent},
-  { path: 'collections/:my-favourites', component: SearchPageComponent},
-  { path: 'collections/:my-recipes', component: SearchPageComponent},
+  { path: '',                           component: HomeComponent,           ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'recipe/:recipeId',           component: RecipeComponent,         ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'category/:categoryName',     component: SearchPageComponent,     ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'search/:searchTerm',         component: SearchPageComponent,     ...canActivate(redirectUnauthorizedToLogin)  },
+  { path: 'import',                     component: ImportComponent,         ...canActivate(redirectUnauthorizedToLogin)  },
+  { path: 'shopping-list',              component: ShoppingListComponent,   ...canActivate(redirectUnauthorizedToLogin)  },
+  { path: 'register',                   component: RegisterComponent },
+  { path: 'login',                      component: LoginComponent },
+  { path: 'recipe-data',                component: ImportRecipeDataComponent,...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'collections/:my-favourites', component: SearchPageComponent,      ...canActivate(redirectUnauthorizedToLogin) },
+  { path: 'collections/:my-recipes',    component: SearchPageComponent,      ...canActivate(redirectUnauthorizedToLogin) },
 
 
 ];
