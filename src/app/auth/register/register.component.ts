@@ -21,7 +21,6 @@ export class RegisterComponent implements OnInit {
         birthDate: new FormControl('', [Validators.required]),
         password: new FormControl('', [Validators.required, Validators.min(4)]),
         password2: new FormControl('', [Validators.required])
-
     },
         {
             validators: [FormValidation.compare('password', 'password2')]
@@ -41,7 +40,7 @@ export class RegisterComponent implements OnInit {
         this.authService.signUp(
             this.registerForm.value.email,
             this.registerForm.value.password,
-            this.registerForm.value.name)
+            this.registerForm.value)
     }
 
     matchPassword(control: AbstractControl): ValidationErrors | null {
@@ -61,12 +60,12 @@ export class RegisterComponent implements OnInit {
     onSubmit() {
         if(this.registerForm.valid){
             alert('User form is valid!!')
+            this.register();
         } else {
             alert('User form is not valid!! @@@@@')
         }
 
         console.warn(this.registerForm.value);
-        //this.register();
     }
 
     isFieldMissing(fieldName: string){
