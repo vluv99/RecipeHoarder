@@ -3,7 +3,8 @@ import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/f
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {User} from "../../../shared/model/User";
-import firebase from "firebase/compat";
+import firebase from 'firebase/compat/app';
+
 
 
 @Injectable({
@@ -18,15 +19,19 @@ export class AuthService {
         public router: Router,
         public ngZone: NgZone // NgZone service to remove outside scope warning
     ) {
+        this.afAuth.authState.subscribe(user => {
+            if (user) {
+                this.userData = user;
+            } else {
+                //alert("Coudn't ...")
+            }
+        })
     }
 
     // Sign in with email/password
     logIn(email: string, password: string) {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then((result) => {
-                /*this.ngZone.run(() => {
-                    this.router.navigate(['dashboard']);
-                });*/
                 this.setUserData(result.user!);
             }).catch((error) => {
                 window.alert(error.message)
@@ -49,6 +54,21 @@ export class AuthService {
 
             }).catch((error) => {
                 window.alert(error.message)
+            })
+    }
+
+    // Sign in with Google
+    googleAuth() {
+        return this.authLogin(new firebase.auth.GoogleAuthProvider());
+    }
+
+    // Auth logic to run auth providers
+    authLogin(provider: firebase.auth.GoogleAuthProvider) {
+        return this.afAuth.signInWithPopup(provider)
+            .then((result) => {
+                this.setUserData(result.user!);
+            }).catch((error) => {
+                window.alert(error)
             })
     }
 

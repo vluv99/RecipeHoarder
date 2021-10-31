@@ -20,14 +20,6 @@ export class LoginComponent implements OnInit {
 
     hide = true;
 
-    get usernameInput() {
-        return this.loginForm.get('email');
-    }
-
-    get passwordInput() {
-        return this.loginForm.get('password');
-    }
-
     constructor(public authService: AuthService, public router: Router) {
     }
 
@@ -38,15 +30,21 @@ export class LoginComponent implements OnInit {
         console.warn(this.loginForm.value);
         this.authService.logIn(
             this.loginForm.value.email,
-            this.loginForm.value.password).then(() => {
-            this.router.navigate(['/']);
-        }).catch(() => {
+            this.loginForm.value.password)
+            .then(() => {
+                this.router.navigate(['/']);
+            }).catch(() => {
             alert("Coundn't log in! :(")
         })
     }
 
     onGoogleLoginClicked() {
         console.warn("Google log in happened!")
+        this.authService.googleAuth().then(() => {
+            this.router.navigate(['/']);
+        }).catch(() => {
+            alert("Coundn't log in with Google :(")
+        })
     }
 
     onGoogleRegisterClicked() {
