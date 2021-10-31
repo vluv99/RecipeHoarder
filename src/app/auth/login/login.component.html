@@ -4,10 +4,10 @@
   <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
     <mat-form-field class="" appearance="outline" color="primary">
-      <mat-label>Username</mat-label>
-      <input type="text" matInput formControlName="username" placeholder="pat_username53">
-      <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
-        Username is missing
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="pat@emaple.com">
+      <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+        Email is missing
       </mat-error>
     </mat-form-field>
 
@@ -36,10 +36,10 @@
   <a [routerLink]="['/register']">
   <button mat-raised-button color="primary" type="submit" >Register</button>
   </a>
-
+<!--
   <span class="mat-subheading-1">OR</span>
 
   <cool-google-button color="light" (click)="onGoogleRegisterClicked()">
     Register with Google
-  </cool-google-button>
+  </cool-google-button>-->
 </div>

@@ -1,57 +1,89 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {AuthService} from "../../services/auth-service";
+import FormValidation from "../../utils/FormValidation";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss']
 })
 
 export class RegisterComponent implements OnInit {
 
 
-  registerForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    username: new FormControl('',[Validators.minLength(4), Validators.required]),
-    email: new FormControl('', [Validators.email, Validators.required ]),
-    gender: new FormControl('', [Validators.required]),
-    birthDate: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.min(4) ]),
-    password2: new FormControl('', [Validators.required]),
-    //TODO: fix confirmation password and password validation
-    // - why isn't it writes out the other error message at less than 4 char?
+    registerForm = new FormGroup({
+        name: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z\ ]+$')]),
+        username: new FormControl('', [Validators.required, Validators.minLength(4)]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        gender: new FormControl('', [Validators.required]),
+        birthDate: new FormControl('', [Validators.required]),
+        password: new FormControl('', [Validators.required, Validators.min(4)]),
+        password2: new FormControl('', [Validators.required])
+    },
+        {
+            validators: [FormValidation.compare('password', 'password2')]
+        });
 
-  });
+    // password show/hide variables
+    hide = true;
+    hide2 = true;
 
+    genders: String[] = ['male', 'female', 'other'];
+    selectedValue: string | undefined;
 
-  hide = true;
-  get nameInput() { return this.registerForm.get('name'); }
-  get usernameInput() { return this.registerForm.get('username'); }
-  get emailInput() { return this.registerForm.get('email'); }
-  get genderInput() { return this.registerForm.get('gender'); }
-  get birthDateInput() { return this.registerForm.get('birthDate'); }
-  get passwordInput() { return this.registerForm.get('password'); }
-  get password2Input() { return this.registerForm.get('password2'); }
+    constructor(public authService: AuthService) {
+    }
 
+    register(){
+        this.authService.register(
+            this.registerForm.value.email,
+            this.registerForm.value.password,
+            this.registerForm.value)
+    }
 
-  genders: String[] = ['male', 'female', 'other'];
-  selectedValue: string | undefined;
+    matchPassword(control: AbstractControl): ValidationErrors | null {
+        let password = this.registerForm.get('password')?.value;
+        let confirm = this.registerForm.get('password2')?.value;
 
-  constructor() { }
+        if (password != confirm) {
+            return {'noMatch': true}
+        }
 
-  matchPassword(control: AbstractControl): ValidationErrors | null {
-    let password = this.registerForm.get('password')?.value;
-    let confirm = this.registerForm.get('password2')?.value;
+        return null
+    }
 
-    if (password != confirm) { return { 'noMatch': true } }
+    ngOnInit(): void {
+    }
 
-    return null
-  }
+    onSubmit() {
+        if(this.registerForm.valid){
+            alert('User form is valid!!')
+            this.register();
+        } else {
+            alert('User form is not valid!! @@@@@')
+        }
 
-  ngOnInit(): void {
-  }
+        console.warn(this.registerForm.value);
+    }
 
-  onSubmit() {
-    console.warn(this.registerForm.value);
-  }
+    isFieldMissing(fieldName: string){
+        return this.registerForm.get(fieldName)?.errors?.required;
+    }
+
+    /**
+     * Check which error you get from the field.
+     * It gives back true when theres and error and that isnt "required".
+     * @param fieldName
+     */
+    isFieldInvalidNotMissing(fieldName: string):boolean{
+        const errors = this.registerForm.get(fieldName)?.errors
+
+        if (errors == null){
+            return false;
+        }
+
+        return !('required' in errors);
+    }
 }

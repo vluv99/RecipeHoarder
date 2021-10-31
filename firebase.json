@@ -1,46 +1,49 @@
 {
-  "hosting": [
-    {
-      "target": "recipe-hoarder",
-      "public": "dist/recipe-hoarder",
-      "ignore": [
-        "**/.*"
-      ],
-      "headers": [
+    "hosting": [
         {
-          "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
-          "headers": [
-            {
-              "key": "Cache-Control",
-              "value": "public,max-age=31536000,immutable"
-            }
-          ]
+            "target": "recipe-hoarder",
+            "public": "dist/recipe-hoarder",
+            "ignore": [
+                "**/.*"
+            ],
+            "headers": [
+                {
+                    "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
+                    "headers": [
+                        {
+                            "key": "Cache-Control",
+                            "value": "public,max-age=31536000,immutable"
+                        }
+                    ]
+                }
+            ],
+            "rewrites": [
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
         }
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    }
-  ],
-  "functions": {
-    "source": "functions",
-    "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run build"
-    ]
-  },
-  "emulators": {
+    ],
     "functions": {
-      "port": 5001
+        "source": "functions",
+        "predeploy": [
+            "npm --prefix \"$RESOURCE_DIR\" run build"
+        ]
     },
-    "firestore": {
-      "port": 8081
-    },
-    "ui": {
-      "enabled": true,
-      "port": 81
+    "emulators": {
+        "functions": {
+            "port": 5001
+        },
+        "firestore": {
+            "port": 8081
+        },
+        "ui": {
+            "enabled": true,
+            "port": 81
+        },
+        "auth": {
+            "port": 9099
+        }
     }
-  }
 }

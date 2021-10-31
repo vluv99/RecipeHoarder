@@ -12,13 +12,17 @@
     </mat-form-field>
 
     <div class="button-container">
+        <div *ngIf="inProgress; then spinner else button"></div>
+        <ng-template #spinner>
+            <mat-spinner [diameter]="37"></mat-spinner>
+        </ng-template>
 
-
-        <button mat-stroked-button color="primary" aria-label="send" (click)="importRecipe()">
-            <mat-icon>add</mat-icon>
-            IMPORT
-        </button>
-
+        <ng-template #button>
+            <button mat-stroked-button color="primary" aria-label="send" (click)="importRecipe()">
+                <mat-icon>add</mat-icon>
+                IMPORT
+            </button>
+        </ng-template>
     </div>
 
     <h3 class="mat-subheading-1">You can import recipes from these sites:</h3>
