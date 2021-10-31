@@ -47,7 +47,7 @@
 
       <mat-divider></mat-divider>
 
-      <a class="menu-item bottom" [routerLink]="['/login']">
+      <a class="menu-item bottom" style="cursor: pointer" (click)="authService.logOut()"> <!--[routerLink]="['/login']"-->
       <span class="menu-icon" aria-label="menu icon">
         <mat-icon>logout</mat-icon>
       </span>

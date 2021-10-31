@@ -52,6 +52,7 @@ import {IngredientFieldComponent} from './import-recipe-data/ingredient-fields/i
 import {StepFieldComponent} from './import-recipe-data/step-fields/step-field.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AuthService} from "./services/auth-service";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import {AuthService} from "./services/auth-service";
         MatNativeDateModule,
         CoolSocialLoginButtonsModule,
         MatChipsModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         {provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['http://localhost:9099', 9099] : undefined},

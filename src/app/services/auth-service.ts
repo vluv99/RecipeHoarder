@@ -21,7 +21,7 @@ export class AuthService {
     }
 
     // Sign in with email/password
-    signIn(email: string, password: string) {
+    logIn(email: string, password: string) {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then((result) => {
                 /*this.ngZone.run(() => {
@@ -34,7 +34,7 @@ export class AuthService {
     }
 
     // Sign up with email/password
-    signUp(email: string, password: string, additionalData: any) {
+    register(email: string, password: string, additionalData: any) {
         return this.afAuth.createUserWithEmailAndPassword(email, password)
             .then((result) => {
                 /* Call the SendVerificaitonMail() function when new user sign
@@ -57,18 +57,33 @@ export class AuthService {
     provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
     setUserData(fuser: firebase.User, additionalData: any = null) {
         const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${fuser.uid}`);
-        const userData: User = {
+        const userData:any = {
             uid: fuser.uid,
             email: fuser.email!,
-            name: additionalData.name,
+            //name: additionalData.name,
             username: fuser.displayName!,
-            gender: additionalData.gender,
-            birthDate: additionalData.birthDate,
+            //gender: additionalData.gender,
+            //birthDate: additionalData.birthDate,
             emailVerified: fuser.emailVerified,
             saved : []
         }
+
+        if (additionalData){
+            userData.name = additionalData.name
+            userData.gender = additionalData.gender
+            userData.birthDate = additionalData.birthDate
+        }
         return userRef.set(userData, {
             merge: true
+        })
+    }
+
+    // Sign out
+    logOut() {
+        return this.afAuth.signOut().then(() => {
+            this.router.navigate(['login']);
+        }).catch(() => {
+            alert("Couldn't log out!")
         })
     }
 }
