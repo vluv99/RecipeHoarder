@@ -39,3 +39,7 @@ mat-card {
     right: 30px;
   }
 }
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
+    stroke: white!important;
+}
