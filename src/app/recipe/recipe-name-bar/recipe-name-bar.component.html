@@ -1,10 +1,20 @@
 <mat-card class="mat-elevation-z4">
-    <div>
+    <div class="card-content">
         <h1>{{ recipe.name }}</h1>
         <div class="link-container">
             <img src="{{website_ico}}">
             <a href="{{ recipe.url }}" target="_blank"> {{website}}</a>
         </div>
+
+        <mat-divider [inset]="true"></mat-divider>
+
+        <mat-chip-list aria-label="Recipe categories">
+            <div *ngFor="let c of recipe.categories">
+                <a [routerLink]="['/category', c]">
+                    <mat-chip>{{c}}</mat-chip>
+                </a>
+            </div>
+        </mat-chip-list>
     </div>
 
     <div class="app-button-container">

@@ -2,42 +2,53 @@
 @import "src/theme/color";
 
 mat-card {
-  background-color: $custom-background-color;
-  display: flex;
-  flex-flow: row;
-  justify-content: space-between;
-  margin-top: -40px;
-  @include mat.elevation(4); //shadow
-
-  h1 {
-    font-size: 20px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-  }
-
-  .link-container {
+    background-color: $custom-background-color;
     display: flex;
-    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+    margin-top: -40px;
+    @include mat.elevation(4); //shadow
 
-    img {
-      height: 20px;
-      width: 20px;
+    h1 {
+        font-size: 20px;
+        margin-bottom: 5px;
+        margin-top: 5px;
     }
 
-    a {
-      text-decoration: none;
-      color: mat.get-color-from-palette($my-primary, 'default');
-      margin-left: 10px;
-      cursor: pointer;
-    }
-  }
+    .card-content{
+        width: 100%;
 
-  .app-button-container{
-    position: absolute;
-    top: 0;
-    transform: translateY(-50%);
-    right: 30px;
-  }
+        .mat-divider-inset{
+            margin-bottom: 15px;
+            margin-top: 15px;
+            /*margin-left: -16px;
+            margin-right: 16px;*/
+        }
+    }
+
+    .link-container {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 20px;
+            width: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: mat.get-color-from-palette($my-primary, 'default');
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    }
+
+    .app-button-container {
+        position: absolute;
+        top: 0;
+        transform: translateY(-50%);
+        right: 30px;
+    }
 }
 
 ::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
