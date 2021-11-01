@@ -11,9 +11,10 @@ export class SeparateIngredients implements PipelineModule {
 
     constructor() {
         for (const unit of this.units) {
-            //https://regex101.com/r/xukvvW/1
+            //console.log(unit);
+            //https://regex101.com/r/zgfo09/1
             // separate str by unit
-            const regex = new RegExp(String.raw`(?<number>[\d,./]+|[\d]*[\s]?[\u2150-\u215E\u00BC-\u00BE])\s?(.+)?(${unit}[s]?)[\.]?\s(?<name>.+)`);
+            const regex = new RegExp(String.raw`(?<number>[\d,./]+|[\d]*[\s]?[\u2150-\u215E\u00BC-\u00BE])\s?(\.+)?(?<unit>${unit}[s]?)[\.]?\s(?<name>.+)`);
 
             //regex.compile()
             this.unitRegexes.push({unit, regex})
@@ -22,21 +23,25 @@ export class SeparateIngredients implements PipelineModule {
 
     run(imp: ImportData): Promise<void> {
         imp.r.ingredients.forEach((i: Ingredient) => {
-            let processed = this.extractUnitMeasurement(i);
 
-            if (!processed) {
-                processed = this.extractPieceCount(i);
-            }
-
-            if (!processed) {
-                i.amount = 1
-                i.measurement = "";
-                //console.log("no regex " + i)
-            }
-
+            this.parseIngredient(i)
         })
 
         return Promise.resolve(undefined);
+    }
+
+    parseIngredient(i:Ingredient){
+        let processed = this.extractUnitMeasurement(i);
+
+        if (!processed) {
+            processed = this.extractPieceCount(i);
+        }
+
+        if (!processed) {
+            i.amount = 1
+            i.measurement = "";
+            //console.log("no regex " + i)
+        }
     }
 
     extractUnitMeasurement(i:Ingredient):boolean{
@@ -49,7 +54,7 @@ export class SeparateIngredients implements PipelineModule {
                 if(found && found) {
                     i.amount = this.parseNumber(found!.groups!.number)
                     i.name = found!.groups!.name
-                    i.measurement = unit.unit
+                    i.measurement = found!.groups!.unit
 
                     return true;
                 }
@@ -60,20 +65,20 @@ export class SeparateIngredients implements PipelineModule {
     }
 
     extractPieceCount(i:Ingredient):boolean{
-        //https://regex101.com/r/zkZdv7/1/
+        //https://regex101.com/r/3Pqk6G/1
         // separate str if it contains number
-        const regex2 = new RegExp(String.raw`(?<amount>^[\d\/\\]+)(\s?-\s?\d*\s?)?\s?(?<name>.+)`);
+        const regex2 = new RegExp(String.raw`(?<amount>^[\d\/\\\u2150-\u215E\u00BC-\u00BE\s]+)(\s?(-|(to))\s?\d*\s?)?\s?(?<name>.+)`);
 
         if (regex2.test(i.name)) {
             const found = i.name.match(regex2)
 
-            console.log("regex piece " + found!.groups!.amount)
+            //console.log("regex piece " + found!.groups!.amount)
             //console.log(this.parseNumber(found!.groups!.amount))
 
-            i.amount = this.parseNumber(found!.groups!.amount);
+            i.amount = this.parseNumber(found!.groups!.amount.trim());
 
             i.name = found!.groups!.name;
-            i.measurement = i.amount == 1 || i.amount == 0.5 ? "piece" : "pieces";
+            i.measurement = i.amount <= 1 /*|| i.amount < 1*/  ? "piece" : "pieces";
 
             return true;
         }
@@ -104,11 +109,12 @@ export class SeparateIngredients implements PipelineModule {
     }
 
     getUnits() {
-        const measuresArray = convert().list('mass')
-        measuresArray.concat(convert().list('length'))
-        measuresArray.concat(convert().list('volume'))
+        let measuresArray = convert().list('mass')
+        measuresArray = measuresArray.concat(convert().list('length'))
+        measuresArray = measuresArray.concat(convert().list('volume'))
 
         let units = measuresArray.map((m: { abbr: { toString: () => any; }; singular:string }) => {
+            //console.log(m);
             return [
                 m.abbr.toString(),
                 m.singular.toLowerCase()
@@ -118,13 +124,14 @@ export class SeparateIngredients implements PipelineModule {
         units.push("piece");
         units.push("pack");
         units.push("c");
-        units.push("cup"); /* !!! why do i have to put this in here? */
+        //units.push("cup"); /* !!! why do i have to put this in here? */
         units.push("tbsp");
-        units.push("tsp"); /* !!! why do i have to put this in here? */
-        units.push("ml"); /* !!! why do i have to put this in here? */
-        units.push("tablespoon");
-        units.push("teaspoon");
+        //units.push("tsp"); /* !!! why do i have to put this in here? */
+        //units.push("ml"); /* !!! why do i have to put this in here? */
+        //units.push("tablespoon");
+        //units.push("teaspoon");
         units.push("pound");
+        units.push("quart");
 
         /*let measuresArray = convert().possibilities('mass');
         measuresArray += convert().possibilities('length');
