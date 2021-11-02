@@ -51,3 +51,12 @@ firestore-debug.log
 firebase-debug.log
 
 *.cache
+
+# Latex generation files
+doc/thesis/latex/out/*.aux
+doc/thesis/latex/out/*.fdb_latexmk
+doc/thesis/latex/out/*.fls
+doc/thesis/latex/out/*.log
+doc/thesis/latex/out/*.out
+doc/thesis/latex/out/*.gz
+doc/thesis/latex/out/*.toc

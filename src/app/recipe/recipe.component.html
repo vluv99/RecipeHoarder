@@ -1,25 +1,63 @@
 <div class="container">
-  <div class="img-container">
-    <img [src]="recipe.image" alt="">
-  </div>
-
-  <app-recipe-name-bar [recipe]="recipe" ></app-recipe-name-bar>
-
-  <div class="data-container">
-    <h1 class="mat-subheading-2">Description</h1>
-    <div class="description mat-body-1" >{{ recipe.description }}</div>
-
-    <h1 class="mat-subheading-2">Ingredients</h1>
-    <div *ngFor="let i of recipe.ingredients">
-      <app-recipe-ingredient [ingredient]="i"></app-recipe-ingredient>
+    <div class="img-container">
+        <img [src]="recipe.image" alt="">
     </div>
 
-    <h1 class="mat-subheading-2">Directions</h1>
-    <div *ngFor="let d of recipe.steps">
-      <app-recipe-step [step]="d.step" [num]="d.number"></app-recipe-step>
+    <app-recipe-name-bar [recipe]="recipe"></app-recipe-name-bar>
+
+    <div class="data-container">
+        <h1 class="mat-subheading-2">Description</h1>
+        <div class="description mat-body-1">{{ recipe.description }}</div>
+
+        <mat-card class="recipe-data-container">
+            <div [hidden]="recipe.totalCookTime == 0">
+                <mat-icon>schedule</mat-icon>
+                <span>{{ recipe.totalCookTime }} mins</span>
+            </div>
+            <div [hidden]="recipe.calories == null">
+                <mat-icon>food_bank</mat-icon>
+                <span>{{ recipe.calories }} kcal</span>
+            </div>
+        </mat-card>
+
+        <h1 class="mat-subheading-2">Ingredients</h1>
+        <div *ngFor="let i of recipe.ingredients">
+            <app-recipe-ingredient [ingredient]="i"></app-recipe-ingredient>
+        </div>
+        <button mat-stroked-button color="primary">Add all to shopping list</button>
+
+
+        <h1 class="mat-subheading-2">Directions</h1>
+        <div *ngFor="let d of recipe.steps">
+            <app-recipe-step [step]="d.step" [num]="d.number"></app-recipe-step>
+        </div>
+
+        <!-- TODO: DANGER ZONE: collapsible (expansion?) folder for report recipe button -->
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    DANGER ZONE
+                </mat-panel-title>
+                <!--<mat-panel-description>
+                    Report problems with the recipe here!
+                </mat-panel-description>-->
+            </mat-expansion-panel-header>
+            <p>Report problem with the recipe here!</p>
+            <!--<button mat-raised-button (click)="opernReportsheet()">Report</button>-->
+
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Problem</mat-label>
+                    <mat-select>
+                        <mat-option *ngFor="let p of problems" [value]="p">
+                            {{p}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-raised-button (click)="reportProblem()">Report</button>
+            </div>
+
+        </mat-expansion-panel>
     </div>
-
-    <!-- TODO: DANGER ZONE: collapsible (expansion?) folder for report recipe button -->
-
-  </div>
 </div>

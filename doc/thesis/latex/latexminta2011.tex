@@ -17,8 +17,20 @@
 \usepackage[utf8]{inputenc}% ékezetes szavak beviteléhez
 
 %Magyar nyelvi támogatás (Babel 3.7 vagy későbbi kell!)
-\def\magyarOptions{defaults=hu-min}
+%\def\magyarOptions{defaults=hu-min}
 \usepackage[magyar]{babel}
+
+
+% Margók és lap geometria beállítása
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  %total={170mm,257mm},
+  %left=2.5cm,
+  top=2.5cm,
+  %right=2.5cm,
+  bottom=2.5cm
+}
 
 % A formai kovetelmenyekben megkövetelt Times betűtípus hasznalata:
 \usepackage{times}
@@ -36,6 +48,8 @@
 %ha nincs rájuk szükség természetesen kihagyhatók.
 \usepackage{graphicx}
 \usepackage{psfrag}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
 
 %Tételszerű környezetek definiálhatók, ezek most fejezetenkent egyutt szamozodnak, pl.
 \newtheorem{tet}{Tétel}[chapter]
@@ -52,30 +66,30 @@
 
 %Margók:
 \hoffset -1in
-\voffset -1in
-\oddsidemargin 35mm
-\textwidth 150mm
-\topmargin 15mm
-\headheight 10mm
-\headsep 5mm
-\textheight 237mm
+%\voffset 9.6mm%-1in % -25.4,,
+%\oddsidemargin 35mm
+%\textwidth 150mm
+%\topmargin 15mm
+%\headheight 10mm
+%\headsep 5mm
+%\textheight 237mm
+
+\oddsidemargin 35mm%= 1cm
 
 
 
 
 \begin{document}
 
-%\include{kotestabla.tex}
-
 %A FEJEZETEK KEZDŐOLDALAINAK FEJ ES LÁBLÉCE:
 %a plain oldalstílust kell átdefiniálni, hogy ott ne legyen fejléc:
 \fancypagestyle{plain}{%
-%ez mindent töröl:
-\fancyhf{}
-% a láblécbe jobboldalra kerüljön az oldalszám:
-\fancyfoot[R]{\thepage}
-%elválasztó vonal sem kell:
-\renewcommand{\headrulewidth}{0pt}
+	%ez mindent töröl:
+	\fancyhf{}
+	% a láblécbe jobboldalra kerüljön az oldalszám:
+	\fancyfoot[R]{\thepage}
+	%elválasztó vonal sem kell:
+	\renewcommand{\headrulewidth}{0pt}
 }
 
 %A TÖBBI OLDAL FEJ ÉS LÁBLÉCE:
@@ -89,46 +103,46 @@
 \thispagestyle{empty}
 
 \begin{center}
-\vspace*{1cm}
-{\Large\bf Szegedi Tudományegyetem}
+	\vspace*{1cm}
+	{\Large\bf Szegedi Tudományegyetem}
 
-\vspace{0.5cm}
+	\vspace{0.5cm}
 
-{\Large\bf Informatikai Intézet}
+	{\Large\bf Informatikai Intézet}
 
-\vspace*{3.8cm}
-
-
-{\LARGE\bf Recipe hoarder webes alkalmazás}
-\\\vspace*{0.3cm}
-{\Large\bf (Recipe hoarder web application)}
+	\vspace*{3.8cm}
 
 
-\vspace*{3.6cm}
+	{\LARGE\bf Recipe hoarder webes alkalmazás}
+	\\\vspace*{0.3cm}
+	{\Large\bf (Recipe hoarder web application)}
 
-{\Large Szakdolgozat}
-% vagy {\Large Szakdolgozat}
 
-\vspace*{4cm}
+	\vspace*{3.6cm}
 
-%Értelemszerűen megváltoztatandó:
-{\large
-\begin{tabular}{c@{\hspace{4cm}}c}
-\emph{Készítette:}     &\emph{Témavezető:}\\
-\bf{Vas Laura}  &\bf{Dr. Bilicki Vilmos}\\
-gazdaságinformatika szakos     &egyetemi adjunktus\\
-hallgató&
-\end{tabular}
-}
+	{\Large Szakdolgozat}
+	% vagy {\Large Szakdolgozat}
 
-\vspace*{2.3cm}
+	\vspace*{4cm}
 
-{\Large
-Szeged
-\\
-\vspace{2mm}
-2021
-}
+	%Értelemszerűen megváltoztatandó:
+	{\large
+		\begin{tabular}{c@{\hspace{4cm}}c}
+			\emph{Készítette:}         & \emph{Témavezető:}      \\
+			\bf{Vas Laura}             & \bf{Dr. Bilicki Vilmos} \\
+			gazdaságinformatika szakos & egyetemi adjunktus      \\
+			hallgató                   &
+		\end{tabular}
+	}
+
+	\vspace*{2.3cm}
+
+	{\Large
+		Szeged
+		\\
+		\vspace{2mm}
+		2021
+	}
 \end{center}
 
 
@@ -165,8 +179,8 @@ Ennek egy fontos lépése az, hogy az alapanyagok nevét, mértékegységét és
 Ehhez regex-et illetve egy kölső konyvtárat használtam, ami sok mértékegység között tud átválltani.
 Miután a receptet sikeresen importáltuk, azokat a Firebase FireStore adatbázisában tároljuk.
 
-Mind az importálás mind az egész projekt során törekedtem, hogy minnél modulárisabb legyen a felépítés. 
-A webapp fejlesztése során a PWA-t alkalmazva elérhető, hogy bizonyos funkciók offline is működjenek. 
+Mind az importálás mind az egész projekt során törekedtem, hogy minnél modulárisabb legyen a felépítés.
+A webapp fejlesztése során a PWA-t alkalmazva elérhető, hogy bizonyos funkciók offline is működjenek.
 A modern, könnyen kezelhető weblap számítógépen és telefonon egyaránt használható.
 
 Kulcsszavak: Angular, Firebase, pipeline architektúra, PWA, telefonos nézet
@@ -177,11 +191,9 @@ Kulcsszavak: Angular, Firebase, pipeline architektúra, PWA, telefonos nézet
 
 Egyetemisták, mint én is egyre közelebb vagyunk ahhoz az életformához, ahol önellátók vagyunk, ennek fontos része a főzés és étkezés. Manapság nagyon egyszerű különböző recepteket, különböző országokból, kultúrákból találni, viszont ez temérdeknyi weblapot jelenthet. Ennek hátulütője, hogy egy idő után követhetetlen lesz, hogy egyáltalán hova regisztráltunk, valamint, hogy “melyik weblapon is volt az a bizonyos recept, amit egyszer már kipróbáltam, és tetszett”. Személyes tapasztalatom ezzel kapcsolatba pedig, hogy én egy TXT fájlba mentegettem az URL címeket, hogy legközelebb is megtaláljam, de már kezdett nagyon követhetetlen lenni.
 
-Azért választottam ezt az ötletet a szakdolgozatom témájának, mert ez egy személyes problémám már hosszú ideje és láttam már korábban próbálkozásokat, de egyik sem volt az én elképzelésemnek megfelelő. A célom az volt, hogy egy egyszerű URL cím másolással pillanatok alatt egy helyen lehessen a megtalálni mindent. 
+Azért választottam ezt az ötletet a szakdolgozatom témájának, mert ez egy személyes problémám már hosszú ideje és láttam már korábban próbálkozásokat, de egyik sem volt az én elképzelésemnek megfelelő. A célom az volt, hogy egy egyszerű URL cím másolással pillanatok alatt egy helyen lehessen a megtalálni mindent.
 
 A továbbiakban részletesen részletezem az általam tervezett és megvalósított webes applikáció felépítését és funkcióit. A bemutatót a konkurencia ismertetésével kezdem.
-
-
 
 
 \chapter{Piacfelmérés}
@@ -189,9 +201,9 @@ Már létező programokra öt példát hoztam, amik mind valamilyen szinten kül
 Felhasználó körük, funkcióik, előnyök és hátrányok az én tervemhez képest.
 
 \section{Grocy}
-A Grocy egy lokálisan hostolható weblap. Irgalmatlanul részletes és rengeteg funkciója van, amihez, ha az ember hozzászokik és elég időt és törődést fektet bele, akkor egy nagyon hasznos program. Ellenben, mivel lokálisan van felépítve, ezért, ha valaki most kezdené el először használni, akkor nagyon sokáig tart, amíg igazán használható lehet. 
+A Grocy egy lokálisan hostolható weblap. Irgalmatlanul részletes és rengeteg funkciója van, amihez, ha az ember hozzászokik és elég időt és törődést fektet bele, akkor egy nagyon hasznos program. Ellenben, mivel lokálisan van felépítve, ezért, ha valaki most kezdené el először használni, akkor nagyon sokáig tart, amíg igazán használható lehet.
 
-A recept kezelő lapja csak manuálisan feltölthető, tehát nincs importálásra lehetőség. Rendelkezik bevásárlólista és “sufni” opciókkal is. Az otthon lévő alapanyagokat egyessével, tetsző részletességgel fel lehet venni a “sufniba”, ezzel leltározva, hogy milyen alapanyagok vannak otthon. Ezekről eltárolható adatok közé tartozik, hogy mennyi van belőle, meddig jók, képet, de akár a vonalkódját is. A bevásárló lista pedig egyértelműen a vásárlást segítő funkció, aminek a végén, egy kattintásra átrakható “sufniba”. 
+A recept kezelő lapja csak manuálisan feltölthető, tehát nincs importálásra lehetőség. Rendelkezik bevásárlólista és “sufni” opciókkal is. Az otthon lévő alapanyagokat egyessével, tetsző részletességgel fel lehet venni a “sufniba”, ezzel leltározva, hogy milyen alapanyagok vannak otthon. Ezekről eltárolható adatok közé tartozik, hogy mennyi van belőle, meddig jók, képet, de akár a vonalkódját is. A bevásárló lista pedig egyértelműen a vásárlást segítő funkció, aminek a végén, egy kattintásra átrakható “sufniba”.
 
 Már ezen kis leírás alapján is látszik, hogy ahhoz, hogy ez a rendszer használható legyen, egy komoly lokális adatbázist kell létrehozni az alapanyagokból és azok adatairól, valamint a receptekről. Ez a rendszer csak limitált tudású emberek számára használható, mivel már csak a telepítése is kicsit bonyolultabb, ezért átlag emberek számára nem ajánlott.
 
@@ -201,208 +213,111 @@ Ezt a weblapot azért választottam példaként, mert ez egy tökéletes példa 
 Egy receptre kattintva látjuk az alapadatokat, hozzávalókat, elkészítési javaslatot valamint alap adatokat mint az elészítési idő. A weblaon található még hasonló recept ajánlások, de ezzel le lett fedve minden funckciója.
 
 \section{Yummly}
-Ez egy fejlettebb verziója a korábban említett "átlagos" weblapoknak. Bejelentkezés nélkül egy kissé korlátolt, viszont utána már kifejezettem sok képessége van. A webes kinézeten felül applikációval is rendelkezik. 
+Ez egy fejlettebb verziója a korábban említett "átlagos" weblapoknak. Bejelentkezés nélkül egy kissé korlátolt, viszont utána már kifejezettem sok képessége van. A webes kinézeten felül applikációval is rendelkezik.
 
-Az alap recept keresésen kívűl, itt már lehetőségünk van azok elmentésére a sajátjaink közé. A weblap rendelkezik bevásárló lista funkcióval, valamint képes azonnal a receptből áthelyezni az alapanyagokat is. Egy kiemelkedő funkciója az étkezés tervező. Ez, figyelembe véve esetleges allergiákat, vagy étrendeket ajánj és segít tervezni a következő időszakra. 
+Az alap recept keresésen kívűl, itt már lehetőségünk van azok elmentésére a sajátjaink közé. A weblap rendelkezik bevásárló lista funkcióval, valamint képes azonnal a receptből áthelyezni az alapanyagokat is. Egy kiemelkedő funkciója az étkezés tervező. Ez, figyelembe véve esetleges allergiákat, vagy étrendeket ajánj és segít tervezni a következő időszakra.
 
 Ami hátrány az egész weblapon, hogy nem közösség bővíti a recept adatbázist, ezért limitált a receptek száma és nem lehet mindent megtalálni. Még akkor is, ha figyelembe vesszük a manuális recept készítést, nem feltétlenül a leg felhasználóbarátibb, hogy mindig egy külső helyről egyösször kikeressük amit akarunk, majd kézzel beírjuk.
 
 \section{BigOven}
 A legnagyobb különbség az eddigiekhez képes, hogy ez a weblap már rendelkezik recept importáló funkcióval is. Azon felül négy különböző módon lehet újjakat létrehozni. Az importálás során nem tárolják el az egész receptet, ha más honlapról származik. "Our Pledge to Food Bloggers" leírja, hogy miért, viszont ez azt jelenti, hogy a teljes receptet megtekintsük, át kell navigálni az eredeti oldalra. Ezen felül a bevásárló listában nem adódnak össze a termékek, valamint nincsenek kategóriák a receptekhez.
 
-Egy nagy hátránya a weblapnak, hogy kissé régi stílusú. A gombok majdnem eredeti HTML alakban jelennek meg. A képek, form-ok, lista nézet mind úgy néz ki, amin épphogy van egy kis formázás. A webes kinézenket a navigációja nem a leg felhasználóbarátibb. 
+Egy nagy hátránya a weblapnak, hogy kissé régi stílusú. A gombok majdnem eredeti HTML alakban jelennek meg. A képek, form-ok, lista nézet mind úgy néz ki, amin épphogy van egy kis formázás. A webes kinézenket a navigációja nem a leg felhasználóbarátibb.
 
 Annak ellenére, hogy a weblapnak mennyire nem modern stílusa van, az applikáció igenis követhető. A funkciók szintén jól működnek. Elméletileg IOS-en is létezik, viszont arra nincs lehetőségem, hogy felmérjem milyen különbségek lehetnek. Egy nagy előny, hogy az ingyenes verzióban is használhatóak az alapfunkciók.
 
 \section{ChefTap}
 Az összes közül valőszínűleg ez az applikáció, ami a legtöbb funkcóval rendelkezik. Technikailag van webes és telefonos applikációs verziója is, viszont a webes csak recept lekérdezésre használható. Minden egyéb, beleértve a recept importálást, bevásárló listát, étkezés tervezőt csak az applikációk keresztűl lehet elérni és szerkeszteni. A weben volt lehetőség Google segítségével bejelentkezni, viszont az applikációnak nem volt ilyen lehetősége. Ennél az appnál az ingyenes verzió elég limitált, a recept importáláson kívül semmi sem működik a próbaidőszak lejárta után.
 
-Ezen a felületen nincs mások által, vagy akár csak egy közös adatbázisból való keresésre és importálása lehetőség a recepteknél. A felhasználónak mindent magának kell beszerezni. 
+Ezen a felületen nincs mások által, vagy akár csak egy közös adatbázisból való keresésre és importálása lehetőség a recepteknél. A felhasználónak mindent magának kell beszerezni.
 
 A beimportált recepteket könnyű módosítani, valamint rengeteg kis adatot megadni, hogy otthonosan lehessen használni a környezetet. Itt nincs lehetőség közvetlenül a receptből a bevásárló listába rakni alapanyagokat, menüket összekészíteni vagy az étkezéstervezőt használni az ingyenes próbaverzió után.
 
 \chapter{Funkcionális specifikáció}
-\section{Részletek}
-Ebbe a fejezetbe pedig írunk sok sok szöveget. Szöveg, szöveg, szöveg,  szöveg, szöveg, szöveg,   szöveg, szöveg, szöveg
-szöveg, szöveg, szöveg,  szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg,
-szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg,
-szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg, szöveg,
+Egy összefoglaló részletesebb arról, hogy minek pontosan hogyan kell működnie az eredeti terv szerint.
+
+\section{Bejelentkezés/Regisztráció}
+A regisztrációt és bejelentkezés a legbiztosabb biztonság érdekében a Firebase Auth rendszerén keresztül történik. Kettő módszer van a regisztrációra. Első, a szokásos email és jelszó páros megadásával a regisztrációs formon keresztül. Második, a Google authentikációs rendszeren keresztül. A felhasználók ezt látják először, mikor a honlapra navigálnak. Bejelentkezés nélkül nem lehetséges a weblapot megtekinteni.
+
+\section{Kezdőoldal}
+A kezdőoldalnak az első lap, amit a bejelentkezés után látnak a felhasználók. A lapon két különböző recept ajánló jelenik meg. Az egyik a saját, kimentett receptekből ajánlott fel párat, a másik viszont a még nem kimentett receptekből. Ezen felül a kategória keresés is itt érhető el. Minden receptnek létrehozáskor kötelezően van legalább egy kategóriája, ezért ez a típusú keresés jó az általános recept felfedező felhasználóknak.
+
+\section{Recept saját gyűjteményekbe}
+A létező recepteknél a megnyitás után egy gombnyomással lehetőségünk van azt a saját gyüjteményünkhöz adni. Amennyiben ez sikerült, a gomb átváltozik egy kuka ikonra. Ez újonnan megnyomása után a recept kikerül az elmentettjeink közül. Ez a lista egyszerűen megtalálható az oldal menüben a "My recipes" alatt. Ezen lap alatt az összes korábban elmentett recept kilistázódik.
+
+Amennyiben a felhasználó kimentett egy receptet, a törlés gombra változásán kívül egy szívecske is megjelenik a recepten. Erre nyomva a recept egy külön listába kerül, ahol a saját receptek közül csak a kedvenceket lehet gyorsan eltárolni. A szivecskére kattintással ki és be lehet kapcsolni, hogy a kedvencek közé kerüljön. Amint a felhasználó ki veszi a receptet a saját gyűjteményéből, akkor a kedvencek közül is eltűnik. A lista megtalálható az oldalsó menüben a "My favourites" menüpont alatt.
+
+\section{Recept importálás}
+Két féle képpen lehet recepteket létrehozni. Az elsőnél a felhasználónak csak ki kell tölteni a mezőket az új recept létrehozó felületen. Az alapanyagokból és lépésekből tetsző mennyiséget tud létrehozni, valamit törölni is.
+
+A második módszer, ami a korábbi folyamat megkönnyítse miatt jött létre, a recept importálás URL-en keresztül. A felhasználó csak kiválaszt egy receptet egy másik honlapról, kimásolva az URL címét és az importálás folyamat során egy Cloud Function lekérdezi az adatokat. A funkció modulásisan lett felépítve, ezért jobban követhető, valamint bővíthető. Az importálás fontos része az alapanyagok szétválasztása alapanyag mennyiség, mértékegység és név szerint. Ez a receptnézetnél is megjelenik, de a fő célja a kalóriaszámlálásnál és a bevásárló listába helyezésnél kerül elő. A lekérdezés során, az egyik modul feladata a képek mentése az eredeti helyről, valamint feltöltése a Firebase Storage-ba. Ez fontos lépés,mert ha a weblap vagy recept egy ponton megszűnne, akkor is megmarad a  kép és adatok a receptről. Amint a funkció lefutott, egy új lapra át lesz navigálva a felhasználó, ahol a recept szerkeszthető mezőkben megjelenik, ilyenkor még nincs elmentve az új adat az adatbázisba. Az importálás sikerességének átvizsgálása után, a felhasználó nyomhat a véglegesítő gombra.
+
+A manuális és URL-es importálás ugyanazon a lapon működik, az egyetlen különbség, hogy üresen jut-e oda, vagy már lehetőleg egy sikeres lekérdezés után egy feltöltött verzióra. A véglegesítés előtt viszont, ha a felhasználó még nem választott besorolási kategóriát, akkor egy felugró ablak figyelmezteti, hogy ezt mindenképp tegye meg, mert nem léphet tovább anélkül.
+
+\section{Recept kalória számlálás}
+Ez a lépés egy modul a recept importálás folyamatban. A projekthez hozzáadtam egy csomagot, ahonnan egyrészt a szétválasztáshoz megkapom a mértékegységeket, másrészt ezt használom a mértékegység átváltáshoz is.
+
+{\color{red}{
+  A tápanyag információkat egy külső adatbázisból szedem, ami offline és a gov.tt… weblapról szereztem. Az “About this website” menüpont alatt megjelenik a megfelelő kijelentés az adatbázis production használatáról.
+}}
+
+{\color{red}{
+  A kalóriaszámlálás kizárólag akkor fut le, ha a receptlekérdezés során nem létezett az eredeti oldalon a kalória információ, vagy ha a recept manuálisan lett létrehozva. Ahhoz, hogy megfelelő eredményt kapjunk, ha az alapanyagokból nem tudunk legalább 80 százalékból tápanyag adatot megkapni, akkor nem lesz megjelenítve kalória információ a recepthez. Amennyiben megfelelő mennyiségű adatunk van, a korábban említett mértékegység átváltásokkal egységesítem az alapanyagokat a tápanyag táblázat alap értékéhez, aztán azt összeadva kapjuk a kalória adatot a recepthez.
+  }}
+
+\section{Bevásárlólista}
+A bevásárlólista egy külön lapon található, ahol a felhasználó a saját vásárlásához gyűjthet alapanyagokat. Ha a lapon található új alapanyag hozzáadó felületet használja, akkor hozzáadás után azonnal, megjelenik a leni listában az új elem. Ha  listában még létezett egy ponosan olyan nevű elem, akkor, ha szükség van rá, egy mértékegység átváltással hozzáadódik az eredeti elemhez. Így az alapanyag mennyisége nő. Amennyiben nem kell már az alapanyag, a sor végén lévő pipával ki lehet venni a listából.
+
+A felhasználó kényelme érdekében, a receptből közvetlenül az alapanyag előtti plusz gombra nyomva hozzá lehet adni egyesével az alapanyagokat a bevásárló listába. Valamint ha mindent gyosan hozzá szeretnénk adni, akkor van egy másik gomb az alapanyag lista alatt,amivel az összeset egy kattintással hozzá lehet adni a listához.
+
+\section{Bevásárlólista ajánló}
+
+{\color{red}{
+  A bevásárló listát gyakran használó felhasználók néha kapnak egy felugró ablakot, ami egy korábbi lista elemet ajánl azonnali hozzáadáshoz. Ez a funkció a felhasználó szokásaiból tippelget, hogy miket ajánljon legközelebb. Amennyiben a tippet nem fogadták el, akkor ezt is számításba véve ajánl legközelebb.
+}}
 
 \chapter{Felhasznált technológiák}
-\section{Környezetek}
-\begin{tet}
-\label{tet-alap}
-Ez itt egy tétel.
-\end{tet}
+\section{Angular}
+asd
 
-%A bizonyítás \begin{proof} és \end{proof} közé kerül:
-\begin{proof}
-Ez pedig a bizonyítása, melyben szerepel egy képlet:
-\begin{equation}
-\begin{split}
-E^{\text{globális}} &= \text{tét}_1\cdot E_1^{\text{elemi}}+\text{tét}_2\cdot
-E_2^{\text{elemi}}+\ldots+\text{tét}_n\cdot E_n^{elemi} \\
-&=E^{\text{elemi}}\left(\text{tét}_1+\text{tét}_2+\ldots+\text{tét}_n\right)\\
-&=E^{\text{elemi}}\cdot\text{össztét}
-\end{split}
-\end{equation}
-A második egyenlőségnél azt használtunk ki, hogy ...
+\section{Angular Material}
+asd
 
-Ezzel a bizonyítást befejeztük.
-\end{proof}
+\section{FireBase}
+asd
 
-\begin{defi}
-\label{def-pelda}
-Ez egy definíció. Számozása a tételekkel együtt történik.
-\end{defi}
+\section{PWA}
+asd
 
-\begin{áll}
-A követekező négy állítás egymással ekvivalens:
-\label{áll-ekvivalencia}
-  \begin{itemize}
-  \item[(i)] $M$ és $N$ gyengén ekvivalensek.
-  \item[(ii)] Minden $n$
-  nemnegatív egész számra $|L_{M}\cap \Sigma_{1}^{n}|=|L_{N}\cap \Sigma_{2}^{n}|$ teljesül.
-  \item[(iii)] Minden $n$ nemnegatív egész szám esetén
-   létezik
-  $ \pi_{n}: L_{M}\cap \Sigma_{1}^{n} \rightarrow L_{N}\cap \Sigma_{2}^{n} $ kölcsönösen egyértelmű
-  leképezés.
-  \item[(iv)] Minden nemnegatív $n$-re $x A^{n} y^{T}=x' A'^{n} y'^{T}$.
-  \end{itemize}
-\end{áll}
+\section{Schema.org}
+asd
 
-\begin{köv}
-  Ez pedig egy következmény.
-\end{köv}
+\section{Figma}
+asd
 
-\begin{pld}
-  Ez lesz a példa, ezt nem szedjük dőlten.
-\end{pld}
-
-\begin{megj}
-  A fejezetet pedig egy megjegyzés zárja.
-\end{megj}
+\chapter{A rendszer magas szintű áttekintése}
+\section{asd}
 
 
-\section{Listák}
-
-Ez egy felsorolás:
-\begin{itemize}
-    \item első
-    \item második
-      \subitem első
-      \subitem második
-    \item harmadik
-    \item[$\clubsuit$]  saját jel is alkalmazható
-\end{itemize}
-Ez pedig egy számozott lista:
-\begin{enumerate}
-            \item hétfő
-            \item kedd
-            \item szerda
-\end{enumerate}
-
-%Oldaltörést is alkalmazhatunk
-\pagebreak
+\chapter{Architektúra}
+\section{asd}
 
 
-\section{Egy táblázat és egy ábra}
-
-A táblázat itt következik.
-\begin{table}[!h]\label{strategia}
-\caption{Példa stratégiatáblára a Black Jack esetében}
-\begin{center}
-\begin{tabular}{l||r|r|r|r|r|r|r|r|r|r}
-&ász&2&3&4&5&6&7&8&9&10\\
-\hline\hline
-21&n&n&n&n&n&n&n&n&n&n\\
-20&n&n&n&n&n&n&n&n&n&n\\
-19&n&n&n&n&n&n&n&n&n&n\\
-18&n&n&n&n&n&n&n&n&n&n\\
-17&n&n&n&n&n&n&n&n&n&n\\
-16&h&n&n&n&n&n&h&h&b&b\\
-15&h&n&n&n&n&n&h&h&h&b\\
-14&h&n&n&n&n&n&h&h&h&b\\
-13&h&n&n&n&n&n&h&h&h&h\\
-12&h&n&n&n&n&n&h&h&h&h\\
-11&h&D&D&D&D&D&D&D&D&h\\
-\end{tabular}
-\end{center}
-\end{table}
-
-Lássunk egy ábrát is!
-\begin{figure}[!h]
-\unitlength 8mm
-\begin{center}
-\begin{picture}(8,6)
-\thicklines
-\multiput(0,1)(0,1){2}{\line(1,0){5}}
-\multiput(3,0)(1,0){2}{\line(0,1){6}}
-\multiput(1,0)(1,0){2}{\line(0,1){1}}
-\multiput(6,0)(1,0){2}{\line(0,1){5}}
-\multiput(0,1)(1,0){3}{\line(0,1){1}}
-\multiput(2,4)(3,0){3}{\line(0,1){1}}
-\multiput(3,0)(0,3){3}{\line(1,0){1}}
-\multiput(6,0)(0,1){4}{\line(1,0){1}}
-\multiput(7,2)(0,1){2}{\line(1,0){1}}
-\multiput(2,4)(0,1){2}{\line(1,0){6}}
-\put(5,1){\line(0,1){1}}
-\put(8,2){\line(0,1){1}}
-\put(1,0){\line(1,0){1}}
-\put(1,1){\makebox(1,1){\(\sphericalangle\)}}
-\put(7,2){\makebox(1,1){\(\$\)}}
-\end{picture}
-\end{center}
-\caption{\label{labirintus}Labirintus bejárása}
-\end{figure}
-
-%laptörés:
-\newpage
-
-Külön fájlban elkészített grafika beillesztését a \ref{abra-automata} ábra szemlélteti.
-\begin{figure}[h]
-\centering
-%A psfrag csomag használatával a (encapsulated)postcript abra feliratait LaTeX koddal helyettesíthatjük:
-\psfrag{a}[c][c]{$q_0$}
-\psfrag{b}[c][c]{$q_1$}
-\psfrag{c}[c][c]{$q_2$}
-\psfrag{d}[c][c]{$q_3$}
-\psfrag{e}[c][c]{$q_4$}
-\psfrag{f}[c][c]{$q_5$}
-\psfrag{g}[c][c]{$q_6$}
-\psfrag{h}[c][c]{$q_7$}
-\psfrag{0}[c][c]{$a_{0}$}
-\psfrag{9}[c][c]{$a_{9}$}
-\psfrag{3}[c][c]{$a_{3}$}
-\psfrag{12}[c][c]{$a_{12}$}
-\psfrag{15}[c][c]{$a_{15}$}
-%Garfika belillesztese, "scale2 a nagyitas/kicinyites merteke, itt 80%.
-\includegraphics[scale=0.8]{abra.eps}
-\caption{\label{abra-automata} A $4\times m$-es tábla lefedéseinek mátrixreprezentációit felismerő automata}
-\end{figure}
+\chapter{Adatmodellek}
+\section{asd}
 
 
-\chapter{Függelék}
+\chapter{Fontosabb kód részek és ismertetései}
+\section{asd}
 
-\section{A program forráskódja}
-A függelékbe kerülhetnek a hosszú táblázatok, vagy mondjuk egy programlista:
-% A verbatim kornyezet hasznalatanal ügyeljünk rá, hogy az editor a szóközöjket át ne írja tab karakterekre!
-\begin{verbatim}
-   while (ujkmodosito[i]<0)
-   {
-      if (ujkmodosito[i]+kegyenletes[i]<0)
-      {
-         j=i+1;
-         while (j<14)
-         if (kegyenletes[i]+ujkmodosito[j]>-1) break;
-         else j++;
-         temp=ujkmodosito[j];
-         for (l=i;l<j;l++) ujkmodosito[l+1]=ujkmodosito[l];
-         ujkmodosito[i]=temp;
-      }
-      i++;
-   }
-\end{verbatim}
+
+\chapter{Tesztelés}
+\section{asd}
+
+
+\chapter{Továbbfejlesztési lehetőségek}
+\section{asd}
+
 
 
 \chapter*{Nyilatkozat}
@@ -431,9 +346,9 @@ Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a Szegedi Tudománye
 \vspace*{2cm}
 
 \begin{tabular}{lc}
-Szeged, \today\
-\hspace{2cm} & \makebox[6cm]{\dotfill} \\
-& aláírás \\
+	Szeged, \today\
+	\hspace{2cm} & \makebox[6cm]{\dotfill} \\
+	             & aláírás                 \\
 \end{tabular}
 
 
@@ -451,9 +366,9 @@ Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a TVSZ 4. sz. mellé
 \vspace*{2cm}
 
 \begin{tabular}{lc}
-Szeged, \today\
-\hspace{2cm} & \makebox[6cm]{\dotfill} \\
-& aláírás \\
+	Szeged, \today\
+	\hspace{2cm} & \makebox[6cm]{\dotfill} \\
+	             & aláírás                 \\
 \end{tabular}
 
 
@@ -473,28 +388,28 @@ Ezúton szeretnék köszönetet mondani \textbf{X. Y-nak} ezért és ezért \ldo
 %VAGY "kézzel" a következő módon:
 
 \begin{thebibliography}{9}
-%10-nél kevesebb hivatkozás esetén
+	%10-nél kevesebb hivatkozás esetén
 
-%\begin{thebibliography}{99}
-% 10-nél több hivatkozás esetén
+	%\begin{thebibliography}{99}
+	% 10-nél több hivatkozás esetén
 
-\addcontentsline{toc}{section}{Irodalomjegyzék}
+	\addcontentsline{toc}{section}{Irodalomjegyzék}
 
-%Elso szerzok vezetekneve alapjan ábécérendben rendezve.
+	%Elso szerzok vezetekneve alapjan ábécérendben rendezve.
 
 
-%folyóirat cikk: szerzok(k), a folyóirat neve kiemelve,
-%az evfolyam felkoveren, zarojelben az evszam, vegul az oldalszamok es pont.
-\bibitem{Gischer}
-J. L. Gischer,
-The equational theory of pomsets.
-\emph{Theoret. Comput. Sci.}, \textbf{61}(1988), 199--224.
+	%folyóirat cikk: szerzok(k), a folyóirat neve kiemelve,
+	%az evfolyam felkoveren, zarojelben az evszam, vegul az oldalszamok es pont.
+	\bibitem{Gischer}
+	J. L. Gischer,
+	The equational theory of pomsets.
+	\emph{Theoret. Comput. Sci.}, \textbf{61}(1988), 199--224.
 
-%könyv (szerzo(k), a könyv neve kiemelve, utana a kiado, a kiado szekhelye, az evszam es pont.)
-\bibitem{Pin}
-J.-E. Pin,
-\emph{Varieties of Formal Languages},
-Plenum Publishing Corp., New York, 1986.
+	%könyv (szerzo(k), a könyv neve kiemelve, utana a kiado, a kiado szekhelye, az evszam es pont.)
+	\bibitem{Pin}
+	J.-E. Pin,
+	\emph{Varieties of Formal Languages},
+	Plenum Publishing Corp., New York, 1986.
 
 
 
