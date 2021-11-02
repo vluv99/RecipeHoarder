@@ -20,15 +20,14 @@ mat-card {
 
         .mat-divider-inset{
             margin-bottom: 15px;
-            margin-top: 15px;
-            /*margin-left: -16px;
-            margin-right: 16px;*/
+            margin-top: 10px;
         }
     }
 
     .link-container {
         display: flex;
         align-items: center;
+        height: 40px;
 
         img {
             height: 20px;
@@ -40,6 +39,11 @@ mat-card {
             color: mat.get-color-from-palette($my-primary, 'default');
             margin-left: 10px;
             cursor: pointer;
+        }
+
+        button{
+            margin-left: auto;
+            margin-right: 25px;
         }
     }
 

@@ -17,7 +17,9 @@ const ingredeintTestValues = [
     {text: "½ a bunch of basil , (15g)", res: new Ingredient("a bunch of basil , (15g)", 0.5, "piece")},
     {text: "1 courgette", res: new Ingredient("courgette", 1, "piece")},
     {text: "8 to 10 black olives , (stone in)", res: new Ingredient("black olives , (stone in)", 8, "pieces")},
-    
+
+    {text: "2 tablespoons unsalted butter", res: new Ingredient("unsalted butter", 2, "tablespoons")},
+
     //{text: "1 x 125 g ball of mozzarella cheese", res: new Ingredient("ball of mozzarella cheese", 125, "g")},
 
 ]

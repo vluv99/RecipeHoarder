@@ -4,6 +4,11 @@
         <div class="link-container">
             <img src="{{website_ico}}">
             <a href="{{ recipe.url }}" target="_blank"> {{website}}</a>
+            <button mat-mini-fab color="primary" *ngIf="recipeBookmarkState == stateType.delete">
+                <mat-icon color="white">favorite_border</mat-icon>
+                <mat-icon color="white">favorite</mat-icon>
+                <mat-spinner color="white" [diameter]="24"></mat-spinner>
+            </button>
         </div>
 
         <mat-divider [inset]="true"></mat-divider>

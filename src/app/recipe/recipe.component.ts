@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {DatabaseService} from "../services/database-service";
 import {Recipe} from "../../../shared/model/Recipe";
+//import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {ReportRecipeListComponent} from "./report-recipe-list/report-recipe-list.component";
 
 @Component({
   selector: 'app-recipe',
@@ -17,7 +19,18 @@ export class RecipeComponent implements OnInit, OnDestroy {
   recipeId!: string;
   private sub: any;
 
-  constructor(private route: ActivatedRoute, private database:DatabaseService) {
+  problems: string[] = [
+      "Missing or bad quality image",
+      "Missing recipe data",
+      "Has wrong category",
+      "Recipe has too many errors",
+      "Inappropriate language",
+      "Other"
+  ]
+
+  constructor(private route: ActivatedRoute,
+              private database:DatabaseService/*,
+              private _bottomSheet: MatBottomSheet*/) {
 
   }
 
@@ -37,4 +50,12 @@ export class RecipeComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+    opernReportsheet() {
+        //this._bottomSheet.open(ReportRecipeListComponent);
+        //this._bottomSheet
+    }
+
+    reportProblem() {
+
+    }
 }
