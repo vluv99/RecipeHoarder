@@ -3,64 +3,65 @@
 @use "src/theme/color";
 
 
-.list{
-  position: relative;
-
-  &.list--show-right{
-    color: red;
-
-    &:after {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      right: 0;
-      bottom: 15px;
-      pointer-events: none;
-      background-image: linear-gradient(to right, rgba(255,255,255,0), color.$custom-background-color 85%);
-      width: 15%;
-    }
-  }
-
-  &.list--show-left{
-    color: green;
-
-    &:before {
-      content: "";
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      /*right: 0;*/
-      bottom: 15px;
-      pointer-events: none;
-      background-image: linear-gradient(to left, rgba(255,255,255,0), color.$custom-background-color 85%);
-      width: 15%;
-    }
-  }
-
-
-
-  .list__container{
-
-    @include mixins.flex(row,$gap:5px);
-
-    overflow-x: auto;
-    padding: 5px;
+.list {
     position: relative;
 
-  }
+    &.list--show-right {
+        color: red;
 
-  @include mixins.media-breakpoint-up(xl) {
-    ::-webkit-scrollbar {
-      height: 5px;
-      width: 4px;
-      background: lightgray;
-      border-radius: 10px;
+        &:after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            bottom: 15px;
+            pointer-events: none;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0), color.$custom-background-color 85%);
+            width: 15%;
+            height: 100%;
+        }
     }
-    ::-webkit-scrollbar-thumb:horizontal {
-      background: #000;
-      border-radius: 10px;
+
+    &.list--show-left {
+        color: green;
+
+        &:before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            /*right: 0;*/
+            bottom: 15px;
+            pointer-events: none;
+            background-image: linear-gradient(to left, rgba(255, 255, 255, 0), color.$custom-background-color 85%);
+            width: 15%;
+            height: 100%;
+        }
     }
-  }
+
+
+    .list__container {
+
+        @include mixins.flex(row, $gap: 5px);
+
+        overflow-x: auto;
+        padding: 5px;
+        position: relative;
+
+    }
+
+    @include mixins.media-breakpoint-up(xl) {
+        ::-webkit-scrollbar {
+            height: 5px;
+            width: 4px;
+            background: lightgray;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:horizontal {
+            background: #000;
+            border-radius: 10px;
+        }
+    }
 
 }
