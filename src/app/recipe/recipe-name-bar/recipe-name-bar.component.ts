@@ -15,8 +15,11 @@ export class RecipeNameBarComponent implements OnInit {
 
     website_ico ?: string
 
-    recipeBookmarkState = RecipeBookmarkState.add
-    stateType = RecipeBookmarkState
+    recipeBookmarkState = RecipeProcessState.add
+    bookmarkStateType = RecipeProcessState
+
+    recipeFavouriteState = RecipeProcessState.add
+    FavoriteStateType = RecipeProcessState
 
     /*
      * 'https://api.statvoo.com/favicon/?url=google.com' - this could work for getting the favicons too
@@ -35,45 +38,83 @@ export class RecipeNameBarComponent implements OnInit {
 
 
         this.recipeCollectionService.isRecipeInUserCollection(this.recipe.id!).then((val) => {
-            if (val){
-                this.recipeBookmarkState = RecipeBookmarkState.delete
-            }else {
-                this.recipeBookmarkState = RecipeBookmarkState.add
+            if (val) {
+                this.recipeBookmarkState = RecipeProcessState.delete
+            } else {
+                this.recipeBookmarkState = RecipeProcessState.add
+            }
+        })
+
+        this.recipeCollectionService.isRecipeInFavouritesCollection(this.recipe.id!).then((val) => {
+            if (val) {
+                this.recipeFavouriteState = RecipeProcessState.delete
+            } else {
+                this.recipeFavouriteState = RecipeProcessState.add
             }
         })
     }
 
-    fabClicked() {
+    fabClicked(buttonClicked: string) {
+        if (buttonClicked == "bookmarker") {
 
-        if (this.recipeBookmarkState == RecipeBookmarkState.add){
-            //Set to loader
-            this.recipeBookmarkState = RecipeBookmarkState.inProgress
+            if (this.recipeBookmarkState == RecipeProcessState.add) {
+                //Set to loader
+                this.recipeBookmarkState = RecipeProcessState.inProgress
 
-            this.recipeCollectionService.addRecipeToUserCollection(this.recipe.id!).then(() => {
-                //set to successfull
-                this.recipeBookmarkState = RecipeBookmarkState.delete
-            }).catch(() => {
-                this.recipeBookmarkState = RecipeBookmarkState.add;
-                alert("Couldn't add recipe")
-            })
+                this.recipeCollectionService.addRecipeToUserCollection(this.recipe.id!).then(() => {
+                    //set to successfull
+                    this.recipeBookmarkState = RecipeProcessState.delete
+                }).catch(() => {
+                    this.recipeBookmarkState = RecipeProcessState.add;
+                    alert("Couldn't add recipe")
+                })
 
-        }else if(this.recipeBookmarkState == RecipeBookmarkState.delete){
-            //Set to loader
-            this.recipeBookmarkState = RecipeBookmarkState.inProgress
+            } else {
+                //Set to loader
+                this.recipeBookmarkState = RecipeProcessState.inProgress
 
-            this.recipeCollectionService.removeRecipeFromUserCollection(this.recipe.id!).then(() => {
-                //set to successfull
-                this.recipeBookmarkState = RecipeBookmarkState.add
-            }).catch(() => {
-                this.recipeBookmarkState = RecipeBookmarkState.delete;
-                alert("Couldn't remove recipe")
-            })
+                this.recipeCollectionService.removeRecipeFromUserCollection(this.recipe.id!).then(() => {
+                    //set to successfull
+                    this.recipeBookmarkState = RecipeProcessState.add
+                }).catch(() => {
+                    this.recipeBookmarkState = RecipeProcessState.delete;
+                    alert("Couldn't remove recipe")
+                })
+            }
+
+        }else if(buttonClicked == "favourite"){
+
+            if (this.recipeFavouriteState == RecipeProcessState.add) {
+                //Set to loader
+                this.recipeFavouriteState = RecipeProcessState.inProgress
+
+                this.recipeCollectionService.addRecipeToFavouritesCollection(this.recipe.id!).then(() => {
+                    //set to successfull
+                    this.recipeFavouriteState = RecipeProcessState.delete
+                }).catch(() => {
+                    this.recipeFavouriteState = RecipeProcessState.add;
+                    alert("Couldn't add to favourites")
+                })
+
+            } else {
+                //Set to loader
+                this.recipeFavouriteState = RecipeProcessState.inProgress
+
+                this.recipeCollectionService.removeRecipeFromFavouritesCollection(this.recipe.id!).then(() => {
+                    //set to successfull
+                    this.recipeFavouriteState = RecipeProcessState.add
+                }).catch(() => {
+                    this.recipeFavouriteState = RecipeProcessState.delete;
+                    alert("Couldn't remove from favourites")
+                })
+            }
         }
+
     }
 
 }
 
-export enum RecipeBookmarkState {
+export enum RecipeProcessState {
     add,
     delete,
     inProgress

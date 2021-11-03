@@ -4,10 +4,10 @@
         <div class="link-container">
             <img src="{{website_ico}}">
             <a href="{{ recipe.url }}" target="_blank"> {{website}}</a>
-            <button mat-mini-fab color="primary" *ngIf="recipeBookmarkState == stateType.delete">
-                <mat-icon color="white">favorite_border</mat-icon>
-                <mat-icon color="white">favorite</mat-icon>
-                <mat-spinner color="white" [diameter]="24"></mat-spinner>
+            <button mat-mini-fab color="primary" *ngIf="recipeBookmarkState == bookmarkStateType.delete" (click)="fabClicked('favourite')">
+                <mat-icon *ngIf=" recipeFavouriteState === FavoriteStateType.add" color="white">favorite_border</mat-icon>
+                <mat-icon *ngIf=" recipeFavouriteState == FavoriteStateType.delete" color="white">favorite</mat-icon>
+                <mat-spinner *ngIf=" recipeFavouriteState == FavoriteStateType.inProgress" color="white" [diameter]="24"></mat-spinner>
             </button>
         </div>
 
@@ -23,10 +23,10 @@
     </div>
 
     <div class="app-button-container">
-        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="fabClicked()">
-            <mat-icon *ngIf=" recipeBookmarkState === stateType.add">bookmark_add</mat-icon>
-            <mat-icon *ngIf=" recipeBookmarkState === stateType.delete">delete</mat-icon>
-            <mat-spinner color="white" [diameter]="24" *ngIf=" recipeBookmarkState === stateType.inProgress"></mat-spinner>
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="fabClicked('bookmarker')">
+            <mat-icon *ngIf=" recipeBookmarkState === bookmarkStateType.add">bookmark_add</mat-icon>
+            <mat-icon *ngIf=" recipeBookmarkState === bookmarkStateType.delete">delete</mat-icon>
+            <mat-spinner color="white" [diameter]="24" *ngIf=" recipeBookmarkState === bookmarkStateType.inProgress"></mat-spinner>
         </button>
     </div>
 

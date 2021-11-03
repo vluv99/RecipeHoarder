@@ -12,6 +12,7 @@ export class RecipeCollectionsService {
                 private databaseService:UserDatabaseService) {
     }
 
+    // bookmark collection functions
     addRecipeToUserCollection(recipeId: string){
         return this.databaseService.addToCollection( SubcollectionName.base, recipeId)
     }
@@ -21,11 +22,36 @@ export class RecipeCollectionsService {
     }
 
     removeRecipeFromUserCollection(recipeId: string){
-        return this.databaseService.deleteFromCollection( SubcollectionName.base, recipeId)
+
+        if(this.isRecipeInFavouritesCollection(recipeId)){
+
+            this.removeRecipeFromFavouritesCollection(recipeId).then(() => {
+                return this.databaseService.deleteFromCollection( SubcollectionName.base, recipeId)
+            })
+        }
+
+         return this.databaseService.deleteFromCollection( SubcollectionName.base, recipeId)
     }
 
     getSavedRecipesCollection(){
         return this.databaseService.getRecipesInCollection( SubcollectionName.base)
+    }
+
+    // favourites collection functions
+    addRecipeToFavouritesCollection(recipeId: string){
+        return this.databaseService.addToCollection( SubcollectionName.favourites, recipeId)
+    }
+
+    isRecipeInFavouritesCollection(recipeId: string){
+        return this.databaseService.checkIfRecipeInCollection( SubcollectionName.favourites, recipeId)
+    }
+
+    removeRecipeFromFavouritesCollection(recipeId: string){
+        return this.databaseService.deleteFromCollection( SubcollectionName.favourites, recipeId)
+    }
+
+    getFavouriteRecipesCollection(){
+        return this.databaseService.getRecipesInCollection( SubcollectionName.favourites)
     }
 
 }

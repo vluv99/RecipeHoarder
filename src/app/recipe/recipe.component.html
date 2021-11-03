@@ -9,7 +9,7 @@
         <h1 class="mat-subheading-2">Description</h1>
         <div class="description mat-body-1">{{ recipe.description }}</div>
 
-        <mat-card class="recipe-data-container">
+        <mat-card class="recipe-data-container" [hidden]="recipe.totalCookTime == 0 && recipe.calories == null">
             <div [hidden]="recipe.totalCookTime == 0">
                 <mat-icon>schedule</mat-icon>
                 <span>{{ recipe.totalCookTime }} mins</span>
