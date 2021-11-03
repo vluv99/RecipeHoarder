@@ -54,8 +54,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
                 } else {
                     this.searchTerm = 'My favourites';
 
-                    //TODO: list out my favourites
-                    this.recipes = []
+                    this.recipes = this.recipeCollectionService.getFavouriteRecipesCollection()
                 }
             }
         });
