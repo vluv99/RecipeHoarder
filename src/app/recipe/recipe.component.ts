@@ -4,6 +4,9 @@ import {DatabaseService} from "../services/database-service";
 import {Recipe} from "../../../shared/model/Recipe";
 //import {MatBottomSheet} from "@angular/material/bottom-sheet";
 import {ReportRecipeListComponent} from "./report-recipe-list/report-recipe-list.component";
+import {AuthService} from "../services/auth-service";
+import {val} from "cheerio/lib/api/attributes";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-recipe',
@@ -29,7 +32,9 @@ export class RecipeComponent implements OnInit, OnDestroy {
   ]
 
   constructor(private route: ActivatedRoute,
-              private database:DatabaseService/*,
+              private database:DatabaseService,
+              private authService:AuthService,
+              private _snackbar:MatSnackBar/*,
               private _bottomSheet: MatBottomSheet*/) {
 
   }
@@ -55,7 +60,24 @@ export class RecipeComponent implements OnInit, OnDestroy {
         //this._bottomSheet
     }
 
-    reportProblem() {
+    report:string = "";
+    async reportProblem() {
+        if (this.report != "") {
+            let res = await this.database.reportRecipe(this.recipeId, this.authService.userData.uid, this.report)
 
+            if (!res) {
+                this._snackbar.open("Thank you for your report!", 'Close!', {
+                    duration: 3000
+                });
+            } /*else {
+                this._snackbar.open("Report failed, try again next time!", 'Close!', {
+                    duration: 3000
+                });
+            }*/
+        }
+    }
+
+    changeReportOptions(value: string) {
+        this.report = value;
     }
 }

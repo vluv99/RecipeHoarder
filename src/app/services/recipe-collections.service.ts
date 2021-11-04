@@ -9,16 +9,16 @@ import {SubcollectionName, UserDatabaseService} from "./user-database.service";
 export class RecipeCollectionsService {
 
     constructor(private authService:AuthService,
-                private databaseService:UserDatabaseService) {
+                private userDatabaseService:UserDatabaseService) {
     }
 
     // bookmark collection functions
     addRecipeToUserCollection(recipeId: string){
-        return this.databaseService.addToCollection( SubcollectionName.base, recipeId)
+        return this.userDatabaseService.addToCollection( SubcollectionName.base, recipeId)
     }
 
     isRecipeInUserCollection(recipeId: string){
-        return this.databaseService.checkIfRecipeInCollection( SubcollectionName.base, recipeId)
+        return this.userDatabaseService.checkIfRecipeInCollection( SubcollectionName.base, recipeId)
     }
 
     removeRecipeFromUserCollection(recipeId: string){
@@ -26,32 +26,32 @@ export class RecipeCollectionsService {
         if(this.isRecipeInFavouritesCollection(recipeId)){
 
             this.removeRecipeFromFavouritesCollection(recipeId).then(() => {
-                return this.databaseService.deleteFromCollection( SubcollectionName.base, recipeId)
+                return this.userDatabaseService.deleteFromCollection( SubcollectionName.base, recipeId)
             })
         }
 
-         return this.databaseService.deleteFromCollection( SubcollectionName.base, recipeId)
+         return this.userDatabaseService.deleteFromCollection( SubcollectionName.base, recipeId)
     }
 
     getSavedRecipesCollection(){
-        return this.databaseService.getRecipesInCollection( SubcollectionName.base)
+        return this.userDatabaseService.getRecipesInCollection( SubcollectionName.base)
     }
 
     // favourites collection functions
     addRecipeToFavouritesCollection(recipeId: string){
-        return this.databaseService.addToCollection( SubcollectionName.favourites, recipeId)
+        return this.userDatabaseService.addToCollection( SubcollectionName.favourites, recipeId)
     }
 
     isRecipeInFavouritesCollection(recipeId: string){
-        return this.databaseService.checkIfRecipeInCollection( SubcollectionName.favourites, recipeId)
+        return this.userDatabaseService.checkIfRecipeInCollection( SubcollectionName.favourites, recipeId)
     }
 
     removeRecipeFromFavouritesCollection(recipeId: string){
-        return this.databaseService.deleteFromCollection( SubcollectionName.favourites, recipeId)
+        return this.userDatabaseService.deleteFromCollection( SubcollectionName.favourites, recipeId)
     }
 
     getFavouriteRecipesCollection(){
-        return this.databaseService.getRecipesInCollection( SubcollectionName.favourites)
+        return this.userDatabaseService.getRecipesInCollection( SubcollectionName.favourites)
     }
 
 }

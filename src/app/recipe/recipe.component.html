@@ -49,12 +49,13 @@
             <div>
                 <mat-form-field appearance="fill">
                     <mat-label>Problem</mat-label>
-                    <mat-select>
+                    <mat-select (selectionChange)="changeReportOptions($event.value)">
                         <mat-option *ngFor="let p of problems" [value]="p">
                             {{p}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+
                 <button mat-raised-button (click)="reportProblem()">Report</button>
             </div>
 
