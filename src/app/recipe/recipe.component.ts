@@ -61,18 +61,23 @@ export class RecipeComponent implements OnInit, OnDestroy {
     }
 
     report:string = "";
-    async reportProblem() {
+    reportProblem() {
         if (this.report != "") {
-            let res = await this.database.reportRecipe(this.recipeId, this.authService.userData.uid, this.report)
+            let res = this.database.reportRecipe(this.recipeId, this.authService.userData.uid, this.report)
 
-            if (!res) {
+            res.then(() => {
                 this._snackbar.open("Thank you for your report!", 'Close!', {
                     duration: 3000
                 });
-            } /*else {
+            }).catch(() => {
                 this._snackbar.open("Report failed, try again next time!", 'Close!', {
                     duration: 3000
                 });
+            })
+            if (!res) {
+
+            } /*else {
+
             }*/
         }
     }

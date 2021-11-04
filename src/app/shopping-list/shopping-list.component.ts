@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Ingredient, Measurement} from "../../../shared/model/Ingredient";
+import {ShoppinglistService} from "../services/shoppinglist.service";
 
 @Component({
   selector: 'app-shopping-list',
@@ -7,15 +8,13 @@ import {Ingredient, Measurement} from "../../../shared/model/Ingredient";
   styleUrls: ['./shopping-list.component.scss']
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients:Ingredient[] = [
-    new Ingredient("chicken breast", 1.5, Measurement.KG),
-    new Ingredient("flour", 2, Measurement.KG),
-    new Ingredient("bakin poweder", 15, Measurement.G),
-  ]
+  ingredients:Ingredient[] = []
 
-  constructor() { }
+  constructor(private shoppinglistService: ShoppinglistService) { }
 
   ngOnInit(): void {
+      this.ingredients = this.shoppinglistService.getShoppinglist()
+
     //let snackBarRef = snackBar.open('Message archived', 'Undo'); TODO: figure out why wouldn't it notice the snackbar import
 
     /*setTimeout(() => {
