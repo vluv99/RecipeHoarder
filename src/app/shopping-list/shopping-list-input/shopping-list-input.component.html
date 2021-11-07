@@ -22,7 +22,7 @@
                    (focus)="onFocusEvent($event, 'name')" [(ngModel)]="ing.name">
         </mat-form-field>
 
-        <button mat-stroked-button color="accent" (click)="add()">
+        <button mat-stroked-button color="accent" (click)="add.emit(ing)">
             <mat-icon aria-hidden="false" aria-label="add to shopping cart">add_shopping_cart</mat-icon>
         </button>
 

@@ -100,6 +100,23 @@ export class UserDatabaseService {
 
     }
 
+    removeFromShoppinglist(shoppinglistId: string){
+        /*const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglist").ref.get()
+
+        collection.then((qs) => {
+            qs.forEach((s) => {
+                if (s.id == shoppinglistId){
+                    return s.ref.delete()
+                }
+            })
+        })*/
+
+
+        const collection = this.store.collection('users').doc(this.authService.userData.uid).collection("shoppinglist")
+
+        return collection.doc(shoppinglistId).delete()
+    }
+
     getIngredientsFromShoppinglist(){
         const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglist").ref.get()
 
@@ -108,6 +125,8 @@ export class UserDatabaseService {
             qs.forEach((s) => {
                 let ingRef:any = s.data();
                 let i = new Ingredient(ingRef.name, ingRef.amount, ingRef.unit)
+                //add id, to be able to remove them
+                i.id = s.id;
                 res.push(i);
             })
 

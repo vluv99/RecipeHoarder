@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Ingredient, Measurement} from "../../../shared/model/Ingredient";
+import {Ingredient} from "../../../shared/model/Ingredient";
 import {ShoppinglistService} from "../services/shoppinglist.service";
 
 @Component({
@@ -14,6 +14,7 @@ export class ShoppingListComponent implements OnInit {
 
   ngOnInit(): void {
       this.ingredients = this.shoppinglistService.getShoppinglist()
+      console.log(this.ingredients)
 
     //let snackBarRef = snackBar.open('Message archived', 'Undo'); TODO: figure out why wouldn't it notice the snackbar import
 
@@ -34,4 +35,15 @@ export class ShoppingListComponent implements OnInit {
       }*/
   }
 
+  removeIngredient(rem: Ingredient){
+      this.shoppinglistService.removeShoppinglistItem(rem.id).then(() => {
+          this.ingredients = this.shoppinglistService.getShoppinglist()
+      })
+  }
+
+    addIngredient(i: Ingredient) {
+        this.shoppinglistService.addIngredientToShoppinglist(i).then(() => {
+            this.ingredients = this.shoppinglistService.getShoppinglist()
+        })
+    }
 }

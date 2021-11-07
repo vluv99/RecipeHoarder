@@ -1,13 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Ingredient} from "../../../../shared/model/Ingredient";
 import {ShoppinglistService} from "../../services/shoppinglist.service";
+import {ControlValueAccessor} from "@angular/forms";
 
 @Component({
     selector: 'app-shopping-list-input',
     templateUrl: './shopping-list-input.component.html',
     styleUrls: ['./shopping-list-input.component.scss']
 })
-export class ShoppingListInputComponent implements OnInit {
+export class ShoppingListInputComponent implements OnInit, ControlValueAccessor  {
     //measures:String[] = ["kg", "dkg", "gr"];
 
     ingredientNamesList = [
@@ -15,6 +16,7 @@ export class ShoppingListInputComponent implements OnInit {
     ]
 
     @Input() ing: Ingredient = new Ingredient("", 0, "");
+    @Output() add = new EventEmitter<Ingredient>()
 
     measures: String[] = /*this.getUnits() */[
 
@@ -37,6 +39,8 @@ export class ShoppingListInputComponent implements OnInit {
         'tbsp'/*, 'piece', 'pieces'*/, 'tbsp'
 
     ]
+
+    onChange = (ing:Ingredient) => {};
 
     constructor(private shoppinglistService: ShoppinglistService) {
     }
@@ -64,19 +68,28 @@ export class ShoppingListInputComponent implements OnInit {
         }
     }
 
-    add() {
+    add2() {
         // @ts-ignore
         document.getElementById("hint").hidden = true;
 
         if (this.ing.name != ""){
             this.shoppinglistService.addIngredientToShoppinglist(this.ing).then(() => {
                 //alert("success")
-                this.shoppinglistService.getShoppinglist()
             }).catch(() => {
                 alert("wasnt success!")
             })
         }
 
         //addToIngredient(new Ingredient(name, amount, measure))
+    }
+
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+    }
+
+    writeValue(obj: any): void {
     }
 }

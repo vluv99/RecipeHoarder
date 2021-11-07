@@ -22,5 +22,7 @@ export class ShoppinglistService {
         return this.userDatabaseService.getIngredientsFromShoppinglist();
     }
 
-
+    removeShoppinglistItem(listId: any){
+        return this.userDatabaseService.removeFromShoppinglist(listId)
+    }
 }

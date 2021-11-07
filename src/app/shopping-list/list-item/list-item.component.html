@@ -3,5 +3,5 @@
   <div class="measure">{{ingredient.measurement}}</div>
   <div class="name">{{ingredient.name}}</div>
   <div class="dots">............................................................................</div>
-  <button mat-stroked-button color="primary"><mat-icon>done</mat-icon></button>
+  <button mat-stroked-button color="primary" (click)="remove.emit(ingredient)"><mat-icon>done</mat-icon></button>
 </div>
