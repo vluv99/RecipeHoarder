@@ -2,7 +2,7 @@
 
   <h1 class="mat-display-3">Shopping List</h1>
 
-  <app-shopping-list-input></app-shopping-list-input>
+  <app-shopping-list-input (add)="addIngredient($event)"></app-shopping-list-input>
   <mat-divider></mat-divider>
 <!--
   <div>
@@ -11,6 +11,11 @@
 -->
 
   <div>
-  <app-list-item *ngFor="let i of ingredients" [ingredient]="i"></app-list-item>
+      <div *ngIf="ingredients.length == 0" style="margin-top: 15px">You shopping list is empty!</div>
+  <app-list-item *ngFor="let i of ingredients" [ingredient]="i" (remove)="removeIngredient($event)"></app-list-item>
   </div>
+
+    <button mat-stroked-button color="accent" style="margin-top: 25px"
+            *ngIf="ingredients.length != 0" (click)="removeAllIngedients()">Remove all from shopping list</button>
+
 </div>

@@ -6,107 +6,107 @@ import {ControlValueAccessor} from "@angular/forms";
 //import convert, { volume, mass, length } from 'convert-units';
 
 
-
 @Component({
-  selector: 'app-ingredient-fields',
-  templateUrl: './ingredient-field.component.html',
-  styleUrls: ['./ingredient-field.component.scss']
+    selector: 'app-ingredient-fields',
+    templateUrl: './ingredient-field.component.html',
+    styleUrls: ['./ingredient-field.component.scss']
 })
 export class IngredientFieldComponent implements OnInit, ControlValueAccessor {
 
-  @Input() ing!: Ingredient;
-  @Output() remove = new EventEmitter<Ingredient>();
+    @Input() ing!: Ingredient;
+    @Output() remove = new EventEmitter<Ingredient>();
 
-  measures: String[] = /*this.getUnits() */[
+    measures: String[] = /*this.getUnits() */[
 
-  'mcg',   'mg',  'g',   'kg',    'mt',
+        'mcg', 'mg', 'g', 'kg', 'mt',
 
-  'oz',    'lb',  'tmm', 'cm',    'm',
+        'oz', 'lb', 'tmm', 'cm', 'm',
 
-  'km',    'in',  'yd',  'ft-us', 'ft',
+        'km', 'in', 'yd', 'ft-us', 'ft',
 
-  'mimm3', 'cm3', 'ml',  'cl',    'dl',
+        'mimm3', 'cm3', 'ml', 'cl', 'dl',
 
-  'l',     'kl',  'm3',  'km3',   'krm',
+        'l', 'kl', 'm3', 'km3', 'krm',
 
-  'tsk',   'msk', 'kkp', 'glas',  'kanna',
+        'tsk', 'msk', 'kkp', 'glas', 'kanna',
 
-  'tsp',   'Tbs', 'in3', 'fl-oz', 'cup',
+        'tsp', 'Tbs', 'in3', 'fl-oz', 'cup',
 
-  'pnt',   'qt',  'gal', 'ft3',   'yd3db',
+        'pnt', 'qt', 'gal', 'ft3', 'yd3db',
 
-  'tbsp', 'piece' , 'pieces' , 'tbsp'
+        'tbsp', 'piece', 'pieces', 'tbsp'
 
-]
+    ]
 
-  ingredientNamesList = [
-    "flour",
-    "cucumber",
-    "distilled white vinegar",
-    "garlic",
-    "extra-virgin olive oil",
-    "lemon",
-    "dried oregano",
-    "tomato",
-    "chicken breast",
-    "bakin poweder"
-  ]
+    ingredientNamesList = [
+        "flour",
+        "cucumber",
+        "distilled white vinegar",
+        "garlic",
+        "extra-virgin olive oil",
+        "lemon",
+        "dried oregano",
+        "tomato",
+        "chicken breast",
+        "bakin poweder"
+    ]
 
-  onChange = (ing:Ingredient) => {};
+    onChange = (ing: Ingredient) => {
+    };
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  onFocusa(event: any) {
-    console.log(event);
-  }
+    onFocusa(event: any) {
+        console.log(event);
+    }
 
-  onFocusEvent(event: any, id: string, num: string) {
+    onFocusEvent(event: any, id: string, num: string) {
+        /*
+        let element = document.getElementById("hint"+num);
+
+         // @ts-ignore
+         element.hidden = false;
+
+         if (id == 'amount'+num){
+           // @ts-ignore
+           element.innerHTML = "Amount of the ingredient"
+         } else if(id == 'measure'+num){
+           // @ts-ignore
+           element.innerHTML = "Measurement type of the ingredient"
+         } else if(id == 'name'+num){
+           // @ts-ignore
+           element.innerHTML = "Name of the ingredient"
+         }*/
+    }
+
+
+    dataChanged(event: any) {
+        console.log(event);
+    }
+
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+    }
+
+    writeValue(obj: any): void {
+    }
+
     /*
-    let element = document.getElementById("hint"+num);
+      getUnits() {
 
-     // @ts-ignore
-     element.hidden = false;
+        let measuresArray = convert().possibilities('mass');
+        measuresArray += convert().possibilities('length');
+        measuresArray += convert().possibilities('volume');
+        measuresArray += "db,tbsp"
 
-     if (id == 'amount'+num){
-       // @ts-ignore
-       element.innerHTML = "Amount of the ingredient"
-     } else if(id == 'measure'+num){
-       // @ts-ignore
-       element.innerHTML = "Measurement type of the ingredient"
-     } else if(id == 'name'+num){
-       // @ts-ignore
-       element.innerHTML = "Name of the ingredient"
-     }*/
-  }
-
-
-
-  dataChanged(event: any) {
-    console.log(event);
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-  }
-
-  writeValue(obj: any): void {
-  }
-/*
-  getUnits() {
-
-    let measuresArray = convert().possibilities('mass');
-    measuresArray += convert().possibilities('length');
-    measuresArray += convert().possibilities('volume');
-    measuresArray += "db,tbsp"
-
-    return measuresArray.split(',')
-  }*/
+        return measuresArray.split(',')
+      }*/
 
 }

@@ -1,37 +1,33 @@
 <div>
-  <form class="shopping-list-input-form container">
-    <mat-form-field id="amount" class="input" appearance="outline" color="accent">
-      <mat-label>Amount</mat-label>
-      <input matInput id="amount-input" maxlength="10" type="number" placeholder="0.5"
-             (focus)="onFocusEvent($event, 'amount')">
-    </mat-form-field>
+    <div class="shopping-list-input-form container">
+        <mat-form-field id="amount" class="input" appearance="outline" color="accent">
+            <mat-label>Amount</mat-label>
+            <input matInput id="amount-input" maxlength="10" type="number" placeholder="0.5" [(ngModel)]="ing.amount"
+                   (focus)="onFocusEvent($event, 'amount')">
+        </mat-form-field>
 
-    <mat-form-field id="measurement" appearance="outline" class="input" color="accent">
-      <mat-label>Measure</mat-label>
-      <mat-select id="measurement-input" (focus)="onFocusEvent($event, 'measure')">
-        <mat-option *ngFor="let m of measures" [value]="m">
-          {{m}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div>
-      <mat-form-field id="name" class="input" color="accent" appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput id="name-inut" maxlength="256" type="text" list="names" placeholder="Flour"
-               (focus)="onFocusEvent($event, 'name')">
-        <datalist id="names">
-          <option *ngFor="let n of ingredientNamesList | slice:0:5;" [value]="n"> {{n}}</option>
+        <datalist id="units">
+            <option *ngFor="let n of measures | slice:0:5;" [value]="n"> {{n}}</option>
         </datalist>
-      </mat-form-field>
 
-      <button mat-stroked-button color="accent" (click)="add()">
-        <mat-icon aria-hidden="false" aria-label="add to shopping cart">add_shopping_cart</mat-icon>
-      </button>
+        <mat-form-field id="measurement" class="input" color="accent" appearance="outline">
+            <mat-label>Unit</mat-label>
+            <input matInput id="measurement-inut" maxlength="10" type="text" placeholder="kg" list="units" [(ngModel)]="ing.measurement">
+        </mat-form-field>
+
+
+        <mat-form-field id="name" class="input" color="accent" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput id="name-inut" maxlength="256" type="text"  placeholder="Flour"
+                   (focus)="onFocusEvent($event, 'name')" [(ngModel)]="ing.name">
+        </mat-form-field>
+
+        <button mat-stroked-button color="accent" (click)="add.emit(ing)">
+            <mat-icon aria-hidden="false" aria-label="add to shopping cart">add_shopping_cart</mat-icon>
+        </button>
+
+        <mat-hint><strong id="hint">hint</strong></mat-hint>
     </div>
-
-    <mat-hint><strong id="hint">hint</strong></mat-hint>
-  </form>
 </div>
 
 
