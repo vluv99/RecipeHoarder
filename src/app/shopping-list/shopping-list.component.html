@@ -15,7 +15,7 @@
   <app-list-item *ngFor="let i of ingredients" [ingredient]="i" (remove)="removeIngredient($event)"></app-list-item>
   </div>
 
-    <button mat-stroked-button color="accent" style="margin-top: 25px"
+    <button mat-stroked-button color="accent" id="deleteAll"
             *ngIf="ingredients.length != 0" (click)="removeAllIngedients()">Remove all from shopping list</button>
 
 </div>
