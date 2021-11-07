@@ -14,4 +14,8 @@
       <div *ngIf="ingredients.length == 0" style="margin-top: 15px">You shopping list is empty!</div>
   <app-list-item *ngFor="let i of ingredients" [ingredient]="i" (remove)="removeIngredient($event)"></app-list-item>
   </div>
+
+    <button mat-stroked-button color="accent" style="margin-top: 25px"
+            *ngIf="ingredients.length != 0" (click)="removeAllIngedients()">Remove all from shopping list</button>
+
 </div>

@@ -1,9 +1,10 @@
 import {Injectable} from "@angular/core";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AngularFirestore, AngularFirestoreCollection} from "@angular/fire/compat/firestore";
 import {AuthService} from "./auth-service";
 import {DatabaseService, recipeConverter} from "./database-service";
 import {Recipe} from "../../../shared/model/Recipe";
 import {Ingredient} from "../../../shared/model/Ingredient";
+import {resolve} from "@angular/compiler-cli/src/ngtsc/file_system";
 
 
 @Injectable({
@@ -111,7 +112,6 @@ export class UserDatabaseService {
             })
         })*/
 
-
         const collection = this.store.collection('users').doc(this.authService.userData.uid).collection("shoppinglist")
 
         return collection.doc(shoppinglistId).delete()
@@ -134,6 +134,79 @@ export class UserDatabaseService {
 
         return res;
     }
+
+    removeAllFromShoppinglist(){
+        const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglist").ref.get()
+
+        return collection.then((qs) => {
+            qs.forEach(async (s) => {
+                await s.ref.delete()
+            })
+        })
+    }
+
+    addAllToShoppinglist(ing: Ingredient[]){
+        const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglist")
+
+        return ing.forEach((i) => {
+            collection.ref.where("name", "==", i.name)
+                .get()
+                .then((querySnapshot) => {
+                    if (querySnapshot.empty) {
+                        collection.add(
+                            {
+                                "name": i.name,
+                                "amount": i.amount,
+                                "unit": i.measurement,
+                                addDate: new Date()
+                            }
+                        )
+                    } else { //TODO: add existing ingredients together
+                        collection.add(
+                            {
+                                "name": i.name,
+                                "amount": i.amount,
+                                "unit": i.measurement,
+                                addDate: new Date()
+                            }
+                        )
+                    }
+                })
+        })
+
+    }
+
+    // TODO its doesnt wanna do the promise, so for now we will have repeating code :(
+    /*addItem(collection: AngularFirestoreCollection<unknown>, i:Ingredient):Promise<boolean>{
+        collection.ref.where("name", "==", i.name)
+            .get()
+            .then((querySnapshot) => {
+                if (querySnapshot.empty) {
+                    collection.add(
+                        {
+                            "name": i.name,
+                            "amount": i.amount,
+                            "unit": i.measurement,
+                            addDate: new Date()
+                        }
+                    ).then(() => {
+                        return Promise<boolean> true
+                    })
+                } else { //TODO: add existing ingredients together
+                    collection.add(
+                        {
+                            "name": i.name,
+                            "amount": i.amount,
+                            "unit": i.measurement,
+                            addDate: new Date()
+                        }
+                    ).then(() => {
+                        return true;
+                    })
+                }
+            })
+        return new Promise<boolean>(resolve)
+    }*/
 }
 
 export enum SubcollectionName {

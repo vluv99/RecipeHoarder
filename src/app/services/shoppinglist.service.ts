@@ -25,4 +25,12 @@ export class ShoppinglistService {
     removeShoppinglistItem(listId: any){
         return this.userDatabaseService.removeFromShoppinglist(listId)
     }
+
+    removeAllIngedients(){
+        return this.userDatabaseService.removeAllFromShoppinglist()
+    }
+
+    addAllIngredients(ing: Ingredient[]){
+        return this.userDatabaseService.addAllToShoppinglist(ing)
+    }
 }
