@@ -17,6 +17,9 @@
 
     mat-form-field:not(:last-of-type) {
         max-width: 95px;
+        @include breakpoints.media-breakpoint-down(rrs) {
+            max-width: 50%;
+        }
     }
 
     mat-form-field:last-of-type {
@@ -34,66 +37,12 @@
         margin-bottom: 24px;*/
 
         @include breakpoints.media-breakpoint-down(sm) {
-            margin-top: -20px;
+            //margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 20px;
+            //margin-bottom: 20px;
         }
     }
-
-    /*
-  mat-form-field{
-    margin: auto;
-  }
-
-  #amount{
-    max-width: 100px;
-  }
-
-  #measurement{
-    max-width: 130px;
-  }
-
-  button{
-    margin-right: auto;
-    margin-left: 4px;
-    height: 66px;
-    margin-top: 5px;
-    vertical-align: top;
-    border-color: mat.get-color-from-palette(color.$my-accent, 500) ;
-  }
-
-  @include breakpoints.media-breakpoint-down(sm) {
-    #amount,#measurement{
-      max-width: 130px;
-    }
-
-    div{
-      margin-top: -20px;
-
-      display: flex;
-      flex-grow: 1;
-
-      #name{
-        max-width: 260px;
-        width: 234px;
-      }
-
-      button{
-        margin-left: 0;
-      }
-    }
-  }*/
-    /*
-      @include breakpoints.media-breakpoint-down(rs) {
-        .container{
-
-        }
-
-        #name{
-          width: 214px!important;
-        }
-      }*/
 }
 
 
