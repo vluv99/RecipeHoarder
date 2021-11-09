@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Input } from "@angular/core";
 import {Ingredient} from "../../../../shared/model/Ingredient";
+import {ShoppinglistService} from "../../services/shoppinglist.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-recipe-ingredient',
@@ -10,9 +12,22 @@ import {Ingredient} from "../../../../shared/model/Ingredient";
 export class RecipeIngredientComponent implements OnInit {
   @Input() ingredient!: Ingredient;
 
-  constructor() { }
+  constructor(private shoppinglistService: ShoppinglistService,
+              private _snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
+    add(ingredient: Ingredient) {
+        this.shoppinglistService.addIngredientToShoppinglist(ingredient).then(() => {
+            /*@ViewChild("mat-icon") //change icon once its added
+            set icon(){
+                contex: "add_circle"
+            }*/
+
+            this._snackbar.open('Added item to shopping list!', 'Got it!', {
+                duration: 2000
+            });
+        })
+    }
 }

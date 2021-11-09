@@ -20,15 +20,14 @@ mat-card {
 
         .mat-divider-inset{
             margin-bottom: 15px;
-            margin-top: 15px;
-            /*margin-left: -16px;
-            margin-right: 16px;*/
+            margin-top: 10px;
         }
     }
 
     .link-container {
         display: flex;
         align-items: center;
+        height: 40px;
 
         img {
             height: 20px;
@@ -41,6 +40,11 @@ mat-card {
             margin-left: 10px;
             cursor: pointer;
         }
+
+        button{
+            margin-left: auto;
+            margin-right: 23px;
+        }
     }
 
     .app-button-container {
@@ -49,4 +53,8 @@ mat-card {
         transform: translateY(-50%);
         right: 30px;
     }
+}
+
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle{
+    stroke: white!important;
 }

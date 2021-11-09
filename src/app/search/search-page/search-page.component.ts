@@ -3,6 +3,8 @@ import {ActivatedRoute, Event, Router, RouterEvent} from "@angular/router";
 import {DatabaseService} from "../../services/database-service";
 import {filter} from "rxjs/operators";
 import {Recipe} from "../../../../shared/model/Recipe";
+import {RecipeCollectionsService} from "../../services/recipe-collections.service";
+import {SubcollectionName} from "../../services/user-database.service";
 
 @Component({
     selector: 'app-search-page',
@@ -20,8 +22,9 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     text?: HTMLElement | null = document.getElementById(`text`)
 
 
-    constructor(private route: ActivatedRoute, private db: DatabaseService) {
-
+    constructor(private route: ActivatedRoute,
+                private db: DatabaseService,
+                private recipeCollectionService: RecipeCollectionsService) {
     }
 
     ngOnInit(): void {
@@ -29,7 +32,8 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
             if (params.searchTerm) { //if its a search term, search
                 this.searchTerm = params['searchTerm'];
-                this.searchTerm = this.searchTerm.charAt(0).toUpperCase() // TODO: delete this part once we have keywords
+                this.searchTerm = this.searchTerm.replace(this.searchTerm.charAt(0), this.searchTerm.charAt(0).toUpperCase())
+                //this.searchTerm = this.searchTerm.charAt(0).toUpperCase() // TODO: delete this part once we have keywords
 
                 this.db.search(this.searchTerm).then(recipes => {
                     this.recipes = recipes;
@@ -42,30 +46,17 @@ export class SearchPageComponent implements OnInit, OnDestroy {
                     this.recipes = recipes
                 })
 
-            } else if (params['my-favourites']) {
+            } else if (params.type) {
+                if (params.type == SubcollectionName.base){
+                    this.searchTerm = 'My recipes';
 
-                /*// @ts-ignore
-                this.title.innerHTML = "My favourites"
-                // @ts-ignore
-                this.text.innerHTML = "You don't have saved favourites yet :("*/
+                    this.recipes = this.recipeCollectionService.getSavedRecipesCollection()
+                } else {
+                    this.searchTerm = 'My favourites';
 
-                this.searchTerm = params['my-favourites'];
-
-                //TODO: list out my faourites
-                this.recipes = []
-
-            } else if (params['my-recipes']) {
-                /*// @ts-ignore
-                this.title.innerHTML = "My recipes"
-                // @ts-ignore
-                this.text.innerHTML = "You don't have saved recipes yet :("*/
-
-                this.searchTerm = params['my-recipes'];
-
-                //TODO: list out my saved recipes
-                this.recipes = []
+                    this.recipes = this.recipeCollectionService.getFavouriteRecipesCollection()
+                }
             }
-
         });
     }
 

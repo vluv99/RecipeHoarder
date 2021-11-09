@@ -23,10 +23,8 @@ const routes: Routes = [
   { path: 'register',                   component: RegisterComponent },
   { path: 'login',                      component: LoginComponent },
   { path: 'recipe-data',                component: ImportRecipeDataComponent,...canActivate(redirectUnauthorizedToLogin) },
-  { path: 'collections/:my-favourites', component: SearchPageComponent,      ...canActivate(redirectUnauthorizedToLogin) },
-  { path: 'collections/:my-recipes',    component: SearchPageComponent,      ...canActivate(redirectUnauthorizedToLogin) },
-
-
+  { path: 'collections/:type',          component: SearchPageComponent,      ...canActivate(redirectUnauthorizedToLogin) },
+  //search?c=favorites&category=breakfast&....
 ];
 
 @NgModule({

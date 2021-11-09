@@ -1,4 +1,5 @@
 export class Ingredient {
+    public id: string | undefined;
   name: string;
   amount: Number;
   measurement: string;
@@ -8,13 +9,4 @@ export class Ingredient {
     this.measurement = measurement;
   }
 
-  get Measurement(){
-    return Measurement;
-  }
-}
-
-export enum Measurement {
-  KG = "kg",
-  DKG = "dkg",
-  G = "g",
 }

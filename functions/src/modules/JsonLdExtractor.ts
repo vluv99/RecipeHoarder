@@ -2,7 +2,7 @@ import {ImportData, PipelineModule} from "../Pipeline";
 //import {parse} from "tldts";
 import {Recipe} from "../../../shared/model/Recipe";
 import * as moment from "moment";
-import {Ingredient, Measurement} from "../../../shared/model/Ingredient";
+import {Ingredient} from "../../../shared/model/Ingredient";
 import {Steps} from "../../../shared/model/Steps";
 
 
@@ -83,11 +83,12 @@ export class JsonLdExtractor implements PipelineModule {
         if (ldData["recipeIngredient"]) {
             ldData["recipeIngredient"].forEach((ing: any) => {
                 const n = ing;
-                r?.ingredients.push(new Ingredient(n, 1, Measurement.KG));
+                r?.ingredients.push(new Ingredient(n, 1, ""));
             });
 
             for (const i of r.ingredients) {
                 i.name = i.name.replace(/<[^>]+>/g, '');
+                i.name = i.name.replace(/(&nbsp;)+/g, ' '); //TODO: could test these
                 //console.log(i.name)
             }
         }

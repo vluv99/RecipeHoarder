@@ -53,6 +53,10 @@ import {StepFieldComponent} from './import-recipe-data/step-fields/step-field.co
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AuthService} from "./services/auth-service";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatListModule} from "@angular/material/list";
+import {MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from "@angular/material/bottom-sheet";
+import {ReportRecipeListComponent} from "./recipe/report-recipe-list/report-recipe-list.component";
 
 
 @NgModule({
@@ -78,7 +82,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         ImportRecipeDataComponent,
         ChipsMultiSelectComponent,
         IngredientFieldComponent,
-        StepFieldComponent
+        StepFieldComponent,
+        ReportRecipeListComponent
     ],
     imports: [
         BrowserModule,
@@ -105,7 +110,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         CoolSocialLoginButtonsModule,
         MatChipsModule,
         MatAutocompleteModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatExpansionModule,
+        MatListModule
     ],
     providers: [
         {provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['http://localhost:9099', 9099] : undefined},
@@ -113,7 +120,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
         {provide: USE_FIRESTORE_EMULATOR, useValue: environment.useEmulators ? ['localhost', 8081] : undefined},
         {provide: USE_FUNCTIONS_EMULATOR, useValue: environment.useEmulators ? ['localhost', 5001] : undefined},
         MatDatepickerModule,
-        AuthService
+        AuthService,
+        {provide: MatBottomSheetRef, useValue: {} },
+        {provide: MAT_BOTTOM_SHEET_DATA, useValue: {} }
     ],
     bootstrap: [AppComponent]
 })

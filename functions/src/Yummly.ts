@@ -1,4 +1,4 @@
-import {Ingredient, Measurement} from "../../shared/model/Ingredient";
+import {Ingredient} from "../../shared/model/Ingredient";
 import {Recipe} from "../../shared/model/Recipe";
 import * as cheerio from 'cheerio';
 import {Steps} from "../../shared/model/Steps";
@@ -37,7 +37,7 @@ export function getRecipeData($: cheerio.CheerioAPI, _url: string) {
 
     element["recipeIngredient"].forEach((ing: any) => {
       const n = ing;
-      r?.ingredients.push(new Ingredient(n, 1, Measurement.KG));
+      r?.ingredients.push(new Ingredient(n, 1, ""));
     });
 
     //TODO: YUMMLY doesnt always have steps, so going to leave it for now.

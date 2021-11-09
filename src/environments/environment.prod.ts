@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyCLCh76hEI8Psx5k_rR84jkEZSnuCFer-4",
-    authDomain: "recipe-hoarder.firebaseapp.com",
+    apiKey: "AIzaSyBIZv0bIGfaHrzXGywI1Jpgt9M3moFRaQU",
+    authDomain: "recipe-hoarder.web.app",
     projectId: "recipe-hoarder",
     storageBucket: "recipe-hoarder.appspot.com",
     messagingSenderId: "450418157187",

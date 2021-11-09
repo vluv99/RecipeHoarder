@@ -3,42 +3,105 @@
 //@use '~@angular/core/style/_elevation.scss';
 
 
-.container{
-  /*box-shadow: 0 0 5px 1px #000000bd;*/
-  @include mat.elevation(6); //shadow
-  border-radius: 0 0 4px 4px;
+.container {
+    /*box-shadow: 0 0 5px 1px #000000bd;*/
+    @include mat.elevation(6); //shadow
+    border-radius: 0 0 4px 4px;
 }
 
-.img-container{
-  width: 100%;
-  height: 300px;
-  /*padding-bottom: 30px;*/
-
-  img{
+.img-container {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+    height: 300px;
+    /*padding-bottom: 30px;*/
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
-.data-container{
-  margin-right: 15px;
-  margin-left: 15px;
-  max-width: 700px;
+.data-container {
+    margin-right: 15px;
+    margin-left: 15px;
+    max-width: 700px;
+    padding-bottom: 50px;
 
-  .description{
+    .description {
 
-  }
+    }
 
-  h1 {
-    /*font-size: 18px;*/
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: 0.15px;
+    .recipe-data-container {
+        display: flex;
+        flex-flow: row;
+        margin-top: 20px;
+        background-color: mat.get-color-from-palette(color.$my-primary, 500);
+        color: white;
 
-    margin-top: 15px;
-  }
+        /*background-color: color.$custom-background-color;
+        border: mat.get-color-from-palette(color.$my-primary, 500) solid 1px;*/
+
+
+         div:nth-child(2){
+            /*display: flex;
+             flex-flow: row;
+             align-content: center;*/
+            margin-left: 10px;
+         }
+        div span{
+            margin-left: 3px;
+            margin-bottom: 2px;
+        }
+    }
+
+    h1 {
+        /*font-size: 18px;*/
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: 0.15px;
+
+        margin-top: 15px;
+    }
+
+    mat-expansion-panel{
+        margin-top: 20px;
+        //background-color: color.$custom-background-color;
+        //color: white;
+
+        p{
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        div{
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: space-evenly;
+
+            button{
+                height: fit-content;
+                width: fit-content;
+                margin-bottom: 24px;
+            }
+        }
+
+        mat-panel-title{
+            color: white;
+            justify-content: center;
+        }
+
+        mat-expansion-panel-header{
+            //background-color: #D64216;
+            background-color: mat.get-color-from-palette(color.$my-accent, 500)
+        }
+
+        mat-expansion-panel-header:hover{
+            //background-color: #D64216;
+            background-color: mat.get-color-from-palette(color.$my-accent, 500)
+        }
+    }
 }

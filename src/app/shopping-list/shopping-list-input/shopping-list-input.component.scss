@@ -3,64 +3,46 @@
 @use '~@angular/material' as mat;
 
 
-.container{
-  display: flex;
-  flex-flow: row;
-  justify-content: center;
-  flex-wrap: wrap;
+.container {
+    display: flex;
+    //flex-flow: row;
+    //justify-content: center;
+    flex-wrap: wrap;
+    padding-left: 4px;
+    padding-right: 4px;
 
-  mat-form-field{
-    margin: auto;
-  }
-
-  #amount{
-    max-width: 100px;
-  }
-
-  #measurement{
-    max-width: 130px;
-  }
-
-  button{
-    margin-right: auto;
-    margin-left: 4px;
-    height: 66px;
-    margin-top: 5px;
-    vertical-align: top;
-    border-color: mat.get-color-from-palette(color.$my-accent, 500) ;
-  }
-
-  @include breakpoints.media-breakpoint-down(sm) {
-    #amount,#measurement{
-      max-width: 130px;
+    mat-form-field {
+        padding-bottom: -1.34375em !important;
     }
 
-    div{
-      margin-top: -20px;
-
-      display: flex;
-      flex-grow: 1;
-
-      #name{
-        max-width: 260px;
-        width: 234px;
-      }
-
-      button{
-        margin-left: 0;
-      }
-    }
-  }
-/*
-  @include breakpoints.media-breakpoint-down(rs) {
-    .container{
-
+    mat-form-field:not(:last-of-type) {
+        max-width: 95px;
+        @include breakpoints.media-breakpoint-down(rrs) {
+            max-width: 50%;
+        }
     }
 
-    #name{
-      width: 214px!important;
+    mat-form-field:last-of-type {
+        flex-grow: 1;
     }
-  }*/
+
+    button {
+        margin-right: auto;
+        margin-left: 4px;
+        height: 66px;
+        margin-top: 5px;
+        vertical-align: top;
+        border-color: mat.get-color-from-palette(color.$my-accent, 500) ;
+        /*align-self: center;
+        margin-bottom: 24px;*/
+
+        @include breakpoints.media-breakpoint-down(sm) {
+            //margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            //margin-bottom: 20px;
+        }
+    }
 }
 
 

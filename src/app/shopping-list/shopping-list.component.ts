@@ -1,38 +1,58 @@
 import {Component, OnInit} from '@angular/core';
-import {Ingredient, Measurement} from "../../../shared/model/Ingredient";
+import {Ingredient} from "../../../shared/model/Ingredient";
+import {ShoppinglistService} from "../services/shoppinglist.service";
+import {AuthService} from "../services/auth-service";
 
 @Component({
-  selector: 'app-shopping-list',
-  templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.scss']
+    selector: 'app-shopping-list',
+    templateUrl: './shopping-list.component.html',
+    styleUrls: ['./shopping-list.component.scss']
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients:Ingredient[] = [
-    new Ingredient("chicken breast", 1.5, Measurement.KG),
-    new Ingredient("flour", 2, Measurement.KG),
-    new Ingredient("bakin poweder", 15, Measurement.G),
-  ]
+    ingredients: Ingredient[] = []
 
-  constructor() { }
+    constructor(
+        private shoppinglistService: ShoppinglistService) {
+    }
 
-  ngOnInit(): void {
-    //let snackBarRef = snackBar.open('Message archived', 'Undo'); TODO: figure out why wouldn't it notice the snackbar import
+    ngOnInit(): void {
+        this.ingredients = this.shoppinglistService.getShoppinglist()
+        console.log(this.ingredients)
 
-    /*setTimeout(() => {
-      openSnackBar(message: string, action: string) {
-        this.snackBar.open(message, action, {
-          duration: 2000,
-          // here specify the position
-          verticalPosition: 'top'
-        });
-      }
-    }, 1000)
-  }*/
+        //let snackBarRef = snackBar.open('Message archived', 'Undo'); TODO: figure out why wouldn't it notice the snackbar import
 
-    /*
-      addToList(i:Ingredient){
-        this.ingredients.push(i);
+        /*setTimeout(() => {
+          openSnackBar(message: string, action: string) {
+            this.snackBar.open(message, action, {
+              duration: 2000,
+              // here specify the position
+              verticalPosition: 'top'
+            });
+          }
+        }, 1000)
       }*/
-  }
 
+        /*
+          addToList(i:Ingredient){
+            this.ingredients.push(i);
+          }*/
+    }
+
+    removeIngredient(rem: Ingredient) {
+        this.shoppinglistService.removeShoppinglistItem(rem.id).then(() => {
+            this.ingredients = this.shoppinglistService.getShoppinglist()
+        })
+    }
+
+    addIngredient(i: Ingredient) {
+        this.shoppinglistService.addIngredientToShoppinglist(i).then(() => {
+            this.ingredients = this.shoppinglistService.getShoppinglist()
+        })
+    }
+
+    removeAllIngedients() {
+        this.shoppinglistService.removeAllIngedients().then(() => {
+            this.ingredients = this.shoppinglistService.getShoppinglist()
+        })
+    }
 }
