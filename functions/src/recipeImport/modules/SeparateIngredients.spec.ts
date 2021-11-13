@@ -1,5 +1,5 @@
 import {SeparateIngredients} from "./SeparateIngredients";
-import {Ingredient} from "../../../shared/model/Ingredient";
+import {Ingredient} from "../../../../shared/model/Ingredient";
 
 const ingredeintTestValues = [
     {text: "¼ cup unsalted butter", res: new Ingredient("unsalted butter", 0.25, "cup")},

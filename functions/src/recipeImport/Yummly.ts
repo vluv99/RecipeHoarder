@@ -1,7 +1,7 @@
-import {Ingredient} from "../../shared/model/Ingredient";
-import {Recipe} from "../../shared/model/Recipe";
+import {Ingredient} from "../../../shared/model/Ingredient";
+import {Recipe} from "../../../shared/model/Recipe";
 import * as cheerio from 'cheerio';
-import {Steps} from "../../shared/model/Steps";
+import {Steps} from "../../../shared/model/Steps";
 import * as moment from "moment";
 
 export function getRecipeData($: cheerio.CheerioAPI, _url: string) {

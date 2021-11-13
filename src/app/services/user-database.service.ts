@@ -5,6 +5,7 @@ import {DatabaseService, recipeConverter} from "./database-service";
 import {Recipe} from "../../../shared/model/Recipe";
 import {Ingredient} from "../../../shared/model/Ingredient";
 import {resolve} from "@angular/compiler-cli/src/ngtsc/file_system";
+import firebase from "firebase/compat/app";
 
 
 @Injectable({
@@ -207,6 +208,50 @@ export class UserDatabaseService {
             })
         return new Promise<boolean>(resolve)
     }*/
+
+    getShoppinglistSuggestions(amount: number){
+        const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglistMeta").ref
+            .where('nextDate', '<=',firebase.firestore.Timestamp.now()  )
+            .where('score', '>', 0)
+            .limit(amount).get()
+
+        let res : Ingredient[] = [];
+        collection.then((qs) => {
+            qs.forEach((s) => {
+
+                let ingRef:any = s.data();
+                let i = new Ingredient(ingRef.name, ingRef.amount, ingRef.unit)
+                //add id, to be able to remove them
+                i.id = s.id;
+                res.push(i);
+            })
+
+        })
+
+        return res;
+    }
+
+    addShoppinglistSuggestionScore(score: number, ingName: string) {
+        const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglistMeta").ref
+            .where("name", '==', ingName)
+            .limit(1)
+            .get()
+        collection.then(snap =>{
+            if(!snap.empty){
+
+                let data: any = snap.docs[0].data();
+                if('score' in data){
+                    data.score = data.score + score;
+                }
+                else {
+                    data.score = 2 + score;
+                }
+
+                snap.docs[0].ref.update({'score': data.score})
+
+            }
+        })
+    }
 }
 
 export enum SubcollectionName {

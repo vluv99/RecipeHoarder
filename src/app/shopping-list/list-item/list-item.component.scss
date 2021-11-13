@@ -2,36 +2,65 @@
 @use "src/theme/color";
 @use "src/theme/mixins/breakpoints";
 
-.item-container{
-  display: flex;
-  flex-flow: row;
-  /*margin-top: 5px;
-  margin-bottom: 5px;*/
-  align-items: flex-end;
-  color: mat.get-color-from-palette(color.$my-primary, 800);
-  padding-top: 15px;
+.item-container {
+    display: flex;
+    flex-flow: row;
+    /*margin-top: 5px;
+    margin-bottom: 5px;*/
+    align-items: flex-end;
+    color: mat.get-color-from-palette(color.$my-primary, 800);
+    padding-top: 15px;
 
-  .name, .amount, .measure,.dots{
-    margin-right: 8px;
-  }
+    .name, .amount, .measure, .dots {
+        margin-right: 8px;
+    }
 
-  .name{
-    min-width: fit-content;
-  }
+    .name {
+        min-width: fit-content;
+    }
 
-  .dots{
-    overflow: hidden;
-  }
+    .dots {
+        overflow: hidden;
+    }
 
-  .amount, .measure{
-    font-weight: bolder;
-  }
+    .amount, .measure {
+        font-weight: bolder;
+    }
 
-  button{
-    justify-content: flex-end
-  }
+    button {
+        justify-content: flex-end
+    }
 
-  @include breakpoints.media-breakpoint-down(sm) {
-    padding: 15px;
-  }
+    @include breakpoints.media-breakpoint-down(sm) {
+        padding: 15px;
+    }
+}
+
+mat-card.item-container{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    align-items: center;
+    background-color: mat.get-color-from-palette(color.$my-primary, 500);
+    color: white;
+    margin-right: -6px;
+    margin-left: -6px;
+    padding-right: 8px;
+    margin-bottom: 4px;
+
+    @include breakpoints.media-breakpoint-down(sm) {
+        margin-right: 4px;
+        margin-left: 4px;
+    }
+
+    .confirm{
+        border-color: white;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .remove{
+        background-color: #D64216;
+        border-color: #D64216;
+        border-radius: 0 4px 4px 0;
+    }
+
 }

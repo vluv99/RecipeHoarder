@@ -1,7 +1,29 @@
-<div class="item-container">
-  <div class="amount">{{ingredient.amount}}</div>
-  <div class="measure">{{ingredient.measurement}}</div>
-  <div class="name">{{ingredient.name}}</div>
-  <div class="dots">............................................................................</div>
-  <button mat-stroked-button color="primary" (click)="remove.emit(ingredient)"><mat-icon>done</mat-icon></button>
-</div>
+<ng-template [ngIf]="type == IngredientType.Suggestion">
+    <mat-card class="item-container">
+
+        <!--<div class="amount">{{ingredient.amount}}</div>
+        <div class="measure">{{ingredient.measurement}}</div>-->
+        <div class="name">{{ingredient.name}}</div>
+
+        <button mat-stroked-button color="secondary" class="confirm" (click)="accept.emit(ingredient)" style="margin-left: auto">
+            <mat-icon>done</mat-icon>
+        </button>
+
+        <button mat-stroked-button color="secondary" class="remove" (click)="remove.emit(ingredient)">
+            <mat-icon>close</mat-icon>
+        </button>
+
+    </mat-card>
+</ng-template>
+
+<ng-template [ngIf]="type == IngredientType.ShoppingList">
+    <div class="item-container">
+        <div class="amount">{{ingredient.amount}}</div>
+        <div class="measure">{{ingredient.measurement}}</div>
+        <div class="name">{{ingredient.name}}</div>
+        <div class="dots">............................................................................</div>
+        <button mat-stroked-button color="primary" (click)="remove.emit(ingredient)">
+            <mat-icon>done</mat-icon>
+        </button>
+    </div>
+</ng-template>

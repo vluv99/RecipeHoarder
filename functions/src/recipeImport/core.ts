@@ -1,6 +1,6 @@
 
 
-import {Recipe} from "../../shared/model/Recipe";
+import {Recipe} from "../../../shared/model/Recipe";
 
 
 import {Pipeline} from "./Pipeline";

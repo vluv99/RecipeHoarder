@@ -1,9 +1,9 @@
 import {ImportData, PipelineModule} from "../Pipeline";
 //import {parse} from "tldts";
-import {Recipe} from "../../../shared/model/Recipe";
+import {Recipe} from "../../../../shared/model/Recipe";
 import * as moment from "moment";
-import {Ingredient} from "../../../shared/model/Ingredient";
-import {Steps} from "../../../shared/model/Steps";
+import {Ingredient} from "../../../../shared/model/Ingredient";
+import {Steps} from "../../../../shared/model/Steps";
 
 
 export class JsonLdExtractor implements PipelineModule {
