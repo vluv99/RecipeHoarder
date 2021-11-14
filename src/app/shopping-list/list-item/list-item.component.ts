@@ -10,8 +10,13 @@ import {ControlValueAccessor} from "@angular/forms";
 })
 export class ListItemComponent implements OnInit, ControlValueAccessor {
 
+    IngredientType = IngredientType;
+
     @Input() ingredient!: Ingredient;
     @Output() remove = new EventEmitter<Ingredient>()
+    @Output() accept = new EventEmitter<Ingredient>()
+
+    @Input() type: IngredientType = IngredientType.ShoppingList;
 
     onChange = (ingredient:Ingredient) => {};
 
@@ -34,4 +39,9 @@ export class ListItemComponent implements OnInit, ControlValueAccessor {
 
     writeValue(obj: any): void {
     }
+}
+
+export enum IngredientType{
+    ShoppingList,
+    Suggestion
 }

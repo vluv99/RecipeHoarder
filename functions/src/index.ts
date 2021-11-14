@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
-import {getData2} from "./core";
+import {getData2} from "./recipeImport/core";
+import {addToShoppinglistMeta} from "./shoppinglist/newShoppinglistItemHandler";
 
 export const importRecipe = functions.https.onCall(async (data, context) => {
 
@@ -17,3 +18,8 @@ export const importRecipe = functions.https.onCall(async (data, context) => {
   return JSON.stringify(r);
 
 });
+
+
+exports.addedShoppinglistItem = functions.firestore
+    .document('users/{userId}/shoppinglist/{shoppinglistId}')
+    .onCreate(addToShoppinglistMeta);

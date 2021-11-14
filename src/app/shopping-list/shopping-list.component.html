@@ -9,6 +9,9 @@
     <app-ingredient-suggestion></app-ingredient-suggestion>
   </div>
 -->
+    <p style="margin:5px" *ngIf="suggestions.length != 0">Suggestions:</p>
+
+    <app-list-item [type]="1" *ngFor="let i of suggestions" (remove)="declinedSuggestion($event)" (accept)="acceptedSuggestion($event)" [ingredient]="i"></app-list-item>
 
   <div>
       <div *ngIf="ingredients.length == 0" style="margin-top: 15px">You shopping list is empty!</div>

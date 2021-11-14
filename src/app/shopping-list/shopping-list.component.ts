@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Ingredient} from "../../../shared/model/Ingredient";
 import {ShoppinglistService} from "../services/shoppinglist.service";
 import {AuthService} from "../services/auth-service";
+import {ShoppingListInputComponent} from "./shopping-list-input/shopping-list-input.component";
 
 @Component({
     selector: 'app-shopping-list',
@@ -10,6 +11,10 @@ import {AuthService} from "../services/auth-service";
 })
 export class ShoppingListComponent implements OnInit {
     ingredients: Ingredient[] = []
+    suggestions: Ingredient[] = []
+
+    @ViewChild(ShoppingListInputComponent)
+    input!: ShoppingListInputComponent
 
     constructor(
         private shoppinglistService: ShoppinglistService) {
@@ -19,23 +24,7 @@ export class ShoppingListComponent implements OnInit {
         this.ingredients = this.shoppinglistService.getShoppinglist()
         console.log(this.ingredients)
 
-        //let snackBarRef = snackBar.open('Message archived', 'Undo'); TODO: figure out why wouldn't it notice the snackbar import
-
-        /*setTimeout(() => {
-          openSnackBar(message: string, action: string) {
-            this.snackBar.open(message, action, {
-              duration: 2000,
-              // here specify the position
-              verticalPosition: 'top'
-            });
-          }
-        }, 1000)
-      }*/
-
-        /*
-          addToList(i:Ingredient){
-            this.ingredients.push(i);
-          }*/
+        this.suggestions = this.shoppinglistService.getShoppinglistSuggestion(3)
     }
 
     removeIngredient(rem: Ingredient) {
@@ -54,5 +43,18 @@ export class ShoppingListComponent implements OnInit {
         this.shoppinglistService.removeAllIngedients().then(() => {
             this.ingredients = this.shoppinglistService.getShoppinglist()
         })
+    }
+
+
+    declinedSuggestion(i: Ingredient) {
+        this.suggestions = this.suggestions.filter(e => e.name != i.name)
+        this.shoppinglistService.addShoppinglistSuggestionScore(-1, i.name)
+    }
+
+    acceptedSuggestion(i: Ingredient) {
+        this.suggestions = this.suggestions.filter(e => e.name != i.name)
+        this.input.setValue(new Ingredient(i.name,0,''));
+        this.shoppinglistService.addShoppinglistSuggestionScore(1, i.name)
+
     }
 }

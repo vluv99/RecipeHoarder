@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Ingredient} from "../../../../shared/model/Ingredient";
 import {ShoppinglistService} from "../../services/shoppinglist.service";
 import {ControlValueAccessor} from "@angular/forms";
@@ -15,8 +15,12 @@ export class ShoppingListInputComponent implements OnInit, ControlValueAccessor 
         "flour", "cucumber", "distilled white vinegar", "garlic", "extra-virgin olive oil", "lemon", "dried oregano", "tomato", "chicken breast", "bakin poweder"
     ]
 
-    @Input() ing: Ingredient = new Ingredient("", 0, "");
-    @Output() add = new EventEmitter<Ingredient>()
+    @Input()
+    ing: Ingredient = new Ingredient("", 0, "");
+
+    @Output()
+    add = new EventEmitter<Ingredient>()
+
 
     measures: String[] = /*this.getUnits() */[
 
@@ -68,19 +72,8 @@ export class ShoppingListInputComponent implements OnInit, ControlValueAccessor 
         }
     }
 
-    add2() {
-        // @ts-ignore
-        document.getElementById("hint").hidden = true;
-
-        if (this.ing.name != ""){
-            this.shoppinglistService.addIngredientToShoppinglist(this.ing).then(() => {
-                //alert("success")
-            }).catch(() => {
-                alert("wasnt success!")
-            })
-        }
-
-        //addToIngredient(new Ingredient(name, amount, measure))
+    setValue(i: Ingredient) {
+        this.ing = i;
     }
 
     registerOnChange(fn: any): void {

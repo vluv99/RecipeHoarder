@@ -33,4 +33,12 @@ export class ShoppinglistService {
     addAllIngredients(ing: Ingredient[]){
         return this.userDatabaseService.addAllToShoppinglist(ing)
     }
+
+    getShoppinglistSuggestion(amount:number){
+        return this.userDatabaseService.getShoppinglistSuggestions(amount)
+    }
+
+    addShoppinglistSuggestionScore(score:number, ingName: string){
+        return this.userDatabaseService.addShoppinglistSuggestionScore(score, ingName)
+    }
 }

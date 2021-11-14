@@ -1,4 +1,4 @@
-import {Recipe} from "../../shared/model/Recipe";
+import {Recipe} from "../../../shared/model/Recipe";
 import * as cheerio from "cheerio";
 
 export class ImportData {

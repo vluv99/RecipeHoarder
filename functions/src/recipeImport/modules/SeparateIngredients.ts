@@ -1,6 +1,6 @@
 import {ImportData, PipelineModule} from "../Pipeline";
 //import convert from "convert-units";
-import {Ingredient} from "../../../shared/model/Ingredient";
+import {Ingredient} from "../../../../shared/model/Ingredient";
 
 const convert = require('convert-units')
 var numQty = require("numeric-quantity");
