@@ -21,7 +21,9 @@ export class ShoppingListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.ingredients = this.shoppinglistService.getShoppinglist()
+        this.shoppinglistService.getShoppinglist().then((a) => {
+            this.ingredients = a;
+        })
         console.log(this.ingredients)
 
         this.suggestions = this.shoppinglistService.getShoppinglistSuggestion(3)
@@ -29,26 +31,32 @@ export class ShoppingListComponent implements OnInit {
 
     removeIngredient(rem: Ingredient) {
         this.shoppinglistService.removeShoppinglistItem(rem.id).then(() => {
-            this.ingredients = this.shoppinglistService.getShoppinglist()
+            this.shoppinglistService.getShoppinglist().then((a) => {
+                this.ingredients = a;
+            })
         })
     }
 
     addIngredient(i: Ingredient) {
         this.shoppinglistService.addIngredientToShoppinglist(i).then(() => {
-            this.ingredients = this.shoppinglistService.getShoppinglist()
+            this.shoppinglistService.getShoppinglist().then((a) => {
+                this.ingredients = a;
+            })
         })
     }
 
     removeAllIngedients() {
         this.shoppinglistService.removeAllIngedients().then(() => {
-            this.ingredients = this.shoppinglistService.getShoppinglist()
+            this.shoppinglistService.getShoppinglist().then((a) => {
+                this.ingredients = a;
+            })
         })
     }
 
 
     declinedSuggestion(i: Ingredient) {
         this.suggestions = this.suggestions.filter(e => e.name != i.name)
-        this.shoppinglistService.addShoppinglistSuggestionScore(-1, i.name)
+        this.shoppinglistService.addShoppinglistSuggestionScore(-1, i.name, true)
     }
 
     acceptedSuggestion(i: Ingredient) {

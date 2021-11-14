@@ -35,6 +35,10 @@ export async function addToShoppinglistMeta(change: QueryDocumentSnapshot, conte
         if('deltaTime' in item){
             item.delaTime = (item.delaTime + timeSince)/2;
 
+            if (item.score < 5){
+                item.score += 0.1;
+            }
+
         }else {
             item.delaTime = timeSince;
         }

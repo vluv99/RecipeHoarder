@@ -38,7 +38,7 @@ export class ShoppinglistService {
         return this.userDatabaseService.getShoppinglistSuggestions(amount)
     }
 
-    addShoppinglistSuggestionScore(score:number, ingName: string){
-        return this.userDatabaseService.addShoppinglistSuggestionScore(score, ingName)
+    addShoppinglistSuggestionScore(score:number, ingName: string, modifyDate: boolean = false){
+        return this.userDatabaseService.addShoppinglistSuggestionScore(score, ingName, modifyDate)
     }
 }

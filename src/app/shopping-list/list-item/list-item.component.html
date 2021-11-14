@@ -18,8 +18,8 @@
 
 <ng-template [ngIf]="type == IngredientType.ShoppingList">
     <div class="item-container">
-        <div class="amount">{{ingredient.amount}}</div>
-        <div class="measure">{{ingredient.measurement}}</div>
+        <div class="amount" *ngIf="ingredient.amount != 0">{{ingredient.amount}}</div>
+        <div class="measure" *ngIf="ingredient.amount != 0">{{ingredient.measurement}}</div>
         <div class="name">{{ingredient.name}}</div>
         <div class="dots">............................................................................</div>
         <button mat-stroked-button color="primary" (click)="remove.emit(ingredient)">
