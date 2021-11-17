@@ -118,19 +118,20 @@ export class UserDatabaseService {
         return collection.doc(shoppinglistId).delete()
     }
 
-    getIngredientsFromShoppinglist(){
-        const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglist").ref.get()
+    async getIngredientsFromShoppinglist(){
+        const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglist").ref
+            .orderBy('addDate', 'desc')
+            .get()
 
         let res:Ingredient[] = []
-        collection.then((qs) => {
-            qs.forEach((s) => {
-                let ingRef:any = s.data();
-                let i = new Ingredient(ingRef.name, ingRef.amount, ingRef.unit)
-                //add id, to be able to remove them
-                i.id = s.id;
-                res.push(i);
-            })
+        let qs = await collection
 
+        qs.forEach((s) => {
+            let ingRef:any = s.data();
+            let i = new Ingredient(ingRef.name, ingRef.amount, ingRef.unit)
+            //add id, to be able to remove them
+            i.id = s.id;
+            res.push(i);
         })
 
         return res;
@@ -211,19 +212,24 @@ export class UserDatabaseService {
 
     getShoppinglistSuggestions(amount: number){
         const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglistMeta").ref
-            .where('nextDate', '<=',firebase.firestore.Timestamp.now()  )
-            .where('score', '>', 0)
+            .where('nextDate', '<=',firebase.firestore.Timestamp.now()  ) //TODO:maybe later do a filter for the past too
+            .orderBy('nextDate', 'desc')
+            .orderBy('score','desc')
+            //.where('score', '>', 0)
             .limit(amount).get()
 
         let res : Ingredient[] = [];
         collection.then((qs) => {
             qs.forEach((s) => {
-
                 let ingRef:any = s.data();
-                let i = new Ingredient(ingRef.name, ingRef.amount, ingRef.unit)
-                //add id, to be able to remove them
-                i.id = s.id;
-                res.push(i);
+
+                if(ingRef.score > 0) {
+
+                    let i = new Ingredient(ingRef.name, ingRef.amount, ingRef.unit)
+                    //add id, to be able to remove them
+                    i.id = s.id;
+                    res.push(i);
+                }
             })
 
         })
@@ -231,7 +237,7 @@ export class UserDatabaseService {
         return res;
     }
 
-    addShoppinglistSuggestionScore(score: number, ingName: string) {
+    addShoppinglistSuggestionScore(score: number, ingName: string, modifyDate: boolean = false) {
         const collection = this.store.collection('users/' + this.authService.userData.uid + "/shoppinglistMeta").ref
             .where("name", '==', ingName)
             .limit(1)
@@ -247,7 +253,11 @@ export class UserDatabaseService {
                     data.score = 2 + score;
                 }
 
-                snap.docs[0].ref.update({'score': data.score})
+                if (modifyDate){
+                    data.nextDate = new firebase.firestore.Timestamp(firebase.firestore.Timestamp.now().seconds + Math.round(data.delaTime), 0)
+                }
+
+                snap.docs[0].ref.update({'score': data.score, 'nextDate': data.nextDate})
 
             }
         })
