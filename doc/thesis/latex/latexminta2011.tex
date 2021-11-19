@@ -51,6 +51,9 @@
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
 
+\usepackage{booktabs}
+\usepackage{pifont}
+
 %Tételszerű környezetek definiálhatók, ezek most fejezetenkent egyutt szamozodnak, pl.
 \newtheorem{tet}{Tétel}[chapter]
 \newtheorem{defi}[tet]{Definíció}
@@ -162,28 +165,20 @@ hogy később a bevásárlólistába helyezésnél a megyegyező anyagok összea
 \chapter*{Tartalmi összefoglaló}
 \addcontentsline{toc}{section}{Tartalmi összefoglaló}
 
-A szakdolgozat céljául kitűzött témám egy Angular-ban írt web applikáció,
-ami recept megjelenítésre és importálásra használható. Az importálás funkció lehetővé teszi,
-hogy a felhasználók egy helyen gyűjsék a receptjeiket. Továbbá a regeptek összetevőit egy bevásárló listába ki tuják menteni,
-ezzel is megkönnyítve a mindennapi életet.
-A felhasználók a többiek álltal létrehozott receptek között tudnak keresni,
-és a nekik tetsző recepteket ki tudják menteni a saját recetgyűjteményükbe.
-
-Az applikáció egy weblap formályában lett megvalósítva, mivel így lehet a legtöbb ezközt elérni egyetlen kódbázissal.
-A megvalósításhoz a már említett Angular keretrendszert használtam, illetve a Firebase felhő alapú szolgáltatásait.
-Mivel mind a kettő (Angular, Firebase) a Google terméke, ezért várhatóan hosszútávon támogatva lesznek.
-
-A felhasználó a recept URL-je alapján tud, recepet importálni, vagy manuálisan is tud létrehozni újjat. %TODO: ú/u j/jj?
-Ekkor az importáláshoz egy szerver oldali funkció fut le és próbálja értelmezni a megkapott URL-en lévő html fájlt.
-Ennek egy fontos lépése az, hogy az alapanyagok nevét, mértékegységét és mennyiségét az eredeti szövegből kiolvassa.
-Ehhez regex-et illetve egy kölső konyvtárat használtam, ami sok mértékegység között tud átválltani.
-Miután a receptet sikeresen importáltuk, azokat a Firebase FireStore adatbázisában tároljuk.
-
-Mind az importálás mind az egész projekt során törekedtem, hogy minnél modulárisabb legyen a felépítés.
-A webapp fejlesztése során a PWA-t alkalmazva elérhető, hogy bizonyos funkciók offline is működjenek.
-A modern, könnyen kezelhető weblap számítógépen és telefonon egyaránt használható.
-
-Kulcsszavak: Angular, Firebase, pipeline architektúra, PWA, telefonos nézet
+\begin{itemize}
+	\item téma megnevezése: \\
+	A szakdolgozat céljául kitűzött témám egy Angular-ban írt web applikáció, ami recept megjelenítésre és importálásra használható.
+	\item feladat megfogalmazása: \\
+	Az importálás funkció lehetővé teszi, hogy a ˝ felhasználók egy helyen gyűjtsék a receptjeiket. Továbbá a regeptek összetevőit egy bevásárló listába ki tudják menteni, ezzel is megkönnyítve a mindennapi életet. A felhasználók a többiek által létrehozott receptek között tudnak keresni, és a nekik tetsző recepteket ki ˝ tudják menteni a saját receptgyűjteményeikbe.
+	\item megoldási mód: \\
+	Az applikáció egy weblap formájában lett megvalósítva, mivel így lehet a legtöbb eszközt elérni egyetlen kód bázissal. A megvalósításhoz a már említett Angular keretrendszert használtam, illetve a Firebase felhő alapú szolgáltatásait. Mivel mind a kettő (Angular, Firebase) a Google terméke, ezért várhatóan hosszútávon támogatva lesznek. A felhasználó a recept URL-je alapján tud, receptet importálni, vagy manuálisan is tud létrehozni újat. Ekkor az importáláshoz egy szerver oldali funkció fut le és próbálja értelmezni a megkapott URL-en lévő html fájlt. Ennek egy fontos lépése az, hogy az alapanyagok nevét, mértékegységét és mennyiségét az eredeti kiolvassa. Ehhez regex-et illetve egy külső konyvtárat használtam, ami sok mértékegység között tud átváltani. Miután a receptet sikeresen importáltuk, azokat a Firebase FireStore adatbázisában tároljuk.
+	\item alkalmazott eszközök, módszerek: \\
+	Mind az importálás mind az egész projekt során törekedtem, hogy minél modulárisabb legyen a felépítés. A webapp fejlesztése során a PWA-t alkalmazva elérhető, hogy ˝ bizonyos funkciók offline is működjenek. A modern, könnyen kezelhető weblap számítógépen és telefonon egyaránt használható.
+	\item elért eredmény: \\
+	A fejlesztés során sikerült egy modern telefonos és számítógépes környezetben is elérhető webes alkalmazást készíteni, ami bárki számára a regisztráció után elérhető és könnyen használható, ezzel könnyebbé téve a hétköznapokat.
+	\item kulcsszavak: \\
+	Angular, Firebase, pipeline architektúra, PWA, telefonos nézet
+\end{itemize}
 
 %Bevezetés
 \chapter*{Motiváció}
@@ -233,8 +228,32 @@ Ezen a felületen nincs mások által, vagy akár csak egy közös adatbázisbó
 
 A beimportált recepteket könnyű módosítani, valamint rengeteg kis adatot megadni, hogy otthonosan lehessen használni a környezetet. Itt nincs lehetőség közvetlenül a receptből a bevásárló listába rakni alapanyagokat, menüket összekészíteni vagy az étkezéstervezőt használni az ingyenes próbaverzió után.
 
+\section{Összefoglaló}
+Egy táblázat a korábban összefoglalt példákról és tudásaikról egy egyszerű összehasonlításhoz.
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+\noindent
+\begin{tabular}{p{3cm} | c c c c c | c @{}}
+	\multicolumn{7}{c}{Összegzés}                                                                   \\ \midrule
+	weblapok                         & Grocy  & Delish & Yummly & BigOven & ChefTap & RecipeHoarder \\ \cmidrule[2pt](r){2-7}
+	open source                      & \cmark & \xmark & \xmark & \xmark  & \xmark  & \xmark        \\\cmidrule(r){2-7}
+	recept importálás - URL          & \xmark & \xmark & \xmark & \cmark  & \cmark  & \cmark        \\ \cmidrule(r){2-7}
+	receptekhez vannak lépések       & \xmark & \cmark & \cmark & \xmark  & \cmark  & \cmark        \\ \cmidrule(r){2-7}
+	manuális recept hozzáadás        & \cmark & \xmark & \xmark & \cmark  & \cmark  & \cmark        \\ \cmidrule(r){2-7}
+	bevásárlólista                   & \cmark & \xmark & \cmark & \cmark  & \cmark  & \cmark        \\ \cmidrule(r){2-7}
+	bevásárlólista ajánló            & \cmark & \xmark & \xmark & \xmark  & \xmark  & \cmark        \\ \cmidrule(r){2-7}
+	katgóriák használata receptekhez & \xmark & \cmark & \cmark & \xmark  & \cmark  & \cmark        \\ \cmidrule(r){2-7}
+	étkzés tervező                   & \cmark & \xmark & \cmark & \xmark  & \xmark  & \xmark        \\ \cmidrule(r){2-7}
+	bejelentkezés google fiókkal     & \xmark & \cmark & \cmark & \cmark  & \xmark  & \cmark        \\ \cmidrule(r){2-7}
+	reszponzív weblap                & \cmark & \xmark & \xmark & \xmark  & \xmark  & \cmark        \\ \bottomrule
+\end{tabular}
+
 \chapter{Funkcionális specifikáció}
-Egy összefoglaló részletesebb arról, hogy minek pontosan hogyan kell működnie az eredeti terv szerint.
+Egy összefoglaló részletesebb arról, hogy minek pontosan hogyan kell működnie az eredeti terv szerint. \\
+
+PUT USE-CASEHERE
 
 \section{Bejelentkezés/Regisztráció}
 A regisztrációt és bejelentkezés a legbiztosabb biztonság érdekében a Firebase Auth rendszerén keresztül történik. Kettő módszer van a regisztrációra. Első, a szokásos email és jelszó páros megadásával a regisztrációs formon keresztül. Második, a Google authentikációs rendszeren keresztül. A felhasználók ezt látják először, mikor a honlapra navigálnak. Bejelentkezés nélkül nem lehetséges a weblapot megtekinteni.
@@ -257,13 +276,13 @@ A manuális és URL-es importálás ugyanazon a lapon működik, az egyetlen kü
 \section{Recept kalória számlálás}
 Ez a lépés egy modul a recept importálás folyamatban. A projekthez hozzáadtam egy csomagot, ahonnan egyrészt a szétválasztáshoz megkapom a mértékegységeket, másrészt ezt használom a mértékegység átváltáshoz is.
 
-{\color{red}{
-  A tápanyag információkat egy külső adatbázisból szedem, ami offline és a gov.tt… weblapról szereztem. Az “About this website” menüpont alatt megjelenik a megfelelő kijelentés az adatbázis production használatáról.
-}}
+	{\color{red}{
+			A tápanyag információkat egy külső adatbázisból szedem, ami /*offline */ és a Food Data Central API ameriaki állami adatbázis rendszert használtam. A használati feltételeket végigolvasva kiderült, hogy bárki ingyen használhatja, akár a jogok feltüntetése nélkül is, bár megköszönik, amennyiben az megtörténne.
+		}}
 
-{\color{red}{
-  A kalóriaszámlálás kizárólag akkor fut le, ha a receptlekérdezés során nem létezett az eredeti oldalon a kalória információ, vagy ha a recept manuálisan lett létrehozva. Ahhoz, hogy megfelelő eredményt kapjunk, ha az alapanyagokból nem tudunk legalább 80 százalékból tápanyag adatot megkapni, akkor nem lesz megjelenítve kalória információ a recepthez. Amennyiben megfelelő mennyiségű adatunk van, a korábban említett mértékegység átváltásokkal egységesítem az alapanyagokat a tápanyag táblázat alap értékéhez, aztán azt összeadva kapjuk a kalória adatot a recepthez.
-  }}
+	{\color{red}{
+			A kalóriaszámlálás kizárólag akkor fut le, ha a receptlekérdezés során nem létezett az eredeti oldalon a kalória információ, vagy ha a recept manuálisan lett létrehozva. Ahhoz, hogy megfelelő eredményt kapjunk, ha az alapanyagokból nem tudunk legalább 80 százalékból tápanyag adatot megkapni, akkor nem lesz megjelenítve kalória információ a recepthez. Amennyiben megfelelő mennyiségű adatunk van, a korábban említett mértékegység átváltásokkal egységesítem az alapanyagokat a tápanyag táblázat alap értékéhez, aztán azt összeadva kapjuk a kalória adatot a recepthez.
+		}}
 
 \section{Bevásárlólista}
 A bevásárlólista egy külön lapon található, ahol a felhasználó a saját vásárlásához gyűjthet alapanyagokat. Ha a lapon található új alapanyag hozzáadó felületet használja, akkor hozzáadás után azonnal, megjelenik a leni listában az új elem. Ha  listában még létezett egy ponosan olyan nevű elem, akkor, ha szükség van rá, egy mértékegység átváltással hozzáadódik az eredeti elemhez. Így az alapanyag mennyisége nő. Amennyiben nem kell már az alapanyag, a sor végén lévő pipával ki lehet venni a listából.
@@ -271,10 +290,16 @@ A bevásárlólista egy külön lapon található, ahol a felhasználó a saját
 A felhasználó kényelme érdekében, a receptből közvetlenül az alapanyag előtti plusz gombra nyomva hozzá lehet adni egyesével az alapanyagokat a bevásárló listába. Valamint ha mindent gyosan hozzá szeretnénk adni, akkor van egy másik gomb az alapanyag lista alatt,amivel az összeset egy kattintással hozzá lehet adni a listához.
 
 \section{Bevásárlólista ajánló}
+A bevásárló listát használó felhasználók a lista megnyitásakor kapnak egy felugró lista elemet, ami egy korábbi alapanyagot kínál, amennyiben az több mind egyszer lett a listához adva. A pipára nyomva, az alapanyag bekerül a hozzáadó mező név elemébe. Amint a mennyiséget és mértékegységet kitöltve hozzáadjuk, akkor egyrész hozzáadódik az új elem a listához, valamint a következő alkalom dátuma újra generálódik a korábbiakat átlagolva.
 
-{\color{red}{
-  A bevásárló listát gyakran használó felhasználók néha kapnak egy felugró ablakot, ami egy korábbi lista elemet ajánl azonnali hozzáadáshoz. Ez a funkció a felhasználó szokásaiból tippelget, hogy miket ajánljon legközelebb. Amennyiben a tippet nem fogadták el, akkor ezt is számításba véve ajánl legközelebb.
-}}
+Amennyiben a felhasználót nem érdekli az ajánlat, az x-re nyomva az ajánlat eltűnik, valamint elindul a funkció, ami -1 értékkel levonja az ajánlat értékelését. Az értékelés mező értéke alapvetően 2 mikor létrejön a meta adat. Amint az érték eléri a nullát, az alapanyag nem lesz többször felajánlva egy ideig.
+
+	{\color{green}{
+			\verb!Lehet, hogy ez már specifikáció inkább...!\\
+			Annak érdekében, hogy ha a felhasználó egy ideig elvetette az alapanyagot, de egy idő után az mégis sokszor újra bekerül a listába, akkor minden hozzátételnél az értékelés mező +0.1 értékkel nő, ami lehetővé teszi, hogy egy idő után visszakerüljön az ajánlottak közé.
+
+			Az ajánlás egy sima adatbázis lekérdezés, ami szűrve van úgy, hogy csak ez a pillanat előtti “ajánlott időpont”-os alapanyagokat kérdezzünk le, ami rendezve van dátum és értékelés csökkenő sorrendjében. Végűl a lekérdezés limitálva van három elemre.
+		}}
 
 \chapter{Felhasznált technológiák}
 \section{Angular}

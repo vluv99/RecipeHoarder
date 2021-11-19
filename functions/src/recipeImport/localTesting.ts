@@ -33,13 +33,15 @@ function runFoodAPI(searchTerm: string) {
      * To save changes, first here has to be a build.
      */
     return axios.post('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=c7aljWCqn0i0qJAaH6hcunC6l6QcJ2F80f3Yv7zi', {
-        "query": searchTerm, //getShortenedSearchTerm(searchTerm),
+        "query": searchTerm.replace(/[,].+/g, '').trim(), //getShortenedSearchTerm(searchTerm),
         "dataType": [
-            "Sample",
+            "Survey (FNDDS)",
+            /*"Sample",
             "SR Legacy",
             "Branded",
-            "Foundation"
-        ]
+            "Foundation"*/
+        ],
+        "pageSite": 5
     })
         .then((response: any) => {
 
@@ -66,7 +68,12 @@ function runFoodAPI(searchTerm: string) {
 
             //console.log(response.data.foods[0])
         }).catch((a: any) => {
-            console.error("error at: " + searchTerm + " is " + a.response)
+            if (typeof a == 'object'){
+                console.log("error at: " + searchTerm)
+                console.log(a.response)
+            } else {
+                console.error("error at: " + searchTerm + " is " + a.response)
+            }
             console.log("----------------------")
         })
 }
