@@ -182,7 +182,7 @@ export class UserDatabaseService {
                                 addDate: new Date()
                             }
                         )
-                    } else { 
+                    } else {
                         const converted = this.convertIngredientByUnit(i, querySnapshot.docs[0].data())
 
                         if (converted.measurement  == i.measurement &&
