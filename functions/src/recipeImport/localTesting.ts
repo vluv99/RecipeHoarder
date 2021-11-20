@@ -1,7 +1,23 @@
-//var request = require("request");
 import {Ingredient} from "../../../shared/model/Ingredient";
 
+import Qty from 'js-quantities';
+//const Qty = require('js-quantities');
+
+
 const axios = require('axios');
+
+let units: string[] = [];
+const cats = ["mass", "volume", "length"];
+
+for (const cat of cats) {
+    for (const unit of Qty.getUnits(cat)) {
+        units = [...units, ...Qty.getAliases(unit)];
+    }
+}
+let qty = Qty('10 kg')
+let qty2 = Qty('10 dkg')
+//console.log(units)
+console.log(qty.to(qty2).toString())
 
 //TODO: Make a static list of ingredients
 const a = [
@@ -38,6 +54,7 @@ function runFoodAPI(searchTerm: string) {
             "Sample",
             "SR Legacy",
             "Branded",
+            "Survey (FNDDS)",
             "Foundation"
         ]
     })
@@ -51,8 +68,8 @@ function runFoodAPI(searchTerm: string) {
             for (const foodNutri of response.data.foods[0].foodNutrients) {
                 if (foodNutri.unitName == "KCAL" /*&& foodNutri.nutrientName == 'Energy'*/ ){
                     console.log(foodNutri.nutrientName)
-                    console.log(foodNutri.nutrientNumber)
-                    kcal = foodNutri.nutrientNumber
+                    console.log(foodNutri.value)
+                    kcal = foodNutri.value
                 }
             }
 
