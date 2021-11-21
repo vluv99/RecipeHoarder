@@ -1,6 +1,7 @@
 import {Ingredient} from "../../../shared/model/Ingredient";
 
 import Qty from 'js-quantities';
+import {getData2} from "./core";
 //const Qty = require('js-quantities');
 
 
@@ -19,7 +20,7 @@ for (const cat of cats) {
 //console.log(units)
 //console.log(qty.to(qty2).toString())
 
-//TODO: Make a static list of test ingredients
+//Make a static list of test ingredients
 const a = [
     new Ingredient("Green Bean",0.5,"kg"),
     new Ingredient("all-purpose flour",1,"kg"),
@@ -36,7 +37,7 @@ const a = [
     new Ingredient("shallot, thinly sliced",0,""),
     new Ingredient("French-fried onions (such as French's®)",1,"kg")
 ]
-//TODO: give back a list of kcal of the ingredients
+//give back a list of kcal of the ingredients
 
 function runFoodAPI(searchTerm: Ingredient) {
     /*var options = {
@@ -131,8 +132,12 @@ function getShortenedSearchTerm(term: string):string {
     term = term.replace(res!.groups!.delete, '').trim()
     return term
 }*/
-
+/*
 for (const ingredient of a) {
     runFoodAPI(ingredient)
 }
+*/
 
+const url = "https://www.delish.com/cooking/recipe-ideas/recipes/a50609/classic-eggnog-recipe/"
+
+getData2(url)
