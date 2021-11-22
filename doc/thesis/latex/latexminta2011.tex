@@ -167,17 +167,17 @@ hogy később a bevásárlólistába helyezésnél a megyegyező anyagok összea
 
 \begin{itemize}
 	\item téma megnevezése: \\
-	A szakdolgozat céljául kitűzött témám egy Angular-ban írt web applikáció, ami recept megjelenítésre és importálásra használható.
+	      A szakdolgozat céljául kitűzött témám egy Angular-ban írt web applikáció, ami recept megjelenítésre és importálásra használható.
 	\item feladat megfogalmazása: \\
-	Az importálás funkció lehetővé teszi, hogy a ˝ felhasználók egy helyen gyűjtsék a receptjeiket. Továbbá a regeptek összetevőit egy bevásárló listába ki tudják menteni, ezzel is megkönnyítve a mindennapi életet. A felhasználók a többiek által létrehozott receptek között tudnak keresni, és a nekik tetsző recepteket ki ˝ tudják menteni a saját receptgyűjteményeikbe.
+	      Az importálás funkció lehetővé teszi, hogy a ˝ felhasználók egy helyen gyűjtsék a receptjeiket. Továbbá a regeptek összetevőit egy bevásárló listába ki tudják menteni, ezzel is megkönnyítve a mindennapi életet. A felhasználók a többiek által létrehozott receptek között tudnak keresni, és a nekik tetsző recepteket ki ˝ tudják menteni a saját receptgyűjteményeikbe.
 	\item megoldási mód: \\
-	Az applikáció egy weblap formájában lett megvalósítva, mivel így lehet a legtöbb eszközt elérni egyetlen kód bázissal. A megvalósításhoz a már említett Angular keretrendszert használtam, illetve a Firebase felhő alapú szolgáltatásait. Mivel mind a kettő (Angular, Firebase) a Google terméke, ezért várhatóan hosszútávon támogatva lesznek. A felhasználó a recept URL-je alapján tud, receptet importálni, vagy manuálisan is tud létrehozni újat. Ekkor az importáláshoz egy szerver oldali funkció fut le és próbálja értelmezni a megkapott URL-en lévő html fájlt. Ennek egy fontos lépése az, hogy az alapanyagok nevét, mértékegységét és mennyiségét az eredeti kiolvassa. Ehhez regex-et illetve egy külső konyvtárat használtam, ami sok mértékegység között tud átváltani. Miután a receptet sikeresen importáltuk, azokat a Firebase FireStore adatbázisában tároljuk.
+	      Az applikáció egy weblap formájában lett megvalósítva, mivel így lehet a legtöbb eszközt elérni egyetlen kód bázissal. A megvalósításhoz a már említett Angular keretrendszert használtam, illetve a Firebase felhő alapú szolgáltatásait. Mivel mind a kettő (Angular, Firebase) a Google terméke, ezért várhatóan hosszútávon támogatva lesznek. A felhasználó a recept URL-je alapján tud, receptet importálni, vagy manuálisan is tud létrehozni újat. Ekkor az importáláshoz egy szerver oldali funkció fut le és próbálja értelmezni a megkapott URL-en lévő html fájlt. Ennek egy fontos lépése az, hogy az alapanyagok nevét, mértékegységét és mennyiségét az eredeti kiolvassa. Ehhez regex-et illetve egy külső konyvtárat használtam, ami sok mértékegység között tud átváltani. Miután a receptet sikeresen importáltuk, azokat a Firebase FireStore adatbázisában tároljuk.
 	\item alkalmazott eszközök, módszerek: \\
-	Mind az importálás mind az egész projekt során törekedtem, hogy minél modulárisabb legyen a felépítés. A webapp fejlesztése során a PWA-t alkalmazva elérhető, hogy ˝ bizonyos funkciók offline is működjenek. A modern, könnyen kezelhető weblap számítógépen és telefonon egyaránt használható.
+	      Mind az importálás mind az egész projekt során törekedtem, hogy minél modulárisabb legyen a felépítés. A webapp fejlesztése során a PWA-t alkalmazva elérhető, hogy ˝ bizonyos funkciók offline is működjenek. A modern, könnyen kezelhető weblap számítógépen és telefonon egyaránt használható.
 	\item elért eredmény: \\
-	A fejlesztés során sikerült egy modern telefonos és számítógépes környezetben is elérhető webes alkalmazást készíteni, ami bárki számára a regisztráció után elérhető és könnyen használható, ezzel könnyebbé téve a hétköznapokat.
+	      A fejlesztés során sikerült egy modern telefonos és számítógépes környezetben is elérhető webes alkalmazást készíteni, ami bárki számára a regisztráció után elérhető és könnyen használható, ezzel könnyebbé téve a hétköznapokat.
 	\item kulcsszavak: \\
-	Angular, Firebase, pipeline architektúra, PWA, telefonos nézet
+	      Angular, Firebase, pipeline architektúra, PWA, telefonos nézet
 \end{itemize}
 
 %Bevezetés
@@ -253,25 +253,42 @@ Egy táblázat a korábban összefoglalt példákról és tudásaikról egy egys
 \chapter{Funkcionális specifikáció}
 Egy összefoglaló részletesebb arról, hogy minek pontosan hogyan kell működnie az eredeti terv szerint. \\
 
-PUT USE-CASEHERE
+\noindent
+\includegraphics[scale=0.6]{out/diagrams/useCaseGuest/useCaseGuest.png} \\
+\noindent
+\includegraphics[scale=0.5]{out/diagrams/useCaseUser/useCaseUser.png}
+
 
 \section{Bejelentkezés/Regisztráció}
 A regisztrációt és bejelentkezés a legbiztosabb biztonság érdekében a Firebase Auth rendszerén keresztül történik. Kettő módszer van a regisztrációra. Első, a szokásos email és jelszó páros megadásával a regisztrációs formon keresztül. Második, a Google authentikációs rendszeren keresztül. A felhasználók ezt látják először, mikor a honlapra navigálnak. Bejelentkezés nélkül nem lehetséges a weblapot megtekinteni.
+\noindent
+\includegraphics[scale=0.5]{pictures/mobil_login.png}
+\includegraphics[scale=0.4]{pictures/web_register.png}
 
 \section{Kezdőoldal}
 A kezdőoldalnak az első lap, amit a bejelentkezés után látnak a felhasználók. A lapon két különböző recept ajánló jelenik meg. Az egyik a saját, kimentett receptekből ajánlott fel párat, a másik viszont a még nem kimentett receptekből. Ezen felül a kategória keresés is itt érhető el. Minden receptnek létrehozáskor kötelezően van legalább egy kategóriája, ezért ez a típusú keresés jó az általános recept felfedező felhasználóknak.
+\noindent
+\includegraphics[scale=0.5]{pictures/mobil_home.png}
 
 \section{Recept saját gyűjteményekbe}
 A létező recepteknél a megnyitás után egy gombnyomással lehetőségünk van azt a saját gyüjteményünkhöz adni. Amennyiben ez sikerült, a gomb átváltozik egy kuka ikonra. Ez újonnan megnyomása után a recept kikerül az elmentettjeink közül. Ez a lista egyszerűen megtalálható az oldal menüben a "My recipes" alatt. Ezen lap alatt az összes korábban elmentett recept kilistázódik.
 
 Amennyiben a felhasználó kimentett egy receptet, a törlés gombra változásán kívül egy szívecske is megjelenik a recepten. Erre nyomva a recept egy külön listába kerül, ahol a saját receptek közül csak a kedvenceket lehet gyorsan eltárolni. A szivecskére kattintással ki és be lehet kapcsolni, hogy a kedvencek közé kerüljön. Amint a felhasználó ki veszi a receptet a saját gyűjteményéből, akkor a kedvencek közül is eltűnik. A lista megtalálható az oldalsó menüben a "My favourites" menüpont alatt.
+\noindent
+\includegraphics[scale=0.5]{pictures/mobil_menu.png}
+\includegraphics[scale=0.5]{pictures/mobil_recipe-top.png} \\
+\includegraphics[scale=0.4]{pictures/web_recipeCollection.png}
 
 \section{Recept importálás}
 Két féle képpen lehet recepteket létrehozni. Az elsőnél a felhasználónak csak ki kell tölteni a mezőket az új recept létrehozó felületen. Az alapanyagokból és lépésekből tetsző mennyiséget tud létrehozni, valamit törölni is.
 
 A második módszer, ami a korábbi folyamat megkönnyítse miatt jött létre, a recept importálás URL-en keresztül. A felhasználó csak kiválaszt egy receptet egy másik honlapról, kimásolva az URL címét és az importálás folyamat során egy Cloud Function lekérdezi az adatokat. A funkció modulásisan lett felépítve, ezért jobban követhető, valamint bővíthető. Az importálás fontos része az alapanyagok szétválasztása alapanyag mennyiség, mértékegység és név szerint. Ez a receptnézetnél is megjelenik, de a fő célja a kalóriaszámlálásnál és a bevásárló listába helyezésnél kerül elő. A lekérdezés során, az egyik modul feladata a képek mentése az eredeti helyről, valamint feltöltése a Firebase Storage-ba. Ez fontos lépés,mert ha a weblap vagy recept egy ponton megszűnne, akkor is megmarad a  kép és adatok a receptről. Amint a funkció lefutott, egy új lapra át lesz navigálva a felhasználó, ahol a recept szerkeszthető mezőkben megjelenik, ilyenkor még nincs elmentve az új adat az adatbázisba. Az importálás sikerességének átvizsgálása után, a felhasználó nyomhat a véglegesítő gombra.
 
-A manuális és URL-es importálás ugyanazon a lapon működik, az egyetlen különbség, hogy üresen jut-e oda, vagy már lehetőleg egy sikeres lekérdezés után egy feltöltött verzióra. A véglegesítés előtt viszont, ha a felhasználó még nem választott besorolási kategóriát, akkor egy felugró ablak figyelmezteti, hogy ezt mindenképp tegye meg, mert nem léphet tovább anélkül.
+A manuális és URL-es importálás ugyanazon a lapon működik, az egyetlen különbség, hogy üresen jut-e oda, vagy már lehetőleg egy sikeres lekérdezés után egy feltöltött verzióra. A véglegesítés előtt viszont, ha a felhasználó még nem választott besorolási kategóriát, akkor egy felugró ablak figyelmezteti, hogy ezt mindenképp tegye meg, mert nem léphet tovább anélkül.\\
+
+\noindent
+\includegraphics[scale=0.4]{pictures/web_import.png}
+\includegraphics[scale=0.5]{pictures/mobile_importDataCheck.png}
 
 \section{Recept kalória számlálás}
 Ez a lépés egy modul a recept importálás folyamatban. A projekthez hozzáadtam egy csomagot, ahonnan egyrészt a szétválasztáshoz megkapom a mértékegységeket, másrészt ezt használom a mértékegység átváltáshoz is.
@@ -287,7 +304,10 @@ Ez a lépés egy modul a recept importálás folyamatban. A projekthez hozzáadt
 \section{Bevásárlólista}
 A bevásárlólista egy külön lapon található, ahol a felhasználó a saját vásárlásához gyűjthet alapanyagokat. Ha a lapon található új alapanyag hozzáadó felületet használja, akkor hozzáadás után azonnal, megjelenik a leni listában az új elem. Ha  listában még létezett egy ponosan olyan nevű elem, akkor, ha szükség van rá, egy mértékegység átváltással hozzáadódik az eredeti elemhez. Így az alapanyag mennyisége nő. Amennyiben nem kell már az alapanyag, a sor végén lévő pipával ki lehet venni a listából.
 
-A felhasználó kényelme érdekében, a receptből közvetlenül az alapanyag előtti plusz gombra nyomva hozzá lehet adni egyesével az alapanyagokat a bevásárló listába. Valamint ha mindent gyosan hozzá szeretnénk adni, akkor van egy másik gomb az alapanyag lista alatt,amivel az összeset egy kattintással hozzá lehet adni a listához.
+A felhasználó kényelme érdekében, a receptből közvetlenül az alapanyag előtti plusz gombra nyomva hozzá lehet adni egyesével az alapanyagokat a bevásárló listába. Valamint ha mindent gyosan hozzá szeretnénk adni, akkor van egy másik gomb az alapanyag lista alatt,amivel az összeset egy kattintással hozzá lehet adni a listához.\\
+
+\noindent
+\includegraphics[scale=0.4]{pictures/web_shoppinglist.png}
 
 \section{Bevásárlólista ajánló}
 A bevásárló listát használó felhasználók a lista megnyitásakor kapnak egy felugró lista elemet, ami egy korábbi alapanyagot kínál, amennyiben az több mind egyszer lett a listához adva. A pipára nyomva, az alapanyag bekerül a hozzáadó mező név elemébe. Amint a mennyiséget és mértékegységet kitöltve hozzáadjuk, akkor egyrész hozzáadódik az új elem a listához, valamint a következő alkalom dátuma újra generálódik a korábbiakat átlagolva.
@@ -300,6 +320,8 @@ Amennyiben a felhasználót nem érdekli az ajánlat, az x-re nyomva az ajánlat
 
 			Az ajánlás egy sima adatbázis lekérdezés, ami szűrve van úgy, hogy csak ez a pillanat előtti “ajánlott időpont”-os alapanyagokat kérdezzünk le, ami rendezve van dátum és értékelés csökkenő sorrendjében. Végűl a lekérdezés limitálva van három elemre.
 		}}
+\noindent
+\includegraphics[scale=0.5]{pictures/mobile_suggestion.png}
 
 \chapter{Felhasznált technológiák}
 \section{Angular}
