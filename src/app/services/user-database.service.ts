@@ -7,16 +7,20 @@ import {Ingredient} from "../../../shared/model/Ingredient";
 import {resolve} from "@angular/compiler-cli/src/ngtsc/file_system";
 import firebase from "firebase/compat/app";
 
+import Qty from 'js-quantities';
+
+//const convert = require('convert-units')
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserDatabaseService {
+    units: string[]
 
     constructor(private store: AngularFirestore,
                 private authService: AuthService,
                 private databaseService: DatabaseService) {
-
+        this.units = this.getUnits();
     }
 
     addToCollection(type: string | SubcollectionName, recipeId: string) {
@@ -88,15 +92,30 @@ export class UserDatabaseService {
                             addDate: new Date()
                         }
                     )
-                } else { //TODO: add existing ingredients together
-                    collection.add(
-                        {
-                            "name": i.name,
-                            "amount": i.amount,
-                            "unit": i.measurement,
-                            addDate: new Date()
-                        }
-                    )
+                } else {
+                    const converted = this.convertIngredientByUnit(i, querySnapshot.docs[0].data())
+
+                    if (converted.measurement  == i.measurement &&
+                        converted.amount == i.amount &&
+                        converted.name == i.name){
+                        collection.add(
+                            {
+                                "name": i.name,
+                                "amount": i.amount,
+                                "unit": i.measurement,
+                                addDate: new Date()
+                            }
+                        )
+                    }else {
+                        collection.doc(querySnapshot.docs[0].id).update(
+                            {
+                                "name": converted.name,
+                                "amount": converted.amount,
+                                "unit": converted.measurement/*,
+                            addDate: new Date()*/
+                            }
+                        )
+                    }
                 }
             })
 
@@ -163,19 +182,71 @@ export class UserDatabaseService {
                                 addDate: new Date()
                             }
                         )
-                    } else { //TODO: add existing ingredients together
-                        collection.add(
-                            {
-                                "name": i.name,
-                                "amount": i.amount,
-                                "unit": i.measurement,
-                                addDate: new Date()
-                            }
-                        )
+                    } else {
+                        const converted = this.convertIngredientByUnit(i, querySnapshot.docs[0].data())
+
+                        if (converted.measurement  == i.measurement &&
+                            converted.amount == i.amount &&
+                            converted.name == i.name){
+                            collection.add(
+                                {
+                                    "name": i.name,
+                                    "amount": i.amount,
+                                    "unit": i.measurement,
+                                    addDate: new Date()
+                                }
+                            )
+                        }else {
+                            collection.doc(querySnapshot.docs[0].id).update(
+                                {
+                                    "name": converted.name,
+                                    "amount": converted.amount,
+                                    "unit": converted.measurement/*,
+                            addDate: new Date()*/
+                                }
+                            )
+                        }
                     }
                 })
         })
 
+    }
+
+    convertIngredientByUnit(newIng: Ingredient, existingIng: any): Ingredient{
+        let res = new Ingredient("", 0,"")
+            Object.assign(res, newIng);
+
+        if (res.measurement == existingIng.unit){
+            res.amount += existingIng.amount;
+        } else if (
+            (existingIng.unit == "piece" || existingIng.unit == "pieces") &&
+            (res.measurement == "piece" || res.measurement == "pieces")
+        ){
+            res.amount += existingIng.amount;
+        } else if (
+            this.units.includes(res.measurement) &&
+            this.units.includes(existingIng.unit)
+        ){
+            const qty = Qty(res.amount.toString() + " " + res.measurement);
+            //rounding to 2 decimals
+            res.amount = Math.round((qty.to(existingIng.unit).scalar + existingIng.amount + Number.EPSILON) *100) / 100
+            res.measurement = existingIng.unit
+        }
+
+        return res
+    }
+
+    getUnits(){
+        let units: string[] = [];
+        const cats = ["mass", "volume", "length"];
+
+        for (const cat of cats) {
+            for (const unit of Qty.getUnits(cat)) {
+                units = [...units, ...Qty.getAliases(unit)];
+            }
+        }
+
+        return units;
     }
 
     // TODO its doesnt wanna do the promise, so for now we will have repeating code :(

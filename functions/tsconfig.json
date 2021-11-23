@@ -1,17 +1,23 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2017",
-    "allowSyntheticDefaultImports": true
-  },
-  "compileOnSave": true,
-  "include": [
-    "src",
-      "src/recipeImport/localTesting.ts"
-  ]
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "outDir": "lib",
+        "sourceMap": true,
+        "strict": true,
+        "target": "es2017",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "plugins": [
+            {
+                "transform": "ts-transformer-keys/transformer"
+            }
+        ]
+    },
+    "compileOnSave": true,
+    "include": [
+        "src",
+        "src/recipeImport/localTesting.ts"
+    ]
 }

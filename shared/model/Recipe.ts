@@ -6,7 +6,7 @@ export class Recipe {
   name: string;
   image: URL | null = null;
   url: string = "";
-  calories: number = 0;
+  calories: number | null = null;
   totalCookTime: any = null;
   description: string = "";
   ingredients: Ingredient[] = [];

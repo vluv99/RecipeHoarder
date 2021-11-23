@@ -7,12 +7,14 @@ import {Pipeline} from "./Pipeline";
 import {FetchUrlData} from "./modules/FetchUrlData";
 import {JsonLdExtractor} from "./modules/JsonLdExtractor";
 import {SeparateIngredients} from "./modules/SeparateIngredients";
+import {CalorieCalculator} from "./modules/CalorieCalculator";
 
 
 const recipesPipeline = new Pipeline([
     new FetchUrlData(),
     new JsonLdExtractor(),
-    new SeparateIngredients()/*,
+    new SeparateIngredients(),
+    new CalorieCalculator()/*,
     new ImageDownloader()*/
 ]);
 
