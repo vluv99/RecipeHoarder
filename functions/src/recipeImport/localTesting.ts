@@ -1,6 +1,4 @@
 
-
-
 /*
 function getShortenedSearchTerm(term: string):string {
 

@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+
+:User: as user
+:Admin: as admin
+
+admin -up-|> user
+
+database FireBase{
+[Cloud Function] as cloudComp
+[FireBase] as firebase
+}
+
+cloudComp -left-> firebase
+admin --> firebase
+
+user --> (addRecipe)
+cloudComp <-up- (addRecipe)
+
+package Shoppinglist{
+user -right-> (ViewShoppinglist)
+user -right-> (AddToShoppinglist)
+user -right-> (deleteFromShoppinglist)
+}
+
+user --> (viewRecipe)
+(viewRecipe) ..> (AddToShoppinglist)
+
+package recipeCollectionFunc{
+(viewRecipe) ..> (addRecipeToCollection)
+(viewRecipe) ..> (deleteRecipeFromCollection)
+(viewRecipe) ..> (reportRecipe)
+}
+
+user --> (viewRecipeCollection)
+(viewRecipeCollection) --> (viewRecipe)
+
+
+
+@enduml
