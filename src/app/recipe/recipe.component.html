@@ -9,12 +9,12 @@
         <h1 class="mat-subheading-2">Description</h1>
         <div class="description mat-body-1">{{ recipe.description }}</div>
 
-        <mat-card class="recipe-data-container" [hidden]="recipe.totalCookTime == 0 && recipe.calories == null">
+        <mat-card class="recipe-data-container" [hidden]="recipe.totalCookTime == 0 && (recipe.calories == 0 || recipe.calories == null)">
             <div [hidden]="recipe.totalCookTime == 0">
                 <mat-icon>schedule</mat-icon>
                 <span>{{ recipe.totalCookTime }} mins</span>
             </div>
-            <div [hidden]="recipe.calories == null">
+            <div [hidden]="recipe.calories == 0 || recipe.calories == null">
                 <mat-icon>food_bank</mat-icon>
                 <span>{{ recipe.calories }} kcal</span>
             </div>

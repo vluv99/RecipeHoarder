@@ -92,7 +92,7 @@ export class SeparateIngredients implements PipelineModule {
         if (num.includes('/')){
 
             res = numQty(num)
-            console.log("eval res: " + res)
+            //console.log("eval res: " + res)
         }else if(num.includes('\\')){
 
             const i = num.replace('\\', '/')

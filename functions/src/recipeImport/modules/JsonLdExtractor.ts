@@ -76,9 +76,10 @@ export class JsonLdExtractor implements PipelineModule {
         if (cal != null) {
             //only keep the numbers
             cal = cal.replace("calories", "");
+            r.calories = Number(cal);
         }
 
-        r.calories = parseInt(cal);
+
 
         if (ldData["recipeIngredient"]) {
             ldData["recipeIngredient"].forEach((ing: any) => {
