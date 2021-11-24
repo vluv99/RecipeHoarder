@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} f
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AuthService} from "../../services/auth-service";
 import FormValidation from "../../utils/FormValidation";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-register',
@@ -33,14 +34,16 @@ export class RegisterComponent implements OnInit {
     genders: String[] = ['male', 'female', 'other'];
     selectedValue: string | undefined;
 
-    constructor(public authService: AuthService) {
+    constructor(public authService: AuthService, public router: Router) {
     }
 
     register(){
         this.authService.register(
             this.registerForm.value.email,
             this.registerForm.value.password,
-            this.registerForm.value)
+            this.registerForm.value).then(() =>{
+            this.router.navigate(['/']);
+        })
     }
 
     matchPassword(control: AbstractControl): ValidationErrors | null {
@@ -59,10 +62,10 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         if(this.registerForm.valid){
-            alert('User form is valid!!')
+            //alert('User form is valid!!')
             this.register();
         } else {
-            alert('User form is not valid!! @@@@@')
+            //alert('User form is not valid!! @@@@@')
         }
 
         console.warn(this.registerForm.value);

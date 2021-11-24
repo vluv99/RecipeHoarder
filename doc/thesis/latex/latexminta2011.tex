@@ -291,15 +291,11 @@ A manuális és URL-es importálás ugyanazon a lapon működik, az egyetlen kü
 \includegraphics[scale=0.5]{pictures/mobile_importDataCheck.png}
 
 \section{Recept kalória számlálás}
-Ez a lépés egy modul a recept importálás folyamatban. A projekthez hozzáadtam egy csomagot, ahonnan egyrészt a szétválasztáshoz megkapom a mértékegységeket, másrészt ezt használom a mértékegység átváltáshoz is.
+Ez a lépés egy modul a recept importálás folyamatban. A projekthez hozzáadtam egy csomagot, ahonnan egyrészt a szétválasztáshoz megkapom a mértékegységeket, másrészt ezt használom a mértékegység átváltáshoz is. 
 
-	{\color{red}{
-			A tápanyag információkat egy külső adatbázisból szedem, ami /*offline */ és a Food Data Central API ameriaki állami adatbázis rendszert használtam. A használati feltételeket végigolvasva kiderült, hogy bárki ingyen használhatja, akár a jogok feltüntetése nélkül is, bár megköszönik, amennyiben az megtörténne.
-		}}
+A tápanyag információkat egy külső adatbázisból szedem, ami az amerikai állami  Food Data Central API-ból elérhető. A használati feltételeket végigolvasva kiderült, hogy bárki ingyen használhatja, akár a jogok feltüntetése nélkül is, bár megköszönik, amennyiben ez feltűntetve lesz. Csak regisztrálni kell a weblapon ahhoz,hogy saját API kulcsot kapjunk.
 
-	{\color{red}{
-			A kalóriaszámlálás kizárólag akkor fut le, ha a receptlekérdezés során nem létezett az eredeti oldalon a kalória információ, vagy ha a recept manuálisan lett létrehozva. Ahhoz, hogy megfelelő eredményt kapjunk, ha az alapanyagokból nem tudunk legalább 80 százalékból tápanyag adatot megkapni, akkor nem lesz megjelenítve kalória információ a recepthez. Amennyiben megfelelő mennyiségű adatunk van, a korábban említett mértékegység átváltásokkal egységesítem az alapanyagokat a tápanyag táblázat alap értékéhez, aztán azt összeadva kapjuk a kalória adatot a recepthez.
-		}}
+A kalóriaszámlálás kizárólag akkor fut le, ha a receptlekérdezés során nem létezett az eredeti oldalon a kalória információ, vagy ha a recept manuálisan lett létrehozva. Ahhoz, hogy megfelelő eredményt kapjunk legalább 80 százaléknyi kiszámolt kalória adatok kell visszakapni az eredeti alapanyag mennyiségéhez képest. Ha ez nincs meg, akkor nem lesz megjelenítve kalória információ a recepthez. Amennyiben megfelelő mennyiségű adatunk van, a korábban említett mértékegység átváltásokkal egységesítem az alapanyagokat a tápanyag táblázat értékéhez, aztán azt összeadva kapjuk a kalória adatot a recepthez.
 
 \section{Bevásárlólista}
 A bevásárlólista egy külön lapon található, ahol a felhasználó a saját vásárlásához gyűjthet alapanyagokat. Ha a lapon található új alapanyag hozzáadó felületet használja, akkor hozzáadás után azonnal, megjelenik a leni listában az új elem. Ha  listában még létezett egy ponosan olyan nevű elem, akkor, ha szükség van rá, egy mértékegység átváltással hozzáadódik az eredeti elemhez. Így az alapanyag mennyisége nő. Amennyiben nem kell már az alapanyag, a sor végén lévő pipával ki lehet venni a listából.
@@ -325,26 +321,65 @@ Amennyiben a felhasználót nem érdekli az ajánlat, az x-re nyomva az ajánlat
 
 \chapter{Felhasznált technológiák}
 \section{Angular}
-asd
+Egy TypeScript alapú Framework fejlesztői platform, ami a eredetileg a Google fejlesztette ki, de most már Open Source. Angular egy teljes újraírása a régi AngularJS-nek. Egyik legnagyobb előnye, hogy komponens alapú a keretrendszer, ami segítségével újra felhasználhatók a kódok. Single Page application felépítésével dinamikusan építi fel a weblapok a felhasználó interakciója szerint, ezzel is gyorsabb és kevesebb újratöltést igényel.
+
+A tervezés során a Figmában is komponensekkel terveztem meg a weblap kinézetét mind telefonos mind desktopos formában. A komponenseket egyszerű létrehozni, valamint felhasználni a megfelelő helyeken. Ha magunknak akarjuk tervezni a komponenseket, akor sima HTML/CSS-el elérhető, amennyiben szeretnénk már egy népszerű és könnyen integrálható komponens bázist felhasználni, akkor az Angular Material használható.
 
 \section{Angular Material}
-asd
+Az Angular Material egy a Google által fejlesztett komponens bázis. Ez segít a fejlesztőknek már kész és modern dizájnos komponenseket egyszerűen felhasználni a projektekben. Ez elsősorban egy UI komponens dizájn könyvtár, ami integrálás után, csak importokkal már azonnal működik. A weblapján pedig példákkal és részletes dokumentációval felsorolja a létező felhasználható komponenseket és különböző változataikat.
+
+Az én projektem is nagy részben ennek a könyvtárnak a komponenseit felhasználva épült fel. Csak pár helyen lett kiegészítve a már létező verzió, hogy illeszkedjek az eredeti tervekhez. Ezen felül az Theming azaz a projekt témája is az Angular Material alapján lett felépítve, hogy a komponenseknek könnyen meglehessen adni az alap színeket és tipográfia szabályokat.
 
 \section{FireBase}
-asd
+Mostmár a Google által fejlesztett webes és mobilos alkalmazások készítéséhez létrehozott platform. Manapság nagyon népszerű az egyszerűsített adatbázis felépítése valamint a könnyű és könnyen értelmezhető kezelő felülete, arról nem beszélve, hogy rengeteg dokumentáció létezik a fejlesztők számára.
+
+Ebben a projektben elég sok helyen használom a Firebase funkcióit. Az egész weblap a Firebase Hosting felületéről működik. A GitHub-bal összekötve, ha a Main Branch-re van feltöltés, akkor a Firebase-en automatikusan deploy-oldódik az új production verzió.
+
+A FireStore Database-t használom a weblap adatok tárolásához. Itt vannak eltárolva  receptek, felhasználók, felhasználókhoz különböző kollekciók és bevásárló lista meta adatok. A Cloud FireStore-on belül lehet beállítani az adatbázis Rule-okat.Ezt azt jelenti, hogy be lehet állítani, hogy különböző kollekciókat kik érhetik el, milyen tevékenységek vannak engedélyezve nekik, valamit, hogy milyen jogokkal milyen adatbázis műveleteket lehet csinálni. Amíg nem volt autentikáció beállítva és a development folyamat volt, akkor csak egy dátumot frissítettem, hogy meddig lehet az összes felhasználónak bármit csinálni. Viszont most már le van tiltva a receptek törése, valamint bejelentkezés nélküli lekérdezések is.
+
+A FireBase Storage-ban tárolódnak a receptekből kimentett képek, amik az import során kerülnek az adatbázisba.
+
+A legnagyobb biztonság érdekében a Firebase Auth-ot használom a weblap bejelentkezés és regisztrációs műveletekhez. Így lehetséges manuálisan regisztrálni majd bejelentkezni, viszont, akinek van Gmail fiókja annak lehetősége van egy lépésben azonnal regisztrálni és belépni annak segítségével.
+
+A recept importálás és a bevásárlólista egy része a Firebase Cloud Function keresztül szerver oldalon fut. Ez nem csak olcsóbb, mivel szerver oldali lekérdezések ingyenesek a kliens oldalival szemben, hanem az importálás során felmerült problémát is megoldotta. Az importálásnál felmerűlt, hogy egy honlap nem lérdezhez le adatot egy másikról kliens oldalon keresztül, valamit a CORS okozta nehézségek elkerülése érdekében is hasznos volt. Azon kívül, mikor a bevásárló listába új alakanyag kerül, akkor egy trigger leful a szerver oldalon, ami segítségével állítjuk elő az ajánlóhoz a metaadatokat.
 
 \section{PWA}
-asd
+PWA azaz Progressive Web Application egy koncepció, amit követve lehetséges megbízható, alkalmazható és telepíthető webes applikációkat fejleszteni. Az alap szabályait követve a weblap platformspecifikus alkalmazássá alakítható. A PWA lehetővé teszi az alkalmazások használatát bárhol, bármikor, bármilyen eszközön. 
+
+Ez eseten az Angular-t kellett kiegészíteni egy kevés plusz JavaScript kóddal, hogy ha az eszköznek nincs internet elérése, akkor a script alapján a localstorage-ba elmentett, valamint cache adatokat használja az indításhoz. Ezzel elérhető, hogy valamilyen szinten használható a weblap offline környezetben is.
 
 \section{Schema.org}
-asd
+A shema.org egy weblap, ami azért készűlt, hogy a közösség a központosított sémákat használja különböző weblapokon, e-mailekben, modellekben, adatbázisok tervezésében vagy sok más helyen. Sok különböző kódolással használható, de a legnépszerűbbek a JSON-LD, Microdata valamint a RDFa. Ezek a szótárak olyan entitásokat és kapcsolatokat írnak le, amik segítik a fejlesztők számára a megfelelő sémát kiválasztani. Tehát összességében, ez egy tervgyűjtemény.
+
+A projektben fontos szerepet játszott a shema.org által biztosított “Recipe” séma feldolgozása és megértése, mivel a recept importálás más weblapokról ezen alapul. A jól felépített weblapok manapság tartalmaznak egy vagy több JSON-LD meta információt, amiben a weblapon jelenleg megjelenő adatok vannak eltárólva JSON formátumban a Shema.org szerinti felépítés alapján.
 
 \section{Figma}
-asd
+Egy  vektorgrafikus szerkesztő, ahol web prototípusokat lehet tervezni. Ez legfőképp webalapú, de letölthető desktopos verziója is. A program képes a tervezett lapok élő tükrözésére akár saját telefonon az applikáción keresztül, vagy csak az emuláló felületen keresztül is. A figma egy modern dizájn tervező felület, ahova egyszerűen integrálni lehet a material design stílust és alap komponenseket, ezzel is segítve az Angular component szerű gondolkodást. Másik nagy előnye, hogy interaktívvá lehet tenni a tervezés során a gombokat, komponenseket. Valamint a kész dizájnoknak meglehet nézni a pontos CSS stílus kódját is, ezzel is segítve a konkrét kódolás folyamatát.
+
+Sokat segített a tervezésben, mivel a kész material design komponenseket tudtam próbálgatni anélkül, hogy először mélyebben tanulmányoznám az Angular felépítését. Az egységes dijájn és téma felépítésében pedig segített konzisztensnek maradnom. Ez igaz mint a színekre, mind a tipográfiára.
+
 
 \chapter{A rendszer magas szintű áttekintése}
-\section{asd}
+Ebben a fejezetben fogom leírni a különböző fontosabb funkciókról a részletesebb felépítését és tudnivalókat.
 
+\section{Recept importálás}
+A moduláris felépítés miatt ezt több al részre szedem.
+
+\subsection{FetchUrlData}
+asd
+\subsection{JsonLdExtractor}
+asd
+\subsection{SeparateIngredients}
+asd
+\subsection{ImageDownloader} 
+asd
+\subsection{CalorieCalculator}
+asd
+\section{Kliens oldali adatbázis műveletek}
+Services...
+
+\section{Bevásárlólista trigger}
+%TODO: more?
 
 \chapter{Architektúra}
 \section{asd}
@@ -354,8 +389,8 @@ asd
 \section{asd}
 
 
-\chapter{Fontosabb kód részek és ismertetései}
-\section{asd}
+%\chapter{Fontosabb kód részek és ismertetései}
+%\section{asd} -> A rendszer magas szintű áttekintése
 
 
 \chapter{Tesztelés}
