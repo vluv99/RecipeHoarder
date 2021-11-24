@@ -57,6 +57,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import {MatListModule} from "@angular/material/list";
 import {MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA} from "@angular/material/bottom-sheet";
 import {ReportRecipeListComponent} from "./recipe/report-recipe-list/report-recipe-list.component";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -112,7 +113,13 @@ import {ReportRecipeListComponent} from "./recipe/report-recipe-list/report-reci
         MatAutocompleteModule,
         MatProgressSpinnerModule,
         MatExpansionModule,
-        MatListModule
+        MatListModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
+          // Register the ServiceWorker as soon as the app is stable
+          // or after 30 seconds (whichever comes first).
+          registrationStrategy: 'registerWhenStable:30000'
+        })
     ],
     providers: [
         {provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['http://localhost:9099', 9099] : undefined},

@@ -21,9 +21,9 @@ export class RecipeCollectionsService {
         return this.userDatabaseService.checkIfRecipeInCollection( SubcollectionName.base, recipeId)
     }
 
-    removeRecipeFromUserCollection(recipeId: string){
+    async removeRecipeFromUserCollection(recipeId: string){
 
-        if(this.isRecipeInFavouritesCollection(recipeId)){
+        if(await this.isRecipeInFavouritesCollection(recipeId)){
 
             this.removeRecipeFromFavouritesCollection(recipeId).then(() => {
                 return this.userDatabaseService.deleteFromCollection( SubcollectionName.base, recipeId)

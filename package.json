@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~13.0.2",
     "@angular/platform-browser-dynamic": "~13.0.2",
     "@angular/router": "~13.0.2",
+    "@angular/service-worker": "~13.0.2",
     "@ngneat/until-destroy": "^8.1.4",
     "axios": "^0.23.0",
     "cheerio": "^1.0.0-rc.10",
@@ -57,6 +58,6 @@
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.7.0",
     "open": "^8.3.0",
-    "typescript": "~4.5.2"
+    "typescript": "~4.4.4"
   }
 }
