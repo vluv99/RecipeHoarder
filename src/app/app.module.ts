@@ -115,11 +115,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
         MatExpansionModule,
         MatListModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: environment.production,
+          enabled: /*true,*/environment.production,
           // Register the ServiceWorker as soon as the app is stable
           // or after 30 seconds (whichever comes first).
           registrationStrategy: 'registerWhenStable:30000'
-        })
+        }),
+        AngularFirestoreModule.enablePersistence()
     ],
     providers: [
         {provide: USE_AUTH_EMULATOR, useValue: environment.useEmulators ? ['http://localhost:9099', 9099] : undefined},

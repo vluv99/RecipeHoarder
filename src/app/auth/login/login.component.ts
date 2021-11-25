@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        console.warn(this.loginForm.value);
+        //console.warn(this.loginForm.value);
         this.authService.logIn(
             this.loginForm.value.email,
             this.loginForm.value.password)
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     onGoogleLoginClicked() {
-        console.warn("Google log in happened!")
+        //console.warn("Google log in happened!")
         this.authService.googleAuth().then(() => {
             this.router.navigate(['/']);
         }).catch(() => {
