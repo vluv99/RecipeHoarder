@@ -1,0 +1,53 @@
+@startuml use-case
+left to right direction
+
+actor User as user
+actor Guest as guest
+
+package "Bejelentkezés/Regisztráció" {
+    
+    usecase "Bejelentkezés" as Login
+    usecase "Regisztráció" as register
+}
+guest -> register
+guest -> Login
+user -> Login
+
+package "Receptek" {
+    usecase "recept megtekintés" as viewRecipe
+
+    usecase "Recept hozzáadás" as addRecipe
+
+    usecase "Recept hozzáadás URL-ből" as addRecipeURL
+    addRecipe --|> addRecipeURL : <<includes>>
+
+    usecase "Recept hozzáadás manuálisan" as addRecipeManual
+    addRecipe --|> addRecipeManual : <<includes>>
+
+    usecase "Recet gyűjtemény kezelés" as collectionManagement
+
+    usecase "Gyüjteményhez adás" as addRecipeToCollection
+    collectionManagement --> addRecipeToCollection
+    
+    usecase "Gyüjteményből törlés" as deleteRecipeFromCollection
+    collectionManagement --> deleteRecipeFromCollection
+}
+
+user --> viewRecipe
+user --> addRecipe  
+user --> collectionManagement
+
+package "Bevásárló lista"{
+    usecase "Bevásárló lista megtekinése" as viewShoppinglist
+    user -> viewShoppinglist
+
+    usecase "Bevásárlólistához adás" as addToShoppinglist
+    user -> addToShoppinglist
+    
+    usecase "Bevásárlólistából törlés" as deleteFromShoppinglist
+    user -> deleteFromShoppinglist
+}
+
+viewRecipe --> addToShoppinglist : <<includes>>
+
+@enduml

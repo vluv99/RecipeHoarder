@@ -1,0 +1,43 @@
+@startjson
+{
+    "uid": "rxFreyiyU8Rpy3W54zBEDMagF5F3",
+    "email": "v.luva99@gmail.com",
+    "username": "Laura Vas",
+    "emailVerified": true,
+    "base": [{
+        "addDate": "2021-10-31T17:54:11.511Z",
+        "recipeId": "rSf5aXjFAAFfNv3xQIWU"
+    }, {
+        "addDate": "2021-11-12T00:24:36.451Z",
+        "recipeId": "gttZ3ZPG0Sr2vUqow6D8"
+    }],
+    "favourites": [{
+        "addDate": "2021-11-03T17:31:12.511Z",
+        "recipeId": "rSf5aXjFAAFfNv3xQIWU"
+    }],
+    "shoppinglist": [{
+        "addDate": "2021-11-07T18:45:12.511Z",
+        "amount": 1,
+		"measurement": "piece",
+		"name": "orange"
+    },{
+        "addDate": "2021-11-07T18:46:12.511Z",
+        "amount": 0.5,
+		"measurement": "cup",
+		"name": "mozzarella cheese"
+    },{
+        "addDate": "2021-11-07T18:46:12.511Z",
+        "amount": 2,
+		"measurement": "kg",
+		"name": "flour"
+    }],
+    "shoppinglistMeta": [{
+        "addDate": "2021-10-10T17:10:10.511Z",
+        "amount": "1.5",
+        "measurement": "kg",
+		"name": "apple",
+        "score": 2,
+        "nextDate": "2021-10-17T17:10:10.511Z"
+    }]
+}
+@endjson
