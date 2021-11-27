@@ -1,8 +1,8 @@
 @startuml use-case
 left to right direction
 
-actor User as user
-actor Guest as guest
+actor Felhasználó as user
+actor Vendég as guest
 
 package "Bejelentkezés/Regisztráció" {
     
@@ -24,7 +24,7 @@ package "Receptek" {
     usecase "Recept hozzáadás manuálisan" as addRecipeManual
     addRecipe --|> addRecipeManual : <<includes>>
 
-    usecase "Recet gyűjtemény kezelés" as collectionManagement
+    usecase "Receptgyűjtemény  kezelés" as collectionManagement
 
     usecase "Gyüjteményhez adás" as addRecipeToCollection
     collectionManagement --> addRecipeToCollection
@@ -41,10 +41,10 @@ package "Bevásárló lista"{
     usecase "Bevásárló lista megtekinése" as viewShoppinglist
     user -> viewShoppinglist
 
-    usecase "Bevásárlólistához adás" as addToShoppinglist
+    usecase "Bevásárló listához adás" as addToShoppinglist
     user -> addToShoppinglist
     
-    usecase "Bevásárlólistából törlés" as deleteFromShoppinglist
+    usecase "Bevásárló listából törlés" as deleteFromShoppinglist
     user -> deleteFromShoppinglist
 }
 
