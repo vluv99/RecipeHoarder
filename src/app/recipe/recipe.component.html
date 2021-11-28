@@ -1,6 +1,6 @@
 <div class="container">
     <div class="img-container">
-        <img [src]="recipe.image" alt="">
+        <img [src]="recipe.image ?? '/assets/img/noPic.png'" alt="">
     </div>
 
     <app-recipe-name-bar [recipe]="recipe"></app-recipe-name-bar>
@@ -9,8 +9,9 @@
         <h1 class="mat-subheading-2">Description</h1>
         <div class="description mat-body-1">{{ recipe.description }}</div>
 
-        <mat-card class="recipe-data-container" [hidden]="recipe.totalCookTime == 0 && (recipe.calories == 0 || recipe.calories == null)">
-            <div [hidden]="recipe.totalCookTime == 0">
+        <mat-card class="recipe-data-container" [hidden]="(recipe.totalCookTime == 0 || recipe.totalCookTime == null) &&
+                                                            (recipe.calories == 0 || recipe.calories == null)">
+            <div [hidden]="recipe.totalCookTime == 0 || recipe.totalCookTime == null">
                 <mat-icon>schedule</mat-icon>
                 <span>{{ recipe.totalCookTime }} mins</span>
             </div>

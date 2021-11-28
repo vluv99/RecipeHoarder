@@ -29,4 +29,9 @@ export class ImportComponent implements OnInit {
         })
     }
 
+    manualImport(){
+        this.importer.recipe = undefined;
+        this._router.navigate(['/recipe-data'])
+    }
+
 }

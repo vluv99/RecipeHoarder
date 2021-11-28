@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import {getData2} from "./recipeImport/core";
 import {addToShoppinglistMeta, updateShoppinglistMeta} from "./shoppinglist/newShoppinglistItemHandler";
+import {checkCalorie} from "./recipeImport/checkCalorie";
 
 export const importRecipe = functions.https.onCall(async (data, context) => {
 
@@ -19,6 +20,9 @@ export const importRecipe = functions.https.onCall(async (data, context) => {
 
 });
 
+exports.recipeUploadCalorySearch = functions.firestore
+    .document("recipes/{recipeID}")
+    .onCreate(checkCalorie);
 
 exports.updatedShoppinglistItem = functions.firestore
     .document('users/{userId}/shoppinglist/{shoppinglistId}')

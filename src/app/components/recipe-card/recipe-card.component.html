@@ -1,6 +1,6 @@
 <a>
 <mat-card [routerLink]="['/recipe/', recipe.id]">
-  <img mat-card-image [src]="recipe.image" alt="">
+  <img mat-card-image [src]="recipe.image ?? '/assets/img/noPic.png'" alt="">
   <mat-card-content>
         {{recipe.name}}
   </mat-card-content>
