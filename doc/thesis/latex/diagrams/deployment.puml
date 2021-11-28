@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+skinparam linetype polyline
+'skinparam roundCorner 15
+skinparam defaultTextAlignment center
+
+node "Kliens : Web Browser"{
+    component "Sevice Worker" as serviceWorker
+    component "Recipe Hoarder" as webapp
+     
+    webapp <--> serviceWorker
+}
+
+node "Google Auth szerver" as auth{
+    
+}
+
+
+cloud "Szerver : FireBase" as FireBase{
+    database db [
+        <b>Firestore
+        ---
+        elérési szabályok
+    ]
+
+    artifact "Weblap fájlok" <<artifact>> as pageFiles
+
+    package "Szerver oldali funkciók" as func{
+        component "Recept importer"
+
+        component "Bevásárló lista kezelő"
+    }
+}
+
+webapp -(0- auth
+FireBase --(0- auth
+
+webapp -(0- FireBase : HTTP
+
+webapp --|> pageFiles
+serviceWorker --|> pageFiles
+
+legend
+| nyíl | jelentés |
+| <img:http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIhEpimhI2nAp5KepaXCoI_Fp4jNI4lCAKxbKaT89ISMfIJb5wMa5YNdv-GNAUJbvwLoWGGLb80miLWXqH25csJ8bMYeeAjRb9cUKQ9ROmSIS4ZDIm5Q2000> | ebből készül |
+end legend
+
+@enduml
