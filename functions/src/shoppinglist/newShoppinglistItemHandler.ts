@@ -1,7 +1,7 @@
 import {initializeApp} from 'firebase-admin/app';
 import {getFirestore} from "firebase-admin/firestore";
 
-import {EventContext} from "firebase-functions";
+import {Change, EventContext} from "firebase-functions";
 import {firestore} from "firebase-admin";
 import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 
@@ -9,9 +9,13 @@ import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 const app = initializeApp();
 const store = getFirestore(app);
 
+export async function updateShoppinglistMeta(change: Change<QueryDocumentSnapshot>, context: EventContext): Promise<void>{
+    return addToShoppinglistMeta(change.after,context);
+}
+
 export async function addToShoppinglistMeta(change: QueryDocumentSnapshot, context: EventContext): Promise<void> {
-    console.log("triggered func: ")
-    console.log(change.data())
+    //console.log("triggered onCreate func: ")
+    //console.log(change.data())
 
     const newItem = change.data();
 

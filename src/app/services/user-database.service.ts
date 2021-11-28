@@ -106,13 +106,13 @@ export class UserDatabaseService {
                                 addDate: new Date()
                             }
                         )
-                    }else {
+                    } else {
                         collection.doc(querySnapshot.docs[0].id).update(
                             {
                                 "name": converted.name,
                                 "amount": converted.amount,
-                                "unit": converted.measurement/*,
-                            addDate: new Date()*/
+                                "unit": converted.measurement,
+                                addDate: new Date()
                             }
                         )
                     }

@@ -38,6 +38,9 @@ export class ShoppingListComponent implements OnInit {
     }
 
     addIngredient(i: Ingredient) {
+        if(i.name == ""){
+            return;
+        }
         this.shoppinglistService.addIngredientToShoppinglist(i).then(() => {
             this.shoppinglistService.getShoppinglist().then((a) => {
                 this.ingredients = a;
