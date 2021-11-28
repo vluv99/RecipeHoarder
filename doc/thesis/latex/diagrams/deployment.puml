@@ -16,7 +16,7 @@ node "Google Auth szerver" as auth{
 }
 
 
-cloud "Szerver : FireBase" as FireBase{
+cloud "Szerver : Firebase" as FireBase{
     database db [
         <b>Firestore
         ---
@@ -35,7 +35,7 @@ cloud "Szerver : FireBase" as FireBase{
 webapp -(0- auth
 FireBase --(0- auth
 
-webapp -(0- FireBase : HTTP
+webapp -(0- FireBase : HTTP / Firesore API
 
 webapp --|> pageFiles
 serviceWorker --|> pageFiles
