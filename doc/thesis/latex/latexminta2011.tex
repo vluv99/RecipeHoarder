@@ -56,6 +56,7 @@
 \usepackage{float}
 %\usepackage{subcaption}
 \usepackage{subfig}
+\usepackage{glossaries}
 
 %Tételszerű környezetek definiálhatók, ezek most fejezetenkent egyutt szamozodnak, pl.
 \newtheorem{tet}{Tétel}[chapter]
@@ -82,6 +83,9 @@
 
 \oddsidemargin 35mm%= 1cm
 
+\makeglossaries
+
+\input{glossary.tex}
 
 
 
@@ -273,6 +277,7 @@ A piackutatás összes eredményét \az{\ref{fig:table}} ábra foglalja össze.
 
 \chapter{Funkcionális specifikáció}
 A következők összefoglalják a program főbb funkcionalitásait, azokat felhasználási esetekben (UseCase) csoportosítja. Ez alkotja a  program funkcionális követelményét, azaz azokat a képességeket, amiket mindenféleképpen tudnia kell. Ezeket az elemeket a \ref{fig:useCase}-es ábra grafikusan ábrázolja, majd a fejezet további része pontosítja és kifejti őket.
+Az ebben a fejezetben használt képek a már kész applikáció-ból származnak, és illusztrálják a megvalósított funkcionalitásokat.
 
 \noindent
 %\includegraphics[scale=0.4]{out/diagrams/useCase/use-case.eps}
@@ -290,6 +295,15 @@ A weblap használatához be kell jelentkezni vagy regisztrálni kell. Ameddig ez
 A regisztrációra két lehetőség van. Egyrész a regisztrációs oldalon a mezők (pl.: név, születési év, email, stb) kitöltésével tud manuálisan regisztrálni (lásd: \ref{fig:useCase}-es ábra “Regisztráció manuálisan”). Ekkor a rendszer az azonosításra a megadott email címet használja és ezt kell megadni a jelszavával együtt a belépéskor. Másrészt, ha a vendégnek van Google fiókja, akkor egyszerűen egy lépéssel azonnal regisztrálhat annak felhasználásával (lásd: \ref{fig:useCase}-es ábra “Regisztráció Google fiókkal”).
 
 A bejelentkezésnél a regisztrációhoz hasonlóan két lehetőség áll rendelkezésre. Attól függően, hogy a felhasználó mely módszerrel regisztrált, az annak megfelelő módszerrel kell belépnie. Tehát, ha manuálisan regisztrált, akkor meg kell adni a regisztrációkor használt email címet és jelszót (lásd: \ref{fig:useCase}-es ábra “Bejelentkezés manuálisan”). Amennyiben Google fiókot használt a regisztrációhoz, akkor egyszerűen a “Sign In with Google” gombra kattintva tud belépni (lásd: \ref{fig:useCase}-es ábra “Bejelentkezés Google fiókkal”).
+ 
+\begin{figure}[H]%
+    \centering
+    \subfloat[\centering Bejelentkezés]{{\includegraphics[width=5cm]{pictures/mobile-login.png} }}%
+    \qquad
+    \subfloat[\centering Regisztráció]{{\includegraphics[width=5cm]{pictures/mobile-register.png} }}%
+    \caption{Bejelentkezés és regisztráció képernyőpépek}% 
+    \label{fig:loginRegis}% 
+\end{figure}
 
 
 %\noindent
@@ -300,16 +314,29 @@ A bejelentkezésnél a regisztrációhoz hasonlóan két lehetőség áll rendel
 A következőkben a receptekhez kapcsolódó főbb funkciókról lesz szó. Ez az ábrán a “Receptek” csoportban található felhasználási eseteket jelenti. Ezen funkcionalitások alkotják az alkalmazás legfontosabb képességeit. A piackutatásban megállapított fontos funkciókat tartalmazza, például a legfontosabbnak megállapított recept importálást.
 %\noindent
 %\includegraphics[scale=0.5]{pictures/mobil_home.png}
-
-
+ 
 \subsection{Receptek hozzáadása} 
 A weblap egyik jellegzetes alapfunkciója, hogy a közösség tölti fel az adatbázist receptekkel. Ez azért fontos, mert így nem az adminisztrátoroknak kell folyamatosan dolgozni, hogy minél több recept legyen elérhető a felhasználók számára. 
 
 Egy recept feltöltésre két lehetőség is van. Az egyik az, hogy a felhasználó manuálisan tölti ki a recept paramétereit (lásd: \ref{fig:useCase}-es ábra “Recept hozzáadás manuálisan”). Ez azokban az esetekben fontos a felhasználó számára, amikor a recept nem az internetről származik, hanem például nyomtatott receptkönyvből vagy családi hagyományból. 
 
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=5cm]{pictures/mobile_importDataCheck.png}
+	\caption{Egy recept a manuális recept feltöltés közben}%
+    \label{fig:importcheck}% 
+\end{figure}
+
 A másik opció az, hogy egy másik recepteket tartalmazó weboldal URL címét kimásolja a böngészőből és beilleszti a linket a RecipeHoarder importáló felületére (lásd: \ref{fig:useCase}-es ábra “Recept hozzáadás URL-ből”). Itt, amennyiben a forrás weblap támogatott, a program betölti a recept adatait. Ezután a felhasználónak lehetősége van módosítani a receptet, majd azt kinentve hozzá adni a globális recept lisához.
 
 Mindkét opció során a felhasználónak meg kell adnia, hogy a recept mely előre meghatározott csoportba tartozik (Pl.: Reggeli, Csípős, stb.). Majd a kimentés után a rendszer mind a két módszernél megpróbál kalória mennyiséget számolni a recepthez.
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=11.5cm]{pictures/web_import.png}
+	\caption{A desktopos verzióban a receptfelöltő oldal}%
+    \label{fig:importPage}% 
+\end{figure}
 
 
 \subsection{Receptgyűjtemény kezelés}
@@ -317,20 +344,50 @@ Ahhoz, hogy a weblap könnyen használható legyen, szükségünk van arra, hogy
 
 Természetesen a felhasználó bármikor meg tudja tekinteni az összes receptet, amit a saját receptkönyvbe vagy kedvencek közé mentett ki (lásd: \ref{fig:useCase}-es ábra “Gyűjtemény megtekintése”). Majd amennyiben egy receptet már nem szeretne az adott listában látni, akkor képes a receptet kivenni a kedvencek/saját receptkönyvből, de ezzel nem törlődik a globális receptlistából, így a többi felhasználó számára elérhető marad (lásd: \ref{fig:useCase}-es ábra “Gyűjteményből törlés”). 
 
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=11.5cm]{pictures/web_recipeCollection.png}
+	\caption{A desktopos verzióban a felhasználónak a "Receptes kézikönyv"-re képernyőkép}%
+    \label{fig:collection}% 
+\end{figure}
+
 
 \subsection{Recept megtekintés}
 Mivel ez egy recept gyűjtő webes alkalmazás, ezért egyértelműen lehetőséget kell adni arra, hogy a receptek leírását meg lehessen tekinteni. Itt már megtalálható az összes eltárolt adat a receptről, mint például a elkészítési idő (ha van), kalória (ha van), hozzávalók vagy elkészítési lépések (lásd: \ref{fig:useCase}-es ábra “Recept megtekintés”).
 
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=5cm]{pictures/mobil_recipe-top.png}
+	\caption{Egy recept képernyőképe}%
+    \label{fig:recipe}% 
+\end{figure}
+
 \subsection{Receptre szűrés}
 A weblapon van lehetőség keresni a receptek között, ezen belül is két mód van erre. Egy általános névre való keresés, valamint kategória szerint is lehet szűrni. Mivel egy recept létrehozásakor kötelező megadni legalább egy kategóriát, így egyszerűen kereshetők ez alapján.
 
-Ez \az{\ref{fig:useCase}-es ábra} “Receptek” csoport alatt, a “Receptre szűrés”-nek felel meg a két lehetséges verziójával, “név szerinti” és “kategória szerinti” szűrés.
+Ez \az{\ref{fig:useCase}-es ábra} “Receptek” csoport alatt, a “Receptre szűrés”-nek felel meg a két lehetséges verziójával, “név szerinti” és “kategória szerinti” szűrés. 
+
+\begin{figure}[H]%
+    \centering
+    \subfloat[\centering Kereső opciók]{{\includegraphics[width=5cm]{pictures/mobile-home.png} }}%
+    \qquad
+    \subfloat[\centering Keresés eredmény]{{\includegraphics[width=5cm]{pictures/mobile-search.png} }}%
+    \caption{A kezdőoldalon található kategória szerinti szűrés}% 
+    \label{fig:catSearch}% 
+\end{figure}
 
 
 \subsection{Hibás recept jelentése}
 Korábban volt szó arról, hogy az oldal adatbázisa a közösség által feltöltött receptek alapján nő. Ezért fennáll a lehetősége, hogy akár az importálás során különböző hibák keletkezzenek, amit a felhasználó nem vesz észre vagy nincs kedve kijavítani. Akár az is lehetséges, hogy támadás érje a weblapot, és keletkezzenek olyan receptek, amelyek hibásak. Ennek javítása érdekében minden recepthez tartozik egy hiba bejelentő rész, ahol előre megszabott lehetséges hibák listájából választva jelezhet a weblap karbantartóinak, hogy ha valami nem jó a recepten. Ezen lehetséges hibák közé tartozik például, ha hiányos az alapanyagok listája vagy trágár szavakat tartalmaz.
 
 Ez \az{\ref{fig:useCase}-es ábra} “Receptek” rész alatt, a “Recept megtekintés”-hez tartozik “Hibás recept jelentés” néven.
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=5cm]{pictures/mobile-report.png}
+	\caption{Egy recept hibabejelentés képernyőkép}%
+    \label{fig:report}% 
+\end{figure}
 
 
 \section{Bevásárló lista}
@@ -339,19 +396,33 @@ Minden felhasználónak van saját bevásárlólistája, amibe össze tudja gyű
 \subsection{Bevásárló listához adás}
 A listához adásra két lehetőség van. A szokásos bevásárlólista módszert követve manuálisan is ki lehet tölteni az adatokat, majd a listához adni. A másik módszer a recepteken belül, a felsorolt alapanyagokat is egyesével hozzá lehet adni, illetve a recepteknél lehetőség vagy az összes alapanyagot azonnal hozzáadni a listához. 
 
-Ezen a diagramon a “Bevásárlólista” rész alatt, a “Bevásárló listához adás” résznek felel meg.
+Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt, a “Bevásárló listához adás” résznek felel meg.
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=11.5cm]{pictures/web_shoppinglist-add.png}
+	\caption{A bevásárló listához adás mezői}%
+    \label{fig:shoppinglistAdd}% 
+\end{figure}
 
 
 \subsection{Bevásárló lista megtekintés}
 A bevásárlólista megjelenítésénél a korábban hozzáadott alapanyagok vannak felsorolva. A bevásárlólista az alapanyagokat a hozzáadásuk dátuma szerint jeleníti meg. Igy könnyen követhető, mikor egy új tétel lett a listához adva.  Amennyiben az alapanyagnak nincs mértékegysége vagy mennyisége, akkor azok az adatok nem lesznek megjelenítve, hogy elkerüljük, hogy például “0 pasta“ legyen megjelenítve.
 
-Ezen az ábrán a “Bevásárlólista” rész alatt lévő “Bevásárló lista megtekintése” résznek felel meg.
+Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt lévő “Bevásárló lista megtekintése” résznek felel meg.
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics[width=11.5cm]{pictures/web-shoppinglist.png}
+	\caption{A bevásárlólistáról képernyőkép}%
+    \label{fig:shoppinglist}% 
+\end{figure}
 
 
 \subsection{Bevásárló listából törlés}
 Ha a felhasználónak már nem kell egy adott alapanyag a listából, legyen ez azért, mert már megvette vagy csak nem aktuális már, akkor könnyen egy kattintással el lehet tüntetni a listából. Másik verzió a lista ürítésére a lista alatt lévő gomb megnyomásával az egész lista törlése. Így gyorsan és egyszerűen lehet újrakezdeni a lista használatát anélkül, hogy az összes elemet egyesével kellett volna törölni.
 
-Ezen az ábrán a “Bevásárlólista” rész alatt lévő “Bevásárló listából törlés” résznek felel meg.
+Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt lévő “Bevásárló listából törlés” résznek felel meg. 
 
 %\noindent
 %\includegraphics[scale=0.5]{pictures/mobil_menu.png}
@@ -372,51 +443,79 @@ Ezen az ábrán a “Bevásárlólista” rész alatt lévő “Bevásárló lis
 Itt fogom részletezni a kiemeltebb felhasznált technológiákról alapvető információkat, valamint szerepüket ebben a projektben.
 
 \section{Angular}
-Az Angular egy TypeScript alapú Framework, amit  eredetileg a Google fejlesztett ki, de most már nyílt forráskódú. Az Angular teljes újraírása a régi AngularJS-nek. Egyik legnagyobb előnye, hogy komponens alapú keretrendszer, ezért ennek segítségével újra felhasználható kódot lehet írni. Támogatja a Single Page alkalmazás készítését. Ezeken a weblapokon a weblap újratöltése nélkül tud a felhasználó navigálni, ezzel is gyorsabbá téve azt.
+Az Angular egy \Gls{TypeScript} alapú \Gls{Framework}, amit  eredetileg a Google fejlesztett ki, de most már nyílt forráskódú. Az Angular teljes újraírása a régi \Gls{AngularJS}-nek. Egyik legnagyobb előnye, hogy komponens alapú keretrendszer, ezért ennek segítségével újra felhasználható kódot lehet írni. Támogatja a \Gls{SinglePageApp} készítését. Ezeken a weblapokon a weblap újratöltése nélkül tud a felhasználó navigálni, ezzel is gyorsabbá téve azt.
 
 A felhasználói felület tervezése során is igyekeztem komponenseket kialakítani mind telefonos, mind desktopos kinézetben. A komponensekkel való munka megkönnyíti egy projekt fejlesztését, mivel akár saját fejlesztésből, akár külső könyvtárból szerzett elemekből lehet egyszerűen felépíteni a weblapokat. Ezeknek az elemeknek másik nagy előnye, hogy elég csak az eredetit módosítani ahhoz, hogy mindenhol megváltozzon, ezzel is egységesítve az oldal szerkezetét, valamint segítve a fejlesztők dolgát.
 
 
-\section{Angular Material}
-Az Angular Material egy, a Google által fejlesztett komponens csomag. Ez segít a fejlesztőknek már kész és modern dizájnos komponenseket egyszerűen felhasználni a projektekben. Ez elsősorban egy UI komponens dizájn könyvtár, ami importálás után egyszerűen használható. A weboldalán pedig példákkal és részletes dokumentációval fel vannak sorolva a létező komponensek és ezek különböző változatai.
+\section{Angular Material} 
+Az Angular Material egy, a Google által fejlesztett komponens csomag. 
+Ez segít a fejlesztőknek már kész és modern dizájnos komponenseket egyszerűen felhasználni a projektekben. 
+Ez elsősorban egy UI komponens dizájn könyvtár, ami importálás után egyszerűen használható. 
+A weboldalán pedig példákkal és részletes dokumentációval fel vannak sorolva a létező komponensek és ezek különböző változatai.
 
-Az én projektem is nagy részben ennek a könyvtárnak a komponenseit használja fel. Csak pár helyen kellett kiegészíteni a már létező verziót, hogy illeszkedjenek az eredeti tervekhez. Ezen felül a projekt témája is az Angular Material alapján lett felépítve, hogy a komponenseknek könnyen meglehessen adni az alap színeket és tipográfia szabályokat.
+Az én projektem is nagy részben ennek a könyvtárnak a komponenseit használja fel. 
+Csak pár helyen kellett kiegészíteni a már létező verziót, hogy illeszkedjenek az eredeti tervekhez. 
+Ezen felül a projekt témája is az Angular Material alapján lett felépítve, hogy a komponenseknek könnyen meglehessen adni az alap színeket és tipográfia szabályokat.
 
 
 \section{Firebase}
-Eredetileg független cég által fejlesztett, de most már a Google által fejlesztett webes és mobilos alkalmazások készítéséhez létrehozott platform. Manapság nagyon népszerű az egyszerűsített adatbázis felépítése, valamint a könnyű és könnyen értelmezhető kezelő felülete miatt, arról nem is beszélve, hogy rengeteg dokumentáció létezik a fejlesztők számára.
+Eredetileg független cég által fejlesztett, de most már a Google által fejlesztett webes és mobilos alkalmazások készítéséhez létrehozott platform. 
+Manapság nagyon népszerű az egyszerűsített adatbázis felépítése, valamint a könnyű és könnyen értelmezhető kezelő felülete miatt, arról nem is beszélve, hogy rengeteg dokumentáció létezik a fejlesztők számára.
 
-Ebben a projektben elég sok helyen használom a Firebase funkcióit. Az egész weblap a Firebase Hosting platformon működik, ami egy statikus weblap hosztolási felület. Ez a GitHub-bal össze van kötve, ha a Main Branch-re feltöltés történik, akkor a Firebase-re automatikusan feltöltődik az új production verzió.
+Ebben a projektben elég sok helyen használom a Firebase funkcióit. 
+Az egész weblap a Firebase Hosting platformon működik, ami egy statikus weblap hosztolási felület. 
+Ez a GitHub-bal össze van kötve, ha a Main Branch-re feltöltés történik, akkor a Firebase-re automatikusan feltöltődik az új production verzió.
 
-A FireStore Database-t használom a weblap adatainak tárolásához. Itt vannak eltárolva  receptek, felhasználók, a felhasználókhoz különböző kollekciók és bevásárló listájuk illetve metaadatok. A Cloud FireStore-on belül lehet beállítani az adatbázis Rule-okat. Ezt azt jelenti, hogy be lehet állítani, hogy különböző kollekciókat kik érhetnek el, milyen tevékenységek vannak engedélyezve nekik, valamint, hogy milyen jogokkal milyen adatbázis műveleteket lehet csinálni. 
+A FireStore Database-t használom a weblap adatainak tárolásához. 
+Itt vannak eltárolva  receptek, felhasználók, a felhasználókhoz különböző kollekciók és bevásárló listájuk illetve \gls{Metaadatok}. 
+A Cloud FireStore-on belül lehet beállítani az adatbázis Rule-okat. 
+Ezt azt jelenti, hogy be lehet állítani, hogy különböző kollekciókat kik érhetnek el, milyen tevékenységek vannak engedélyezve nekik, valamint, hogy milyen jogokkal milyen adatbázis műveleteket lehet csinálni. 
 
 A FireBase Storage-ban tárolódnak a receptekből kimentett képek, amik az importálás során kerülnek az adatbázisba.
 
-A legnagyobb biztonság érdekében a Firebase Auth-ot használom a weblap bejelentkezés és regisztrációs műveleteihez. Így lehetséges email és jelszó párossal regisztrálni majd bejelentkezni, viszont, akinek van Gmail fiókja, annak lehetősége van egy lépésben azonnal regisztrálni és belépni annak segítségével.
+A legnagyobb biztonság érdekében a Firebase Auth-ot használom a weblap bejelentkezés és regisztrációs műveleteihez. 
+Így lehetséges email és jelszó párossal regisztrálni majd bejelentkezni, viszont, akinek van Gmail fiókja, annak lehetősége van egy lépésben azonnal regisztrálni és belépni annak segítségével.
 
-A recept importálás és a bevásárlólista egy része a Firebase Cloud Function keresztül a szerver oldalon fut. Ez nem csak olcsóbb, mivel szerver oldali adatbázis lekérdezések ingyenesek a kliens oldalival szemben, hanem az importálás során felmerült problémát is megoldotta. Ez a  probléma az, hogy egy honlap nem kérdezhet le adatot egy másikról kliens oldalon keresztül, mivel a cél weblapok CORS beállítása ezt nem engedi. Azon kívül, mikor a bevásárló listába új alapanyag kerül, akkor egy trigger lefut a szerver oldalon, aminek segítségével állítjuk elő az ajánlóhoz a metaadatokat.
+A recept importálás és a bevásárlólista egy része a Firebase Cloud Function keresztül a szerver oldalon fut. 
+Ez nem csak olcsóbb, mivel szerver oldali adatbázis lekérdezések ingyenesek a kliens oldalival szemben, hanem az importálás során felmerült problémát is megoldotta. 
+Ez a  probléma az, hogy egy honlap nem kérdezhet le adatot egy másikról kliens oldalon keresztül, mivel a cél weblapok CORS beállítása ezt nem engedi. 
+Azon kívül, mikor a bevásárló listába új alapanyag kerül, akkor egy trigger lefut a szerver oldalon, aminek segítségével állítjuk elő az ajánlóhoz a metaadatokat.
 
 
 \section{PWA}
-A PWA azaz Progressive Web Application egy koncepció, amit követve lehetséges megbízható, stabil és telepíthető webes applikációkat fejleszteni. Az alapszabályait követve a weblap akár platformspecifikus alkalmazássá is alakítható. A PWA lehetővé teszi az alkalmazások használatát bárhol, bármikor, bármilyen eszközön. 
+A PWA azaz Progressive Web Application egy koncepció, amit követve lehetséges megbízható, stabil és telepíthető webes applikációkat fejleszteni. 
+Az alapszabályait követve a weblap akár platformspecifikus alkalmazássá is alakítható. A PWA lehetővé teszi az alkalmazások használatát bárhol, bármikor, bármilyen eszközön. 
 
-A projekt esetében az Angular-t ki kell kiegészíteni JavaScript kóddal. Ha az eszköznek nincs internet elérése, akkor a script segítségével a weblapnak lokálisan elmentett változatát használja a böngésző. Ezzel elérhető, hogy valamilyen szinten használható legyen a weblap offline környezetben is. Szerencsére mind az Angular, mind an Firebase úgy lett kifejlesztve, hogy csak egy-egy helyen kell megadni neki, hogy az Angular Service Worker-t használja, ezért nekem nem kellett saját kódot írni ahhoz, hogy internet nélkül is használható legyen a weblap. Ez persze limitált arra, ami cachelve lett, például a keresés csak a már egyszer letöltött receptekre fog működni, de a bevásárló listához adás során, mikor az eszközön újra lesz internet, az egész szinkronizálódik, hogy ne legyen adatvesztés.
+A projekt esetében az Angular-t ki kell kiegészíteni JavaScript kóddal. 
+Ha az eszköznek nincs internet elérése, akkor a script segítségével a weblapnak lokálisan elmentett változatát használja a böngésző. 
+Ezzel elérhető, hogy valamilyen szinten használható legyen a weblap offline környezetben is. Szerencsére mind az Angular, mind an Firebase úgy lett kifejlesztve, hogy csak egy-egy helyen kell megadni neki, hogy az Angular Service Worker-t használja, ezért nekem nem kellett saját kódot írni ahhoz, hogy internet nélkül is használható legyen a weblap. Ez persze limitált arra, ami cachelve lett, például a keresés csak a már egyszer letöltött receptekre fog működni, de a bevásárló listához adás során, mikor az eszközön újra lesz internet, az egész szinkronizálódik, hogy ne legyen adatvesztés.
 
 \section{Schema.org}
-A schema.org egy kereső cégek által kezdett indítvány aminek része a Google, Yahoo és Bing!. A céljuk az, hogy az interneten való keresést megkönnyítsék az által, hogy a weblapok egy a számítógépek által könnyen értelmezhető formátumban is elérhetővé teszik a tartalmukat. Az indítvány összefoglalja, hogy milyen tartalmakat tudnak az egyes weblapok leírni és ezeknek milyen konkrét tulajdonságaik lehetnek. A weblapokban ezeket az adatokat több féle tényleges formátumban lehet eltárolni úgy, hogy azt a megjelenítés során nem rajzolja ki. Ezek közül a legelterjedtebb a JSON-LD, ami a HTML head részében elhelyezett JSON formátumú adatot jelent.
+A schema.org egy kereső cégek által kezdett indítvány aminek része a Google, Yahoo és Bing!. 
+A céljuk az, hogy az interneten való keresést megkönnyítsék az által, hogy a weblapok egy a számítógépek által könnyen értelmezhető formátumban is elérhetővé teszik a tartalmukat. 
+Az indítvány összefoglalja, hogy milyen tartalmakat tudnak az egyes weblapok leírni és ezeknek milyen konkrét tulajdonságaik lehetnek. 
+A weblapokban ezeket az adatokat több féle tényleges formátumban lehet eltárolni úgy, hogy azt a megjelenítés során nem rajzolja ki. Ezek közül a legelterjedtebb a JSON-LD, ami a HTML head részében elhelyezett JSON formátumú adatot jelent.
 
-A projektben a legfontosabb a “Recipe“ séma, ami leírja hogy a receptnek milyen tulajdonságait lehet megtalálni a JSON-LD kódban. Sajnos a standardizáció ellenére a különböző weblapok sok adatot eltérő módokon adnak meg, igy ez az adat további feldolgozásra szorul. A helyzetet tovább rontja az, hogy nem minden adatot kötelező megadni a sémában, így például elképzelhető, hogy egy receptnek hiányoznak a lépései. 
+A projektben a legfontosabb a “Recipe“ séma, ami leírja hogy a receptnek milyen tulajdonságait lehet megtalálni a JSON-LD kódban. 
+Sajnos a standardizáció ellenére a különböző weblapok sok adatot eltérő módokon adnak meg, igy ez az adat további feldolgozásra szorul. 
+A helyzetet tovább rontja az, hogy nem minden adatot kötelező megadni a sémában, így például elképzelhető, hogy egy receptnek hiányoznak a lépései. 
 
 
 \section{Figma}
-Egy  vektorgrafikus szerkesztő, ahol felhasználói felület prototípusokat lehet tervezni. A program legfőképp webalapú, de letölthető desktopos verziója is. A program képes a tervezett lapok élő tükrözésére akár saját telefonon az applikáción keresztül, vagy csak az emuláló felületen keresztül. A Figma egy modern dizájn tervező app, amiben egyszerűen fel lehet használni a material design stílust és alap komponenseket, ezzel is segítve az Angular-ban is használt komponens alapú gondolkodást. Másik nagy előnye, hogy interaktívvá lehet tenni a tervezés során a gombokat, komponenseket, így akár a teljes felhasználói élmény kipróbálható. Ezen túl meg lehet nézni a kész dizájnoknak  a pontos CSS stílus kódját is, ezzel is segítve a konkrét kódolás folyamatát.
+Egy  vektorgrafikus szerkesztő, ahol felhasználói felület prototípusokat lehet tervezni. A program legfőképp webalapú, de letölthető desktopos verziója is. 
+A program képes a tervezett lapok élő tükrözésére akár saját telefonon az applikáción keresztül, vagy csak az emuláló felületen keresztül. 
+A Figma egy modern dizájn tervező app, amiben egyszerűen fel lehet használni a material design stílust és alap komponenseket, ezzel is segítve az Angular-ban is használt komponens alapú gondolkodást. Másik nagy előnye, hogy interaktívvá lehet tenni a tervezés során a gombokat, komponenseket, így akár a teljes felhasználói élmény kipróbálható. Ezen túl meg lehet nézni a kész dizájnoknak  a pontos CSS stílus kódját is, ezzel is segítve a konkrét kódolás folyamatát.
 
-Ez a program sokat segített a tervezésben, mivel a kész material design komponenseket tudtam próbálgatni anélkül, hogy először mélyebben kellet volna tanulmányoznom az Angular felépítését. Az egységes dizájn és téma tervezésében pedig segített konzisztensnek maradnom. Ez igaz mint a színekre, mind a tipográfiára.
+Ez a program sokat segített a tervezésben, mivel a kész material design komponenseket tudtam próbálgatni anélkül, hogy először mélyebben kellet volna tanulmányoznom az Angular felépítését. 
+Az egységes dizájn és téma tervezésében pedig segített konzisztensnek maradnom. Ez igaz mint a színekre, mind a tipográfiára.
 
 
 \chapter{A rendszer magas szintű áttekintése}
 \label{systemExplanation}
-Mint minden más webes alkalmazás, ez a projekt is egyértelműen felbontható két fő egységre a szerver és a kliens oldal mentén. A kliens oldal azt a kódot és egyéb fájlokat jeleni, amiket az interneten keresztűl a felhasználó böngészője tölt le és futtat. Míg a szerver oldali kód az egy központi helyen fut és a hosszabb időt igénybe vevő számításokat, illetve az adatbázis elérését végzi.
+Mint minden más webes alkalmazás, ez a projekt is egyértelműen felbontható két fő egységre a szerver és a kliens oldal mentén. 
+A kliens oldal azt a kódot és egyéb fájlokat jeleni, amiket az interneten keresztűl a felhasználó böngészője tölt le és futtat. 
+Míg a szerver oldali kód az egy központi helyen fut és a hosszabb időt igénybe vevő számításokat, illetve az adatbázis elérését végzi.
 
 \noindent
 \begin{figure}[H]
@@ -427,10 +526,13 @@ Mint minden más webes alkalmazás, ez a projekt is egyértelműen felbontható 
 \end{figure}
 
 \section{Szerver oldal}
-A projekt esetében a szerveroldali funkcionalitások a Firebase segítségével lettek megvalósítva (lásd: \ref{fig:deployment}. ábra Firebase eleme). Ez nagyban megkönnyítette a munkát, mivel a szerver tényleges működtetését a Firebase végzi. Az adatbázis szerepét a Firebase Firestore tölti be (lásd: \ref{fig:deployment}.  ábra Firestore eleme), ami egy NoSQL alapú adatbázis (lásd: \ref{dataSchemes}. fejezetben részletesebben).  Ez egy biztonságos, kliens oldalról is használható API-val rendelkezik, aminek segítségével az adatbázis műveletek elvégzéséhez nincs szükség saját szerver oldali kód írására. A weblap statikus fájljainak kiszolgálására a FireBase Hosting van használva, aminek segítségével nincs szükség saját Apache vagy NGINX szerver üzemeltetésére. Ahol szükséges volt a szerver oldalon saját kódot futtatni, ott a FireStore által nyújtott Cloud Functions megoldást használtam.
+A projekt esetében a szerveroldali funkcionalitások a Firebase segítségével lettek megvalósítva (lásd: \ref{fig:deployment}. ábra Firebase eleme). 
+Ez nagyban megkönnyítette a munkát, mivel a szerver tényleges működtetését a Firebase végzi. 
+Az adatbázis szerepét a Firebase Firestore tölti be (lásd: \ref{fig:deployment}.  ábra Firestore eleme), ami egy NoSQL alapú adatbázis (lásd: \ref{dataSchemes}. fejezetben részletesebben).  Ez egy biztonságos, kliens oldalról is használható API-val rendelkezik, aminek segítségével az adatbázis műveletek elvégzéséhez nincs szükség saját szerver oldali kód írására. A weblap statikus fájljainak kiszolgálására a FireBase Hosting van használva, aminek segítségével nincs szükség saját \Gls{Apache} vagy \Gls{NGINX} szerver üzemeltetésére. Ahol szükséges volt a szerver oldalon saját kódot futtatni, ott a FireStore által nyújtott Cloud Functions megoldást használtam.
 
 \subsection{Firebase functions}
-A Firebase functions egy olyan felhő alapú megoldás, ahol a fejlesztőnek csak a ténylegesen futtatni kívánt kódot kell megadnia. A virtuális gép, az azon futó operációs rendszer és a program elindítása mind a platform által van kezelve. Ez nagyban megkönnyíti a fejlesztést, mivel nem kell plusz időt fordítani a szerver karbantartására. A Firebase csak JavaScript/TypeScript -ben írt kódot tud futtatni. Mivel a kliens oldal is TypeScript-ben készűlt, ezért bizonyos funkciókat, illetve adatstruktúrákat a két komponens között meg lehet osztani. 
+A Firebase functions egy olyan felhő alapú megoldás, ahol a fejlesztőnek csak a ténylegesen futtatni kívánt kódot kell megadnia. 
+A virtuális gép, az azon futó operációs rendszer és a program elindítása mind a platform által van kezelve. Ez nagyban megkönnyíti a fejlesztést, mivel nem kell plusz időt fordítani a szerver karbantartására. A Firebase JavaScript/ \Gls{TypeScript} -ben írt kódot tud futtatni. Mivel a kliens oldal is \Gls{TypeScript}-ben készűlt, ezért bizonyos funkciókat, illetve adatstruktúrákat a két komponens között meg lehet osztani. 
 
 A fejlesztő álltal megírt programokat többféle események is elindíthatják. Leggyakoribb példák erre a bejövő HTTP kérések vagy az adatbázisban történt változások. Ezek közül a projekt mind a kettőt használja. 
 
@@ -443,7 +545,7 @@ A Google felhasználói fiókkal való belépéshez természetesen a Google ált
 A kliens a projekt esetében a felhasználó web böngészőjében futó kódokat jelenti. ez két fő egységre választható szét. Az egyik a ténylegesen megjelenő weblap kódja, amely tartalmazza a megjelenítéshez szükséges HTML, CSS és JavaScript fájlokat. A másik komponens a weblap offline elérését biztosító Service Worker. Ami a webböngészőben, mint háttérfolyamat fut.
 
 \subsection{Weboldal}
-A weboldalt az Angular fordítási folyamat eredményeképp létrejövő fájlok alkotják. Ezek a fájlok tartalmazzák a lefordított TypeScript kódot, ami egy JavaScript fájlba lett generálva, illetve tartalmazza még a hasonló módon összesített stílusokat egy CSS fájlban. Ezeket a fájlokat a kliens a Firebase Hosting szerveréről tölti le, ami egy statikus fájlkiszolgáló rendszer. Azért lett ez választva, mivel a Google szervereit használja, így magas szintű megbízhatóságot biztosít. Továbbá automatikusan jól skálázódik, ha a weblap forgalma hirtelen megnövekszik. Ezen tulajdonságai miatt, ez egy olyan platformot biztosít, ami bármekkora felhasználói bázis mellett jól használható.
+A weboldalt az Angular fordítási folyamat eredményeképp létrejövő fájlok alkotják. Ezek a fájlok tartalmazzák a lefordított \Gls{TypeScript} kódot, ami egy JavaScript fájlba lett generálva, illetve tartalmazza még a hasonló módon összesített stílusokat egy CSS fájlban. Ezeket a fájlokat a kliens a Firebase Hosting szerveréről tölti le, ami egy statikus fájlkiszolgáló rendszer. Azért lett ez választva, mivel a Google szervereit használja, így magas szintű megbízhatóságot biztosít. Továbbá automatikusan jól skálázódik, ha a weblap forgalma hirtelen megnövekszik. Ezen tulajdonságai miatt, ez egy olyan platformot biztosít, ami bármekkora felhasználói bázis mellett jól használható.
 
 A fordítás kimeneti fájljai autómatikusan feltöltésre kerülnek, amikor a GitHubra-ra egy új verzió kerül fel. Ezzel biztosított, hogy a feltöltés közben emberi hiba nem történhet.
 
@@ -459,16 +561,7 @@ Ezt a funkcionalitást az Angular által szolgáltatott ServiceWorker megvalós�
 Ebben a fejezetben \az{\ref{systemExplanation}-es fejezetben} leírt komponensek kerülnek részletes leírásra.
 
 \section{Kliens}
-A kliens oldal felépítését nagyban meghatározza az, hogy Angular keretrendszer van használva a projektben,ami sok programozási mintát megkövetel. Ezek segítenek az újrafelhasználható, illetve megbízható kódot írni.
-
-%\begin{figure}%
-%    \centering
-%    \subfloat[\centering label 1]{{\includegraphics[width=5cm]{pictures/web_shoppinglist.png} }}%
-%    \qquad
-%    \subfloat[\centering label 2]{{\includegraphics[width=5cm]{pictures/mobile_suggestion.png} }}%
-%    \caption{2 Figures side by side}%
-%    \label{fig:example}%
-%\end{figure}
+A kliens oldal felépítését nagyban meghatározza az, hogy Angular keretrendszer van használva a projektben, ami sok programozási mintát megkövetel. Ezek segítenek az újrafelhasználható, illetve megbízható kódot írni.
 
 \noindent
 \begin{figure}[H]
@@ -637,11 +730,14 @@ Jelenleg a képeknek is csak az url címe van elmentve de a képeket letöltő C
 %nem kézzel helyettesítendők:
 
 \noindent
-Alulírott \makebox[4cm]{\dotfill} szakos hallgató, kijelentem, hogy a dolgozatomat a Szegedi Tudományegyetem, Informatikai Intézet \makebox[4cm]{\dotfill} Tanszékén készítettem, \makebox[4cm]{\dotfill} diploma megszerzése érdekében.
+Alulírott %\makebox[4cm]{\dotfill}
+Vas Laura, gazdaságinformatikus szakos hallgató, kijelentem, hogy a dolgozatomat a Szegedi Tudományegyetem, Informatikai Intézet %\makebox[4cm]{\dotfill} 
+Szoftverfejlesztés Tanszékén készítettem, %\makebox[4cm]{\dotfill}
+Bsc diploma megszerzése érdekében.
 
 Kijelentem, hogy a dolgozatot más szakon korábban nem védtem meg, saját munkám eredménye, és csak a hivatkozott forrásokat (szakirodalom, eszközök, stb.) használtam fel.
 
-Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a Szegedi Tudományegyetem Informatikai Intézet könyvtárában, a helyben olvasható könyvek között helyezik el.
+Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a Szegedi Tudományegyetem Informatikai Intézet könyvtárában, a helyben olvasható könyvek között helyezik el. 
 
 \vspace*{2cm}
 
@@ -654,31 +750,12 @@ Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a Szegedi Tudománye
 
 \vspace*{4cm}
 
-%A nyilatkozat szövege TITKOSNAK MINŐSÍTETT dolgozatban a következő:
-
-\noindent
-Alulírott \makebox[4cm]{\dotfill} szakos hallgató, kijelentem, hogy a dolgozatomat a Szegedi Tudományegyetem, Informatikai Intézet \makebox[4cm]{\dotfill} Tanszékén készítettem, \makebox[4cm]{\dotfill} diploma megszerzése érdekében.
-
-Kijelentem, hogy a dolgozatot más szakon korábban nem védtem meg, saját munkám eredménye, és csak a hivatkozott forrásokat (szakirodalom, eszközök, stb.) használtam fel.
-
-Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a TVSZ 4. sz. mellékletében leírtak szerint kezelik.
-
-\vspace*{2cm}
-
-\begin{tabular}{lc}
-	Szeged, \today\
-	\hspace{2cm} & \makebox[6cm]{\dotfill} \\
-	             & aláírás                 \\
-\end{tabular}
 
 
+%\chapter*{Köszönetnyilvánítás}
+%\addcontentsline{toc}{section}{Köszönetnyilvánítás}
 
-
-
-\chapter*{Köszönetnyilvánítás}
-\addcontentsline{toc}{section}{Köszönetnyilvánítás}
-
-Ezúton szeretnék köszönetet mondani \textbf{X. Y-nak} ezért és ezért \ldots
+%Ezúton szeretnék köszönetet mondani \textbf{X. Y-nak} ezért és ezért \ldots
 
 
 %% Az itrodalomjegyzek keszitheto a BibTeX segedprogrammal:
@@ -686,9 +763,9 @@ Ezúton szeretnék köszönetet mondani \textbf{X. Y-nak} ezért és ezért \ldo
 %\bibliographystyle{plain}
 
 %VAGY "kézzel" a következő módon:
-
+ 
 \begin{thebibliography}{9}
-	%10-nél kevesebb hivatkozás esetén
+	%10-nél kevesebb hivatkozás esetén 
 
 	%\begin{thebibliography}{99}
 	% 10-nél több hivatkozás esetén
@@ -700,24 +777,51 @@ Ezúton szeretnék köszönetet mondani \textbf{X. Y-nak} ezért és ezért \ldo
 
 	%folyóirat cikk: szerzok(k), a folyóirat neve kiemelve,
 	%az evfolyam felkoveren, zarojelben az evszam, vegul az oldalszamok es pont.
-	\bibitem{Gischer}
-	J. L. Gischer,
-	The equational theory of pomsets.
-	\emph{Theoret. Comput. Sci.}, \textbf{61}(1988), 199--224.
 
 	%könyv (szerzo(k), a könyv neve kiemelve, utana a kiado, a kiado szekhelye, az evszam es pont.)
-	\bibitem{Pin}
-	J.-E. Pin,
-	\emph{Varieties of Formal Languages},
-	Plenum Publishing Corp., New York, 1986.
 
+	\bibitem{angular}
+	\href{https://angular.io/docs}{Angular dokumentáció}, \\
+	\url{https://angular.io/docs}
 
+	\bibitem{firebaseDocs}
+	\href{https://firebase.google.com/docs/build}{Firebase dokumentáció}, \\
+	\url{https://firebase.google.com/docs/build}
+	
+	\bibitem{angualMaterialDocs}
+	\href{https://material.angular.io/guide/getting-started}{Angular Material dokumentáció}, \\
+	\url{https://material.angular.io/guide/getting-started}  
 
+	\bibitem{angularFire}
+	\href{https://github.com/angular/angularfire}
+	{Angular Fire dokumentáció (Firebase API)},\\
+	\url{https://github.com/angular/angularfire}
 
+	\bibitem{angularServiceWorker}
+	\href{https://angular.io/guide/service-worker-intro}{Angular Service Worker dokumentáció}, \\
+	\url{https://angular.io/guide/service-worker-intro}
+
+	\bibitem{schema.org}
+	\href{https://schema.org/}{Shema.org}, \\
+	\url{https://schema.org/}
+
+	\bibitem{js-quantities}
+	\href{https://www.npmjs.com/package/js-quantities}{Mértékegység átváltó 1}, \\
+	\url{https://www.npmjs.com/package/js-quantities}
+
+	\bibitem{convert-units}
+	\href{https://www.npmjs.com/package/convert-units}{Mértékegység átváltó 2}, \\
+	\url{https://www.npmjs.com/package/convert-units}
+
+	\bibitem{AngularPWADocs}
+	\href{https://angular.io/guide/service-worker-getting-started}{Angular PWA dokumentáció}, \\
+	\url{https://angular.io/guide/service-worker-getting-started}
 
 \end{thebibliography}
 
+\chapter{Melléklet}
 
-
+\printglossary[title=Szótár]
+%\addcontentsline{toc}{section}{Szótár}
 
 \end{document}
