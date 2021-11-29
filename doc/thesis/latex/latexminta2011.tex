@@ -440,7 +440,10 @@ Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt lévő 
 %\includegraphics[scale=0.5]{pictures/mobile_suggestion.png}
 
 \chapter{Felhasznált technológiák}
-Itt fogom részletezni a kiemeltebb felhasznált technológiákról alapvető információkat, valamint szerepüket ebben a projektben.
+Ebben a fejezetben a projekt által felhasznált számos technológiák kerülnek bemutatásra. A projekt legfontosabb technológiái az Angular és Firebase. Ezeknek a Google a fő fejlesztője, így várhatóan sokáig támogatva lesznek. 
+A projekt az itt felsoroltakon túl, számos kisebb program könyvtárat is felhasznál, de ezek
+......................................
+
 
 \section{Angular}
 Az Angular egy \Gls{TypeScript} alapú \Gls{Framework}, amit  eredetileg a Google fejlesztett ki, de most már nyílt forráskódú. Az Angular teljes újraírása a régi \Gls{AngularJS}-nek. Egyik legnagyobb előnye, hogy komponens alapú keretrendszer, ezért ennek segítségével újra felhasználható kódot lehet írni. Támogatja a \Gls{SinglePageApp} készítését. Ezeken a weblapokon a weblap újratöltése nélkül tud a felhasználó navigálni, ezzel is gyorsabbá téve azt.
@@ -563,6 +566,21 @@ Ebben a fejezetben \az{\ref{systemExplanation}-es fejezetben} leírt komponensek
 \section{Kliens}
 A kliens oldal felépítését nagyban meghatározza az, hogy Angular keretrendszer van használva a projektben, ami sok programozási mintát megkövetel. Ezek segítenek az újrafelhasználható, illetve megbízható kódot írni.
 
+
+
+\subsection{Angular által nyújtott szolgáltatások}
+Az Angular által előírt minták közül a legfontosabb a komponens minta. Mivel így az általunk készített grafikus komponenseket az oldalon akárhány helyen fel tudjuk használni. Ezek a komponensek a fejlesztés alatt úgy viselkednek, mintha tényleges HTML elemek lennének, majd futtatáskor az Angular rendszere helyettesíti be az általunk megadott HTML szegmenseket.
+
+Továbbá a keretrendszer lehetőséget biztosít service-k írására és használatára. Ezek olyan speciális osztályok, amelyeket a komponensekből el tudunk érni és komponenshez szorosan nem köthető funkcionalitásokat lehet bennük megvalósítani. Az elérésükhöz az Angular dependency injection-t biztosít. Ennek a lényege az, hogy a felhasználni kívánt service-t mint bemeneti paraméter van feltéve az osztály konstruktorában. Így, amikor az Angular-nak létre kell hoznia az osztályt, automatikusan átadja neki a service egy példányát.  Ezt a megoldást sok más környezetben például JAVA-ban is szokás használni.
+
+\subsection{Recept importálás}
+A recept importálás folyamatot kliens oldalról mindig a felhasználó kezdeményezi.
+Ezt a link bemásolásával és az import gombra való rányomással teszi meg. 
+Ekkor a kliens a megadott URL címmel meghívja a felhőben futó Cloud function-t, majd vár amíg az visszaküldi az elkészült recept adatokat. 
+Ezután a felhasználónak lehetősége van azt javítani. Majd, ha azt jóváhagyta, akkor a kliens ismét a szerver oldalhoz fordul. 
+Ezúttal az adatbázisba tölti fel a receptet. Ezt a folyamatot \az{\ref{fig:clientRecipeImport}}. ábra mutatja be.
+A szerver oldali folyamatokat később \az{\ref{serverImportsRecipe}}. szekcióban vannak részletezve.
+
 \noindent
 \begin{figure}[H]
 	\centering
@@ -571,21 +589,48 @@ A kliens oldal felépítését nagyban meghatározza az, hogy Angular keretrends
     \label{fig:clientRecipeImport}
 \end{figure}
 
-\subsection{Angular által nyújtott szolgáltatások}
-Az Angular által előírt minták közül a legfontosabb a komponens minta. Mivel így az általunk készített grafikus komponenseket az oldalon akárhány helyen fel tudjuk használni. Ezek a komponensek a fejlesztés alatt úgy viselkednek, mintha tényleges HTML elemek lennének, majd futtatáskor az Angular rendszere helyettesíti be az általunk megadott HTML szegmenseket.
-
-Továbbá a keretrendszer lehetőséget biztosít service-k írására és használatára. Ezek olyan speciális osztályok, amelyeket a komponensekből el tudunk érni és komponenshez szorosan nem köthető funkcionalitásokat lehet bennük megvalósítani. Az elérésükhöz az Angular dependency injection-t biztosít. Ennek a lényege az, hogy a felhasználni kívánt service-t mint bemeneti paraméter van feltéve az osztály konstruktorában. Így, amikor az Angular-nak létre kell hoznia az osztályt, automatikusan átadja neki a service egy példányát.  Ezt a megoldást sok más környezetben például JAVA-ban is szokás használni.
-
-\subsection{Recept letöltés}
-
 \subsection{Saját kollekcióba mentés}
+A receptek saját kollekcióba való mentése egy egyszerű folyamat. 
+Amikor a felhasználó rányom a megfelelő gombra, a kliens a felhasználó adatbázisában lévő kollekcióba tölti fel a kiválasztott recept címét.
 
 \subsection{Bevásárló listához adás}
+A bevásárlólistához adáskor a kliensnek sok feladata van, ezt a folyamatot a \ref{fig:clientShoppingListAdd}. ábra mutatja be.
+Ezt az esemény sorozatot is a felhasználó indítja el azzal, hogy a megfelelő gombra rányom (\verb+1+. átmenet az ábrán). 
+Ezután a kliens az adatbázisból lekérdezi az ugyanilyen nevű tételeket. 
+Amennyiben van ugyanilyen nevű tétel, akkor a kliens megpróbálja ezeket összevonni.
+A tételek mértékegységét is átváltja, ha szükséges. (\verb+4+)
+Amennyiben az összevonás lehetséges, akkor az adatbázisban frissül a már meglévő tétel (\verb+6+).
+Azonban, ha nincs megfelelő nevű tétel még kimentve vagy nem lehet őket összevonni, akkor új tételként kerülnek feltöltésre (\verb+8+ és \verb+10+).
+
+\noindent
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.8\textwidth]{out/diagrams/clientShoppingListAdd/clientShoppingListAdd.eps}
+	\caption{A recept importálás a kliens szemszögéből}
+    \label{fig:clientShoppingListAdd}
+\end{figure}
 
 \section{Szerver}
 
 \subsection{Recept importálás}
+\label{serverImportsRecipe}
+A recept importálás nagy része a szerveren történik. A szerver pipeline (csővezeték) achitektúrát alkalmaz.
+Ennek a lényege az hogy a kérést lépésekben dolgozzuk fel. Minden egyes lépés a csővezeték egy egy állomása.
+A Pipeline osztály egy példányába berakhatunk modulokat, amiket egy egy futtatás során az sorrendben egymás után fog lefuttatni.
+Ennek a felépítésnek az előnye, hogy kevés a modulok közötti függőség igy azok egymástól függetlenül is tesztelhetőek.
+Illetve akár külön külön is futtatthatóak. 
 
+Amikor a kliens elindít egy lekérdezést, a cloud function belépési pntja rögtön meghívja a \verb+recipesPipeline+-t ami sorban lefuttatjs a modulokat
+\begin{itemize}
+	\item FetchUrlData
+	Ez a modul fut le legelsőnek és ez felelős a HTLM letöltéséért a megadott URL címről. Ehhez kettő külső csomagot hsznál fel.
+	Elsőként az \verb+axios+ csomagot használja a tényleges \Gls{HTTP} lekérdezés lefuttatására. Majd a \verb+cheerio+ csomag segítségével a megkapott HTML file-t értelmezi. 
+	A \verb+cheerio+ nagy előnye, hogy a CSS-ben megszokott módon tudunk kiválasztani elemetn a megadott HTML-ből. 
+	\item JsonLdExtractor
+	Ebben a modulba kerülnek a már említett JSON-LD adatok feldolgozásra. Itt megpróbálja a modul megtalálni azt a \Gls{JSON} szekciót ami a \ref{ Schema.org }-os \verb+Recipe+-t ír le.
+	Majd ha ezt megtalálta akkor ezt a különböző weblapok álltal használt változtatásokat fgyelembe véve feldolgozza. 
+
+\end{itemize}
 \subsection{Bevásárlólista metaadat kezelés}
 
 \chapter{Adatmodellek}

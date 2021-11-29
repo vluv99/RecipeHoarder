@@ -1,0 +1,38 @@
+@startuml
+autonumber
+!pragma teoz true
+
+participant "Kliens : Weboldal" as client
+
+participant "Szerver : Firebase Functions" as server
+
+participant "recipesPipeline : Pipeline" as pipeline
+
+collections "m:Module" as module
+
+{start} client -> server : <i>importRecipe(url)
+activate server
+
+server -> pipeline : run(recipeUrl)
+activate pipeline
+
+loop m in modules
+
+    pipeline -> module : run(data)
+    activate module
+
+    pipeline <-- module
+    deactivate module
+
+end
+
+server <-- pipeline
+deactivate pipeline
+
+{end} client <-- server
+deactivate server
+
+{start} <-> {end} : Több másodperc is lehet
+ 
+
+@enduml
