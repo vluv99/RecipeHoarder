@@ -57,6 +57,7 @@
 %\usepackage{subcaption}
 \usepackage{subfig}
 \usepackage{glossaries}
+\usepackage{nameref}
 
 %Tételszerű környezetek definiálhatók, ezek most fejezetenkent egyutt szamozodnak, pl.
 \newtheorem{tet}{Tétel}[chapter]
@@ -280,7 +281,6 @@ A következők összefoglalják a program főbb funkcionalitásait, azokat felha
 Az ebben a fejezetben használt képek a már kész applikáció-ból származnak, és illusztrálják a megvalósított funkcionalitásokat.
 
 \noindent
-%\includegraphics[scale=0.4]{out/diagrams/useCase/use-case.eps}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{out/diagrams/useCase/use-case.eps}
@@ -306,14 +306,9 @@ A bejelentkezésnél a regisztrációhoz hasonlóan két lehetőség áll rendel
 \end{figure}
 
 
-%\noindent
-%\includegraphics[scale=0.5]{pictures/mobil_login.png}
-%\includegraphics[scale=0.4]{pictures/web_register.png}
-
 \section{Receptek}
 A következőkben a receptekhez kapcsolódó főbb funkciókról lesz szó. Ez az ábrán a “Receptek” csoportban található felhasználási eseteket jelenti. Ezen funkcionalitások alkotják az alkalmazás legfontosabb képességeit. A piackutatásban megállapított fontos funkciókat tartalmazza, például a legfontosabbnak megállapított recept importálást.
-%\noindent
-%\includegraphics[scale=0.5]{pictures/mobil_home.png}
+
  
 \subsection{Receptek hozzáadása} 
 A weblap egyik jellegzetes alapfunkciója, hogy a közösség tölti fel az adatbázist receptekkel. Ez azért fontos, mert így nem az adminisztrátoroknak kell folyamatosan dolgozni, hogy minél több recept legyen elérhető a felhasználók számára. 
@@ -365,7 +360,7 @@ Mivel ez egy recept gyűjtő webes alkalmazás, ezért egyértelműen lehetősé
 \subsection{Receptre szűrés}
 A weblapon van lehetőség keresni a receptek között, ezen belül is két mód van erre. Egy általános névre való keresés, valamint kategória szerint is lehet szűrni. Mivel egy recept létrehozásakor kötelező megadni legalább egy kategóriát, így egyszerűen kereshetők ez alapján.
 
-Ez \az{\ref{fig:useCase}-es ábra} “Receptek” csoport alatt, a “Receptre szűrés”-nek felel meg a két lehetséges verziójával, “név szerinti” és “kategória szerinti” szűrés. 
+Ez \az{\ref{fig:useCase}-es ábrán} “Receptek” csoport alatt, a “Receptre szűrés”-nek felel meg a két lehetséges verziójával, “név szerinti” és “kategória szerinti” szűrés. 
 
 \begin{figure}[H]%
     \centering
@@ -380,7 +375,7 @@ Ez \az{\ref{fig:useCase}-es ábra} “Receptek” csoport alatt, a “Receptre s
 \subsection{Hibás recept jelentése}
 Korábban volt szó arról, hogy az oldal adatbázisa a közösség által feltöltött receptek alapján nő. Ezért fennáll a lehetősége, hogy akár az importálás során különböző hibák keletkezzenek, amit a felhasználó nem vesz észre vagy nincs kedve kijavítani. Akár az is lehetséges, hogy támadás érje a weblapot, és keletkezzenek olyan receptek, amelyek hibásak. Ennek javítása érdekében minden recepthez tartozik egy hiba bejelentő rész, ahol előre megszabott lehetséges hibák listájából választva jelezhet a weblap karbantartóinak, hogy ha valami nem jó a recepten. Ezen lehetséges hibák közé tartozik például, ha hiányos az alapanyagok listája vagy trágár szavakat tartalmaz.
 
-Ez \az{\ref{fig:useCase}-es ábra} “Receptek” rész alatt, a “Recept megtekintés”-hez tartozik “Hibás recept jelentés” néven.
+Ez \az{\ref{fig:useCase}-es ábrán} “Receptek” rész alatt, a “Recept megtekintés”-hez tartozik “Hibás recept jelentés” néven.
 
 \begin{figure}[H]%
     \centering
@@ -396,7 +391,7 @@ Minden felhasználónak van saját bevásárlólistája, amibe össze tudja gyű
 \subsection{Bevásárló listához adás}
 A listához adásra két lehetőség van. A szokásos bevásárlólista módszert követve manuálisan is ki lehet tölteni az adatokat, majd a listához adni. A másik módszer a recepteken belül, a felsorolt alapanyagokat is egyesével hozzá lehet adni, illetve a recepteknél lehetőség vagy az összes alapanyagot azonnal hozzáadni a listához. 
 
-Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt, a “Bevásárló listához adás” résznek felel meg.
+Ez \az{\ref{fig:useCase}-es ábrán} a “Bevásárlólista” rész alatt, a “Bevásárló listához adás” résznek felel meg.
 
 \begin{figure}[H]%
     \centering
@@ -409,7 +404,7 @@ Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt, a “B
 \subsection{Bevásárló lista megtekintés}
 A bevásárlólista megjelenítésénél a korábban hozzáadott alapanyagok vannak felsorolva. A bevásárlólista az alapanyagokat a hozzáadásuk dátuma szerint jeleníti meg. Igy könnyen követhető, mikor egy új tétel lett a listához adva.  Amennyiben az alapanyagnak nincs mértékegysége vagy mennyisége, akkor azok az adatok nem lesznek megjelenítve, hogy elkerüljük, hogy például “0 pasta“ legyen megjelenítve.
 
-Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt lévő “Bevásárló lista megtekintése” résznek felel meg.
+Ez \az{\ref{fig:useCase}-es ábrán} a “Bevásárlólista” rész alatt lévő “Bevásárló lista megtekintése” résznek felel meg.
 
 \begin{figure}[H]%
     \centering
@@ -422,33 +417,22 @@ Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt lévő 
 \subsection{Bevásárló listából törlés}
 Ha a felhasználónak már nem kell egy adott alapanyag a listából, legyen ez azért, mert már megvette vagy csak nem aktuális már, akkor könnyen egy kattintással el lehet tüntetni a listából. Másik verzió a lista ürítésére a lista alatt lévő gomb megnyomásával az egész lista törlése. Így gyorsan és egyszerűen lehet újrakezdeni a lista használatát anélkül, hogy az összes elemet egyesével kellett volna törölni.
 
-Ez \az{\ref{fig:useCase}-es ábra} a “Bevásárlólista” rész alatt lévő “Bevásárló listából törlés” résznek felel meg. 
+Ez \az{\ref{fig:useCase}-es ábrán} a “Bevásárlólista” rész alatt lévő “Bevásárló listából törlés” résznek felel meg. 
 
-%\noindent
-%\includegraphics[scale=0.5]{pictures/mobil_menu.png}
-%\includegraphics[scale=0.5]{pictures/mobil_recipe-top.png} \\
-%\includegraphics[scale=0.4]{pictures/web_recipeCollection.png}
-
-%\noindent
-%\includegraphics[scale=0.4]{pictures/web_import.png}
-%\includegraphics[scale=0.5]{pictures/mobile_importDataCheck.png}
-
-%\noindent
-%\includegraphics[scale=0.4]{pictures/web_shoppinglist.png}
-
-%\noindent
-%\includegraphics[scale=0.5]{pictures/mobile_suggestion.png}
 
 \chapter{Felhasznált technológiák}
-Ebben a fejezetben a projekt által felhasznált számos technológiák kerülnek bemutatásra. A projekt legfontosabb technológiái az Angular és Firebase. Ezeknek a Google a fő fejlesztője, így várhatóan sokáig támogatva lesznek. 
-A projekt az itt felsoroltakon túl, számos kisebb program könyvtárat is felhasznál, de ezek
-......................................
+Ebben a fejezetben a projekt által felhasznált számos technológiák kerülnek bemutatásra. A projekt legfontosabb technológiái az Angular és Firebase. 
+Ezeknek a Google a fő fejlesztője, így várhatóan sokáig lesznek támogatva.
+A projekt az itt felsoroltakon túl, számos kisebb program könyvtárat is felhasznál, de ezek nem kerülnek részletezésre, mivel a projekt szempontjából nem kiemelt fontosságúak.
+A felhasznált csomagok teljes listáját a projekt forrásfáljai között lévő kettő \texttt{packag.json} file tartalmazza.
 
 
 \section{Angular}
 Az Angular egy \Gls{TypeScript} alapú \Gls{Framework}, amit  eredetileg a Google fejlesztett ki, de most már nyílt forráskódú. Az Angular teljes újraírása a régi \Gls{AngularJS}-nek. Egyik legnagyobb előnye, hogy komponens alapú keretrendszer, ezért ennek segítségével újra felhasználható kódot lehet írni. Támogatja a \Gls{SinglePageApp} készítését. Ezeken a weblapokon a weblap újratöltése nélkül tud a felhasználó navigálni, ezzel is gyorsabbá téve azt.
 
-A felhasználói felület tervezése során is igyekeztem komponenseket kialakítani mind telefonos, mind desktopos kinézetben. A komponensekkel való munka megkönnyíti egy projekt fejlesztését, mivel akár saját fejlesztésből, akár külső könyvtárból szerzett elemekből lehet egyszerűen felépíteni a weblapokat. Ezeknek az elemeknek másik nagy előnye, hogy elég csak az eredetit módosítani ahhoz, hogy mindenhol megváltozzon, ezzel is egységesítve az oldal szerkezetét, valamint segítve a fejlesztők dolgát.
+A felhasználói felület tervezése során is igyekeztem komponenseket kialakítani mind telefonos, mind desktopos kinézetben. 
+A komponensekkel való munka megkönnyíti egy projekt fejlesztését, mivel akár saját fejlesztésből, akár külső könyvtárból szerzett elemekből lehet egyszerűen felépíteni a weblapokat. 
+Ezeknek az elemeknek másik nagy előnye, hogy elég csak az eredetit módosítani ahhoz, hogy mindenhol megváltozzon, ezzel is egységesítve az oldal szerkezetét, valamint segítve a fejlesztők dolgát.
 
 
 \section{Angular Material} 
@@ -495,6 +479,8 @@ Ha az eszköznek nincs internet elérése, akkor a script segítségével a webl
 Ezzel elérhető, hogy valamilyen szinten használható legyen a weblap offline környezetben is. Szerencsére mind az Angular, mind an Firebase úgy lett kifejlesztve, hogy csak egy-egy helyen kell megadni neki, hogy az Angular Service Worker-t használja, ezért nekem nem kellett saját kódot írni ahhoz, hogy internet nélkül is használható legyen a weblap. Ez persze limitált arra, ami cachelve lett, például a keresés csak a már egyszer letöltött receptekre fog működni, de a bevásárló listához adás során, mikor az eszközön újra lesz internet, az egész szinkronizálódik, hogy ne legyen adatvesztés.
 
 \section{Schema.org}
+\label{shemaorg}
+
 A schema.org egy kereső cégek által kezdett indítvány aminek része a Google, Yahoo és Bing!. 
 A céljuk az, hogy az interneten való keresést megkönnyítsék az által, hogy a weblapok egy a számítógépek által könnyen értelmezhető formátumban is elérhetővé teszik a tartalmukat. 
 Az indítvány összefoglalja, hogy milyen tartalmakat tudnak az egyes weblapok leírni és ezeknek milyen konkrét tulajdonságaik lehetnek. 
@@ -614,24 +600,46 @@ Azonban, ha nincs megfelelő nevű tétel még kimentve vagy nem lehet őket ös
 
 \subsection{Recept importálás}
 \label{serverImportsRecipe}
-A recept importálás nagy része a szerveren történik. A szerver pipeline (csővezeték) achitektúrát alkalmaz.
-Ennek a lényege az hogy a kérést lépésekben dolgozzuk fel. Minden egyes lépés a csővezeték egy egy állomása.
-A Pipeline osztály egy példányába berakhatunk modulokat, amiket egy egy futtatás során az sorrendben egymás után fog lefuttatni.
-Ennek a felépítésnek az előnye, hogy kevés a modulok közötti függőség igy azok egymástól függetlenül is tesztelhetőek.
-Illetve akár külön külön is futtatthatóak. 
+A recept importálás nagy része a szerveren történik. A szerver pipeline (csővezeték) architektúrát alkalmaz.
+Ennek a lényege az, hogy a kérést lépésekben dolgozzuk fel. Minden egyes lépés a csővezeték egy egy állomása.
+A Pipeline osztály egy példányába bele kell rakni a modulokat, amiket egy-egy futtatás során a felépített sorrendben egymás után fog futtatni.
+Ennek a felépítésnek az előnye, hogy kevés a modulok közötti függőség így azok egymástól függetlenül is tesztelhetők.
+Azon kívül még akár külön külön is futtathatóak. 
 
-Amikor a kliens elindít egy lekérdezést, a cloud function belépési pntja rögtön meghívja a \verb+recipesPipeline+-t ami sorban lefuttatjs a modulokat
+Amikor a kliens elindít egy lekérdezést, a cloud function belépési pontja rögtön meghívja a \verb+recipesPipeline+-t ami sorban lefuttatja a modulokat.
+
+
 \begin{itemize}
-	\item FetchUrlData
-	Ez a modul fut le legelsőnek és ez felelős a HTLM letöltéséért a megadott URL címről. Ehhez kettő külső csomagot hsznál fel.
-	Elsőként az \verb+axios+ csomagot használja a tényleges \Gls{HTTP} lekérdezés lefuttatására. Majd a \verb+cheerio+ csomag segítségével a megkapott HTML file-t értelmezi. 
-	A \verb+cheerio+ nagy előnye, hogy a CSS-ben megszokott módon tudunk kiválasztani elemetn a megadott HTML-ből. 
-	\item JsonLdExtractor
-	Ebben a modulba kerülnek a már említett JSON-LD adatok feldolgozásra. Itt megpróbálja a modul megtalálni azt a \Gls{JSON} szekciót ami a \ref{ Schema.org }-os \verb+Recipe+-t ír le.
-	Majd ha ezt megtalálta akkor ezt a különböző weblapok álltal használt változtatásokat fgyelembe véve feldolgozza. 
+	\item \textbf{FetchUrlData} \\
+	Ez a modul fut le legelsőnek és ez felelős a HTML letöltéséért a megadott URL címről. Ehhez kettő külső csomagot használ fel.
+	Elsőként az \verb+axios+ csomagot használja a tényleges \Gls{HTTP} lekérdezés futtatására. Majd a \verb+cheerio+ csomag segítségével a megkapott HTML fájlt értelmezi. 
+	A \verb+cheerio+ nagy előnye, hogy a CSS-ben megszokott módon tudunk kiválasztani elemeket a megadott HTML-ből. 
+
+	\item \textbf{JsonLdExtractor} \\
+	Ebben a modulba kerülnek a már említett JSON-LD adatok feldolgozásra. Itt megpróbálja a modul megtalálni azt a \Gls{JSON} szekciót, ami \az{\nameref{shemaorg}}-os  \verb+Recipe+-t ír le.
+	Majd, ha ezt megtalálta, akkor ezt a különböző weblapok által használt változtatásokat figyelembe véve dolgozza azt fel. 
+
+	\item \textbf{SeparateIngredients} \\
+	Ez a module az előzőleg megszerzett összető neveket választja szét. Erre több \Gls{regex} kifejezést használ. Ezek a sokféle emberek számára könnyen érthető formátumokat dolgozzák fel. 
+	Például külön eset dolgozza fel azt, amikor az összetevő \texttt{<szám> <mértékegység> <megnevezés>} (pl.: 2 kg apples) alakban van, a \texttt{(<tól> - <ig>) <mértékegység> <megnevezés>} (pl.: 1 - 2 kg apples) alakhoz képest. 
+	Ez egy kifejezetten  összetett lépés mivel fel kell tudni dolgozni a \Gls{unicodeVulgarFraction} karaktereit is. Ez azért fontos, mert elég sok weblap előszeretettel használja ezeket a tört szám jelöléseket.
+
+	\item \textbf{CalorieCalculator} \\
+	A kalória számlálást valósítja meg, ehhez az \Gls{USDA} által szolgáltatott \Gls{API}-t használja. 
+	Az API-ról visszakapott adatokat fel kell dolgozni és kiszámítani az alapján, hogy mennyi kalória van a receptben megadott mennyiségekhez. 
+	Ehhez a modulnak át kell tudni váltania a recept által megadott mértékegységek és az API által szolgáltatott mennyiségek között. 
+	Ez jelenleg a legerősebb modul, mivel minden alapanyaghoz web lekérdezést kell elindítani. Ezt a későbbiekben lokális adatbázisban eltárolt \gls{cache} segítségével lehetne gyorsítani.
 
 \end{itemize}
 \subsection{Bevásárlólista metaadat kezelés}
+
+A bevásárló listában az ajánlások funkcióhoz el kell tárolni azt, hogy a felhasználó milyen gyakorisággal vásárol egy adott terméket. 
+Ehhez egy metaadat kollekció van fenntartva (Lásd részletesebben \nameref{dataSchemes:users}). Ennek a listának a fenntartása egy cloud function feladata. 
+A funkció minden alkalommal lefut, ha úgy tétel felvételre került a bevásárlólistába vagy egy a listában lévő tétel került módosításra. 
+Ezekben az esetekben a program kiszámítja az előző hozzáadástól eltelt időt, majd ezt átlagolva eltárolja a \texttt{deltaTime} mezőben.
+Ezen érték alapján kiszámolja a következő alkalmat, hogy mikor kell a következő alapanyag javaslatot feldobni a felhasználónak.
+
+
 
 \chapter{Adatmodellek}
 \label{dataSchemes}
@@ -669,6 +677,7 @@ Alapanyagokon belül eltároljuk az alapanyag nevét, mennyiségét és mérték
 \end{figure}
 
 \section{Felhasználók eltárolása}
+\label{dataSchemes:users}
 Az adatbázisban a felhasználókat egy kollekcióban tároljuk. A regisztráció során létrejön egy új dokumentum az adatbázisban. Itt tároljuk el az egyéb adatokat, amit a felhasználó az alap e-mail és jelszón kívül megad. Az egyéb adatok segíthetnek a jövőben személyre szabott recept ajánlót készíteni. 
 
 Minden felhasználóhoz továbbá eltároljuk a Firebase Auth által adott “UID” azonosítót, ami garantáltan egyedi. Itt a korábban említett kulcs-tömb típushoz képest már alkollekciók lettek bevezetve. Ezekben az alkollekciókban tároljuk el a felhasználó által elmentett recepteket, illetve hasonló módon tároljuk el a bevásárló lista adatait is.
@@ -681,7 +690,7 @@ A bevásárló listába az alapanyagokról a mentés dátumát és a pontos adat
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{out/diagrams/jsonUsers/jsonUsers.eps}
-	\caption{Egy minta felhaszáló adatairól}
+	\caption{Minta egy példa felhaszáló lehetséges adatairól}
     \label{fig:jsonUsers}
 \end{figure}
 
@@ -698,34 +707,30 @@ Ezeket a bejelentett hibákat egy kollekcióban tároljuk, ahol minden dokumentu
     \label{fig:jsonReports}
 \end{figure}
 
-%\includegraphics[width=\textwidth]{out/diagrams/jsonReports/jsonReports.png}
-%\includegraphics[width=\textwidth]{out/diagrams/jsonReports/jsonReports.eps}
-
-
-%\chapter{Fontosabb kód részek és ismertetései}
-%\section{asd} -> A rendszer magas szintű áttekintése
-
 
 \chapter{Tesztelés}
-A fontosabb funkciók, amik meghatározzák az alap témáját a weblapnak tesztelve lettek. A szerver oldali funkciók mind, az alap működések közé tartoznak,ezért a cloud function moduloknak be lett állítva automatikus tesztelés. Ennek segítségével, ha valami nagyobb változtatást csináltunk,mint például egy rendszer szintű frissítés a FireBase csomagnak, akkor egyszerűen le lehet tesztelni, hogy még minden jól működik-e. Ezt egyszerű unit tesztekkel oldottam meg. A teszteket az npm-ről szedett Jasmine csomaggal készítettem.
+A fontosabb funkciók, amik meghatározzák a témáját a weblapnak tesztelve lettek. A szerver oldali funkciók mind, az alap működések közé tartoznak, ezért a cloud function moduloknak automatikusan futtatható tesztek lettek készítve. Ezeknek a segítségével könnyen észrevehető, ha egy változtatás a kódban hibás működéshez vezet. Ennek a megvalósítására unit és integráció tesztek lettek írva. Ezek különböző modulokat és az egész importáló pipeline-t tesztelik.
 
-\section{Recept importálás URL-en keresztül}
-Mivel ez a folyamat modulárisan lett felépítve, ezért minden egyes lépését egyszerű tesztelni. A modulok egyesével és a végeredmény is külön tesztelve van.
+A tesztelés a Jasmine könyvtárat használja. Ez egy elterjedt az Angular által is javasolt teszt környezet. Az előnye az, hogy gyors és könnyedén hozzáadható a projekthez. 
 
-\subsection{FetchUrlData}
-
-\subsection{JsonLdExtractor}
+\section{Import modulok}
+Mivel a recept importálás folyamat modulárisan lett felépítve, ezért minden egyes lépését egyszerű tesztelni. A modulokból a lényegesebbek egyesével és a teljes funkció külön tesztelve van.
 
 \subsection{SeparateIngredients}
-Az alapanyag szétválasztás az egyik legkényesebb része a importálás folyamatnak, mivel ebben a részben egy string adatot kell megvizsgálni és különböző adattagokra osztani. Ehhez különböző regex formulák lettek kifejlesztve, hogy a különböző eseteket minél jobban és pontosabban tudjuk feldolgozni. Ehhez, egy egyszerű alap és egy komplexebb teszt készűlt.
+Az alapanyag szétválasztás az egyik legkényesebb része a importálás folyamatnak, mivel ebben a részben egy szöveges adatot kell megvizsgálni és különböző adattagokra osztani. Ehhez különböző \Gls{regex} formulák lettek kifejlesztve, hogy a különböző eseteket minél jobban és pontosabban lehessen feldolgozni.
+ 
+Ezekhez egy egyszerű alap és egy komplexebb teszt készűlt. Az első célja, hogy le ellenőrizze a tört szám karakter és egyéb törtszám változatok helyesen vannak átkonvertálva float értékre. A második teszt pedig egy tömböt kap értéknek, amiben rengeteg különböző alapanyag és eredmény páros van felsorolva. Ezek olyan példák, amik élő importálás során kaphatóak és szélsőséges eseteket illusztrálnak. Ezek közé tartozik a három alapeset, ahol az első és legjobb eset amikor szépen visszaadja a mennyiséget, mértékegységet és az alapanyag megnevezését. Második lehetőség lehet az, amikor nem talál mértékegységet, de számot igen, tehát úgy kell visszaadnia mintha darabokban lenne mérve. Végül, ha számot sem talál a feldolgozandó szövegben, akkor csak simán visszaadja azt mintha az egész leírás a neve lenne. Ezen kívül le kell ellenőrizni azokat az eseteket, amik komplexé tették a \Gls{regex} teszteket például, a korábban említett tört karakter helyes észlelése és formázása.
 
-Az első célja, hogy le ellenőrizze, hogy a tört szám karakter és egyéb tört szám változatok helyesen vannak átkonvertálva float értékre. A második teszt pedig egy tömböt kap értéknek, amiben rengeteg különböző eset van felsorolva olyan példákkal, amit élő importálás során kaphatunk és szélsőséges probléma lehet. Ezek közé tartozik a három alapeset, ahol vagy szépen visszaadja a mennyiséget, mértékegységet és az alapanyag megnevezését, vagy ha nem talál mértékegységet, de van szám, akkor berendezi, hogy mennyi datab alapanyagot talált, vgay végűl, ha nincs szám se, akkor csak simán visszaadja alapértelmezett módon. Ezen kívül le kell ellenőrizni azokat az eseteket, amik komplexé tették a regex teszteket például, a korábban említett tört karakter helyes észlelése és formázása.
-
-\subsection{ImageDownloader}
 
 \subsection{CalorieCalculator}
+Egy másik fontos teszt a modulok között a kalória számláló. Mivel ez külső rendszereket is használ, ezért ennek a tesztelése fontos. Itt egy pár ismerten jó és egy pár biztosan sikertelen keresést van végrehajtva a modul segítségével. A sikertelen keresések főként arra alapulnak, hogy jelenleg darabszámhoz nem tudunk kalóriát számolni, mivel nem lehet előre hogy tudni hány gramm lehet például egy darab krumpli vagy tojás.
 
-\section{GetData}
+\section{Teljes recept importálás}
+Ez a teszt a teljes importer működését teszteli le egy példa recepten keresztül. Itt jelenleg csak egy receptet tesztelünk, mivel ezeknek a steszeknek az előállítása időigényes.
+A fejlesztést segítette, hogy a lokális teszteléshez készült egy \texttt{localTesting.ts} fájl, ami több már előre kiválasztott recept importálását futtatja végig.
+
+A jövőben hasznos lehet több automatikus tesztet elkészíteni, esetleg a teszt előállítását automatizálni.
+
 
 \chapter{Továbbfejlesztési lehetőségek}
 \section{Személyre szabott ajánló}
@@ -862,9 +867,23 @@ Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a Szegedi Tudománye
 	\href{https://angular.io/guide/service-worker-getting-started}{Angular PWA dokumentáció}, \\
 	\url{https://angular.io/guide/service-worker-getting-started}
 
+	\bibitem{JasmineDoc}
+	\href{https://jasmine.github.io/}{Jasmine dokumentáció}, \\
+	\url{https://jasmine.github.io/}
+
 \end{thebibliography}
 
-\chapter{Melléklet}
+\chapter{Melléklet} 
+
+\section{Projekt elérése}
+
+\subsection{Forrás fájok}
+A projekt forrás fájljai eléhetőek a \href{https://github.com/vluv99/RecipeHoarder}{GitHub}-on a következő linken:\\
+\url{https://github.com/vluv99/RecipeHoarder}
+
+\subsection{Élő weboldal}
+A kész weblap a következő címen érhető el:\\
+\url{https://recipe-hoarder.web.app/}
 
 \printglossary[title=Szótár]
 %\addcontentsline{toc}{section}{Szótár}

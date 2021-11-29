@@ -37,6 +37,7 @@
         "measurement": "kg",
 		"name": "apple",
         "score": 2,
+        "deltaTime": 1856.394996643066406,
         "nextDate": "2021-10-17T17:10:10.511Z"
     }]
 }
