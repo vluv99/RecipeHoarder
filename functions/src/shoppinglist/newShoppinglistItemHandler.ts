@@ -37,18 +37,18 @@ export async function addToShoppinglistMeta(change: QueryDocumentSnapshot, conte
         const timeSince = newItem.addDate - addDate
 
         if('deltaTime' in item){
-            item.delaTime = (item.delaTime + timeSince)/2;
+            item.deltaTime = (item.deltaTime + timeSince)/2;
 
             if (item.score < 5){
                 item.score += 0.1;
             }
 
         }else {
-            item.delaTime = timeSince;
+            item.deltaTime = timeSince;
         }
 
         item.addDate = newItem.addDate;
-        item.nextDate = new firestore.Timestamp(newItem.addDate.seconds + Math.round(item.delaTime), 0)
+        item.nextDate = new firestore.Timestamp(newItem.addDate.seconds + Math.round(item.deltaTime), 0)
 
 
         await querySnapshot.docs[0].ref.update(item);

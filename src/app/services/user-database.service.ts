@@ -325,7 +325,7 @@ export class UserDatabaseService {
                 }
 
                 if (modifyDate){
-                    data.nextDate = new firebase.firestore.Timestamp(firebase.firestore.Timestamp.now().seconds + Math.round(data.delaTime), 0)
+                    data.nextDate = new firebase.firestore.Timestamp(firebase.firestore.Timestamp.now().seconds + Math.round(data.deltaTime), 0)
                 }
 
                 snap.docs[0].ref.update({'score': data.score, 'nextDate': data.nextDate})

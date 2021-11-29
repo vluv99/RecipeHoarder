@@ -30,7 +30,7 @@ describe("The calorie calculator component", function () {
         const ing = failIngredientsList[i];
         it("shouldn't be able to find "+ ing.name, async function () {
             const kcal = await module.runFoodAPI(ing)
-            
+
             expect(kcal).toBe(null);
         });
     }
