@@ -52,7 +52,7 @@ export class CalorieCalculator implements PipelineModule {
         return Promise.resolve(undefined);
     }
 
-    runFoodAPI(searchTerm: Ingredient) {
+    async runFoodAPI(searchTerm: Ingredient): Promise<number | null> {
         return axios.post('https://api.nal.usda.gov/fdc/v1/foods/search?api_key=c7aljWCqn0i0qJAaH6hcunC6l6QcJ2F80f3Yv7zi', {
             "query": searchTerm.name, //getShortenedSearchTerm(searchTerm),
             "dataType": [
@@ -65,10 +65,7 @@ export class CalorieCalculator implements PipelineModule {
 
             return this.parseResponse(response.data,searchTerm)
 
-        })/*.catch((a: any) => {
-            console.error("error at: " + searchTerm + " is " + a)
-            console.log("----------------------")
-        })*/
+        })
     }
 
     parseResponse(data:any, searchTerm: Ingredient): number | null{
@@ -85,23 +82,30 @@ export class CalorieCalculator implements PipelineModule {
 
         let packageWeight = ["100", "g"];
         if("packageWeight" in data.foods[0]){
-            const pw = data.foods[0].packageWeight
-            packageWeight = pw.split('/')
+            //console.log(data.foods[0].packageWeight);
 
-            for (let i = 0; i < packageWeight.length; i++) {
-                const u = packageWeight[i].trim().split(' ')
+            const pw = data.foods[0].packageWeight
+            const splitData = pw.split('/')
+
+            for (let i = 0; i < splitData.length; i++) {
+                const u = splitData[i].trim().split(' ')
+                //console.log(u);
                 if (this.units.includes(u[1].trim().toLowerCase())) {
                     packageWeight = u;
                     break
                 }
             }
         }
+        //console.log(packageWeight);
+        //console.log(packageWeight[1]);
         const calculatedKCAL = this.calculateKCAL(searchTerm, kcal, Number(packageWeight[0]), packageWeight[1])
 
         return calculatedKCAL
     }
 
     calculateKCAL(i:Ingredient, kcal:number, servingSize:number|undefined, servingUnit:string|undefined){
+
+        //console.log(servingUnit);
 
         if (servingSize != undefined && servingUnit != undefined){
             const res = UnitConverter.convert(i.amount.valueOf(), i.measurement,servingUnit);
