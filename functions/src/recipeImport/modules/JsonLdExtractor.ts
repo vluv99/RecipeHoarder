@@ -108,6 +108,7 @@ export class JsonLdExtractor implements PipelineModule {
                         res = st;
                     } else if ('text' in st) {
                         res = st.text;
+
                     }
                     //res = res.replace(/<[^>]+>/g, '');
 
