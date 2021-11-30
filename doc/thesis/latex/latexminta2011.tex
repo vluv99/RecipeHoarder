@@ -176,7 +176,8 @@ A szakdolgozat során egy Angular keretrendszerben kialakított webes alkalmazá
 	\item Feladat  megfogalmazása: \\
 	Az importálás funkció lehetővé teszi, hogy a felhasználók egy helyen gyűjtsék a receptjeiket. Ezen túl az is, hogy a receptek összetevőit egy bevásárló listába ki tudják menteni, ezzel is megkönnyítve a mindennapi életet. A felhasználók a többiek által létrehozott receptek között tudnak keresni, és a nekik tetsző recepteket ki tudják menteni a saját receptgyűjteményeikbe.
 	\item Megoldási  mód: \\
-	Az applikáció egy weblap formájában lett megvalósítva, mivel így lehet a legtöbb eszközt elérni egyetlen kód bázissal. A megvalósításhoz a már említett Angular keretrendszert használtam, illetve a Firebase felhő alapú szolgáltatásait. Mivel mind a kettő (Angular, Firebase) a Google terméke, ezért várhatóan hosszútávon támogatva lesznek. A felhasználó a recept URL-je alapján tud receptet importálni, vagy manuálisan is lehet létrehozni újat. Ekkor az importáláshoz egy szerver oldali funkció fut le és próbálja értelmezni a megkapott URL-en lévő html fájlt. Ennek egy fontos lépése az, hogy az alapanyagok nevét, mértékegységét és mennyiségét az eredeti helyről kiolvassa. Miután a receptet sikeresen importáltuk, azokat a Firebase adatbázisában tároljuk. 
+	Az applikáció egy weblap formájában lett megvalósítva, mivel így lehet a legtöbb eszközt elérni egyetlen kód bázissal. A megvalósításhoz a már említett Angular keretrendszert használtam, illetve a Firebase felhő alapú szolgáltatásait. Mivel mind a kettő (Angular, Firebase) a Google terméke, ezért várhatóan hosszú távon támogatva lesznek. 
+	A felhasználó a recept URL-je alapján tud receptet importálni, vagy manuálisan is lehet létrehozni újat. Ekkor az importáláshoz egy szerver oldali funkció fut le és próbálja értelmezni a megkapott URL-en lévő html fájlt. Ennek egy fontos lépése az, hogy az alapanyagok nevét, mértékegységét és mennyiségét az eredeti helyről kiolvassa. Miután a recept sikeresen importálva lett, az adatokat a Firebase adatbázisában lesznek eltárolva. 
 	\item Alkalmazott  eszközök, módszerek: \\
 	Mind az importálás, mind az egész projekt során törekedtem arra, hogy minél modulárisabb legyen a felépítés. A webapp fejlesztése során a PWA-t alkalmazva elérhető, hogy bizonyos funkciók offline is működjenek. Ezt a modern, könnyen kezelhető weblapot számítógépen és telefonon egyaránt lehet használni.
 	\item Elért  eredmény: \\
@@ -219,7 +220,7 @@ Ez egy fejlettebb verziója a korábban említett "átlagos" weblapoknak. Bejele
 
 Az alap recept keresésen kívül itt már lehetőségünk van azok elmentésére a sajátjaink közé. A weblap rendelkezik bevásárló lista funkcióval, valamint képes azonnal a receptből áthelyezni az alapanyagokat is. Egy kiemelkedő funkciója az étkezés tervező. Ez figyelembe vesz esetleges allergiákat, vagy étrendeket ajánl és segít tervezni a következő időszakra. 
 
-Ami hátrány az egész weblapon, hogy nem közösség bővíti a recept adatbázist, ezért limitált a receptek száma és nem lehet mindent megtalálni. Mivel nincs importálási lehetőség, nem a legegyszerűbb használni, mert kézzel kell beírni az adatokat.
+Ami hátrány az egész weblapon, hogy nem a közösség bővíti a recept adatbázist, hanem a weblapot fenntartó adminisztrátokot és szerkesztők, ezért limitált a receptek száma és nem lehet mindent megtalálni. Mivel nincs importálási lehetőség, nem a legegyszerűbb használni, mert kézzel kell beírni az adatokat.
 
 
 \section{BigOven}
@@ -278,7 +279,7 @@ A piackutatás összes eredményét \az{\ref{fig:table}} ábra foglalja össze.
 
 \chapter{Funkcionális specifikáció}
 A következők összefoglalják a program főbb funkcionalitásait, azokat felhasználási esetekben (UseCase) csoportosítja. Ez alkotja a  program funkcionális követelményét, azaz azokat a képességeket, amiket mindenféleképpen tudnia kell. Ezeket az elemeket a \ref{fig:useCase}-es ábra grafikusan ábrázolja, majd a fejezet további része pontosítja és kifejti őket.
-Az ebben a fejezetben használt képek a már kész applikáció-ból származnak, és illusztrálják a megvalósított funkcionalitásokat.
+Az ebben a fejezetben használt képek a már kész applikációból származnak, és illusztrálják a megvalósított funkcionalitásokat.
 
 \noindent
 \begin{figure}[h]
@@ -322,14 +323,14 @@ Egy recept feltöltésre két lehetőség is van. Az egyik az, hogy a felhaszná
     \label{fig:importcheck}% 
 \end{figure}
 
-A másik opció az, hogy egy másik recepteket tartalmazó weboldal URL címét kimásolja a böngészőből és beilleszti a linket a RecipeHoarder importáló felületére (lásd: \ref{fig:useCase}-es ábra “Recept hozzáadás URL-ből”). Itt, amennyiben a forrás weblap támogatott, a program betölti a recept adatait. Ezután a felhasználónak lehetősége van módosítani a receptet, majd azt kinentve hozzá adni a globális recept lisához.
+A másik opció az, hogy egy másik recepteket tartalmazó weboldal URL címét kimásolja a böngészőből és beilleszti a linket a RecipeHoarder importáló felületére (lásd: \ref{fig:useCase}-es ábra “Recept hozzáadás URL-ből”). Itt, amennyiben a forrás weblap támogatott, a program betölti a recept adatait. Ezután a felhasználónak lehetősége van módosítani a receptet, majd azt kimentve hozzá adni a globális recept lisához.
 
 Mindkét opció során a felhasználónak meg kell adnia, hogy a recept mely előre meghatározott csoportba tartozik (Pl.: Reggeli, Csípős, stb.). Majd a kimentés után a rendszer mind a két módszernél megpróbál kalória mennyiséget számolni a recepthez.
 
 \begin{figure}[H]%
     \centering
     \includegraphics[width=11.5cm]{pictures/web_import.png}
-	\caption{A desktopos verzióban a receptfelöltő oldal}%
+	\caption{A desktopos verzióban a receptfelöltő oldal} %Az asztali verzióban a recept feltöltő oldal
     \label{fig:importPage}% 
 \end{figure}
 
@@ -342,7 +343,7 @@ Természetesen a felhasználó bármikor meg tudja tekinteni az összes receptet
 \begin{figure}[H]%
     \centering
     \includegraphics[width=11.5cm]{pictures/web_recipeCollection.png}
-	\caption{A desktopos verzióban a felhasználónak a "Receptes kézikönyv"-re képernyőkép}%
+	\caption{Képernyőkép a felhasználó recept gyűjteménéről az asztali nézetben}% .
     \label{fig:collection}% 
 \end{figure}
 
@@ -421,7 +422,7 @@ Ez \az{\ref{fig:useCase}-es ábrán} a “Bevásárlólista” rész alatt lév�
 
 
 \chapter{Felhasznált technológiák}
-Ebben a fejezetben a projekt által felhasznált számos technológiák kerülnek bemutatásra. A projekt legfontosabb technológiái az Angular és Firebase. 
+Ebben a fejezetben a projekt által felhasznált számos technológia kerülnek bemutatásra. A projekt legfontosabb technológiái az Angular és Firebase. 
 Ezeknek a Google a fő fejlesztője, így várhatóan sokáig lesznek támogatva.
 A projekt az itt felsoroltakon túl, számos kisebb program könyvtárat is felhasznál, de ezek nem kerülnek részletezésre, mivel a projekt szempontjából nem kiemelt fontosságúak.
 A felhasznált csomagok teljes listáját a projekt forrásfáljai között lévő kettő \texttt{packag.json} file tartalmazza.
@@ -481,18 +482,18 @@ Ezzel elérhető, hogy valamilyen szinten használható legyen a weblap offline 
 \section{Schema.org}
 \label{shemaorg}
 
-A schema.org egy kereső cégek által kezdett indítvány aminek része a Google, Yahoo és Bing!. 
-A céljuk az, hogy az interneten való keresést megkönnyítsék az által, hogy a weblapok egy a számítógépek által könnyen értelmezhető formátumban is elérhetővé teszik a tartalmukat. 
+A schema.org egy kereső cégek által kezdett indítvány, aminek része a Google, Yahoo és Bing!. 
+A céljuk az, hogy az interneten való keresést megkönnyítsék az által, hogy a weblapok egy, a számítógépek által könnyen értelmezhető formátumban is elérhetővé teszik a tartalmukat. 
 Az indítvány összefoglalja, hogy milyen tartalmakat tudnak az egyes weblapok leírni és ezeknek milyen konkrét tulajdonságaik lehetnek. 
 A weblapokban ezeket az adatokat több féle tényleges formátumban lehet eltárolni úgy, hogy azt a megjelenítés során nem rajzolja ki. Ezek közül a legelterjedtebb a JSON-LD, ami a HTML head részében elhelyezett JSON formátumú adatot jelent.
 
-A projektben a legfontosabb a “Recipe“ séma, ami leírja hogy a receptnek milyen tulajdonságait lehet megtalálni a JSON-LD kódban. 
+A projektben a legfontosabb a “Recipe“ séma, ami leírja, hogy a receptnek milyen tulajdonságait lehet megtalálni a JSON-LD kódban. 
 Sajnos a standardizáció ellenére a különböző weblapok sok adatot eltérő módokon adnak meg, igy ez az adat további feldolgozásra szorul. 
 A helyzetet tovább rontja az, hogy nem minden adatot kötelező megadni a sémában, így például elképzelhető, hogy egy receptnek hiányoznak a lépései. 
 
 
 \section{Figma}
-Egy  vektorgrafikus szerkesztő, ahol felhasználói felület prototípusokat lehet tervezni. A program legfőképp webalapú, de letölthető desktopos verziója is. 
+A Figma egy vektorgrafikus szerkesztő, ahol felhasználói felület prototípusokat lehet tervezni. A program legfőképp webalapú, de letölthető desktopos verziója is. 
 A program képes a tervezett lapok élő tükrözésére akár saját telefonon az applikáción keresztül, vagy csak az emuláló felületen keresztül. 
 A Figma egy modern dizájn tervező app, amiben egyszerűen fel lehet használni a material design stílust és alap komponenseket, ezzel is segítve az Angular-ban is használt komponens alapú gondolkodást. Másik nagy előnye, hogy interaktívvá lehet tenni a tervezés során a gombokat, komponenseket, így akár a teljes felhasználói élmény kipróbálható. Ezen túl meg lehet nézni a kész dizájnoknak  a pontos CSS stílus kódját is, ezzel is segítve a konkrét kódolás folyamatát.
 
@@ -515,26 +516,29 @@ Míg a szerver oldali kód az egy központi helyen fut és a hosszabb időt igé
 \end{figure}
 
 \section{Szerver oldal}
-A projekt esetében a szerveroldali funkcionalitások a Firebase segítségével lettek megvalósítva (lásd: \ref{fig:deployment}. ábra Firebase eleme). 
+A projekt esetében a szerver oldali funkcionalitások a Firebase segítségével lettek megvalósítva (lásd: \ref{fig:deployment}. ábra Firebase eleme). 
 Ez nagyban megkönnyítette a munkát, mivel a szerver tényleges működtetését a Firebase végzi. 
-Az adatbázis szerepét a Firebase Firestore tölti be (lásd: \ref{fig:deployment}.  ábra Firestore eleme), ami egy NoSQL alapú adatbázis (lásd: \ref{dataSchemes}. fejezetben részletesebben).  Ez egy biztonságos, kliens oldalról is használható API-val rendelkezik, aminek segítségével az adatbázis műveletek elvégzéséhez nincs szükség saját szerver oldali kód írására. A weblap statikus fájljainak kiszolgálására a FireBase Hosting van használva, aminek segítségével nincs szükség saját \Gls{Apache} vagy \Gls{NGINX} szerver üzemeltetésére. Ahol szükséges volt a szerver oldalon saját kódot futtatni, ott a FireStore által nyújtott Cloud Functions megoldást használtam.
+Az adatbázis szerepét a Firebase Firestore tölti be (lásd: \ref{fig:deployment}.  ábra Firestore eleme), ami egy NoSQL alapú adatbázis (lásd: \ref{dataSchemes}. fejezetben részletesebben).  Ez egy biztonságos, kliens oldalról is használható API-val rendelkezik, aminek segítségével az adatbázis műveletek elvégzéséhez nincs szükség saját szerver oldali kód írására. A weblap statikus fájljainak kiszolgálására a FireBase Hosting van használva, aminek segítségével nincs szükség saját \Gls{Apache} vagy \Gls{NGINX} szerver üzemeltetésére. Ahol szükséges volt a szerver oldalon saját kódot futtatni, ott a FireStore által nyújtott \gls{cloudFunction} megoldást használtam.
 
 \subsection{Firebase functions}
 A Firebase functions egy olyan felhő alapú megoldás, ahol a fejlesztőnek csak a ténylegesen futtatni kívánt kódot kell megadnia. 
-A virtuális gép, az azon futó operációs rendszer és a program elindítása mind a platform által van kezelve. Ez nagyban megkönnyíti a fejlesztést, mivel nem kell plusz időt fordítani a szerver karbantartására. A Firebase JavaScript/ \Gls{TypeScript} -ben írt kódot tud futtatni. Mivel a kliens oldal is \Gls{TypeScript}-ben készűlt, ezért bizonyos funkciókat, illetve adatstruktúrákat a két komponens között meg lehet osztani. 
+A virtuális gép, az azon futó operációs rendszer és a program elindítása mind a platform által van kezelve. Ez nagyban megkönnyíti a fejlesztést, mivel nem kell plusz időt fordítani a szerver karbantartására. A Firebase JavaScript/ \Gls{TypeScript} -ben írt kódot tud futtatni. Mivel a kliens oldal is \Gls{TypeScript}-ben készült, ezért bizonyos funkciókat, illetve adatstruktúrákat a két komponens között meg lehet osztani. 
 
 A fejlesztő álltal megírt programokat többféle események is elindíthatják. Leggyakoribb példák erre a bejövő HTTP kérések vagy az adatbázisban történt változások. Ezek közül a projekt mind a kettőt használja. 
 
-A szerver oldalon két fő funkcionalitást kellett megvalósítani. Első és legfontosabb a receptek importálásáért felelős Cloud Function. Ez a kliens által küldött speciális HTTP üzenetre indul el és végzi el a receptek letöltését és értelmezését. A második funkcionalitás a bevásárló lista ajánlóhoz metaadatok előállítását végzi, amit minden bevásárlólistához adáskor elvégez.
+A szerver oldalon két fő funkcionalitást kellett megvalósítani. Első és legfontosabb a receptek importálásáért felelős \gls{cloudFunction}. Ez a kliens által küldött speciális HTTP üzenetre indul el és végzi el a receptek letöltését és értelmezését. A második funkcionalitás a bevásárló lista ajánlóhoz metaadatok előállítását végzi, amit minden bevásárlólistához adáskor elvégez.
 
 \subsection{Google Auth}
-A Google felhasználói fiókkal való belépéshez természetesen a Google által üzemeltetett azonosító szerverrel kell kommunikálni a mind a kliensnek, mind a szervernek. A kliens a kommunikáció során elvégzi a felhasználói adatok megszerzését, majd ezeket a szerver is hitelesíti. Mindezt a Firebase Auth szolgáltatása autómaikusan elintézi. Az Auth szolgáltatás előnye, hogy sok más platformot is támogat például Facebook és Twitter. 
+A Google felhasználói fiókkal való belépéshez természetesen a Google által üzemeltetett azonosító szerverrel kell kommunikálnia mind a kliensnek, mind a szervernek. A kliens a kommunikáció során elvégzi a felhasználói adatok megszerzését, majd ezeket a szerver is hitelesíti. Mindezt a Firebase Auth szolgáltatása automaikusan elintézi. Az Auth szolgáltatás előnye, hogy sok más platformot is támogat, például Facebook és Twitter. 
 
 \section{Kliens oldal}
-A kliens a projekt esetében a felhasználó web böngészőjében futó kódokat jelenti. ez két fő egységre választható szét. Az egyik a ténylegesen megjelenő weblap kódja, amely tartalmazza a megjelenítéshez szükséges HTML, CSS és JavaScript fájlokat. A másik komponens a weblap offline elérését biztosító Service Worker. Ami a webböngészőben, mint háttérfolyamat fut.
+A kliens a projekt esetében a felhasználó web böngészőjében futó kódokat jelenti. Ez két fő egységre választható szét. Az egyik a ténylegesen megjelenő weblap kódja, amely tartalmazza a megjelenítéshez szükséges HTML, CSS és JavaScript fájlokat. A másik komponens a weblap offline elérését biztosító Service Worker, ami a webböngészőben, mint háttérfolyamat fut.
 
 \subsection{Weboldal}
-A weboldalt az Angular fordítási folyamat eredményeképp létrejövő fájlok alkotják. Ezek a fájlok tartalmazzák a lefordított \Gls{TypeScript} kódot, ami egy JavaScript fájlba lett generálva, illetve tartalmazza még a hasonló módon összesített stílusokat egy CSS fájlban. Ezeket a fájlokat a kliens a Firebase Hosting szerveréről tölti le, ami egy statikus fájlkiszolgáló rendszer. Azért lett ez választva, mivel a Google szervereit használja, így magas szintű megbízhatóságot biztosít. Továbbá automatikusan jól skálázódik, ha a weblap forgalma hirtelen megnövekszik. Ezen tulajdonságai miatt, ez egy olyan platformot biztosít, ami bármekkora felhasználói bázis mellett jól használható.
+A weboldalt az Angular fordítási folyamat eredményeképp létrejövő fájlok alkotják. Ezek a fájlok tartalmazzák a lefordított \Gls{TypeScript} kódot, ami egy JavaScript fájlba lett generálva, illetve tartalmazza még a hasonló módon összesített stílusokat egy CSS fájlban.
+Ezeket a fájlokat a kliens a Firebase Hosting szerveréről tölti le, ami egy statikus fájlkiszolgáló rendszer. 
+Azért lett ez választva, mivel a Google szervereit használja, így magas szintű megbízhatóságot biztosít. 
+Továbbá automatikusan jól skálázódik, ha a weblap forgalma hirtelen megnövekszik. Ezen tulajdonságai miatt, ez egy olyan platformot biztosít, ami bármekkora felhasználói bázis mellett jól használható.
 
 A fordítás kimeneti fájljai autómatikusan feltöltésre kerülnek, amikor a GitHubra-ra egy új verzió kerül fel. Ezzel biztosított, hogy a feltöltés közben emberi hiba nem történhet.
 
@@ -550,22 +554,22 @@ Ezt a funkcionalitást az Angular által szolgáltatott ServiceWorker megvalós�
 Ebben a fejezetben \az{\ref{systemExplanation}-es fejezetben} leírt komponensek kerülnek részletes leírásra.
 
 \section{Kliens}
-A kliens oldal felépítését nagyban meghatározza az, hogy Angular keretrendszer van használva a projektben, ami sok programozási mintát megkövetel. Ezek segítenek az újrafelhasználható, illetve megbízható kódot írni.
+A kliens oldal felépítését nagyban meghatározza az, hogy Angular keretrendszer van használva a projektben, ami sok programozási mintát megkövetel. Ezek segítenek újrafelhasználható, illetve megbízható kódot írni.
 
 
 
 \subsection{Angular által nyújtott szolgáltatások}
-Az Angular által előírt minták közül a legfontosabb a komponens minta. Mivel így az általunk készített grafikus komponenseket az oldalon akárhány helyen fel tudjuk használni. Ezek a komponensek a fejlesztés alatt úgy viselkednek, mintha tényleges HTML elemek lennének, majd futtatáskor az Angular rendszere helyettesíti be az általunk megadott HTML szegmenseket.
+Az Angular által előírt minták közül a legfontosabb a komponens minta, mivel így a projektbe  készített grafikus komponenseket az oldalon akárhány helyen fel lehet használni. Ezek a komponensek a fejlesztés alatt úgy viselkednek, mintha tényleges HTML elemek lennének, majd futtatáskor az Angular rendszere helyettesíti be az általunk megadott HTML szegmenseket.
 
-Továbbá a keretrendszer lehetőséget biztosít service-k írására és használatára. Ezek olyan speciális osztályok, amelyeket a komponensekből el tudunk érni és komponenshez szorosan nem köthető funkcionalitásokat lehet bennük megvalósítani. Az elérésükhöz az Angular dependency injection-t biztosít. Ennek a lényege az, hogy a felhasználni kívánt service-t mint bemeneti paraméter van feltéve az osztály konstruktorában. Így, amikor az Angular-nak létre kell hoznia az osztályt, automatikusan átadja neki a service egy példányát.  Ezt a megoldást sok más környezetben például JAVA-ban is szokás használni.
+Továbbá a keretrendszer lehetőséget biztosít service-ek írására és használatára. Ezek olyan speciális osztályok, amelyeket a komponensekből el lehet érni és a komponenshez szorosan nem köthető funkcionalitásokat lehet bennük megvalósítani. Az elérésükhöz az Angular \gls{dependencyInjection}-t biztosít. Ennek a lényege az, hogy a felhasználni kívánt service mint bemeneti paraméter van felvéve az osztály konstruktorában. Így, amikor az Angular-nak létre kell hoznia az osztályt, az automatikusan átadja neki a service egy példányát.  Ezt a megoldást sok más környezetben, például \Gls{JAVA}-ban is szokás használni.
 
 \subsection{Recept importálás}
 A recept importálás folyamatot kliens oldalról mindig a felhasználó kezdeményezi.
 Ezt a link bemásolásával és az import gombra való rányomással teszi meg. 
-Ekkor a kliens a megadott URL címmel meghívja a felhőben futó Cloud function-t, majd vár amíg az visszaküldi az elkészült recept adatokat. 
+Ekkor a kliens a megadott URL címmel meghívja a felhőben futó \gls{cloudFunction}-t, majd vár amíg, az visszaküldi az elkészült recept adatokat. 
 Ezután a felhasználónak lehetősége van azt javítani. Majd, ha azt jóváhagyta, akkor a kliens ismét a szerver oldalhoz fordul. 
 Ezúttal az adatbázisba tölti fel a receptet. Ezt a folyamatot \az{\ref{fig:clientRecipeImport}}. ábra mutatja be.
-A szerver oldali folyamatokat később \az{\ref{serverImportsRecipe}}. szekcióban vannak részletezve.
+A szerver oldali folyamatok később \az{\ref{serverImportsRecipe}}. szekcióban vannak részletezve.
 
 \noindent
 \begin{figure}[H]
@@ -601,12 +605,12 @@ Azonban, ha nincs megfelelő nevű tétel még kimentve vagy nem lehet őket ös
 \subsection{Recept importálás}
 \label{serverImportsRecipe}
 A recept importálás nagy része a szerveren történik. A szerver pipeline (csővezeték) architektúrát alkalmaz.
-Ennek a lényege az, hogy a kérést lépésekben dolgozzuk fel. Minden egyes lépés a csővezeték egy egy állomása.
+Ennek a lényege az, hogy a kérések lépésekben vannak feldolgozva. Minden egyes lépés a csővezeték egy-egy állomása.
 A Pipeline osztály egy példányába bele kell rakni a modulokat, amiket egy-egy futtatás során a felépített sorrendben egymás után fog futtatni.
-Ennek a felépítésnek az előnye, hogy kevés a modulok közötti függőség így azok egymástól függetlenül is tesztelhetők.
-Azon kívül még akár külön külön is futtathatóak. 
+Ennek a felépítésnek az előnye, hogy kevés a modulok közötti függőség, így azok egymástól függetlenül is tesztelhetők.
+Azon kívül még akár külön-külön is futtathatóak. 
 
-Amikor a kliens elindít egy lekérdezést, a cloud function belépési pontja rögtön meghívja a \verb+recipesPipeline+-t ami sorban lefuttatja a modulokat.
+Amikor a kliens elindít egy lekérdezést, a \gls{cloudFunction} belépési pontja rögtön meghívja a \verb+recipesPipeline+-t ami sorban lefuttatja a modulokat.
 
 
 \begin{itemize}
@@ -616,13 +620,13 @@ Amikor a kliens elindít egy lekérdezést, a cloud function belépési pontja r
 	A \verb+cheerio+ nagy előnye, hogy a CSS-ben megszokott módon tudunk kiválasztani elemeket a megadott HTML-ből. 
 
 	\item \textbf{JsonLdExtractor} \\
-	Ebben a modulba kerülnek a már említett JSON-LD adatok feldolgozásra. Itt megpróbálja a modul megtalálni azt a \Gls{JSON} szekciót, ami \az{\nameref{shemaorg}}-os  \verb+Recipe+-t ír le.
-	Majd, ha ezt megtalálta, akkor ezt a különböző weblapok által használt változtatásokat figyelembe véve dolgozza azt fel. 
+	Ebben a modulba kerülnek a már említett JSON-LD adatok feldolgozásra. Itt megpróbálja a modul megtalálni azt a \Gls{JSON} szekciót, ami \az{\nameref{shemaorg}}-ban található \texttt{Recipe}-t ír le.
+	Majd, ha ezt megtalálta, akkor a különböző weblapok által használt változtatásokat figyelembe véve dolgozza azt fel. 
 
 	\item \textbf{SeparateIngredients} \\
-	Ez a module az előzőleg megszerzett összető neveket választja szét. Erre több \Gls{regex} kifejezést használ. Ezek a sokféle emberek számára könnyen érthető formátumokat dolgozzák fel. 
+	Ez a module az előzőleg megszerzett összetevő neveket választja szét. Erre több \Gls{regex} kifejezést használ. Ezek a sokféle, emberek számára könnyen érthető formátumokat dolgozzák fel. 
 	Például külön eset dolgozza fel azt, amikor az összetevő \texttt{<szám> <mértékegység> <megnevezés>} (pl.: 2 kg apples) alakban van, a \texttt{(<tól> - <ig>) <mértékegység> <megnevezés>} (pl.: 1 - 2 kg apples) alakhoz képest. 
-	Ez egy kifejezetten  összetett lépés mivel fel kell tudni dolgozni a \Gls{unicodeVulgarFraction} karaktereit is. Ez azért fontos, mert elég sok weblap előszeretettel használja ezeket a tört szám jelöléseket.
+	Ez egy kifejezetten  összetett lépés, mivel fel kell tudni dolgozni a \Gls{unicodeVulgarFraction} karaktereit is. Ez azért fontos, mert elég sok weblap előszeretettel használja ezeket a tört szám jelöléseket.
 
 	\item \textbf{CalorieCalculator} \\
 	A kalória számlálást valósítja meg, ehhez az \Gls{USDA} által szolgáltatott \Gls{API}-t használja. 
@@ -634,8 +638,8 @@ Amikor a kliens elindít egy lekérdezést, a cloud function belépési pontja r
 \subsection{Bevásárlólista metaadat kezelés}
 
 A bevásárló listában az ajánlások funkcióhoz el kell tárolni azt, hogy a felhasználó milyen gyakorisággal vásárol egy adott terméket. 
-Ehhez egy metaadat kollekció van fenntartva (Lásd részletesebben \nameref{dataSchemes:users}). Ennek a listának a fenntartása egy cloud function feladata. 
-A funkció minden alkalommal lefut, ha úgy tétel felvételre került a bevásárlólistába vagy egy a listában lévő tétel került módosításra. 
+Ehhez egy metaadat kollekció van fenntartva (Lásd részletesebben \nameref{dataSchemes:users}). Ennek a listának a fenntartása egy \gls{cloudFunction} feladata. 
+A funkció minden alkalommal lefut, ha úgy tétel felvételre került a bevásárlólistába vagy egy, a listában lévő tétel került módosításra. 
 Ezekben az esetekben a program kiszámítja az előző hozzáadástól eltelt időt, majd ezt átlagolva eltárolja a \texttt{deltaTime} mezőben.
 Ezen érték alapján kiszámolja a következő alkalmat, hogy mikor kell a következő alapanyag javaslatot feldobni a felhasználónak.
 
@@ -643,7 +647,7 @@ Ezen érték alapján kiszámolja a következő alkalmat, hogy mikor kell a köv
 
 \chapter{Adatmodellek}
 \label{dataSchemes}
-Az adatbázis felépítése különbözik a megszokott táblás módszertől, mivel a Firebase a NoSQL módszerrel tárolja az adatokat, amivel gyorsabb a keresés az adatok között. A szerkezete nagyon egyszerű, mivel csak egyszerű kollekciónkból és dokumentumokból áll, felépítése hasonlít a JSON fájltípusokra. Minden adat egy-egy dokumentumban tárolódik és ezek a dokumentumok vannak elrendezve kollekcióban. A szokványos SQL adatbázisoktól eltérően a FireStore-nak nincs fix sémája. Ez azt jelenti, hogy egy kollekción belül a dokumentumoknak a felépítése nem rögzített. Így előfordulhat az, hogy egy dokumentumnak a többihez képes több vagy kevesebb adata van. Emiatt a dokumentumok frissítésére külön energiát és figyelmet kell fordítani. Ezt a legtöbb esetben Cloud Functions futtatásával szokás megoldani.
+Az adatbázis felépítése különbözik a megszokott táblás módszertől, mivel a Firebase a NoSQL módszerrel tárolja az adatokat, amivel gyorsabb a keresés az adatok között. A szerkezete nagyon egyszerű, mivel csak egyszerű kollekciókból és dokumentumokból áll, felépítése hasonlít a JSON fájltípusokra. Minden adat egy-egy dokumentumban tárolódik és ezek a dokumentumok vannak elrendezve kollekcióban. A szokványos SQL adatbázisoktól eltérően a FireStore-nak nincs fix sémája. Ez azt jelenti, hogy egy kollekción belül a dokumentumoknak a felépítése nem rögzített. Így előfordulhat az, hogy egy dokumentumnak a többihez képes több vagy kevesebb adata van. Emiatt a dokumentumok frissítésére külön energiát és figyelmet kell fordítani. Ezt a legtöbb esetben \gls{cloudFunction} futtatásával szokás megoldani.
 
 A FireStore-ban a dokumentumok olyan felépítésű adattárolók, amelyekben egy tetszőleges szöveges kulcshoz tudunk valamilyen típusú adatot rendelni. Ezek az adatok lehetnek: 
 
@@ -651,9 +655,9 @@ A FireStore-ban a dokumentumok olyan felépítésű adattárolók, amelyekben eg
 	\item \textbf{Szöveg} (string), ami UTF-8 kódolású és maximum 1MiB méretű lehet
 	\item \textbf{Szám} (number),  tetszőleges pontosságú számérték
 	\item \textbf{Igaz/Hamis} (boolean), igaz vagy hamis
-	\item \textbf{Tetszőleges adatstruktúra} (map), ez egy a JSON formátumhoz nagyban hasonlító kötetlen adatmező
+	\item \textbf{Tetszőleges adatstruktúra} (map), ez egy, a \Gls{JSON} formátumhoz nagyban hasonlító kötetlen adatmező
 	\item \textbf{Üres} (null)
-	\item \textbf{Időpont} (timestamp), ez egy dátumot és másodpercre pontos időpontot jelez
+	\item \textbf{Időpont} (timestamp), ez dátumot és másodpercre pontos időpontot jelez
 
 	\item \textbf{Földrajzi koordináta} (geopoint), hosszúsági és szélességi fokot egy mezőben tároló típus
 
@@ -664,7 +668,7 @@ A FireStore-ban a dokumentumok olyan felépítésű adattárolók, amelyekben eg
  
 
 \section{A receptek eltárolása}
-Az adatbázisban a legfontosabb adatok a receptek, mivel ezekre épül az egész weblap témája. A receptek a feltöltés során automatikus azonosító ID értéket kapnak, ami a weblapon az URL címben az azonosításért is is felelős. A recepteket egy kollekcióban tároljuk és ezen belül a dokumentumok az adott recept adatait tartalmazzák, ezek közé tartozik például: kalória, teljes főzési idő (percben mérve), recept neve, eredeti URL, stb. Ezek az alap adatok csak simán kulcs érték párok.
+Az adatbázisban a legfontosabb adatok a receptek, mivel ezekre épül az egész weblap témája. A receptek a feltöltés során automatikus azonosító ID értéket kapnak, ami a weblapon az URL címben az azonosításért is felelős. A recepteket egy kollekcióban tároljuk és ezen belül a dokumentumok az adott recept adatait tartalmazzák, ezek közé tartozik például: kalória, teljes főzési idő (percben mérve), recept neve, eredeti URL, stb. Ezek az alap adatok csak simán kulcs érték párok.
 
 Alapanyagokon belül eltároljuk az alapanyag nevét, mennyiségét és mértékegységét. A recept elkészítésének lépéseihez tároljuk a sorrendbeli számát és a lépés leírását. Jelenleg még kulcs-tömb értékben vannak tárolva az alapanyagok és lépések, viszont a jövőben megváltoztathatjuk alkollekcióvá a gyorsabb betöltési idő eléréséért.
 
@@ -682,7 +686,7 @@ Az adatbázisban a felhasználókat egy kollekcióban tároljuk. A regisztráci�
 
 Minden felhasználóhoz továbbá eltároljuk a Firebase Auth által adott “UID” azonosítót, ami garantáltan egyedi. Itt a korábban említett kulcs-tömb típushoz képest már alkollekciók lettek bevezetve. Ezekben az alkollekciókban tároljuk el a felhasználó által elmentett recepteket, illetve hasonló módon tároljuk el a bevásárló lista adatait is.
 
-Az alkollekció azért fontos ebben az esetben, mert ha le akarjuk kérdezni a felhasználó kedvenc receptjeit, akkor nem kell mindig az egész felhasználói adatot lekérdezni, hanem lekérdezhető ugyanúgy, mint egy egyedülálló kollekció. Ezzel gyorsabb lesz a weblap, valamint spórolunk a fölösleges adatok kezelésével is. A felhasználó által a könyvtárába elmentett receptek, a felhasználó dokumentuma alatt lévő “base” alkollekcióban kerülnek tárolásra. Ezek a recept ID-jét és a kimentési időpontot tartalmazó dokumentumokkal vannak eltárolva. Ugyanez igaz a kedvencek listára, ami a  “favourites” alkollekcióban van tárolva. Amint a felhasználó kimentett egy receptet a saját listájába, akkor van lehetősége ezt tovább elmenteni a kedvencek közé. Ez ugyanúgy működik, mint az egyszerű listába mentés. Amennyiben viszont a saját listájából törli a receptet, akkor a kedvencek közül is eltűnik. 
+Az alkollekció azért fontos ebben az esetben, mert ha le akarjuk kérdezni a felhasználó kedvenc receptjeit, akkor nem kell mindig az egész felhasználói adatot lekérdezni, hanem lekérdezhető ugyanúgy, mint egy egyedülálló kollekció. Ezzel gyorsabb lesz a weblap, valamint spórolunk a fölösleges adatok kezelésével is. A felhasználó által a könyvtárába elmentett receptek a felhasználó dokumentuma alatt lévő “base” alkollekcióban kerülnek tárolásra. Ezek a recept ID-jét és a kimentési időpontot tartalmazó dokumentumokkal vannak eltárolva. Ugyanez igaz a kedvencek listára, ami a  “favourites” alkollekcióban van tárolva. Amint a felhasználó kimentett egy receptet a saját listájába, akkor van lehetősége ezt tovább elmenteni a kedvencek közé. Ez ugyanúgy működik, mint az egyszerű listába mentés. Amennyiben viszont a saját listájából törli a receptet, akkor a kedvencek közül is eltűnik. 
 
 A bevásárló listába az alapanyagokról a mentés dátumát és a pontos adatokat is elmentjük. A létrehozás dátuma a sorrendbe rendezés és a metaadat számítás miatt fontos. Ha a felhasználó úgy dönt, hogy a lista elem már nem aktuális, akkor az törölhető a listából. Továbbá a bevásárló listáról el vannak tárolva meta adatok, amiket egy-egy termék kettő listához adása között eltelt időből számolunk ki. Az ajánló jelenleg csak az alapanyag nevét ajánlja fel, viszont a mértékegység és mennyiség is el van tárolva, ezt a jövőben pontosabb számításokra lehet felhasználni. Ezen kívül, mikor az adat létrejön, a “score” értéke 2. Ez egy érték, ami segít az ajánlás sikerességét követni, max értéke 5, minimum értéke 0. Végül a “nextDate” egy számolt TimeStamp érték, ami a eredeti hozzáadás dátumából és az újonnan hozzáadott alapanyag dátumából számolunk ki.
 
@@ -690,7 +694,7 @@ A bevásárló listába az alapanyagokról a mentés dátumát és a pontos adat
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{out/diagrams/jsonUsers/jsonUsers.eps}
-	\caption{Minta egy példa felhaszáló lehetséges adatairól}
+	\caption{Minta egy esetleges felhasználó lehetséges adatairól}
     \label{fig:jsonUsers}
 \end{figure}
 
@@ -709,9 +713,9 @@ Ezeket a bejelentett hibákat egy kollekcióban tároljuk, ahol minden dokumentu
 
 
 \chapter{Tesztelés}
-A fontosabb funkciók, amik meghatározzák a témáját a weblapnak tesztelve lettek. A szerver oldali funkciók mind, az alap működések közé tartoznak, ezért a cloud function moduloknak automatikusan futtatható tesztek lettek készítve. Ezeknek a segítségével könnyen észrevehető, ha egy változtatás a kódban hibás működéshez vezet. Ennek a megvalósítására unit és integráció tesztek lettek írva. Ezek különböző modulokat és az egész importáló pipeline-t tesztelik.
+A fontosabb funkciók, amelyek meghatározzák a weblap témáját, lelettek tesztelve. A szerver oldali funkciók mind az alap működések közé tartoznak, ezért a \gls{cloudFunction} modulokhoz automatikusan futtatható tesztek lettek készítve. Ezeknek a segítségével könnyen észrevehető, ha egy változtatás a kódban hibás működéshez vezet. Ennek a megvalósítására unit és integráció tesztek lettek írva. Ezek különböző modulokat és az egész importáló pipeline-t tesztelik.
 
-A tesztelés a Jasmine könyvtárat használja. Ez egy elterjedt az Angular által is javasolt teszt környezet. Az előnye az, hogy gyors és könnyedén hozzáadható a projekthez. 
+A tesztelés a Jasmine könyvtárat használja. Ez egy elterjedt, az Angular által is javasolt teszt környezet. Az előnye az, hogy gyors és könnyedén hozzáadható a projekthez. 
 
 \section{Import modulok}
 Mivel a recept importálás folyamat modulárisan lett felépítve, ezért minden egyes lépését egyszerű tesztelni. A modulokból a lényegesebbek egyesével és a teljes funkció külön tesztelve van.
@@ -719,22 +723,22 @@ Mivel a recept importálás folyamat modulárisan lett felépítve, ezért minde
 \subsection{SeparateIngredients}
 Az alapanyag szétválasztás az egyik legkényesebb része a importálás folyamatnak, mivel ebben a részben egy szöveges adatot kell megvizsgálni és különböző adattagokra osztani. Ehhez különböző \Gls{regex} formulák lettek kifejlesztve, hogy a különböző eseteket minél jobban és pontosabban lehessen feldolgozni.
  
-Ezekhez egy egyszerű alap és egy komplexebb teszt készűlt. Az első célja, hogy le ellenőrizze a tört szám karakter és egyéb törtszám változatok helyesen vannak átkonvertálva float értékre. A második teszt pedig egy tömböt kap értéknek, amiben rengeteg különböző alapanyag és eredmény páros van felsorolva. Ezek olyan példák, amik élő importálás során kaphatóak és szélsőséges eseteket illusztrálnak. Ezek közé tartozik a három alapeset, ahol az első és legjobb eset amikor szépen visszaadja a mennyiséget, mértékegységet és az alapanyag megnevezését. Második lehetőség lehet az, amikor nem talál mértékegységet, de számot igen, tehát úgy kell visszaadnia mintha darabokban lenne mérve. Végül, ha számot sem talál a feldolgozandó szövegben, akkor csak simán visszaadja azt mintha az egész leírás a neve lenne. Ezen kívül le kell ellenőrizni azokat az eseteket, amik komplexé tették a \Gls{regex} teszteket például, a korábban említett tört karakter helyes észlelése és formázása.
+Ezekhez egy egyszerű alap és egy komplexebb teszt készűlt. Az első célja, hogy le ellenőrizze a tört szám karakter és egyéb törtszám változatok helyesen vannak átkonvertálva float értékre. A második teszt pedig egy tömböt kap értéknek, amiben rengeteg különböző alapanyag és eredmény páros van felsorolva. Ezek olyan példák, amik élő importálás során kaphatóak és szélsőséges eseteket illusztrálnak. Ezek közé tartozik a három alapeset, ahol az első és legjobb eset amikor szépen visszaadja a mennyiséget, mértékegységet és az alapanyag megnevezését. Második lehetőség lehet az, amikor nem talál mértékegységet, de számot igen, tehát úgy kell visszaadnia, mintha darabokban lenne mérve. Végül, ha számot sem talál a feldolgozandó szövegben, akkor csak simán visszaadja azt, mintha az egész leírás a neve lenne. Ezen kívül le kell ellenőrizni azokat az eseteket, amik komplexé tették a \Gls{regex} teszteket, például a korábban említett tört karakter helyes észlelése és formázása.
 
 
 \subsection{CalorieCalculator}
-Egy másik fontos teszt a modulok között a kalória számláló. Mivel ez külső rendszereket is használ, ezért ennek a tesztelése fontos. Itt egy pár ismerten jó és egy pár biztosan sikertelen keresést van végrehajtva a modul segítségével. A sikertelen keresések főként arra alapulnak, hogy jelenleg darabszámhoz nem tudunk kalóriát számolni, mivel nem lehet előre hogy tudni hány gramm lehet például egy darab krumpli vagy tojás.
+Egy másik fontos teszt a modulok között a kalória számláló. Mivel ez külső rendszereket is használ, ezért ennek a tesztelése fontos. Itt egy pár ismerten jó és egy pár biztosan sikertelen keresés van végrehajtva a modul segítségével. A sikertelen keresések főként arra alapulnak, hogy jelenleg darabszámhoz nem tudunk kalóriát számolni, mivel nem lehet előre tudni, hogy hány gramm lehet például egy darab krumpli vagy tojás.
 
 \section{Teljes recept importálás}
-Ez a teszt a teljes importer működését teszteli le egy példa recepten keresztül. Itt jelenleg csak egy receptet tesztelünk, mivel ezeknek a steszeknek az előállítása időigényes.
-A fejlesztést segítette, hogy a lokális teszteléshez készült egy \texttt{localTesting.ts} fájl, ami több már előre kiválasztott recept importálását futtatja végig.
+Ez a teszt a teljes importer működését teszteli le egy példa recepten keresztül. Itt jelenleg csak egy receptet tesztelünk, mivel ezeknek a teszeknek az előállítása időigényes.
+A fejlesztést segítette, hogy a lokális teszteléshez készült egy \texttt{localTesting.ts} fájl, ami több, már előre kiválasztott recept importálását futtatja végig.
 
 A jövőben hasznos lehet több automatikus tesztet elkészíteni, esetleg a teszt előállítását automatizálni.
 
 
 \chapter{Továbbfejlesztési lehetőségek}
 \section{Személyre szabott ajánló}
-Mivel a regisztrációnál sok egyéb adat van még eltárolva a felhasználóról, ezért ezeket fel lehet használni, hogy személyre szabott receptajánlója legyen mindenkinek a kezdőoldalon. Ez azt jelenti, hogy felmérést lehet indítani arról, hogy az adatbázisban lévő receptek mely felhasználó csoporthoz vannak leggyakrabban elmentve. Ezeket az adatokat a jövőben fel lehet használni a  receptek listázásához a ajánlóban. 
+Mivel a regisztrációnál sok egyéb adat van még eltárolva a felhasználóról, ezért ezeket fel lehet használni, hogy személyre szabott receptajánlója legyen mindenkinek a kezdőoldalon. Ez azt jelenti, hogy felmérést lehet indítani arról, hogy az adatbázisban lévő receptek mely felhasználó csoporthoz vannak leggyakrabban elmentve. Ezeket az adatokat a jövőben fel lehet használni a  receptek listázásához az ajánlóban. 
 
 Amíg a receptet nem mentette ki eléggé sok ember, addig nehéz lehet megállapítani, hogy mely felhasználói csoportoknak tetszhet. Így ilyenkor a feltöltő csoportjához sorolhatjuk, ezzel is segítve a recept korai javaslását.
 
@@ -742,25 +746,25 @@ Amíg a receptet nem mentette ki eléggé sok ember, addig nehéz lehet megálla
 \section{Recept ellenőrző admin felület}
 Jelenleg már létezik minden recept alatt egy bejelentő mező, ahol hibákat tudnak a felhasználók küldeni a receptek állapotáról. Jelenleg ez még csak el van tárolva az adatbázisban, viszont a jövőben, a könnyű kezelés érdekében ezekhez lehetne csinálni egy adminisztrációs felületet. Ezen az oldalon ki lennének listázva a hibás receptek és az admin egy kattintással rá tud nézni a receptre úgy, ahogy a felhasználók is látják.
 
-Itt két lehetősége lenne a hiba megoldására. Ha olyan a recept, hogy nem egyértelmű hogyan lehetne javítani, akkor az törlésre kerül. Ehhez írni kell egy olyan funkciót, ami nemcsak törli az adatbázis receptek kollekciójából, hanem törli,  a felhasználók  recept gyűjteményeiből is. Amennyiben a javítás lehetséges, akkor az admin számára az összes adat módosítható, így könnyen meg tudja tenni a javítást.
+Itt két lehetősége lenne a hiba megoldására. Ha olyan a recept, hogy nem egyértelmű, hogyan lehetne javítani, akkor az törlésre kerül. Ehhez írni kell egy olyan funkciót, ami nemcsak törli az adatbázis receptek kollekciójából, hanem törli,  a felhasználók  recept gyűjteményeiből is. Amennyiben a javítás lehetséges, akkor az admin számára az összes adat módosítható, így könnyen meg tudja tenni a javítást.
 
 
 \section{Desktop-os és Telefonos kinézet továbbfejlesztése}
-Jelenleg a mobilos és desktopos nézetek nem használják ki az adtott platform által nyújtott lehetőségeket tökéletesen. Így például az asztali nézetben sok üres kihasználatlan hely marad, míg bizonyos komponensek a telefonon túl nagyok. Ezeket az alap beviteli komponensek lecserélésével lehetne javítani, illetve az asztali nézetet esetleg újra gondolni az üres helyeknek új felhasználát kitalálni.  
+Jelenleg a mobilos és desktopos nézetek nem használják ki az adtott platform által nyújtott lehetőségeket tökéletesen. Így például az asztali nézetben sok üres kihasználatlan hely marad, míg bizonyos komponensek a telefonon túl nagyok. Ezeket az alap beviteli komponensek lecserélésével lehetne javítani, illetve az asztali nézetet esetleg újra gondolva az üres helyeknek új felhasználását kitalálni.  
 
 \section{Mértékegység átváltás}
 Mivel három féle mértékegységet szokás használni főzésnél, mégpedig az Egyesült Államok által használt rendszert (cup, ounce, inch, stb) vagy az általános SI mértékegységeket (ml, g, dkg, stb.) és konyhai mértékegységeket (tsb, tbsp, stb.), így a recept nézetben hasznos volna, ha az összetevők mértékegységeit automatikusan át tudná váltani a program. Ez azért jutott eszembe, mivel általában az emberek csak az egyiket vagy a másikat ismerik jobban. Tehát be lehetne állítani a profilban, hogy a felhasználó melyiket preferálja, valamint, hogy akarja-e, hogy mindig át legyenek váltva. Ezen kívül lehet még akár minden recept tetején egy gombbal megkérni a weblapot, hogy váltsa át a mértékegységeket.
 
 \section{Főzési folyamat lejátszó}
-Ha valaki telefonon néz meg egy receptet, akkor elég zavaró tud lenni mikor egy recept lépés közepén azt írják, hogy “használd fel a fentebb említett alapanyagokat”, amihez föl-le kell mozgatni a képernyőt. Ezzel elvesztve, hogy hol tartottunk a rept lépései között. Ennek a problémának megoldása érdekében lehetne egy “lejátszás” gomb, ami továbbvisz egy olyan lapra, amin a lépések egyesével vannak megjelenítve  a hozzájuk tartozó alapanyagokkal. Amikor egy lépés kész, egy gombbal a következő lépésre lehetne menni. 
+Ha valaki telefonon néz meg egy receptet, akkor elég zavaró tud lenni, mikor egy recept lépés közepén azt írják, hogy “használd fel a fentebb említett alapanyagokat”, amihez föl-le kell mozgatni a képernyőt, ezzel elvesztve, hogy hol tartottunk a recept lépései között. Ennek a problémának megoldása érdekében lehetne egy “lejátszás” gomb, ami továbbvisz egy olyan lapra, amin a lépések egyesével vannak megjelenítve  a hozzájuk tartozó alapanyagokkal. Amikor egy lépés kész, egy gombbal a következő lépésre lehetne menni. 
 
-Így könnyen követhető lenne a főzés folyamata. Valamint, mivel az alapanyagok külön mértékegységgel és mennyiséggel vannak eltárolva, ezért pontos értékeket lehet megadni a különböző lépésekben ha ugyanazt az alapanyagot több részletben és több lépésben kell felhasználni.
+Így könnyen követhető lenne a főzés folyamata, valamint, mivel az alapanyagok külön mértékegységgel és mennyiséggel vannak eltárolva, ezért pontos értékeket lehet megadni a különböző lépésekben, ha ugyanazt az alapanyagot több részletben és több lépésben kell felhasználni.
 
 
 \section{Videók és képek jobb felhasználása}
-Vannak olyan receptek, ahol videó is szerepelt a recept adatai között. Viszont ezt a videó lenne  jelenleg nincs eltárolva és a felhasználónál nem jelenik meg. Ehhez a szükség lenne a programban egy videó lejátszóra. A videó eltárolására két lehetőség van. Az egyik esetben a teljes videó a weblap saját felhő alapú tárhelyére lenne kimentve, ez a legmegbízhatóbb de a várhatóan a legdrágább megoldás is. A Második opció az pedig, hogy csak a videóra mutató URL címet tároljuk el hasonlóan a jelenlegi képekhez.
+Vannak olyan receptek, ahol videó is szerepelt a recept adatai között, viszont ez a videó   jelenleg nincs eltárolva és a felhasználónál nem jelenik meg. Ehhez szükség lenne a programban egy videó lejátszóra. A videó eltárolására két lehetőség van. Az egyik esetben a teljes videó a weblap saját felhő alapú tárhelyére lenne kimentve, ez a legmegbízhatóbb, de a várhatóan a legdrágább megoldás is. A második opció az, hogy csak a videóra mutató URL címet tároljuk el, hasonlóan a jelenlegi képekhez.
 
-Jelenleg a képeknek is csak az url címe van elmentve de a képeket letöltő Cloud Function már kész van. Ez azért nem fut jelenleg, mert a kliens oldalról a manuálisan megadott receptek képeit bonyolultabb feltölteni. 
+Jelenleg a képeknek is csak az url címe van elmentve de a képeket letöltő \gls{cloudFunction} már kész van. Ez azért nem fut jelenleg, mert a kliens oldalról a manuálisan megadott receptek képeit bonyolultabb feltölteni. 
 
 
 \chapter*{Nyilatkozat}
@@ -872,6 +876,10 @@ Tudomásul veszem, hogy szakdolgozatomat / diplomamunkámat a Szegedi Tudománye
 	\bibitem{JasmineDoc}
 	\href{https://jasmine.github.io/}{Jasmine dokumentáció}, \\
 	\url{https://jasmine.github.io/}
+
+	\bibitem{centralFoodDB}
+	\href{https://fdc.nal.usda.gov/api-guide.html}{Tápanyag adatbázis dokumentáció (FoodData Central API)}, \\
+	\url{https://fdc.nal.usda.gov/api-guide.html}
 
 \end{thebibliography}
 
