@@ -28,8 +28,7 @@ export class ImportRecipeDataComponent implements OnInit {
             this.r = this.recipeImporter.recipe!; //TODO: check this
             this.stepCount = this.r.steps.length
         } else {
-            this.r = Recipe.empty()
-            //this.r.categories.push("Dinner")
+            this.r = Recipe.empty();
             this.stepCount = 0
         }
     }
@@ -57,8 +56,10 @@ export class ImportRecipeDataComponent implements OnInit {
 
                 } else {
                     this.database.upload(this.r).then(id => {
+                        this.recipeImporter.recipe = undefined;
                         this._router.navigate(['/recipe/', id])
-                    })
+                    });
+
                 }
 
             } else {
@@ -70,13 +71,14 @@ export class ImportRecipeDataComponent implements OnInit {
     }
 
     checkForEmptyStep() {
+        let newList: Steps[] = []
         // remove empty lines
         for (let i = 0; i < this.r.steps.length; i++) {
-            if (this.r.steps[i].step == "") {
-                delete this.r.steps[i]
-                this.removeStep(this.r.steps[i])
+            if (this.r.steps[i].step != "" || this.r.steps[i].step != undefined) {
+                newList.push(this.r.steps[i])
             }
         }
+        this.r.steps = newList;
 
         //resets numbers
         for (let i = 0; i < this.r.steps.length; i++) {
@@ -108,12 +110,12 @@ export class ImportRecipeDataComponent implements OnInit {
     }
 
     addNewStep() {
-        this.stepCount++
-        this.r.steps.push(new Steps(this.stepCount, ""))
+        //this.stepCount++
+        this.r.steps.push(new Steps(this.r.steps.length+1, ""))
     }
 
     removeStep(rem: Steps) {
-        this.stepCount--
+        //this.stepCount--
         this.r.steps = this.r.steps.filter(function (obj) {
             return obj !== rem
         });

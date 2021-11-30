@@ -9,7 +9,7 @@
     </mat-form-field>
 
     <!--<input accept="image/*" type='file' id="imgInp" (change)="loadFile()"/>-->
-    <img id="recipe-image" [src]="r.image" alt="image" />
+    <img id="recipe-image" [src]="r.image ?? 'assets/img/noPic.png'" alt="image" />
 
     <div>
       <mat-form-field class="" appearance="outline" color="accent" style="max-width: 150px;">

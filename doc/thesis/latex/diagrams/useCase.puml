@@ -1,0 +1,85 @@
+@startuml use-case
+left to right direction
+
+actor Felhasználó as user
+actor Vendég as guest
+
+package "Bejelentkezés/Regisztráció" {
+    
+    usecase "Bejelentkezés" as Login
+    usecase "Regisztráció" as register
+
+    usecase "Regisztráció manuálisan" as registerManula
+        register --|> registerManula : <<includes>>
+
+    usecase "Bejelentkezés manuálisan" as loginManula
+            Login --|> loginManula : <<includes>>
+
+
+    usecase "Regisztráció Google fiókkal" as registerGoogle
+            register --|> registerGoogle : <<includes>>
+
+    usecase "Bejelentkezés Google fiókkal" as loginGoogle
+            Login --|> loginGoogle : <<includes>>
+
+
+}
+guest -> register
+guest -> Login
+user -> Login
+
+package "Receptek" {
+    usecase "Recept megtekintés" as viewRecipe
+
+    usecase "Recept hozzáadás" as addRecipe
+
+    usecase "Recept hozzáadás URL-ből" as addRecipeURL
+    addRecipe --|> addRecipeURL : <<includes>>
+
+    usecase "Recept hozzáadás manuálisan" as addRecipeManual
+    addRecipe --|> addRecipeManual : <<includes>>
+
+    usecase "Receptgyűjtemény  kezelés" as collectionManagement
+
+    usecase "Gyüjteményhez adás" as addRecipeToCollection
+    collectionManagement --> addRecipeToCollection
+    
+    usecase "Gyüjteményből törlés" as deleteRecipeFromCollection
+    collectionManagement --> deleteRecipeFromCollection
+
+    usecase "Gyüjtemény megtekintése" as viewRecipeCollection
+    collectionManagement --> viewRecipeCollection
+
+    usecase "Receptre szűrés" as sortRecipes
+
+    usecase "Kategória szerint" as sortByCategory
+    sortRecipes --|> sortByCategory : <<includes>>
+
+    usecase "Név szerint" as sortByName
+    sortRecipes --|> sortByName : <<includes>>
+
+    usecase "Hibás recept jelentése" as reportRecipe
+    viewRecipe -> reportRecipe : <<includes>>
+}
+
+user --> viewRecipe
+user --> addRecipe  
+user --> collectionManagement
+user --> sortRecipes
+
+sortByName -> viewRecipe : <<includes>>
+
+package "Bevásárló lista"{
+    usecase "Bevásárló lista megtekinése" as viewShoppinglist
+    user -> viewShoppinglist
+
+    usecase "Bevásárló listához adás" as addToShoppinglist
+    user -> addToShoppinglist
+    
+    usecase "Bevásárló listából törlés" as deleteFromShoppinglist
+    user -> deleteFromShoppinglist
+}
+
+viewRecipe -> addToShoppinglist : <<includes>>
+
+@enduml

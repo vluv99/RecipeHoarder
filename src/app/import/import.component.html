@@ -46,7 +46,7 @@
     </mat-chip-list>
 
     <h3 class="mat-subheading-1" style="margin-top: 20px">Or import manually:</h3>
-    <a [routerLink]="['/recipe-data']">
+    <a (click)="manualImport()">
         <button mat-stroked-button color="primary" aria-label="send">
             <mat-icon>add</mat-icon>
             IMPORT

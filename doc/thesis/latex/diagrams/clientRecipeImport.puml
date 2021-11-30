@@ -1,0 +1,40 @@
+@startuml clientRecipeImport
+autonumber
+
+actor "Felhasználó" as user
+
+participant "Kliens : Weboldal" as client
+
+participant "Recept Importer" as func
+
+database "Firestore" as db
+
+
+user -> client : Recept importálás
+activate client
+
+client -> func : <i>importRecipe(url)
+activate func
+
+client <-- func : Recept adatok
+deactivate func
+
+user <- client : Recept adatok mutatása
+activate user
+
+user -> client : Recept adatok jóváhagyása
+deactivate user
+
+client -> db : Adatok kimentése
+activate db
+
+client <-- db
+deactivate db
+
+client -> client : Navigálás a recept oldalára
+
+user <- client
+deactivate client
+
+
+@enduml

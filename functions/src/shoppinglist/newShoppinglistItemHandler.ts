@@ -1,7 +1,7 @@
 import {initializeApp} from 'firebase-admin/app';
 import {getFirestore} from "firebase-admin/firestore";
 
-import {EventContext} from "firebase-functions";
+import {Change, EventContext} from "firebase-functions";
 import {firestore} from "firebase-admin";
 import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 
@@ -9,9 +9,13 @@ import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 const app = initializeApp();
 const store = getFirestore(app);
 
+export async function updateShoppinglistMeta(change: Change<QueryDocumentSnapshot>, context: EventContext): Promise<void>{
+    return addToShoppinglistMeta(change.after,context);
+}
+
 export async function addToShoppinglistMeta(change: QueryDocumentSnapshot, context: EventContext): Promise<void> {
-    console.log("triggered func: ")
-    console.log(change.data())
+    //console.log("triggered onCreate func: ")
+    //console.log(change.data())
 
     const newItem = change.data();
 
@@ -33,18 +37,18 @@ export async function addToShoppinglistMeta(change: QueryDocumentSnapshot, conte
         const timeSince = newItem.addDate - addDate
 
         if('deltaTime' in item){
-            item.delaTime = (item.delaTime + timeSince)/2;
+            item.deltaTime = (item.deltaTime + timeSince)/2;
 
             if (item.score < 5){
                 item.score += 0.1;
             }
 
         }else {
-            item.delaTime = timeSince;
+            item.deltaTime = timeSince;
         }
 
         item.addDate = newItem.addDate;
-        item.nextDate = new firestore.Timestamp(newItem.addDate.seconds + Math.round(item.delaTime), 0)
+        item.nextDate = new firestore.Timestamp(newItem.addDate.seconds + Math.round(item.deltaTime), 0)
 
 
         await querySnapshot.docs[0].ref.update(item);

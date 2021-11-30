@@ -32,10 +32,16 @@ export class RecipeNameBarComponent implements OnInit {
 
     ngOnInit(): void {
 
-        let result = parse(this.recipe.url);
-        this.website = result.domainWithoutSuffix
-        this.website_ico = 'http://www.google.com/s2/favicons?domain=' + result.hostname
+        if (this.recipe.url == ""){
+            this.website = "Recipe Hoarder"
+            this.website_ico = "/favicon.ico";
+        }
+        else {
 
+            let result = parse(this.recipe.url);
+            this.website = result.domainWithoutSuffix
+            this.website_ico = 'http://www.google.com/s2/favicons?domain=' + result.hostname
+        }
 
         this.recipeCollectionService.isRecipeInUserCollection(this.recipe.id!).then((val) => {
             if (val) {

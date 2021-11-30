@@ -14,7 +14,7 @@ export class RecipeCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.recipe);
+    //console.log(this.recipe);
   }
 
 

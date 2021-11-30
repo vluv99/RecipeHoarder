@@ -1,0 +1,44 @@
+
+@startjson
+{
+	"name": "Healthy porridge bowl",
+	"description": "Start your day right with this filling ...",
+	"image": "https://images.immediate.co.uk/production/vol...",
+	"calories": 533,
+	"totalCookTime": 15,
+	"url": "https://www.bbcgoodfood.com/recipes/healthy-porridge-bowl",
+	"categories": ["Breakfast", "Snack"],
+	"ingredients": [{
+			"amount": 100,
+			"measurement": "g",
+			"name": "frozen raspberries"
+		},
+		{
+			"amount": 1,
+			"measurement": "piece",
+			"name": "orange"
+		},
+		{
+			"amount": 150,
+			"measurement": "g",
+			"name": "porridge oats"
+		},
+		{
+			"amount": 100,
+			"measurement": "ml",
+			"name": "milk"
+		}
+	],
+	"steps": [{
+			"number": 1,
+			"step": "Tip half the raspberries and all of the orange ..."
+		},
+		{
+			"number": 2,
+			"step": "Meanwhile stir the oats, milk and 450ml water ..."
+		}
+    ]
+}
+@endjson
+
+

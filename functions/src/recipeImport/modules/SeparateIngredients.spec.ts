@@ -25,7 +25,7 @@ const ingredeintTestValues = [
 ]
 
 describe("The separate ingredients component", function () {
-    let module = new SeparateIngredients();
+    const module = new SeparateIngredients();
 
     it('should find the amount', function () {
         expect(module.parseNumber("¼")).toBe(0.25);

@@ -1,0 +1,59 @@
+@startuml clientShoppingListAdd
+autonumber
+
+actor "Felhasználó" as user
+
+participant "Kliens : Weboldal" as client
+
+database "Firestore" as db
+
+
+user -> client : Új tétel hozzáadása
+activate client
+
+client -> db : egyező nevű elem lekérdezése
+activate db
+
+client <-- db : megtalált elemek
+deactivate db
+
+alt van megfelelő elem
+
+    client -> client : összevonhatóság vizsgálata
+
+    alt lehetséges összevonni
+
+        client -> client : meglévő és új tétel összevonása
+
+        client -> db : Tétel frissítése
+        activate db
+
+        client <-- db
+        deactivate db
+
+    else 
+
+        client -> db : Új tétel feltöltése
+        activate db
+
+        client <-- db
+        deactivate db
+
+    end
+
+else nincs megfelelő elem
+
+    client -> db : Új tétel feltöltése
+    activate db
+
+    client <-- db
+    deactivate db
+
+end
+
+
+user <- client
+deactivate client
+
+
+@enduml
